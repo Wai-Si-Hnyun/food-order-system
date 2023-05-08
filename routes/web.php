@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('admin.layouts.app');
 });
+
+Route::middleware(['role:user'])->group(function () {
+    //Define user routes here
+});
+
+Route::middleware(['role:admin'])->group(function () {
+    //Define admin routes here
+});
