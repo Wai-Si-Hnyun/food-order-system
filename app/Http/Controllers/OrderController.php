@@ -7,8 +7,16 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    /**
+     * orderService
+     */
     private $orderService;
 
+    /**
+     * Constructor for OrderController
+     *
+     * @param OrderServiceInterface $orderService
+     */
     public function __construct(OrderServiceInterface $orderService)
     {
         $this->orderService = $orderService;

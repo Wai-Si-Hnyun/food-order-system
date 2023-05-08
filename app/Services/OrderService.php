@@ -8,6 +8,9 @@ use App\Contracts\Services\OrderServiceInterface;
 
 class OrderService implements OrderServiceInterface
 {
+    /**
+     * order dao
+     */
     private $orderDao;
 
     /**
