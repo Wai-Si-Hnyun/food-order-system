@@ -9,7 +9,8 @@
                 <div class="d-flex">
                     <input class="form-control" name="key" type="text" value="{{ request('key') }}" id=""
                         placeholder="Search..">
-                    <input class='btn btn-sm btn-dark ms-2' type="submit" value="Search">
+                    <button class='btn btn-sm btn-dark ms-2' type="submit"><i
+                            class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </form>
         </div>
@@ -54,10 +55,12 @@
                                     <td>{{ $category->created_at->format('j-F-Y') }}</td>
                                     <td>
                                         <a href="{{ route('categories.edit', $category->id) }}">
-                                            <button class='btn btn-sm btn-success'>Edit</button>
+                                            <button class='btn btn-sm btn-success'><i
+                                                    class="fa-solid fa-pen-to-square"></i></button>
                                         </a>
                                         <a href="{{ route('categories.destroy', $category->id) }}">
-                                            <button class='btn btn-sm btn-danger'>Delete</button>
+                                            <button class='btn btn-sm btn-danger'><i
+                                                    class="fa-solid fa-trash-can"></i></button>
                                         </a>
                                     </td>
                                 </tr>
