@@ -9,6 +9,27 @@ use App\Models\OrderList;
 class OrderDao implements OrderDaoInterface
 {
     /**
+     * Get all orders
+     *
+     * @return object
+     */
+    public function getOrders()
+    {
+        return Order::all();
+    }
+
+    /**
+     * Get order by id
+     *
+     * @param integer $id
+     * @return object
+     */
+    public function getOrderById(int $id)
+    {
+        return Order::where('id', $id)->first();
+    }
+
+    /**
      * Store order to order table
      *
      * @param array $data

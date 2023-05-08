@@ -5,6 +5,21 @@ namespace App\Contracts\Dao;
 interface OrderDaoInterface
 {
     /**
+     * Get all orders
+     *
+     * @return object
+     */
+    public function getOrders();
+
+    /**
+     * Get order by id
+     *
+     * @param integer $id
+     * @return object
+     */
+    public function getOrderById(int $id);
+
+    /**
      * Store order to order table
      *
      * @param array $data
