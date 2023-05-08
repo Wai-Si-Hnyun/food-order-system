@@ -5,6 +5,21 @@ namespace App\Contracts\Services;
 interface OrderServiceInterface
 {
     /**
+     * Get all orders
+     *
+     * @return object
+     */
+    public function index();
+
+    /**
+     * Get order by id
+     *
+     * @param integer $id
+     * @return object
+     */
+    public function show(int $id);
+
+    /**
      * Store order
      *
      * @param array $data

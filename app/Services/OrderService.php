@@ -8,6 +8,9 @@ use App\Contracts\Services\OrderServiceInterface;
 
 class OrderService implements OrderServiceInterface
 {
+    /**
+     * order dao
+     */
     private $orderDao;
 
     /**
@@ -18,6 +21,27 @@ class OrderService implements OrderServiceInterface
     public function __construct(OrderDaoInterface $orderDao)
     {
         $this->orderDao = $orderDao;
+    }
+
+    /**
+     * Get all orders
+     *
+     * @return object
+     */
+    public function index()
+    {
+        return $this->orderDao->getOrders();
+    }
+
+    /**
+     * Get order by id
+     *
+     * @param integer $id
+     * @return object
+     */
+    public function show(int $id)
+    {
+        return  $this->orderDao->getOrderById($id);
     }
 
     /**
