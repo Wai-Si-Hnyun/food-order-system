@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\OrderController;
+use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
@@ -19,9 +21,6 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
     Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
 });
 
-
-
-
 //login/register
 Route::get('/',[AuthController::class,'login'])->name('auth#login');
 Route::get('/registerPage',[AuthController::class,'registerPage'])->name('auth#registerPage');
@@ -33,3 +32,17 @@ Route::prefix('category')->middleware('auth')->group(function(){
     Route::get('list',[CategoryController::class,'list'])->name('category#list');
 });
 
+=======
+Route::get('/', function () {
+    return view('admin.layouts.app');
+});
+
+Route::post('/order/create', [OrderController::class, 'store'])->name('order.store');
+
+Route::middleware(['role:user'])->group(function () {
+    //Define user routes here
+});
+
+Route::middleware(['role:admin'])->group(function () {
+    //Define admin routes here
+});
