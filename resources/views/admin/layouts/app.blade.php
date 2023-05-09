@@ -1,13 +1,7 @@
 <!DOCTYPE html>
 
-<html 
-    lang="en"
-    class="light-style layout-menu-fixed"
-    dir="ltr"
-    data-theme="theme-default"
-    data-assets-path="../assets/"
-    data-template="vertical-menu-template-free"
->
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default"
+    data-assets-path="../assets/" data-template="vertical-menu-template-free">
 
 <head>
     <meta charset="utf-8" />
@@ -38,6 +32,10 @@
         class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{ asset('assets/admin/css/demo.css') }}" />
 
+    {{-- font awesome --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ asset('assets/admin/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
 
@@ -62,41 +60,41 @@
 
             <div class="layout-page">
 
-            <!-- Common Header for admin dashboard -->
-            @include('admin.common.header')
+                <!-- Common Header for admin dashboard -->
+                @include('admin.common.header')
 
-            <div class="content-wrapper">
-                @yield('content')
+                <div class="content-wrapper">
+                    @yield('content')
 
-                <!-- Common footer for admin dashboard -->
-                @include('admin.common.footer')
+                    <!-- Common footer for admin dashboard -->
+                    @include('admin.common.footer')
 
-                <div class="content-backdrop fade"></div>
+                    <div class="content-backdrop fade"></div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js') }} -->
-    <script src="{{ asset('assets/admin/vendor/libs/jquery/jquery.js') }}"></script>
-    <script src="{{ asset('assets/admin/vendor/libs/popper/popper.js') }}"></script>
-    <script src="{{ asset('assets/admin/vendor/js/bootstrap.js') }}"></script>
-    <script src="{{ asset('assets/admin/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
+        <!-- Core JS -->
+        <!-- build:js assets/vendor/js/core.js') }} -->
+        <script src="{{ asset('assets/admin/vendor/libs/jquery/jquery.js') }}"></script>
+        <script src="{{ asset('assets/admin/vendor/libs/popper/popper.js') }}"></script>
+        <script src="{{ asset('assets/admin/vendor/js/bootstrap.js') }}"></script>
+        <script src="{{ asset('assets/admin/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
 
-    <script src="{{ asset('assets/admin/vendor/js/menu.js') }}"></script>
-    <!-- endbuild -->
+        <script src="{{ asset('assets/admin/vendor/js/menu.js') }}"></script>
+        <!-- endbuild -->
 
-    <!-- Vendors JS -->
-    <script src="{{ asset('assets/admin/vendor/libs/apex-charts/apexcharts.js') }}"></script>
+        <!-- Vendors JS -->
+        <script src="{{ asset('assets/admin/vendor/libs/apex-charts/apexcharts.js') }}"></script>
 
-    <!-- Main JS -->
-    <script src="{{ asset('assets/admin/js/main.js') }}"></script>
+        <!-- Main JS -->
+        <script src="{{ asset('assets/admin/js/main.js') }}"></script>
 
-    <!-- Page JS -->
-    <script src="{{ asset('assets/admin/js/dashboards-analytics.js') }}"></script>
+        <!-- Page JS -->
+        <script src="{{ asset('assets/admin/js/dashboards-analytics.js') }}"></script>
 
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js') }}"></script>
+        <!-- Place this tag in your head or just before your close body tag. -->
+        <script async defer src="https://buttons.github.io/buttons.js') }}"></script>
 </body>
 
 </html>

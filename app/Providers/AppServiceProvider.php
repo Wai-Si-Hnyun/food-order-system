@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,8 +14,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('App\Contracts\Dao\AuthDaoInterface', 'App\Dao\AuthDao');
-        $this->app->bind('App\Contracts\Services\AuthServiceInterface', 'App\Services\AuthService');
+        $this->app->bind('App\Contracts\Dao\ProductDaoInterface', 'App\Dao\ProductDao');
+        $this->app->bind('App\Contracts\Services\ProductServiceInterface', 'App\Services\ProductService');
+
     }
 
     /**
@@ -25,5 +27,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        Paginator::useBootstrap();
     }
 }
