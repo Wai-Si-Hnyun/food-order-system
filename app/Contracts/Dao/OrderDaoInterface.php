@@ -36,6 +36,14 @@ interface OrderDaoInterface
     public function storeOrderList(array $data);
 
     /**
+     * Delete order by id
+     *
+     * @param integer $id
+     * @return object
+     */
+    public function deleteOrder(int $id);
+
+    /**
      * Check generated order code is unique or not
      *
      * @param string $orderCode

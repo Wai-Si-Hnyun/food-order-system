@@ -86,6 +86,17 @@ class OrderService implements OrderServiceInterface
     }
 
     /**
+     * Delete order by id
+     *
+     * @param integer $id
+     * @return object
+     */
+    public function destroy(int $id)
+    {
+        return $this->orderDao->deleteOrder($id);
+    }
+
+    /**
      * Generate a unique order code
      *
      * @return string

@@ -53,4 +53,17 @@ class OrderController extends Controller
     {
         $this->orderService->store($request->all());
     }
+
+    /**
+     * Delete order by id from database
+     *
+     * @param integer $id
+     * @return \\Illuminate\Http\JsonResponse
+     */
+    public function destroy(int $id)
+    {
+        $deletedOrder =$this->orderService->destroy($id);
+
+        return response()->json($deletedOrder, 200);
+    }
 }

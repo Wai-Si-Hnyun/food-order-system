@@ -52,6 +52,20 @@ class OrderDao implements OrderDaoInterface
     }
 
     /**
+     * Delete order by id
+     *
+     * @param integer $id
+     * @return object
+     */
+    public function deleteOrder(int $id)
+    {
+        $order = Order::find($id);
+        $order->delete();
+
+        return $order;
+    }
+
+    /**
      * Check generated order code is exist or not
      *
      * @param string $orderCode
