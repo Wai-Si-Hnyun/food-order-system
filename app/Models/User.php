@@ -49,7 +49,6 @@ class User extends Authenticatable
     {
         return $this->role === $role;
     }
-
     /**
      * Get all of the orders for the User
      *
