@@ -13,10 +13,12 @@ class ProductDao implements ProductDaoInterface
      */
     public function getProduct(): object
     {
-        return Product::when(request('key'), function ($query) {
-            $query->where('name', 'LIKE', '%' . request('key') . '%');
-        })
-            ->orderBy('created_at', 'asc')
+        return Product::select('products.*', 'categories.name as category_name')
+            ->when(request('key'), function ($query) {
+                $query->where('products.name', 'LIKE', '%' . request('key') . '%');
+            })
+            ->leftJoin('categories', 'products.category_id', 'categories.id')
+            ->orderBy('products.created_at', 'desc')
             ->paginate(4)
             ->appends(request()->all());
 
@@ -51,6 +53,8 @@ class ProductDao implements ProductDaoInterface
      */
     public function updateProduct(array $data, $id): void
     {
+        $product = Product::findOrFail($id);
+        $product->update($data);
 
     }
 

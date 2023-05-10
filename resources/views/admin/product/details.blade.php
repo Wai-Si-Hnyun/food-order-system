@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="col-7 offset-3 mt-5">
-            <a href="{{ route('products.index') }}" class="btn btn-dark btn-sm">Back</a>
+            <button class="btn btn-dark btn-sm" onclick="history.back()">Back</button>
         </div>
         <div class="card col-7 offset-3 mt-2">
             <div class="card-header text-center">

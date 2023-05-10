@@ -55,8 +55,8 @@
                                     <td class="col-2"><img src="{{ asset('storage/' . $product->image) }}"
                                             class="img-thumbnail shadow-sm"></td>
                                     <td>{{ $product->name }}</td>
-                                    <td>{{ $product->category_id }}</td>
-                                    <td>{{ $product->description }}</td>
+                                    <td>{{ $product->category_name }}</td>
+                                    <td>{{ Str::words($product->description, 2, '...') }}</td>
                                     <td>${{ $product->price }}</td>
                                     <td>
                                         <a href="{{ route('products.details', $product->id) }}">
