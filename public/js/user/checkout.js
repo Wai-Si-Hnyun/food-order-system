@@ -107,7 +107,7 @@ $(document).ready(function () {
 
         saveBillingDetails($data);
 
-        const paymentComplete = $(this).data('payment-complete');
+        const paymentComplete = $(this).data('payment-complete')
 
         if (!paymentComplete) {
             Swal.fire({
