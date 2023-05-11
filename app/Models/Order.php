@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -37,5 +38,15 @@ class Order extends Model
     public function orderlists(): HasMany
     {
         return $this->hasMany(OrderList::class, 'order_code', 'order_code');
+    }
+
+    /**
+     * Get the billingdetail associated with the Order
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function billingdetail(): HasOne
+    {
+        return $this->hasOne(BillingDetails::class, 'order_code', 'order_code');
     }
 }

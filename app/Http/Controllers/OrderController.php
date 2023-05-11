@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Services\LocationServiceInterface;
 use App\Contracts\Services\OrderServiceInterface;
-use Illuminate\Http\Request;
+use App\Http\Requests\OrderRequest;
 
 class OrderController extends Controller
 {
@@ -12,24 +13,30 @@ class OrderController extends Controller
      */
     private $orderService;
 
+    protected $locationService;
+
     /**
      * Constructor for OrderController
      *
-     * @param OrderServiceInterface $orderService
+     * @param \App\Contracts\Services\OrderServiceInterface $orderService
+     * @param \App\Contracts\Services\LocationServiceInterface $locationService
      */
-    public function __construct(OrderServiceInterface $orderService)
+    public function __construct(OrderServiceInterface $orderService, LocationServiceInterface $locationService)
     {
         $this->orderService = $orderService;
+        $this->locationService = $locationService;
     }
 
     /**
      * Get all orders
      *
-     * @return object
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
-        return $this->orderService->index();
+        $orders = $this->orderService->index();
+
+        return view('admin.pages.orders.index', compact('orders'));
     }
 
     /**
@@ -46,24 +53,33 @@ class OrderController extends Controller
     /**
      * Store order in database
      *
-     * @param \Illuminate\Http\Request $request
-     * @return void
+     * @param \App\Http\Requests\OrderRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(OrderRequest $request)
     {
-        $this->orderService->store($request->all());
+        $this->orderService->store($request);
+
+        return response()->json(['message' => 'Order created successfully'], 200);
     }
 
     /**
      * Delete order by id from database
      *
      * @param integer $id
-     * @return \\Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(int $id)
     {
-        $deletedOrder =$this->orderService->destroy($id);
+        $deletedOrder = $this->orderService->destroy($id);
 
         return response()->json($deletedOrder, 200);
+    }
+
+    public function checkout()
+    {
+        $countries = $this->locationService->countries();
+
+        return view('user.pages.order.checkout', compact('countries'));
     }
 }

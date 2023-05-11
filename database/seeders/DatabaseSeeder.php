@@ -21,5 +21,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@example.com',
             'password' => Hash::make('admin123')
         ]);
+
+        $this->call(LocationsTableSeeder::class);
     }
 }
