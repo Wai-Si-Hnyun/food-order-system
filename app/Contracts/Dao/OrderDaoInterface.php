@@ -36,6 +36,14 @@ interface OrderDaoInterface
     public function storeOrderList(array $data);
 
     /**
+     * Store billing data to billing details table
+     *
+     * @param array $data
+     * @return void
+     */
+    public function storeBillingDetails(array $data);
+
+    /**
      * Delete order by id
      *
      * @param integer $id

@@ -2,6 +2,7 @@
 
 namespace App\Dao;
 
+use App\Models\BillingDetails;
 use App\Models\Order;
 use App\Contracts\Dao\OrderDaoInterface;
 use App\Models\OrderList;
@@ -49,6 +50,17 @@ class OrderDao implements OrderDaoInterface
     public function storeOrderList(array $data)
     {
         OrderList::create($data);
+    }
+
+    /**
+     * Store billing data to billing_details table
+     *
+     * @param array $data
+     * @return void
+     */
+    public function storeBillingDetails(array $data)
+    {
+        BillingDetails::create($data);
     }
 
     /**

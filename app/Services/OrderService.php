@@ -47,18 +47,33 @@ class OrderService implements OrderServiceInterface
     /**
      * Store an order in the database
      *
-     * @param array $data
+     * @param object $data
      * @return void
      */
-    public function store(array $data)
+    public function store(object $data)
     {
         // Generate the unique order code
         $orderCode = $this->generateUniqueOrderCode();
 
+        // Create the billing details record
+        $billingDetailsData = [
+            'order_code' => $orderCode,
+            'name' => $data->billingInfo->name,
+            'country' => $data->billingInfo->country,
+            'state' => $data->billingInfo->state,
+            'city' => $data->billingInfo->city,
+            'address' => $data->billingInfo->address,
+            'phone' => $data->billingInfo->phone,
+            'note' => $data->billingInfo->note
+        ];
+
+        // Store billing details in billing details database
+        $this->orderDao->storeBillingDetails($billingDetailsData);
+
         // Calculate the total price of all products in the order
         $totalPrice = 0;
-        foreach ($data['products'] as $product) {
-            $totalPrice += $product['price'] * $product['quantity'];
+        foreach ($data->items as $item) {
+            $totalPrice += $item['total'];
         }
 
         // Create the order record
@@ -118,7 +133,7 @@ class OrderService implements OrderServiceInterface
      *
      * @return string
      */
-    private function generateOrderCode()
+    public function generateOrderCode()
     {
         return Str::random(8);
     }

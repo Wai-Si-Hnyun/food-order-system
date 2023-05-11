@@ -13,7 +13,7 @@
     <meta charset="utf-8" />
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Cake Shop | Admin</title>
 
     <meta name="description" content="" />
@@ -97,6 +97,8 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js') }}"></script>
+
+    @stack('script')
 </body>
 
 </html>

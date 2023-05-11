@@ -22,10 +22,10 @@ interface OrderServiceInterface
     /**
      * Store order
      *
-     * @param array $data
+     * @param object $data
      * @return void
      */
-    public function store(array $data);
+    public function store(object $data);
 
     /**
      * Delete order by id
@@ -34,6 +34,13 @@ interface OrderServiceInterface
      * @return object
      */
     public function destroy(int $id);
+
+    /**
+     * Generate unique order code
+     *
+     * @return string
+     */
+    public function generateUniqueOrderCode();
 
     /**
      * Generate order code
