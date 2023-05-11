@@ -56,7 +56,8 @@ Route::post('/products/update/{id}', [ProductController::class, 'update'])->name
 Route::get('/products/delete/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
 // Order
-Route::get('/admin/orders', [OrderController::class, 'index'])->name('orders#index');
+Route::get('/admin/order', [OrderController::class, 'index'])->name('orders#index');
+Route::get('/admin/order/{id}/show', [OrderController::class, 'show'])->name('orders#show');
 Route::post('/order/create', [OrderController::class, 'store'])->name('order.store');
 Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
 Route::get('/payment/status', [PaymentController::class, 'status']);
