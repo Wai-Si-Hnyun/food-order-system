@@ -1,12 +1,23 @@
 <?php
 
+use App\Http\Controllers\ProductController;
+
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Models\Order;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CategoryController;
 
+use Illuminate\Support\Facades\Route;
+
+
+// for product
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+Route::post('/products/store', [ProductController::class, 'store'])->name('products.store');
+Route::get('/product/details/{id}', [ProductController::class, 'detail'])->name('products.details');
+Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
+Route::post('/products/update/{id}', [ProductController::class, 'update'])->name('products.update');
+Route::get('/products/delete/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+=======
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,3 +65,4 @@ Route::middleware(['role:user'])->group(function () {
 Route::middleware(['role:admin'])->group(function () {
     //Define admin routes here
 });
+
