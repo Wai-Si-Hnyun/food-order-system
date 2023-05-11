@@ -43,11 +43,13 @@ class OrderController extends Controller
      * Get order by id
      *
      * @param integer $id
-     * @return object
+     * @return \\Illuminate\Contracts\View\View
      */
     public function show(int $id)
     {
-        return $this->orderService->show($id);
+        //$order = $this->orderService->show($id);
+
+        return view('admin.pages.orders.detail');
     }
 
     /**

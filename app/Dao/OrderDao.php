@@ -27,7 +27,7 @@ class OrderDao implements OrderDaoInterface
      */
     public function getOrderById(int $id)
     {
-        return Order::where('id', $id)->first();
+        return Order::where('id', $id)->with('user', 'orderlists.product', 'billingdetail')->first();
     }
 
     /**
