@@ -52,4 +52,5 @@ Route::middleware('role:admin')->group(function () {
     Route::get('/admin/orders', [OrderController::class, 'index'])->name('orders#index');
     Route::get('/admin/order/{id}/show', [OrderController::class, 'show'])->name('order#show');
     Route::delete('admin/order/{id}/delete', [OrderController::class, 'destroy'])->name('order#delete');
+    Route::get('/admin/order/{id}/status/change', [OrderController::class, 'changeStatus']);
 });

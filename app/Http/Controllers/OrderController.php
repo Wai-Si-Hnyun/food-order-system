@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\Services\LocationServiceInterface;
-use App\Contracts\Services\OrderServiceInterface;
+use Illuminate\Http\Request;
 use App\Http\Requests\OrderRequest;
+use App\Contracts\Services\OrderServiceInterface;
+use App\Contracts\Services\LocationServiceInterface;
 
 class OrderController extends Controller
 {
@@ -78,10 +79,30 @@ class OrderController extends Controller
         return response()->json($deletedOrder, 200);
     }
 
+    /**
+     * Go to checkout page
+     *
+     * @return \Illuminate\Contracts\View\View
+     */
     public function checkout()
     {
         $countries = $this->locationService->countries();
 
         return view('user.pages.order.checkout', compact('countries'));
+    }
+
+    /**
+     * Change order status
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param integer $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function changeStatus(Request $request, int $id)
+    {
+        $status = $request->input('status');
+        $this->orderService->changeOrderStatus($status, $id);
+
+        return response()->json(['message' => 'Order status changed successfully'], 200);
     }
 }

@@ -87,4 +87,16 @@ class OrderDao implements OrderDaoInterface
     {
         return Order::where('order_code', $orderCode)->exists();
     }
+
+    /**
+     * Change order status function
+     *
+     * @param integer $status
+     * @param integer $id
+     * @return void
+     */
+    public function changeOrderStatus(int $status, int $id)
+    {
+        Order::where('id', $id)->update(['status' => $status]);
+    }
 }

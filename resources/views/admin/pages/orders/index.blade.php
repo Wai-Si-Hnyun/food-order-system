@@ -26,7 +26,7 @@
                                 <td><a href="#" class="text-decoration-underline">{{ $order->order_code }}</a></td>
                                 <td>{{ $order->total_price }}</td>
                                 <td>
-                                    <select class="form-select form-select-sm" name="status" id="status">
+                                    <select class="form-select form-select-sm orderStatus" name="status" id="status">
                                         <option value="0" {{ $order->status == 0 ? 'selected' : null }}>
                                             reject
                                         </option>

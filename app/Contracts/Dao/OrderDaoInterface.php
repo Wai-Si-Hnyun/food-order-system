@@ -58,4 +58,13 @@ interface OrderDaoInterface
      * @return bool
      */
     public function checkOrderCode(string $orderCode);
+
+    /**
+     * Change order status 
+     *
+     * @param integer $status
+     * @param integer $id
+     * @return void
+     */
+    public function changeOrderStatus(int $status, int $id);
 }

@@ -101,6 +101,18 @@ class OrderService implements OrderServiceInterface
     }
 
     /**
+     * Change order status
+     *
+     * @param integer $status
+     * @param integer $id
+     * @return void
+     */
+    public function changeOrderStatus(int $status, int $id)
+    {
+        $this->orderDao->changeOrderStatus($status, $id);
+    }
+
+    /**
      * Delete order by id
      *
      * @param integer $id
