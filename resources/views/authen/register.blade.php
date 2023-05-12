@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="login-form">
-    <form action="{{route('auth#store')}}" method="post">
+    <form action="{{route('auth.store')}}" method="post">
     {{ csrf_field() }}
         <div class="form-group">
             <label>Username</label>
@@ -45,7 +45,7 @@
         <div class="register-link">
             <p>
                 Already have account?
-                <a href="{{route('auth#login')}}">Sign In</a>
+                <a href="{{route('auth.login')}}">Sign In</a>
              </p>
         </div>
  </div>

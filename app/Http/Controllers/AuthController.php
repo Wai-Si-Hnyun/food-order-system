@@ -51,7 +51,7 @@ class AuthController extends Controller
         $this->authService->createUser($request->only([
             'name','email','password','remember_token',
         ]));
-        return redirect()->route('auth#login');
+        return redirect()->route('auth.login');
     }
 
      /**
@@ -64,15 +64,15 @@ class AuthController extends Controller
         if(Auth::attempt(['email'=>$request->email,'password'=>$request->password])){
             $user = Auth::user();
             if ($user->role == 'admin') {
-                return redirect()->route('admin#dashboard');
+                return redirect()->route('admin.dashboard');
             } elseif ($user->role == 'user') {
                 return redirect()->route('home');
             } else {
-                return redirect()->route('auth#login');
+                return redirect()->route('auth.login');
             }
         }
         else {
-            return redirect()->route('auth#login')->with('alert', "<script>alert('email or password may be wrong')</script>");
+            return redirect()->route('auth.login')->with('alert', "<script>alert('email or password may be wrong')</script>");
         }
     }
 
