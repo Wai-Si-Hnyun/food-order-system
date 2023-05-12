@@ -4,15 +4,25 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class AjaxController extends Controller
 {
     /**
      * index function
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Product::get();
+        if ($request->status == 'desc') {
+            $data = Product::orderBy('created_at', 'desc')
+                ->get();
+
+        } else {
+            $data = Product::orderBy('created_at', 'asc')
+                ->get();
+
+        }
+
         return $data;
     }
 }
