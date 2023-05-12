@@ -26,3 +26,11 @@ const deleteOrder = (e, id) => {
         }
     });
 }
+
+$(document).ready(function () {
+    $('.orderStatus').on('change',function () {
+        $current = $(this).val();
+        $orderId = $(this).closest('tr').data('id');
+        console.log($orderId);
+    })
+})
