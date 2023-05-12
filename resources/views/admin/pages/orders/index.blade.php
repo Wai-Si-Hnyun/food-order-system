@@ -45,7 +45,7 @@
                                 <td>{{ $order->created_at->format('j-m-Y') }}</td>
                                 <td>
                                     <div class="d-flex">
-                                        <a class="text-primary me-3" href="{{ route('orders#show', $order->id) }}">
+                                        <a class="text-primary me-3" href="{{ route('order#show', $order->id) }}">
                                             <i class="bx bx-edit-alt me-1"></i>
                                         </a>
                                         <a class="text-danger delete-btn" href="#" onclick="deleteOrder(event, {{ $order->id }})">
