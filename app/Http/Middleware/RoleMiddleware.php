@@ -15,7 +15,7 @@ class RoleMiddleware
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @param string $role
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\View\View 
      */
     public function handle(Request $request, Closure $next, $role)
     {
@@ -25,7 +25,7 @@ class RoleMiddleware
         }
 
         if (!$user->hasRole($role)) {
-            abort(403);
+            return view('error.404');
         }
 
         return $next($request);

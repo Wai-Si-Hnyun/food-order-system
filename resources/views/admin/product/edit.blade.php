@@ -11,7 +11,7 @@
                     <div class="row">
                         <div class="col-4 offset-1 my-5">
                             <div class="form-group mb-3">
-                                <img src="{{ asset('storage/' . $product->image) }}" alt="product image">
+                                <img src="{{ asset('storage/' . $product->image) }}" alt="product image" class="img-thumbnail">
                                 <input class="form-control mt-2 @error('productImage') is-invalid @enderror" type="file"
                                     name="productImage" id="product-image">
                                 @error('productImage')
@@ -75,7 +75,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="{{ route('products.index') }}" class="btn btn-sm btn-dark my-3 ms-5">Back</a>
+                    <a href="{{ route('products#index') }}" class="btn btn-sm btn-dark my-3 ms-5">Back</a>
                     <input type="submit" value="Update" class="btn btn-sm btn-info my-3 text-dark float-end">
                 </form>
             </div>

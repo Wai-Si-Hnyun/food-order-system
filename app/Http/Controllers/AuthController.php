@@ -13,7 +13,7 @@ class AuthController extends Controller
 
     /**
      * Create a new controller instance.
-     * @param AuthServiceInterface $userServiceInterface
+     * @param \App\Contracts\Services\AuthServiceInterface $userServiceInterface
      * @return void
      */
 
