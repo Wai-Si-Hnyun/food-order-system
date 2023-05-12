@@ -65,7 +65,7 @@ class ProductController extends Controller
         $request->file('productImage')->storeAs('public', $fileName);
         $data['image'] = $fileName;
         $this->productService->createProduct($data, $request);
-        return redirect()->route('products#index')->with(['createSuccess' => 'Product created Successfully!']);
+        return redirect()->route('products.index')->with(['createSuccess' => 'Product created Successfully!']);
     }
 
     /**function details

@@ -75,7 +75,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="{{ route('products#index') }}" class="btn btn-sm btn-dark my-3 ms-5">Back</a>
+                    <a href="{{ route('products.index') }}" class="btn btn-sm btn-dark my-3 ms-5">Back</a>
                     <input type="submit" value="Update" class="btn btn-sm btn-info my-3 text-dark float-end">
                 </form>
             </div>

@@ -51,7 +51,7 @@ class CategoryController extends Controller
 
         $this->categoryService->createCategory($data, $request);
 
-        return redirect()->route('categories#index')->with(['createSuccess' => 'Category created Successfully!']);
+        return redirect()->route('categories.index')->with(['createSuccess' => 'Category created Successfully!']);
     }
 
     /**

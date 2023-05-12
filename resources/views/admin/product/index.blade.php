@@ -4,7 +4,7 @@
         <a href="{{ route('products.create') }}" class="btn btn-info my-2"><i class="fa-regular fa-plus me-2"></i>Create</a>
 
         <div class="float-end mt-2 col-4">
-            <form action="{{ route('products#index') }}" class="" method="get">
+            <form action="{{ route('products.index') }}" class="" method="get">
                 @csrf
                 <div class="d-flex">
                     <input class="form-control" name="key" type="text" value="{{ request('key') }}" id=""
