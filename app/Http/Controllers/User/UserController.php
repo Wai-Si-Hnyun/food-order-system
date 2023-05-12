@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Models\Product;
-use App\Models\Category;
-use App\Http\Controllers\Controller;
 use App\Contracts\Services\UserServiceInterface;
+use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Product;
 
 class UserController extends Controller
 {
@@ -28,7 +28,6 @@ class UserController extends Controller
      */
     public function home()
     {
-        // $products = Product::get();
         $products = $this->userService->getUsers();
         return view('user.main.home', compact('products'));
     }
