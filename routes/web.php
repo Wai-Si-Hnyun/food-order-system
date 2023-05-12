@@ -9,9 +9,10 @@ Route::get('/', function () {
 });
 
 // for users
-Route::get('/users', [UserController::class, 'home'])->name('users.home');
-Route::get('/users/shop', [UserController::class, 'shop'])->name('users.shop');
-Route::get('/users/filter/{id}', [UserController::class, 'filter'])->name('users.filter');
+Route::get('/users', [UserController::class, 'home'])->name('users#home');
+Route::get('/users/shop', [UserController::class, 'shop'])->name('users#shop');
+Route::get('/users/filter/{id}', [UserController::class, 'filter'])->name('users#filter');
+Route::get('/users/details/{id}', [UserController::class, 'details'])->name('users#details');
 
 // ajax
-Route::get('/ajax/products', [AjaxController::class, 'index'])->name('ajax.index');
+Route::get('/ajax/products', [AjaxController::class, 'index'])->name('ajax#index');

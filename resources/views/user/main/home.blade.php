@@ -11,7 +11,7 @@
                         <div class="col-lg-8">
                             <div class="hero__text">
                                 <h2>When you have a lot to do,start with a meal!</h2>
-                                <a href="{{ route('users.shop') }}" class="primary-btn">Our Foods</a>
+                                <a href="{{ route('users#shop') }}" class="primary-btn">Our Foods</a>
                             </div>
                         </div>
                     </div>
@@ -24,7 +24,7 @@
                         <div class="col-lg-8">
                             <div class="hero__text">
                                 <h2>When you have a lot to do,start with a meal!</h2>
-                                <a href="{{ route('users.shop') }}" class="primary-btn">Our Foods</a>
+                                <a href="{{ route('users#shop') }}" class="primary-btn">Our Foods</a>
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                                 <h6><a href="#">{{ $product->name }}</a></h6>
                                 <div class="product__item__price">${{ $product->price }}</div>
                                 <div class="cart_add">
-                                    <a href="{{ route('users.shop') }}">Add to cart</a>
+                                    <a href="{{ route('users#shop') }}">Add to cart</a>
                                 </div>
                             </div>
                         </div>

@@ -35,17 +35,6 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * Save user
-     * @param array
-     * @return void
-     */
-    public function createUser(array $data): void
-    {
-        // Mail Send Code
-        $this->userDao->createUser($data);
-    }
-
-    /**
      * Get user by id
      * @param int $id
      * @return object
@@ -55,24 +44,4 @@ class UserService implements UserServiceInterface
         return $this->userDao->getUserById($id);
     }
 
-    /**
-     * Update User
-     * @param array $data
-     * @param int $id
-     * @return void
-     */
-    public function updateUser(array $data, int $id): void
-    {
-        $this->userDao->updateUser($data, $id);
-    }
-
-    /**
-     * Delete user by id
-     * @param int $id
-     * @return void
-     */
-    public function deleteUserById(int $id): void
-    {
-        $this->userDao->deleteUserById($id);
-    }
 }

@@ -25,16 +25,6 @@ class UserDao implements UserDaoInterface
     }
 
     /**
-     * Save user
-     * @param array
-     * @return void
-     */
-    public function createUser(array $data): void
-    {
-
-    }
-
-    /**
      * Get user by id
      * @param int $id
      * @return object
@@ -42,28 +32,7 @@ class UserDao implements UserDaoInterface
     public function getUserById($id): object
     {
         return Product::where('category_id', $id)->orderBy('created_at', 'desc')->get();
-        return Category::get();
 
     }
 
-    /**
-     * Update User
-     * @param array $data
-     * @param int $id
-     * @return void
-     */
-    public function updateUser(array $data, $id): void
-    {
-
-    }
-
-    /**
-     * Delete user by id
-     * @param int $id
-     * @return void
-     */
-    public function deleteUserById($id): void
-    {
-
-    }
 }

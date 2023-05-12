@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Contracts\Services\UserServiceInterface;
+use App\Models\Product;
+use App\Models\Category;
 use App\Http\Controllers\Controller;
+use App\Contracts\Services\UserServiceInterface;
 
 class UserController extends Controller
 {
@@ -36,8 +38,18 @@ class UserController extends Controller
     public function shop()
     {
         $products = $this->userService->getUsers();
-        $categories = $this->userService->getUsers();
+        $categories = Category::get();
         return view('user.main.shop', compact('products', 'categories'));
+    }
+
+    /**
+     * shop details function
+     */
+    public function details($id)
+    {
+        $products = Product::where('id', $id)->first();
+        $productList = Product::get();
+        return view('user.main.details', compact('products', 'productList'));
     }
 
     /**
@@ -45,11 +57,8 @@ class UserController extends Controller
      */
     public function filter($id)
     {
-        // $products = Product::where('category_id', $id)->orderBy('created_at', 'desc')->get();
-        // $categories = Category::get();
         $products = $this->userService->getUserById($id);
         $categories = $this->userService->getUserById($id);
-
         return view('user.main.shop', compact('products', 'categories'));
 
     }

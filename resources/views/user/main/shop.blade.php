@@ -12,7 +12,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="breadcrumb__links">
-                        <a href="{{ route('users.home') }}">Home</a>
+                        <a href="{{ route('users#home') }}">Home</a>
                         <span>Shop</span>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                     <div class="col-lg-7 col-md-7">
                         <div class="shop__option__search row mb-5">
 
-                            <form action="{{ route('users.shop') }}" class="row">
+                            <form action="{{ route('users#shop') }}" class="row">
                                 @csrf
 
                                 <div class="dropdown" class="col-4 my-3">
@@ -39,13 +39,13 @@
 
                                     <div class="dropdown-menu" aria-labelledby="dropdownMendivink">
                                         <div>
-                                            <a class="dropdown-item" href="{{ route('users.shop') }}">All
+                                            <a class="dropdown-item" href="{{ route('users#shop') }}">All
                                             </a>
                                         </div>
                                         @foreach ($categories as $category)
                                             <div>
                                                 <a class="dropdown-item"
-                                                    href="{{ route('users.filter', $category->id) }}">{{ $category->name }}
+                                                    href="{{ route('users#filter', $category->id) }}">{{ $category->name }}
                                                 </a>
                                             </div>
                                         @endforeach
@@ -79,7 +79,8 @@
                                     <img src="{{ asset('storage/' . $product->image) }}" alt=""
                                         style="height:200px">
                                     <div class="product__label">
-                                        <span>Foods</span>
+                                        <span><a class="text-dark"
+                                                href="{{ route('users#details', $product->id) }}">View</a></span>
                                     </div>
                                 </div>
                                 <div class="product__item__text">
