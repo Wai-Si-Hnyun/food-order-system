@@ -28,6 +28,15 @@ interface OrderServiceInterface
     public function store(object $data);
 
     /**
+     * Change order status
+     *
+     * @param integer $status
+     * @param integer $id
+     * @return void
+     */
+    public function changeOrderStatus(int $status, int $id);
+
+    /**
      * Delete order by id
      *
      * @param integer $id

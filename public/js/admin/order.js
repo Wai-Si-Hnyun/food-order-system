@@ -28,9 +28,26 @@ const deleteOrder = (e, id) => {
 }
 
 $(document).ready(function () {
-    $('.orderStatus').on('change',function () {
+    $('.orderStatus').on('change',function (e) {
+        e.preventDefault();
+
         $current = $(this).val();
         $orderId = $(this).closest('tr').data('id');
-        console.log($orderId);
+
+        $data = {
+            'status': $current
+        }
+
+        axios.get(`/admin/order/${$orderId}/status/change`, {params: $data})
+            .then((res) => {
+                Swal.fire({
+                    title: 'Success!',
+                    text: res.data.message,
+                    icon: 'success',
+                })
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     })
 })
