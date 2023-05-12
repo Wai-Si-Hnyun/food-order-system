@@ -65,7 +65,7 @@ class ProductController extends Controller
         $request->file('productImage')->storeAs('public', $fileName);
         $data['image'] = $fileName;
         $this->productService->createProduct($data, $request);
-        return redirect()->route('products.index')->with(['createSuccess' => 'Product created Successfully!']);
+        return redirect()->route('products#index')->with(['createSuccess' => 'Product created Successfully!']);
     }
 
     /**function details
@@ -108,7 +108,7 @@ class ProductController extends Controller
             $oldImageName = Product::where('id', $request->id)->first();
             $oldImageName = $oldImageName->image;
             if ($oldImageName != null) {
-                Storage::delete('public/', $oldImageName);
+                Storage::delete('public/'. $oldImageName);
             }
             $fileName = uniqid() . $request->file('productImage')->getClientOriginalName();
             $request->file('productImage')->storeAs('public', $fileName);

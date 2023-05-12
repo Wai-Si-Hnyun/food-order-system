@@ -69,7 +69,7 @@
                         @enderror
                     </div>
                     <input type="submit" value="Create" class="btn btn-sm btn-info my-3 text-dark">
-                    <a href="{{ route('products.index') }}" class="btn btn-sm btn-dark float-end my-3">Back</a>
+                    <a href="{{ route('products#index') }}" class="btn btn-sm btn-dark float-end my-3">Back</a>
                 </form>
             </div>
         </div>

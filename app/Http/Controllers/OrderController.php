@@ -47,9 +47,9 @@ class OrderController extends Controller
      */
     public function show(int $id)
     {
-        //$order = $this->orderService->show($id);
+        $order = $this->orderService->show($id);
 
-        return view('admin.pages.orders.detail');
+        return view('admin.pages.orders.detail', compact('order'));
     }
 
     /**
