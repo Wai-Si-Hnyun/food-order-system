@@ -9,7 +9,7 @@
                 <h4><b> Product Details</b></h4>
             </div>
             <div class="row card-body">
-                <div class="col-3 offset-1">
+                <div class="col-3">
                     <img class="w-80" src="{{ asset('storage/' . $product->image) }}" class="img-thumbnail shadow-sm">
                 </div>
                 <div class="col-5 offset-2">
