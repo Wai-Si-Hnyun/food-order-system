@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\UserCreateRequest;
 use Illuminate\Http\Request;
 use App\Contracts\Services\AuthServiceInterface;
@@ -25,7 +24,7 @@ class AuthController extends Controller
       /**
      * login page
      *
-     * @return View login page
+     * @return \Illuminate\Contracts\View\View login page
      */
     public function login() {
         return view('authen.login');
@@ -35,7 +34,7 @@ class AuthController extends Controller
       /**
      * register page
      *
-     * @return View register page
+     * @return \Illuminate\Contracts\View\View  register page
      */
     public function registerPage() {
         return view ('authen.register');
@@ -59,12 +58,18 @@ class AuthController extends Controller
      * Check user
      *
      * @param \App\Http\Requests\UserCreateRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function authLogin(Request $request) {
         if(Auth::attempt(['email'=>$request->email,'password'=>$request->password])){
             $user = Auth::user();
-            return redirect()->route('category#list');
+            if ($user->role == 'admin') {
+                return redirect()->route('admin#dashboard');
+            } elseif ($user->role == 'user') {
+                return redirect()->route('home');
+            } else {
+                return redirect()->route('auth#login');
+            }
         }
         else {
             return redirect()->route('auth#login')->with('alert', "<script>alert('email or password may be wrong')</script>");
