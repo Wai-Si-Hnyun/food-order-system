@@ -21,6 +21,11 @@ class CreateOrderListsTable extends Migration
             $table->integer('total');
             $table->string('order_code');
             $table->timestamps();
+
+            $table->foreign('order_code')
+                ->references('order_code')
+                ->on('orders')
+                ->onDelete('cascade');
         });
     }
 

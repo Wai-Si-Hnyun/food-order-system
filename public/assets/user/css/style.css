@@ -2059,6 +2059,11 @@ ol {
   margin-bottom: 22px;
 }
 
+.custom-dropdown-height .select2-results__options {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
 .checkout__order {
   background: #fdf3ea;
   padding: 30px;

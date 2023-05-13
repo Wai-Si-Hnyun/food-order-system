@@ -12,8 +12,8 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="breadcrumb__links">
-                        <a href="{{ route('users#home') }}">Home</a>
-                        <a href="{{ route('users#shop') }}">Shop</a>
+                        <a href="{{ route('users.home') }}">Home</a>
+                        <a href="{{ route('users.shop') }}">Shop</a>
                     </div>
                 </div>
             </div>
@@ -77,7 +77,7 @@
                                         style="height:200px">
                                     <div class="product__label">
                                         <span>
-                                            <a href="{{ route('users#details', $list->id) }}" class="text-dark">View</a>
+                                            <a href="{{ route('users.details', $list->id) }}" class="text-dark">View</a>
                                         </span>
                                     </div>
                                 </div>
