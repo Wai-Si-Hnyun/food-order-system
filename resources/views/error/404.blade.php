@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en" class="light-style" dir="ltr" data-theme="theme-default" data-assets-path="../assets/"
     data-template="vertical-menu-template-free">
-@include('admin.common.head')
+{{-- @include('admin.common.head') --}}
 
 <body>
     <!-- Content -->
@@ -26,7 +26,7 @@
 
     <!-- / Content -->
 
-    @include('admin.common.js')
+    {{-- @include('admin.common.js') --}}
 </body>
 
 </html>
