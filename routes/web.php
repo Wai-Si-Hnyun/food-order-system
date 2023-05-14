@@ -25,12 +25,13 @@ Route::middleware('role:user')->group(function () {
     Route::post('user/order/create', [OrderController::class, 'store'])->name('order.store');
     Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
     Route::get('/payment/status', [PaymentController::class, 'status']);
+
 });
 
 Route::middleware('role:admin')->group(function () {
     // Dashboard
     Route::get('/admin/dashboard', [HomeController::class, 'adminDashboard'])->name('admin.dashboard');
-    
+
     // for category
     Route::get('/admin/categories', [CategoryController::class, 'index'])->name('categories.index');
     Route::get('/create', [CategoryController::class, 'create'])->name('categories.create');
