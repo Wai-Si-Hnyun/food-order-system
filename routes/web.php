@@ -6,7 +6,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 // Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
@@ -26,12 +25,6 @@ Route::middleware('role:user')->group(function () {
     Route::post('user/order/create', [OrderController::class, 'store'])->name('order.store');
     Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
     Route::get('/payment/status', [PaymentController::class, 'status']);
-
-    // for users
-    Route::get('/users', [UserController::class, 'home'])->name('users.home');
-    Route::get('/users/shop', [UserController::class, 'shop'])->name('users.shop');
-    Route::get('/users/filter/{id}', [UserController::class, 'filter'])->name('users.filter');
-    Route::get('/users/details/{id}', [UserController::class, 'details'])->name('users.details');
 
 });
 
