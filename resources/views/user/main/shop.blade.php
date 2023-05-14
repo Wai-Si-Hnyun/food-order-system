@@ -102,7 +102,7 @@
     </section>
     <!-- Shop Section End -->
 @endsection
-@section('scripts')
+@section('scriptSource')
     <script>
         $(document).ready(function() {
             $('#sorting').change(function() {
