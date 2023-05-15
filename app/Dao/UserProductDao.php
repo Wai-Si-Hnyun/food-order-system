@@ -2,25 +2,23 @@
 
 namespace App\Dao;
 
-use App\Contracts\Dao\UserDaoInterface;
-use App\Models\Category;
+use App\Contracts\Dao\UserProductDaoInterface;
 use App\Models\Product;
 use App\Models\User;
 
-class UserDao implements UserDaoInterface
+class UserProductDao implements UserProductDaoInterface
 {
     /**
      * Get user list
      * @return object
      */
-    public function getUsers(): object
+    public function getUsersProduct(): object
     {
         return Product::when(request('key'), function ($query) {
             $query->where('products.name', 'LIKE', '%' . request('key') . '%');
 
         })
             ->get();
-        return Category::get();
 
     }
 
@@ -29,7 +27,7 @@ class UserDao implements UserDaoInterface
      * @param int $id
      * @return object
      */
-    public function getUserById($id): object
+    public function getUserProductById($id): object
     {
         return Product::where('category_id', $id)->orderBy('created_at', 'desc')->get();
 

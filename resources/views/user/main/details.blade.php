@@ -49,6 +49,7 @@
                                 </div>
                             </div>
                             <a href="#" class="primary-btn">Add to cart</a>
+                            <a href="#" class="heart__btn"><span class="icon_heart_alt"></span></a>
                         </div>
                     </div>
                 </div>
@@ -77,7 +78,7 @@
                                         style="height:200px">
                                     <div class="product__label">
                                         <span>
-                                            <a href="{{ route('users.details', $list->id) }}" class="text-dark">View</a>
+                                            <a href="{{ route('users.details', $list->id) }}" class="text-dark">Foods</a>
                                         </span>
                                     </div>
                                 </div>
@@ -85,7 +86,7 @@
                                     <h6><a href="#">{{ $list->name }}</a></h6>
                                     <div class="product__item__price">${{ $list->price }}</div>
                                     <div class="cart_add">
-                                        <a href="#">Add to cart</a>
+                                        <a href="{{ route('users.details', $list->id) }}">Add to cart</a>
                                     </div>
                                 </div>
                             </div>

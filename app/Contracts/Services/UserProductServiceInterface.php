@@ -5,19 +5,19 @@ namespace App\Contracts\Services;
 /**
  * Interface for user service
  */
-interface UserServiceInterface
+interface UserProductServiceInterface
 {
     /**
      * Get user list
      * @return object
      */
-    public function getUsers(): object;
+    public function getUsersProduct(): object;
 
     /**
      * Get user by id
      * @param int $id
      * @return object
      */
-    public function getUserById(int $id): object;
+    public function getUserProductById(int $id): object;
 
 }

@@ -2,33 +2,33 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Contracts\Services\UserServiceInterface;
+use App\Contracts\Services\UserProductServiceInterface;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 
-class UserController extends Controller
+class UserProductController extends Controller
 {
     /**
      * user interface
      */
 
-    private $userService;
+    private $userProductService;
     /**
      * Create a new controller instance.
-     * @param UserServiceInterface $userServiceInterface
+     * @param UserProductServiceInterface $userServiceInterface
      * @return void
      */
-    public function __construct(UserServiceInterface $userServiceInterface)
+    public function __construct(UserProductServiceInterface $userProductServiceInterface)
     {
-        $this->userService = $userServiceInterface;
+        $this->userProductService = $userProductServiceInterface;
     }
     /**
      * home function
      */
     public function home()
     {
-        $products = $this->userService->getUsers();
+        $products = $this->userProductService->getUsersProduct();
         return view('user.main.home', compact('products'));
     }
     /**
@@ -36,7 +36,7 @@ class UserController extends Controller
      */
     public function shop()
     {
-        $products = $this->userService->getUsers();
+        $products = $this->userProductService->getUsersProduct();
         $categories = Category::get();
         return view('user.main.shop', compact('products', 'categories'));
     }
@@ -56,8 +56,8 @@ class UserController extends Controller
      */
     public function filter($id)
     {
-        $products = $this->userService->getUserById($id);
-        $categories = $this->userService->getUserById($id);
+        $products = $this->userProductService->getUserProductById($id);
+        $categories = $this->userProductService->getUserProductById($id);
         return view('user.main.shop', compact('products', 'categories'));
 
     }

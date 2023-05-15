@@ -80,14 +80,14 @@
                                         style="height:200px">
                                     <div class="product__label">
                                         <span><a class="text-dark"
-                                                href="{{ route('users.details', $product->id) }}">View</a></span>
+                                                href="{{ route('users.details', $product->id) }}">Foods</a></span>
                                     </div>
                                 </div>
                                 <div class="product__item__text">
                                     <h6><a href="#">{{ $product->name }}</a></h6>
                                     <div class="product__item__price">${{ $product->price }}</div>
                                     <div class="cart_add">
-                                        <a href="#">Add to cart</a>
+                                        <a href="{{ route('users.details', $product->id) }}">Add to cart</a>
                                     </div>
                                 </div>
                             </div>
