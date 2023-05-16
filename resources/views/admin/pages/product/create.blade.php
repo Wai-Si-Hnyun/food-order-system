@@ -11,7 +11,7 @@
                     <div class="form-group mb-3">
                         <label for="">Category</label>
                         <select name="category" id="category" class="form-control @error('category') is-invalid @enderror">
-                            <option value="">Choose category</option>
+                            <option value="{{ old('category') }}">Choose category</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
@@ -38,7 +38,7 @@
                     <div class="form-group mb-3">
                         <label for="">Image</label>
                         <input class="form-control @error('productImage') is-invalid @enderror" type="file"
-                            name="productImage" id="product-image">
+                            name="productImage" value="{{ old('productImage') }}" id="product-image">
                         @error('productImage')
                             <div class="invalid-feedback">
                                 {{ $message }}
