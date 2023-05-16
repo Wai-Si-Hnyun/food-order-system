@@ -26,11 +26,13 @@
         @if (session('deleteSuccess'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 {{ session('deleteSuccess') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
         @if (session('updateSuccess'))
             <div class="alert alert-primary alert-dismissible fade show" role="alert">
                 {{ session('updateSuccess') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
         @if (count($categories) != 0)

@@ -21,8 +21,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Contracts\Services\OrderServiceInterface', 'App\Services\OrderService');
         $this->app->bind('App\Contracts\Services\LocationServiceInterface', 'App\Services\LocationService');
         $this->app->bind('App\Contracts\Services\PaymentServiceInterface', 'App\Services\PaymentService');
-
+        $this->app->bind('App\Contracts\Services\UserProductServiceInterface', 'App\Services\UserProductService');
         //Dao
+        $this->app->bind('App\Contracts\Dao\UserProductDaoInterface', 'App\Dao\UserProductDao');
+        $this->app->bind('App\Contracts\Dao\AjaxDaoInterface', 'App\Dao\AjaxDao');
         $this->app->bind('App\Contracts\Dao\AuthDaoInterface', 'App\Dao\AuthDao');
         $this->app->bind('App\Contracts\Dao\CategoryDaoInterface', 'App\Dao\CategoryDao');
         $this->app->bind('App\Contracts\Dao\ProductDaoInterface', 'App\Dao\ProductDao');

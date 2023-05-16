@@ -6,6 +6,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\User\AjaxController;
+use App\Http\Controllers\User\UserProductController;
 use Illuminate\Support\Facades\Route;
 
 // Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
@@ -26,22 +28,30 @@ Route::middleware('role:user')->group(function () {
     Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
 
     // Payment
-    Route::get('/payment/status', [PaymentController::class, 'getStatus']);
     Route::get('/payment/choose', [PaymentController::class, 'index'])->name('user.payment');
     Route::get('/payment/card', [PaymentController::class, 'card'])->name('payment.card');
     Route::post('/payment/card', [PaymentController::class, 'chargeCard'])->name('stripe.card');
     Route::get('/payment/google-pay', [PaymentController::class, 'google'])->name('payment.google');
     Route::post('/payment/google-pay', [PaymentController::class, 'chargeGooglePay'])->name('stripe.google');
+
+    // for users
+    Route::get('/users', [UserProductController::class, 'home'])->name('users.home');
+    Route::get('/users/shop', [UserProductController::class, 'shop'])->name('users.shop');
+    Route::get('/users/filter/{id}', [UserProductController::class, 'filter'])->name('users.filter');
+    Route::get('/users/details/{id}', [UserProductController::class, 'details'])->name('users.details');
+
+    // ajax
+    Route::get('/ajax/products', [AjaxController::class, 'index'])->name('ajax.index');
 });
 
 Route::middleware('role:admin')->group(function () {
     // Dashboard
     Route::get('/admin/dashboard', [HomeController::class, 'adminDashboard'])->name('admin.dashboard');
-    
+
     // for category
     Route::get('/admin/categories', [CategoryController::class, 'index'])->name('categories.index');
-    Route::get('/create', [CategoryController::class, 'create'])->name('categories.create');
-    Route::post('/store', [CategoryController::class, 'store'])->name('categories.store');
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+    Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store');
     Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('categories.edit');
     Route::post('/categories/update/{id}', [CategoryController::class, 'update'])->name('categories.update');
     Route::get('/categories/delete/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');

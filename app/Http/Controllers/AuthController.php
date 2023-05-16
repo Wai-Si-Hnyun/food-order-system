@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Contracts\Services\AuthServiceInterface;
 use App\Http\Requests\UserCreateRequest;
 use Illuminate\Http\Request;
-use App\Contracts\Services\AuthServiceInterface;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -21,25 +22,25 @@ class AuthController extends Controller
         $this->authService = $authServiceInterface;
     }
 
-      /**
+    /**
      * login page
      *
      * @return \Illuminate\Contracts\View\View login page
      */
-    public function login() {
+    public function login()
+    {
         return view('authen.login');
     }
 
-
-      /**
+    /**
      * register page
      *
      * @return \Illuminate\Contracts\View\View  register page
      */
-    public function registerPage() {
-        return view ('authen.register');
+    public function registerPage()
+    {
+        return view('authen.register');
     }
-
 
     /**
      * Save user
@@ -47,21 +48,23 @@ class AuthController extends Controller
      * @param \App\Http\Requests\UserCreateRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function authRegisterStore(UserCreateRequest $request) {
+    public function authRegisterStore(UserCreateRequest $request)
+    {
         $this->authService->createUser($request->only([
-            'name','email','password','remember_token',
+            'name', 'email', 'password', 'remember_token',
         ]));
         return redirect()->route('auth.login');
     }
 
-     /**
+    /**
      * Check user
      *
      * @param \App\Http\Requests\UserCreateRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function authLogin(Request $request) {
-        if(Auth::attempt(['email'=>$request->email,'password'=>$request->password])){
+    public function authLogin(Request $request)
+    {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
             if ($user->role == 'admin') {
                 return redirect()->route('admin.dashboard');
@@ -70,11 +73,9 @@ class AuthController extends Controller
             } else {
                 return redirect()->route('auth.login');
             }
-        }
-        else {
+        } else {
             return redirect()->route('auth.login')->with('alert', "<script>alert('email or password may be wrong')</script>");
         }
     }
-
 
 }
