@@ -2,9 +2,11 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Str;
 use App\Contracts\Dao\OrderDaoInterface;
 use App\Contracts\Services\OrderServiceInterface;
+use App\Contracts\Services\PaymentServiceInterface;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class OrderService implements OrderServiceInterface
 {
@@ -12,15 +14,17 @@ class OrderService implements OrderServiceInterface
      * order dao
      */
     private $orderDao;
+    private $paymentService;
 
     /**
      * Constructor for the OrderService
      *
      * @param OrderDaoInterface $orderDao
      */
-    public function __construct(OrderDaoInterface $orderDao)
+    public function __construct(OrderDaoInterface $orderDao, PaymentServiceInterface $paymentService)
     {
         $this->orderDao = $orderDao;
+        $this->paymentService = $paymentService;
     }
 
     /**
@@ -41,63 +45,79 @@ class OrderService implements OrderServiceInterface
      */
     public function show(int $id)
     {
-        return  $this->orderDao->getOrderById($id);
+        return $this->orderDao->getOrderById($id);
     }
 
     /**
      * Store an order in the database
      *
      * @param object $data
-     * @return void
+     * @return boolean
      */
     public function store(object $data)
     {
-        // Generate the unique order code
-        $orderCode = $this->generateUniqueOrderCode();
+        if ($this->paymentService->getStatus()) {
+            // Generate the unique order code
+            $orderCode = $this->generateUniqueOrderCode();
 
-        // Create the billing details record
-        $billingDetailsData = [
-            'order_code' => $orderCode,
-            'name' => $data->billingInfo->name,
-            'country' => $data->billingInfo->country,
-            'state' => $data->billingInfo->state,
-            'city' => $data->billingInfo->city,
-            'address' => $data->billingInfo->address,
-            'phone' => $data->billingInfo->phone,
-            'note' => $data->billingInfo->note
-        ];
-
-        // Store billing details in billing details database
-        $this->orderDao->storeBillingDetails($billingDetailsData);
-
-        // Calculate the total price of all products in the order
-        $totalPrice = 0;
-        foreach ($data->items as $item) {
-            $totalPrice += $item['total'];
-        }
-
-        // Create the order record
-        $orderData = [
-            'user_id' => $data['user_id'],
-            'order_code' => $orderCode,
-            'total_price' => $totalPrice
-        ];
-
-        // Store order in order database
-        $this->orderDao->storeOrder($orderData);
-
-        // Create the order list records
-        foreach ($data['products'] as $product) {
-            $orderListsData = [
-                'user_id' => $data['user_id'],
-                'product_id' => $product['id'],
-                'quantity' => $product['quantity'],
-                'total' => $product['price'] * $product['quantity'],
-                'order_code' => $orderCode
+            // Create the billing details record
+            $billingDetailsData = [
+                'order_code' => $orderCode,
+                'name' => $data->billingInfo['name'],
+                'country' => $data->billingInfo['country'],
+                'state' => $data->billingInfo['state'],
+                'city' => $data->billingInfo['city'],
+                'address' => $data->billingInfo['address'],
+                'phone' => $data->billingInfo['phone'],
+                'note' => $data->billingInfo['note'],
             ];
-            // Store order lists in order list database
-            $this->orderDao->storeOrderList($orderListsData);
+
+            // Create the payment details record
+            $payment_data = Session::get('payment_data');
+            $payment_data['order_code'] = $orderCode;
+
+            // Calculate the total price of all products in the order
+            $totalPrice = 0;
+            foreach ($data->items as $item) {
+                $totalPrice += $item['product']['price'] * $item['quantity'];
+            }
+
+            // Create the order record
+            $orderData = [
+                'user_id' => $data['user_id'],
+                'order_code' => $orderCode,
+                'total_price' => $totalPrice,
+            ];
+
+            // Store order in order database
+            $this->orderDao->storeOrder($orderData);
+
+            // Store billing details in billing details database
+            $this->orderDao->storeBillingDetails($billingDetailsData);
+
+            // Store payment details in payment database
+            $this->paymentService->store($payment_data);
+
+            // Create the order list records
+            foreach ($data->items as $item) {
+                $orderListsData = [
+                    'user_id' => $data['user_id'],
+                    'product_id' => $item['product']['id'],
+                    'quantity' => $item['quantity'],
+                    'total' => $item['product']['price'] * $item['quantity'],
+                    'order_code' => $orderCode,
+                ];
+                // Store order lists in order list database
+                $this->orderDao->storeOrderList($orderListsData);
+            }
+
+            Session::forget(['payment-complete', 'payment_data']);
+
+            return true;
+        } else {
+            return false;
         }
+
     }
 
     /**
@@ -110,6 +130,18 @@ class OrderService implements OrderServiceInterface
     public function changeOrderStatus(int $status, int $id)
     {
         $this->orderDao->changeOrderStatus($status, $id);
+    }
+
+    /**
+     * Change deliver status
+     *
+     * @param integer $status
+     * @param integer $id
+     * @return void
+     */
+    public function changeDeliverStatus(int $status, int $id)
+    {
+        $this->orderDao->changeDeliverStatus($status, $id);
     }
 
     /**

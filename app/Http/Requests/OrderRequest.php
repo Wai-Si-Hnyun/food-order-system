@@ -32,7 +32,7 @@ class OrderRequest extends FormRequest
             'billingInfo.state' => 'required',
             'billingInfo.city' => 'required',
             'billingInfo.address' => 'required|max:255',
-            'billingInfo.phone' => 'required|string|max:15|regex:/^(\+\d+|\d+)$/',
+            'billingInfo.phone' => ['required', 'string', 'max:15', 'regex:/^(\+\d+|\d+)$/'],
             'billingInfo.password' => ['required', new MatchUserPassword($userId)],
         ];
     }

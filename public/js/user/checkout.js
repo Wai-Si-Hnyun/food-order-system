@@ -17,6 +17,12 @@ const loadBillingDetails = () => {
     }
 }
 
+const storeTotalPriceInLocalStorage = () => {
+    $selectText = $('#total-price').text();
+    $totalPrice = parseFloat($selectText.replace('$', ''));
+    localStorage.setItem('order-total-price', $totalPrice);
+}
+
 $(document).ready(function () {
     // Remove build in select
     $('.nice-select').remove();
@@ -61,16 +67,9 @@ $(document).ready(function () {
         fetchCities(state, $citySelect);
     })
 
-    axios.get('/payment/status')
-        .then(function (res) {
-            const status = res.data.paymentComplete;
-            $('#order-btn').data('payment-complete', status);
-        })
-        .catch(function (e) {
-            console.log(e);
-        })
+    // Listen for the change event on the city select box'))
 
-    $('#order-btn').click(function (event) {
+    $('#order-btn').click(async function (event) {
         event.preventDefault();
 
         // Find parent node for all
@@ -91,45 +90,43 @@ $(document).ready(function () {
 
         // Create data to pass
         $data = {
-            'user_id': $user_id,
-            'billingInfo': {
-                'name': $name,
-                'country': $country,
-                'state': $state,
-                'city': $city,
-                'address': $address,
-                'phone': $phone,
-                'note': $note,
-                'password': $password
+            user_id: $user_id,
+            billingInfo: {
+                name: $name,
+                country: $country,
+                state: $state,
+                city: $city,
+                address: $address,
+                phone: $phone,
+                note: $note,
+                password: $password
             },
-            'items': {}
+            items: [
+                {
+                    product: {
+                        id: 1,
+                        name: 'Product1',
+                        price: 50,
+                    },
+                    quantity: 10
+                },
+            ]
         }
 
         saveBillingDetails($data);
 
-        const paymentComplete = $(this).data('payment-complete')
-
-        if (!paymentComplete) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Payment Incomplete',
-                text: 'Please complete payment process first',
-                confirmButtonText: 'Go to Payment',
-            }).then((result) => {
-                window.location.href = '/payment';
+        await axios.post('/user/order/create', $data)
+            .then(function (res) {
+                sessionStorage.removeItem('billing-details');
+                window.location.href = '/';
             })
-        } else {
-            axios.post('/order/create', $data)
-                .then(function (res) {
-                    sessionStorage.removeItem('billing-details');
-                    sessionStorage.removeItem('payment-complete');
-                })
-                .catch(function (e) {
-                    if (e.response.status === 422) {
-                        displayValidationErrors(e.response.data.errors);
-                    }
-                })
-        }
+            .catch(function (e) {
+                if (e.response.status == 422) {
+                    displayValidationErrors(e.response.data.errors);
+                } else if(e.response.status == 402) {
+                    window.location.href = '/payment/choose';
+                }
+            })
     })
 
     const displayValidationErrors = (errors) => {
@@ -149,6 +146,7 @@ $(document).ready(function () {
             const errorMessage = errors[field][0];
 
             // Split the field string by the dot and use the last part
+            // return error is like billingdetails.name
             const inputName = field.split('.').pop();
 
             // Find the input element by its id
@@ -185,9 +183,9 @@ $(document).ready(function () {
         sessionStorage.setItem('billing-details', JSON.stringify(billingDetails));
     }
 
-    const fetchStates = (country, $stateSelect) => {
+    const fetchStates = async (country, $stateSelect) => {
         // Fetch state data
-        axios.get(`/api/states/${country}`)
+        await axios.get(`/api/states/${country}`)
             .then(function (response) {
                 const states = response.data;
 
@@ -204,9 +202,9 @@ $(document).ready(function () {
             });
     }
 
-    const fetchCities = (state, $citySelect) => {
+    const fetchCities = async (state, $citySelect) => {
         // Fetch state data
-        axios.get(`/api/cities/${state}`)
+        await axios.get(`/api/cities/${state}`)
             .then(function (response) {
                 const cities = response.data;
 

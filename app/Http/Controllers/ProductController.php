@@ -29,7 +29,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = $this->productService->getProduct();
-        return view('admin.product.index', compact('products'));
+        return view('admin.pages.product.index', compact('products'));
 
     }
     /**
@@ -39,7 +39,7 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::select('id', 'name')->get();
-        return view('admin.product.create', compact('categories'));
+        return view('admin.pages.product.create', compact('categories'));
     }
     /**
      * function store
@@ -64,7 +64,8 @@ class ProductController extends Controller
         $fileName = uniqid() . $request->file('productImage')->getClientOriginalName();
         $request->file('productImage')->storeAs('public', $fileName);
         $data['image'] = $fileName;
-        $this->productService->createProduct($data, $request);
+        $this->productService->createProduct($data);
+
         return redirect()->route('products.index')->with(['createSuccess' => 'Product created Successfully!']);
     }
 
@@ -74,7 +75,8 @@ class ProductController extends Controller
     public function detail($id)
     {
         $product = $this->productService->getProductById($id);
-        return view('admin.product.details', compact('product'));
+
+        return view('admin.pages.product.details', compact('product'));
     }
     /**
      * function edit
@@ -83,7 +85,8 @@ class ProductController extends Controller
     {
         $product = Product::where('id', $id)->first();
         $categories = Category::get();
-        return view('admin.product.edit', compact('product', 'categories'));
+        
+        return view('admin.pages.product.edit', compact('product', 'categories'));
     }
 
     /**
