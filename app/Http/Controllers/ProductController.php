@@ -85,6 +85,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::where('id', $id)->first();
+        $categories = Category::get();
 
         return view('admin.pages.product.edit', compact('product', 'categories'));
     }
