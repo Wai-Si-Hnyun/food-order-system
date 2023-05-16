@@ -91,7 +91,7 @@
                                 </ul>
                                 <a href="{{ route('user.payment') }}" class="text-dark"><i class="fa-regular fa-credit-card mr-3"></i>Go to
                                     Payment</a>
-                                <button type="submit" data-payment-complete="false" id="order-btn" class="site-btn">PLACE ORDER</button>
+                                <button type="submit" id="order-btn" class="site-btn">PLACE ORDER</button>
                             </div>
                         </div>
                     </div>

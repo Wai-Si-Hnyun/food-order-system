@@ -17,6 +17,40 @@ class PaymentService implements PaymentServiceInterface
     }
 
     /**
+     * Store payment data in database
+     *
+     * @param array $data
+     * @return \App\Models\Payment
+     */
+    public function store(array $data)
+    {
+        $payment = $this->paymentDao->store($data);
+
+        return $payment;
+    }
+
+    /**
+     * Get payment status
+     *
+     * @return \Illuminate\Support\Facades\Session
+     */
+    public function getStatus()
+    {
+        return Session::get('payment-complete', false);
+    }
+
+    /**
+     * Set payment status
+     *
+     * @param boolean $status
+     * @return void
+     */
+    public function setStatus($status)
+    {
+        Session::put('payment-complete', $status);
+    }
+
+    /**
      * Charge function to Stripe
      *
      * @param \Illuminate\Http\Request $request

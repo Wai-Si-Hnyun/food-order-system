@@ -16,7 +16,7 @@ class OrderDao implements OrderDaoInterface
      */
     public function getOrders()
     {
-        return Order::with('user')->paginate(5);
+        return Order::with('user')->paginate(10);
     }
 
     /**

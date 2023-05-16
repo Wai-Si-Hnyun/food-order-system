@@ -61,9 +61,13 @@ class OrderController extends Controller
      */
     public function store(OrderRequest $request)
     {
-        $this->orderService->store($request);
+        $status = $this->orderService->store($request);
 
-        return response()->json(['message' => 'Order created successfully'], 200);
+        if ($status) {
+            return response()->json(['message' => 'Order created successfully'], 200);
+        } else {
+            return response()->json(['message' => 'Payment Required'], 402);
+        }
     }
 
     /**

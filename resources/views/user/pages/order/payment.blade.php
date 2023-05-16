@@ -64,7 +64,3 @@
     </section>
     <!-- Payment Section End -->
 @endsection
-
-@push('script')
-    <script src="{{ asset('js/user/payment.js') }}"></script>
-@endpush

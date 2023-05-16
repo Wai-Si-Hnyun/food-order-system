@@ -59,7 +59,7 @@ class PaymentController extends Controller
      */
     public function getStatus(Request $request)
     {
-        $paymentComplete = Session::get('payment-complete', false);
+        $paymentComplete = $this->paymentService->getStatus();
 
         return response()->json($paymentComplete, 200);
     }
@@ -72,7 +72,7 @@ class PaymentController extends Controller
      */
     public function setStatus($status)
     {
-        Session::put('payment-complete', $status);
+        $this->paymentService->setStatus($status);
     }
 
     /**

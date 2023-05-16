@@ -23,7 +23,7 @@ interface OrderServiceInterface
      * Store order
      *
      * @param object $data
-     * @return void
+     * @return boolean
      */
     public function store(object $data);
 
