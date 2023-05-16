@@ -29,7 +29,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = $this->productService->getProduct();
-        return view('admin.product.index', compact('products'));
+        return view('admin.pages.product.index', compact('products'));
 
     }
     /**
@@ -39,7 +39,7 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::select('id', 'name')->get();
-        return view('admin.product.create', compact('categories'));
+        return view('admin.pages.product.create', compact('categories'));
     }
     /**
      * function store
@@ -74,7 +74,7 @@ class ProductController extends Controller
     public function detail($id)
     {
         $product = $this->productService->getProductById($id);
-        return view('admin.product.details', compact('product'));
+        return view('admin.pages.product.details', compact('product'));
     }
     /**
      * function edit
@@ -83,7 +83,7 @@ class ProductController extends Controller
     {
         $product = Product::where('id', $id)->first();
         $categories = Category::get();
-        return view('admin.product.edit', compact('product', 'categories'));
+        return view('admin.pages.product.edit', compact('product', 'categories'));
     }
 
     /**
@@ -93,7 +93,7 @@ class ProductController extends Controller
     {
         Validator::make($request->all(), [
             'category' => 'required',
-            'productName' => 'required|min:5|unique:products,name',
+            'productName' => 'required|min:5',
             'productImage' => 'mimes:jpg,jpeg,png,webp|file',
             'productDescription' => 'required|min:10',
             'productPrice' => 'required',
@@ -108,7 +108,7 @@ class ProductController extends Controller
             $oldImageName = Product::where('id', $request->id)->first();
             $oldImageName = $oldImageName->image;
             if ($oldImageName != null) {
-                Storage::delete('public/'. $oldImageName);
+                Storage::delete('public/' . $oldImageName);
             }
             $fileName = uniqid() . $request->file('productImage')->getClientOriginalName();
             $request->file('productImage')->storeAs('public', $fileName);
