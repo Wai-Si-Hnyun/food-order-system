@@ -24,7 +24,14 @@ Route::middleware('role:user')->group(function () {
     // Order
     Route::post('user/order/create', [OrderController::class, 'store'])->name('order.store');
     Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
-    Route::get('/payment/status', [PaymentController::class, 'status']);
+
+    // Payment
+    Route::get('/payment/status', [PaymentController::class, 'getStatus']);
+    Route::get('/payment/choose', [PaymentController::class, 'index'])->name('user.payment');
+    Route::get('/payment/card', [PaymentController::class, 'card'])->name('payment.card');
+    Route::post('/payment/card', [PaymentController::class, 'chargeCard'])->name('stripe.card');
+    Route::get('/payment/google-pay', [PaymentController::class, 'google'])->name('payment.google');
+    Route::post('/payment/google-pay', [PaymentController::class, 'chargeGooglePay'])->name('stripe.google');
 });
 
 Route::middleware('role:admin')->group(function () {
@@ -51,6 +58,7 @@ Route::middleware('role:admin')->group(function () {
     // Order
     Route::get('/admin/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/admin/order/{id}/show', [OrderController::class, 'show'])->name('order.show');
-    Route::delete('admin/order/{id}/delete', [OrderController::class, 'destroy'])->name('order.delete');
-    Route::get('/admin/order/{id}/status/change', [OrderController::class, 'changeStatus']);
+    Route::delete('admin/orders/{id}/delete', [OrderController::class, 'destroy'])->name('order.delete');
+    Route::get('/admin/orders/{id}/status/change', [OrderController::class, 'changeOrderStatus']);
+    Route::get('/admin/orders/{id}/deivered/status/change', [OrderController::class, 'changeDeliverStatus']);
 });

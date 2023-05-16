@@ -10,7 +10,7 @@
             </div>
             <div class="row card-body">
                 <div class="col-3">
-                    <img class="w-80" src="{{ asset('storage/' . $product->image) }}" class="img-thumbnail shadow-sm">
+                    <img src="{{ asset('storage/' . $product->image) }}" class="img-thumbnail shadow-sm">
                 </div>
                 <div class="col-5 offset-2">
                     <h5 class="mb-4"><i class="fa-solid fa-clipboard-list me-3"></i>{{ $product->category_id }}</h5>

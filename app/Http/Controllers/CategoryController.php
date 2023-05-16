@@ -25,14 +25,14 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = $this->categoryService->getCategory();
-        return view('admin.category.index', compact('categories'));
+        return view('admin.pages.category.index', compact('categories'));
     }
     /**
      * function category create
      */
     public function create()
     {
-        return view('admin.category.create');
+        return view('admin.pages.category.create');
     }
 
     /**
@@ -49,7 +49,7 @@ class CategoryController extends Controller
             'name' => $request->categoryName,
         ];
 
-        $this->categoryService->createCategory($data, $request);
+        $this->categoryService->createCategory($data);
 
         return redirect()->route('categories.index')->with(['createSuccess' => 'Category created Successfully!']);
     }
@@ -60,7 +60,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::where('id', $id)->first();
-        return view('admin.category.edit', compact('category'));
+        return view('admin.pages.category.edit', compact('category'));
     }
 
     /**

@@ -98,11 +98,19 @@ class OrderController extends Controller
      * @param integer $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function changeStatus(Request $request, int $id)
+    public function changeOrderStatus(Request $request, int $id)
     {
         $status = $request->input('status');
         $this->orderService->changeOrderStatus($status, $id);
 
-        return response()->json(['message' => 'Order status changed successfully'], 200);
+        return response()->json(['message' => 'Order status changed successfully!'], 200);
+    }
+
+    public function changeDeliverStatus(Request $request, int $id)
+    {
+        $status = $request->input('status');
+        $this->orderService->changeDeliverStatus($status, $id);
+
+        return response()->json(['message' => 'Delivered status changed successfully!'], 200);
     }
 }

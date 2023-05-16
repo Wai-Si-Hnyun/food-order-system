@@ -17,6 +17,12 @@ const loadBillingDetails = () => {
     }
 }
 
+const storeTotalPriceInLocalStorage = () => {
+    $selectText = $('#total-price').text();
+    $totalPrice = parseFloat($selectText.replace('$', ''));
+    localStorage.setItem('order-total-price', $totalPrice);
+}
+
 $(document).ready(function () {
     // Remove build in select
     $('.nice-select').remove();
@@ -63,12 +69,14 @@ $(document).ready(function () {
 
     axios.get('/payment/status')
         .then(function (res) {
-            const status = res.data.paymentComplete;
+            const status = res.data;
             $('#order-btn').data('payment-complete', status);
         })
         .catch(function (e) {
             console.log(e);
         })
+
+    // Listen for the change event on the city select box'))
 
     $('#order-btn').click(function (event) {
         event.preventDefault();
@@ -91,18 +99,27 @@ $(document).ready(function () {
 
         // Create data to pass
         $data = {
-            'user_id': $user_id,
-            'billingInfo': {
-                'name': $name,
-                'country': $country,
-                'state': $state,
-                'city': $city,
-                'address': $address,
-                'phone': $phone,
-                'note': $note,
-                'password': $password
+            user_id: $user_id,
+            billingInfo: {
+                name: $name,
+                country: $country,
+                state: $state,
+                city: $city,
+                address: $address,
+                phone: $phone,
+                note: $note,
+                password: $password
             },
-            'items': {}
+            items: [
+                {
+                    product: {
+                        id: 1,
+                        name: 'Product1',
+                        price: 50,
+                    },
+                    quantity: 10
+                },
+            ]
         }
 
         saveBillingDetails($data);
@@ -116,13 +133,14 @@ $(document).ready(function () {
                 text: 'Please complete payment process first',
                 confirmButtonText: 'Go to Payment',
             }).then((result) => {
-                window.location.href = '/payment';
+                window.location.href = '/payment/choose';
             })
         } else {
-            axios.post('/order/create', $data)
+            axios.post('/user/order/create', $data)
                 .then(function (res) {
                     sessionStorage.removeItem('billing-details');
                     sessionStorage.removeItem('payment-complete');
+                    window.location.href = '/';
                 })
                 .catch(function (e) {
                     if (e.response.status === 422) {

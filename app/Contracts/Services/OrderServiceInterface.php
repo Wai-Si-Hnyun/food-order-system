@@ -37,6 +37,15 @@ interface OrderServiceInterface
     public function changeOrderStatus(int $status, int $id);
 
     /**
+     * Change deliver status
+     *
+     * @param integer $status
+     * @param integer $id
+     * @return void
+     */
+    public function changeDeliverStatus(int $status, int $id);
+
+    /**
      * Delete order by id
      *
      * @param integer $id

@@ -3,7 +3,10 @@
 namespace App\Services;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 use App\Contracts\Dao\OrderDaoInterface;
+use App\Contracts\Dao\PaymentDaoInterface;
 use App\Contracts\Services\OrderServiceInterface;
 
 class OrderService implements OrderServiceInterface
@@ -12,15 +15,17 @@ class OrderService implements OrderServiceInterface
      * order dao
      */
     private $orderDao;
+    private $paymentDao;
 
     /**
      * Constructor for the OrderService
      *
      * @param OrderDaoInterface $orderDao
      */
-    public function __construct(OrderDaoInterface $orderDao)
+    public function __construct(OrderDaoInterface $orderDao, PaymentDaoInterface $paymentDao)
     {
         $this->orderDao = $orderDao;
+        $this->paymentDao = $paymentDao;
     }
 
     /**
@@ -58,22 +63,23 @@ class OrderService implements OrderServiceInterface
         // Create the billing details record
         $billingDetailsData = [
             'order_code' => $orderCode,
-            'name' => $data->billingInfo->name,
-            'country' => $data->billingInfo->country,
-            'state' => $data->billingInfo->state,
-            'city' => $data->billingInfo->city,
-            'address' => $data->billingInfo->address,
-            'phone' => $data->billingInfo->phone,
-            'note' => $data->billingInfo->note
+            'name' => $data->billingInfo['name'],
+            'country' => $data->billingInfo['country'],
+            'state' => $data->billingInfo['state'],
+            'city' => $data->billingInfo['city'],
+            'address' => $data->billingInfo['address'],
+            'phone' => $data->billingInfo['phone'],
+            'note' => $data->billingInfo['note']
         ];
 
-        // Store billing details in billing details database
-        $this->orderDao->storeBillingDetails($billingDetailsData);
+        // Create the payment details record
+        $payment_data = Session::get('payment_data');
+        $payment_data['order_code'] = $orderCode;
 
         // Calculate the total price of all products in the order
         $totalPrice = 0;
         foreach ($data->items as $item) {
-            $totalPrice += $item['total'];
+            $totalPrice += $item['product']['price'] * $item['quantity'];
         }
 
         // Create the order record
@@ -86,18 +92,26 @@ class OrderService implements OrderServiceInterface
         // Store order in order database
         $this->orderDao->storeOrder($orderData);
 
+        // Store billing details in billing details database
+        $this->orderDao->storeBillingDetails($billingDetailsData);
+
+        // Store payment details in payment database
+        $this->paymentDao->store($payment_data);
+
         // Create the order list records
-        foreach ($data['products'] as $product) {
+        foreach ($data->items as $item) {
             $orderListsData = [
                 'user_id' => $data['user_id'],
-                'product_id' => $product['id'],
-                'quantity' => $product['quantity'],
-                'total' => $product['price'] * $product['quantity'],
+                'product_id' => $item['product']['id'],
+                'quantity' => $item['quantity'],
+                'total' => $item['product']['price'] * $item['quantity'],
                 'order_code' => $orderCode
             ];
             // Store order lists in order list database
             $this->orderDao->storeOrderList($orderListsData);
         }
+        
+        Session::forget(['payment-complete', 'payment_data']);
     }
 
     /**
@@ -110,6 +124,18 @@ class OrderService implements OrderServiceInterface
     public function changeOrderStatus(int $status, int $id)
     {
         $this->orderDao->changeOrderStatus($status, $id);
+    }
+
+    /**
+     * Change deliver status
+     *
+     * @param integer $status
+     * @param integer $id
+     * @return void
+     */
+    public function changeDeliverStatus(int $status, int $id)
+    {
+        $this->orderDao->changeDeliverStatus($status, $id);
     }
 
     /**
