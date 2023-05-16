@@ -60,7 +60,7 @@
                 </div>
             </div>
         </div>
-        <div class="card">
+        <div class="card mb-5">
             <h5 class="card-header">Billing Details</h5>
             <div class="card-body">
                 <ul class="list-group">
@@ -78,6 +78,22 @@
                             {{ $order->billingdetail->note }}
                         @endif
                     </li>
+                </ul>
+            </div>
+        </div>
+        <div class="card">
+            <h5 class="card-header">Payment Details</h5>
+            <div class="card-body">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        Transaction&nbsp;ID&nbsp;-&nbsp;
+                        <a target="_blink" href="{{ 'https://dashboard.stripe.com/test/payments/' . $order->payment->transaction_id }}" class="text-primary">{{ $order->payment->transaction_id }}</a>
+                    </li>
+                    <li class="list-group-item">Amount&nbsp;-&nbsp; {{ $order->payment->payment_amount }}</li>
+                    <li class="list-group-item">Currency&nbsp;-&nbsp; {{ $order->payment->payment_currency }}</li>
+                    <li class="list-group-item">Method&nbsp;-&nbsp; {{ $order->payment->payment_method }}</li>
+                    <li class="list-group-item">Gateway&nbsp;-&nbsp; {{ $order->payment->payment_gateway }}</li>
+                    <li class="list-group-item">Status&nbsp;-&nbsp; {{ $order->payment->payment_status }}</li>
                 </ul>
             </div>
         </div>

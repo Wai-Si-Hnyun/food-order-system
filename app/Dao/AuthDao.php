@@ -3,6 +3,8 @@ namespace App\Dao;
 
 use App\Contracts\Dao\AuthDaoInterface;
 use App\Models\User;
+use Illuminate\Support\Str;
+use App\Models\PasswordReset;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Str;
