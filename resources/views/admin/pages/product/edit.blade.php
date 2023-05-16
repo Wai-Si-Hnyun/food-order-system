@@ -9,9 +9,10 @@
                 <form action="{{ route('products.update', $product->id) }}" enctype="multipart/form-data" method="post">
                     @csrf
                     <div class="row">
-                        <div class="col-4 offset-1 my-5">
+                        <div class="col-6 offset-3">
                             <div class="form-group mb-3">
-                                <img src="{{ asset('storage/' . $product->image) }}" alt="product image" class="img-thumbnail">
+                                <img src="{{ asset('storage/' . $product->image) }}" alt="product image"
+                                    class="img-thumbnail shadow-sm">
                                 <input class="form-control mt-2 @error('productImage') is-invalid @enderror" type="file"
                                     name="productImage" id="product-image">
                                 @error('productImage')
@@ -21,7 +22,9 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-6 offset-1">
+                    </div>
+                    <div>
+                        <div class="col-10 offset-1">
                             <div class="form-group mb-3">
                                 <label for="">Category</label>
                                 <select name="category" id="category"
@@ -75,8 +78,10 @@
                             </div>
                         </div>
                     </div>
-                    <a href="{{ route('products.index') }}" class="btn btn-sm btn-dark my-3 ms-5">Back</a>
-                    <input type="submit" value="Update" class="btn btn-sm btn-info my-3 text-dark float-end">
+                    <div class="col-10 offset-1">
+                        <input type="submit" value="Update" class="btn btn-sm btn-info my-3 text-dark">
+                        <a href="{{ route('products.index') }}" class="btn btn-sm btn-dark my-3 ms-5 float-end">Back</a>
+                    </div>
                 </form>
             </div>
         </div>

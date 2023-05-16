@@ -78,6 +78,7 @@ class ProductController extends Controller
 
         return view('admin.pages.product.details', compact('product'));
     }
+  
     /**
      * function edit
      */
@@ -85,7 +86,7 @@ class ProductController extends Controller
     {
         $product = Product::where('id', $id)->first();
         $categories = Category::get();
-        
+
         return view('admin.pages.product.edit', compact('product', 'categories'));
     }
 
@@ -96,7 +97,7 @@ class ProductController extends Controller
     {
         Validator::make($request->all(), [
             'category' => 'required',
-            'productName' => 'required|min:5|unique:products,name',
+            'productName' => 'required',
             'productImage' => 'mimes:jpg,jpeg,png,webp|file',
             'productDescription' => 'required|min:10',
             'productPrice' => 'required',
@@ -111,7 +112,7 @@ class ProductController extends Controller
             $oldImageName = Product::where('id', $request->id)->first();
             $oldImageName = $oldImageName->image;
             if ($oldImageName != null) {
-                Storage::delete('public/'. $oldImageName);
+                Storage::delete('public/' . $oldImageName);
             }
             $fileName = uniqid() . $request->file('productImage')->getClientOriginalName();
             $request->file('productImage')->storeAs('public', $fileName);

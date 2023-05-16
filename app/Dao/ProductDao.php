@@ -19,7 +19,7 @@ class ProductDao implements ProductDaoInterface
             })
             ->leftJoin('categories', 'products.category_id', 'categories.id')
             ->orderBy('products.created_at', 'desc')
-            ->paginate(4)
+            ->paginate(10)
             ->appends(request()->all());
 
     }
