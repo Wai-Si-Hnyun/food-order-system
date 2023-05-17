@@ -43,17 +43,13 @@
                             <li>Product-Id : <span>{{ $products->id }}</span></li>
                         </ul>
                         <div class="product__details__option">
-
-                            <form action="{{ url('add-cart/'.$products->id) }}" method="post" class="d-inline-block ">
-                                @csrf
-                                <div class="quantity">
-                                    <div class="pro-qty">
-                                        <input type="text" name="quantity" value="3">
-                                    </div>
+                            <div class="quantity">
+                                <div class="pro-qty">
+                                    <input type="text" value="2">
                                 </div>
-                                <button type="submit" class="primary-btn border border-0">Add to cart</button>
-                            </form>
-                            <a href="#" class="heart__btn  me-2"><span class="icon_heart_alt"></span></a>
+                            </div>
+                            <a href="#" class="primary-btn">Add to cart</a>
+                            <a href="#" class="heart__btn"><span class="icon_heart_alt"></span></a>
                         </div>
                     </div>
                 </div>
@@ -90,7 +86,7 @@
                                     <h6><a href="#">{{ $list->name }}</a></h6>
                                     <div class="product__item__price">${{ $list->price }}</div>
                                     <div class="cart_add">
-                                        <a href="{{ url('add-cart/'.$list->id) }}">Add to cart</a>
+                                        <a href="{{ route('users.details', $list->id) }}">Add to cart</a>
                                     </div>
                                 </div>
                             </div>

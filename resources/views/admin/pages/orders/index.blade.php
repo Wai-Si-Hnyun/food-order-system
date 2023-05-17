@@ -2,7 +2,8 @@
 
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4">Orders</h4>
+        <h4 class="fw-bold">Orders</h4>
+        <div class="alert alert-success w-50 fade" id="successAlert" role="alert"></div>
         <div class="card">
             <div class="table-responsive text-nowrap">
                 <table class="table">
@@ -27,13 +28,13 @@
                                 <td>{{ $order->total_price }}</td>
                                 <td>
                                     <select class="form-select form-select-sm orderStatus" name="status" id="status">
-                                        <option value="0" {{ $order->status == 0 ? 'selected' : null }}>
+                                        <option class="text-danger" value="0" {{ $order->status == 0 ? 'selected' : null }}>
                                             reject
                                         </option>
-                                        <option value="1" {{ $order->status == 1 ? 'selected' : null }}>
+                                        <option class="text-success" value="1" {{ $order->status == 1 ? 'selected' : null }}>
                                             success
                                         </option>
-                                        <option value="2" {{ $order->status == 2 ? 'selected' : null }}>
+                                        <option class="text-warning" value="2" {{ $order->status == 2 ? 'selected' : null }}>
                                             pending
                                         </option>
                                     </select>
@@ -62,6 +63,9 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div class="mt-3">
+            {{ $orders->links() }}
         </div>
     </div>
 @endsection

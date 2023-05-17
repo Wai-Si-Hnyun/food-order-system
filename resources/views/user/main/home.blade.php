@@ -41,7 +41,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="product__item">
                             <div class="product__item__pic set-bg">
-                                <img src="{{ asset('storage/ . $product->image') }}" alt="">
+                                <img src={{ asset('storage/' . $product->image) }} alt="">
                                 <div class="product__label">
                                     <span>Foods</span>
                                 </div>
@@ -50,11 +50,7 @@
                                 <h6><a href="#">{{ $product->name }}</a></h6>
                                 <div class="product__item__price">${{ $product->price }}</div>
                                 <div class="cart_add">
-                                    <form action="{{ url('add-cart/'.$product->id) }}" method="post">
-                                        @csrf
-                                        <input type="hidden" value="1" name="quantity">
-                                        <button type="submit" class="border border-warning">Add to cart</button>
-                                    </form>
+                                    <a href="{{ route('users.shop') }}">Add to cart</a>
                                 </div>
                             </div>
                         </div>

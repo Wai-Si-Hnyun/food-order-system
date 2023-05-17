@@ -33,7 +33,13 @@ Route::middleware('role:user')->group(function () {
     // Order
     Route::post('user/order/create', [OrderController::class, 'store'])->name('order.store');
     Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
-    Route::get('/payment/status', [PaymentController::class, 'status']);
+
+    // Payment
+    Route::get('/payment/choose', [PaymentController::class, 'index'])->name('user.payment');
+    Route::get('/payment/card', [PaymentController::class, 'card'])->name('payment.card');
+    Route::post('/payment/card', [PaymentController::class, 'chargeCard'])->name('stripe.card');
+    Route::get('/payment/google-pay', [PaymentController::class, 'google'])->name('payment.google');
+    Route::post('/payment/google-pay', [PaymentController::class, 'chargeGooglePay'])->name('stripe.google');
 
     // for users
     Route::get('/users', [UserProductController::class, 'home'])->name('users.home');
@@ -48,7 +54,6 @@ Route::middleware('role:user')->group(function () {
     Route::post('add-cart/{product}',[CartController::class, 'addToCart'])->name('add.cart');
     Route::get('cart',[CartController::class, 'cart'])->name('show.cart');
     Route::delete('/deleteCart/{id}',[CartController::class, 'remove'])->name('remove.cart');
-
 });
 
 Route::middleware('role:admin')->group(function () {
@@ -57,8 +62,8 @@ Route::middleware('role:admin')->group(function () {
 
     // for category
     Route::get('/admin/categories', [CategoryController::class, 'index'])->name('categories.index');
-    Route::get('/create', [CategoryController::class, 'create'])->name('categories.create');
-    Route::post('/store', [CategoryController::class, 'store'])->name('categories.store');
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+    Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store');
     Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('categories.edit');
     Route::post('/categories/update/{id}', [CategoryController::class, 'update'])->name('categories.update');
     Route::get('/categories/delete/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
@@ -75,6 +80,7 @@ Route::middleware('role:admin')->group(function () {
     // Order
     Route::get('/admin/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/admin/order/{id}/show', [OrderController::class, 'show'])->name('order.show');
-    Route::delete('admin/order/{id}/delete', [OrderController::class, 'destroy'])->name('order.delete');
-    Route::get('/admin/order/{id}/status/change', [OrderController::class, 'changeStatus']);
+    Route::delete('admin/orders/{id}/delete', [OrderController::class, 'destroy'])->name('order.delete');
+    Route::get('/admin/orders/{id}/status/change', [OrderController::class, 'changeOrderStatus']);
+    Route::get('/admin/orders/{id}/deivered/status/change', [OrderController::class, 'changeDeliverStatus']);
 });
