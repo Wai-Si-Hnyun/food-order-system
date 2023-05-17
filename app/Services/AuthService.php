@@ -4,7 +4,6 @@ namespace App\Services;
 use App\Contracts\Dao\AuthDaoInterface;
 use App\Contracts\Services\AuthServiceInterface;
 use App\Models\User;
-use Illuminate\Support\Facades\Validator;
 
 /**
  * User Service class
@@ -40,5 +39,10 @@ class AuthService implements AuthServiceInterface
     public function passUpdate($request,$resetData): void
     {
         $this->authDao->passUpdate($request,$resetData);
+    }
+
+    public function getNameById(int $id): object
+    {
+        return $this->authDao->getNameById($id);
     }
 }

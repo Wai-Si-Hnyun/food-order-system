@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\User\AjaxController;
 use App\Http\Controllers\User\UserProductController;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,12 @@ Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
 Route::get('/register', [AuthController::class, 'registerPage'])->name('auth.registerPage');
 Route::post('/register', [AuthController::class, 'authRegisterStore'])->name('auth.store');
 Route::post('/login', [AuthController::class, 'authLogin'])->name('auth.loginCheck');
+
+//forget/reset password
+Route::get('/forget-password-page',[AuthController::class,'forgetPass'])->name('auth.forgetPass');
+Route::post('/forget-create',[AuthController::class,'forgetCreate'])->name('auth.forgetCreate');
+Route::get('/reset-password-page',[AuthController::class,'resetPass'])->name('auth.resetPass');
+Route::post('/pass-change',[AuthController::class,'passChange'])->name('auth.passChange');
 
 Route::middleware('role:user')->group(function () {
     // Order
@@ -42,6 +49,11 @@ Route::middleware('role:user')->group(function () {
 
     // ajax
     Route::get('/ajax/products', [AjaxController::class, 'index'])->name('ajax.index');
+
+    //cart
+    Route::post('add-cart/{product}',[CartController::class, 'addToCart'])->name('add.cart');
+    Route::get('cart',[CartController::class, 'cart'])->name('show.cart');
+    Route::delete('/deleteCart/{id}',[CartController::class, 'remove'])->name('remove.cart');
 });
 
 Route::middleware('role:admin')->group(function () {

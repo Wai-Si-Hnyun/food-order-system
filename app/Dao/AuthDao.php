@@ -3,10 +3,8 @@ namespace App\Dao;
 
 use App\Contracts\Dao\AuthDaoInterface;
 use App\Models\User;
-use Illuminate\Support\Str;
-use App\Models\PasswordReset;
 use Carbon\Carbon;
-use Illuminate\Auth\Events\PasswordReset;
+use App\Models\PasswordReset;
 use Illuminate\Support\Str;
 
 class AuthDao implements AuthDaoInterface
@@ -52,5 +50,10 @@ class AuthDao implements AuthDaoInterface
         $userUpdate = User::find($user->id);
         $userUpdate->password = bcrypt($request->password);
         $userUpdate->save();
+    }
+
+    public function getNameById(int $id): object
+    {
+        return User::findOrFail($id);
     }
 }

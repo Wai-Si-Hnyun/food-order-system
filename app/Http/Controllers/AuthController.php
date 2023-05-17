@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Services\AuthServiceInterface;
 use App\Http\Requests\UserCreateRequest;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\mailNotify;
+use Mail;
 
 class AuthController extends Controller
 {
@@ -75,6 +78,71 @@ class AuthController extends Controller
             }
         } else {
             return redirect()->route('auth.login')->with('alert', "<script>alert('email or password may be wrong')</script>");
+        }
+    }
+
+          /**
+     * forgetPassword page
+     *
+     * @return View forgetPassword page
+     */
+    public function forgetPass() {
+        return view ('authen.forgetPassword');
+    }
+
+    /**
+     * Save token
+     *
+     * @param \App\Http\Requests\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function forgetCreate(Request $request) {
+        $user = $this->authService->emailCheck($request);
+        if (count($user) > 0) {
+            $passwordReset =$this->authService->passwordReset($request);
+            $data = [
+                "subject"=>"Please check your token",
+                "body"=>$passwordReset->token
+            ];
+            $mail = Mail::to($request->email)->send(new mailNotify($data));
+            return redirect()->route('auth.resetPass');
+
+        }
+        else {
+            return redirect()->route('auth.forgetPass')->with('alert', "Your account is not found");
+        }
+    }
+
+      /**
+     * resetPassword page
+     *
+     * @return View resetPassword page
+     */
+    public function resetPass() {
+        return view ('authen.resetPassword');
+    }
+
+    /**
+     * Pass Change
+     *
+     * @param \App\Http\Requests\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function passChange(Request $request) {
+        $validator = Validator::make($request->all(),[
+            'token'=>'required',
+            'password'=>'required',
+            'confirm_password'=>'required|same:password'
+        ]);
+        if ($validator->fails()){
+            return redirect('/resetPasswordPage')
+                ->withInput()
+                ->withErrors($validator);
+        }
+        $resetData = $this->authService->findToken($request);
+        if (isset($request->token) && $resetData) {
+            $update = $this->authService->passUpdate($request,$resetData);
+            return redirect('/login');
         }
     }
 

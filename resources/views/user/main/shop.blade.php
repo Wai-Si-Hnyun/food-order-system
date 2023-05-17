@@ -87,7 +87,11 @@
                                     <h6><a href="#">{{ $product->name }}</a></h6>
                                     <div class="product__item__price">${{ $product->price }}</div>
                                     <div class="cart_add">
-                                        <a href="{{ route('users.details', $product->id) }}">Add to cart</a>
+                                    <form action="{{ url('add-cart/'.$product->id) }}" method="post">
+                                        @csrf
+                                        <input type="hidden" value="1" name="quantity">
+                                        <button type="submit" class="border border-warning">Add to cart</button>
+                                    </form>
                                     </div>
                                 </div>
                             </div>
