@@ -23,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Contracts\Services\UserProductServiceInterface', 'App\Services\UserProductService');
         $this->app->bind('App\Contracts\Services\ReviewServiceInterface', 'App\Services\ReviewService');
         $this->app->bind('App\Contracts\Services\PaymentServiceInterface', 'App\Services\PaymentService');
+        $this->app->bind('App\Contracts\Services\MailServiceInterface', 'App\Services\MailService');
         //Dao
         $this->app->bind('App\Contracts\Dao\UserProductDaoInterface', 'App\Dao\UserProductDao');
         $this->app->bind('App\Contracts\Dao\AjaxDaoInterface', 'App\Dao\AjaxDao');
