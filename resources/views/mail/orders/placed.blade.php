@@ -1,10 +1,36 @@
 @component('mail::message')
 # Order Confirmation
 
+Hello {{ $order->user->name }},
+
 Thank you for your order!
 
-**Order Number:** {{ $order->order_code }}
+---
+
+## Summary:
+**Order Code:** {{ $order->order_code }}<br>
+**Order Time:** {{ $order->created_at->format('Y-m-d H:i:s') }}
+
+---
+
+## Delivery Address:
+{{ $order->billingdetail->name }}<br>
+{{ $order->billingdetail->address }}<br>
+{{ $order->billingdetail->city }}<br>
+
+---
+
+@component('mail::table')
+| Product Name       | Quantity | Price      |
+|:-------------------|:--------:|:----------:|
+@foreach($order->orderlists as $orderlist)
+| {{ $orderlist->product->name }} | {{ $orderlist->quantity }}      | ${{ number_format($orderlist->total, 2) }}  |
+@endforeach
+@endcomponent
+
 **Order Total:** ${{ number_format($order->total_price, 2) }}
+
+---
 
 @component('mail::button', ['url' => url('/')])
 View Order

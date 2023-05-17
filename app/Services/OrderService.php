@@ -115,7 +115,7 @@ class OrderService implements OrderServiceInterface
 
             // Mail process to user
             // Load the users relationship
-            $order->load('user');
+            $order->load('user', 'orderlists.product', 'billingdetail');
 
             // Queue the confirmation email
             Mail::to($order->user->email)->queue(new OrderPlaced($order));

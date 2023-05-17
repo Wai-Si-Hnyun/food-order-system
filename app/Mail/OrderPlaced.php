@@ -32,6 +32,6 @@ class OrderPlaced extends Mailable implements ShouldQueue
     public function build()
     {
         return $this->subject('Order Confirmation')
-                    ->markdown('emails.orders.placed');
+                    ->markdown('mail.orders.placed');
     }
 }

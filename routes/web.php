@@ -1,15 +1,16 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\User\AjaxController;
 use App\Http\Controllers\User\UserProductController;
-use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
@@ -91,4 +92,8 @@ Route::middleware('role:admin')->group(function () {
     //review
     Route::get('/review-list',[ReviewController::class,'reviewList'])->name('review.list');
     Route::delete('/user-review/{review}',[ReviewController::class,'reviewDestory'])->name('review.destory');
+
+    // Mail
+    Route::get('/admin/mail', [MailController::class, 'index'])->name('mail.index');
+    Route::post('/admin/mail/send', [MailController::class, 'send'])->name('mail.send');
 });
