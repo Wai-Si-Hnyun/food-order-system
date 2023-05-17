@@ -11,9 +11,6 @@ use App\Http\Controllers\User\AjaxController;
 use App\Http\Controllers\User\UserProductController;
 use Illuminate\Support\Facades\Route;
 
-// Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
-//     Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
-// });
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
@@ -33,16 +30,10 @@ Route::middleware('role:user')->group(function () {
     // Order
     Route::post('user/order/create', [OrderController::class, 'store'])->name('order.store');
     Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
-
-    // Payment
-    Route::get('/payment/choose', [PaymentController::class, 'index'])->name('user.payment');
-    Route::get('/payment/card', [PaymentController::class, 'card'])->name('payment.card');
-    Route::post('/payment/card', [PaymentController::class, 'chargeCard'])->name('stripe.card');
-    Route::get('/payment/google-pay', [PaymentController::class, 'google'])->name('payment.google');
-    Route::post('/payment/google-pay', [PaymentController::class, 'chargeGooglePay'])->name('stripe.google');
+    Route::get('/payment/status', [PaymentController::class, 'status']);
 
     // for users
-    Route::get('/users', [UserProductController::class, 'home'])->name('users.home');
+    Route::get('/users/{id}', [UserProductController::class, 'home'])->name('users.home');
     Route::get('/users/shop', [UserProductController::class, 'shop'])->name('users.shop');
     Route::get('/users/filter/{id}', [UserProductController::class, 'filter'])->name('users.filter');
     Route::get('/users/details/{id}', [UserProductController::class, 'details'])->name('users.details');
@@ -54,6 +45,13 @@ Route::middleware('role:user')->group(function () {
     Route::post('add-cart/{product}',[CartController::class, 'addToCart'])->name('add.cart');
     Route::get('cart',[CartController::class, 'cart'])->name('show.cart');
     Route::delete('/deleteCart/{id}',[CartController::class, 'remove'])->name('remove.cart');
+
+    //reviews
+    Route::post('/review',[ReviewController::class,'review'])->name('review.create');
+    Route::get('/review/{review}/edit',[ReviewController::class,'reviewEdit'])->name('review.edit');
+    Route::put('/review/{review}',[ReviewController::class,'reviewUpdate'])->name('review.update');
+    Route::delete('/review-delete/{review}',[ReviewController::class,'reviewDelete'])->name('review.delete');
+
 });
 
 Route::middleware('role:admin')->group(function () {
@@ -62,8 +60,8 @@ Route::middleware('role:admin')->group(function () {
 
     // for category
     Route::get('/admin/categories', [CategoryController::class, 'index'])->name('categories.index');
-    Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
-    Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store');
+    Route::get('/create', [CategoryController::class, 'create'])->name('categories.create');
+    Route::post('/store', [CategoryController::class, 'store'])->name('categories.store');
     Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('categories.edit');
     Route::post('/categories/update/{id}', [CategoryController::class, 'update'])->name('categories.update');
     Route::get('/categories/delete/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
@@ -83,4 +81,8 @@ Route::middleware('role:admin')->group(function () {
     Route::delete('admin/orders/{id}/delete', [OrderController::class, 'destroy'])->name('order.delete');
     Route::get('/admin/orders/{id}/status/change', [OrderController::class, 'changeOrderStatus']);
     Route::get('/admin/orders/{id}/deivered/status/change', [OrderController::class, 'changeDeliverStatus']);
+    
+    //review
+    Route::get('/review-list',[ReviewController::class,'reviewList'])->name('review.list');
+    Route::delete('/user-review/{review}',[ReviewController::class,'reviewDestory'])->name('review.destory');
 });

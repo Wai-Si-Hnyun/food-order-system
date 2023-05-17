@@ -182,14 +182,3 @@ class OrderService implements OrderServiceInterface
         return Str::random(8);
     }
 }
-
-    /**
-     * Generate a random order code
-     *
-     * @return string
-     */
-    public function generateOrderCode()
-    {
-        return Str::random(8);
-    }
-}

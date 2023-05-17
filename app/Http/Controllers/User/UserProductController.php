@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Contracts\Services\UserProductServiceInterface;
+use App\Contracts\Services\ReviewServiceInterface;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
@@ -14,20 +15,27 @@ class UserProductController extends Controller
      */
 
     private $userProductService;
+    private $reviewServiceInterface;
     /**
      * Create a new controller instance.
      * @param UserProductServiceInterface $userServiceInterface
      * @return void
      */
-    public function __construct(UserProductServiceInterface $userProductServiceInterface)
+    public function __construct(UserProductServiceInterface $userProductServiceInterface,ReviewServiceInterface $reviewServiceInterface)
     {
         $this->userProductService = $userProductServiceInterface;
+        $this->reviewService = $reviewServiceInterface;
     }
     /**
      * home function
      */
-    public function home()
+    public function home($id)
     {
+        $user = session()->get('user',[]);
+        $user[$id] = [
+            "user_id"=> $id
+        ];
+        session()->put('user',$user);
         $products = $this->userProductService->getUsersProduct();
         return view('user.main.home', compact('products'));
     }
@@ -46,9 +54,11 @@ class UserProductController extends Controller
      */
     public function details($id)
     {
+        $user = session()->get('user');
+        $review = $this->reviewService->reviewShow($id);
         $products = Product::where('id', $id)->first();
         $productList = Product::get();
-        return view('user.main.details', compact('products', 'productList'));
+        return view('user.main.details', compact('products', 'productList', 'id', 'user','review'));
     }
 
     /**

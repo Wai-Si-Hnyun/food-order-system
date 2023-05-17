@@ -21,7 +21,8 @@ class CartController extends Controller
      * @param \App\Http\Requests\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function addToCart(Request $request,$id) {
+    public function addToCart(Request $request,$id)
+    {
         $product = Product::findOrFail($id);
         $item = session()->get('item',[]);
         if($request->quantity > 1) {
@@ -58,7 +59,8 @@ class CartController extends Controller
      * @param \App\Http\Requests\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function remove(Request $request) {
+    public function remove(Request $request)
+    {
         if ($request->id) {
             $item = session()->get('item');
             if(isset($item[$request->id])) {
