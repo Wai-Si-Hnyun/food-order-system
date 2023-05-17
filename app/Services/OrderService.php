@@ -2,11 +2,13 @@
 
 namespace App\Services;
 
+use App\Mail\OrderPlaced;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 use App\Contracts\Dao\OrderDaoInterface;
 use App\Contracts\Services\OrderServiceInterface;
 use App\Contracts\Services\PaymentServiceInterface;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Str;
 
 class OrderService implements OrderServiceInterface
 {
@@ -90,7 +92,7 @@ class OrderService implements OrderServiceInterface
             ];
 
             // Store order in order database
-            $this->orderDao->storeOrder($orderData);
+            $order = $this->orderDao->storeOrder($orderData);
 
             // Store billing details in billing details database
             $this->orderDao->storeBillingDetails($billingDetailsData);
@@ -110,6 +112,13 @@ class OrderService implements OrderServiceInterface
                 // Store order lists in order list database
                 $this->orderDao->storeOrderList($orderListsData);
             }
+
+            // Mail process to user
+            // Load the users relationship
+            $order->load('user');
+
+            // Queue the confirmation email
+            Mail::to($order->user->email)->queue(new OrderPlaced($order));
 
             Session::forget(['payment-complete', 'payment_data']);
 
