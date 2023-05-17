@@ -67,3 +67,14 @@ $(document).ready(function () {
             .then((res) => {
                 $('#successAlert').text(res.data.message);
                 $('#successAlert').addClass('show');
+
+                // Hide the success alert
+                setTimeout(function () {
+                    $('#successAlert').removeClass('show');
+                }, 2000);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    })
+})
