@@ -30,7 +30,13 @@ Route::middleware('role:user')->group(function () {
     // Order
     Route::post('user/order/create', [OrderController::class, 'store'])->name('order.store');
     Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
-    Route::get('/payment/status', [PaymentController::class, 'status']);
+
+    // Payment
+    Route::get('/payment/choose', [PaymentController::class, 'index'])->name('user.payment');
+    Route::get('/payment/card', [PaymentController::class, 'card'])->name('payment.card');
+    Route::post('/payment/card', [PaymentController::class, 'chargeCard'])->name('stripe.card');
+    Route::get('/payment/google-pay', [PaymentController::class, 'google'])->name('payment.google');
+    Route::post('/payment/google-pay', [PaymentController::class, 'chargeGooglePay'])->name('stripe.google');
 
     // for users
     Route::get('/users/{id}', [UserProductController::class, 'home'])->name('users.home');
