@@ -17,7 +17,7 @@ class CategoryDao implements CategoryDaoInterface
             $query->where('name', 'LIKE', '%' . request('key') . '%');
         })
             ->orderBy('created_at', 'asc')
-            ->paginate(4)
+            ->paginate(10)
             ->appends(request()->all());
 
     }

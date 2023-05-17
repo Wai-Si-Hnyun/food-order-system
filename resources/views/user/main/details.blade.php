@@ -45,11 +45,15 @@
                         <div class="product__details__option">
                             <div class="quantity">
                                 <div class="pro-qty">
-                                    <input type="text" value="2">
+                                    <input type="text" value="1">
                                 </div>
                             </div>
                             <a href="#" class="primary-btn">Add to cart</a>
-                            <a href="#" class="heart__btn"><span class="icon_heart_alt"></span></a>
+                            <a href="{{ route('users.wishlist') }}">
+                                <button class="btn btn-lg btn-outline-warning heart__btn"><span
+                                        class="icon_heart_alt"></span></button>
+                            </a>
+
                         </div>
                     </div>
                 </div>
