@@ -11,7 +11,7 @@ const deleteOrder = (e, id) => {
         confirmButtonText: 'Confirm'
     }).then((result) => {
         if (result.isConfirmed) {
-            axios.delete(`/admin/order/${id}/delete`)
+            axios.delete(`/admin/orders/${id}/delete`)
                 .then((res) => {
                     $(`table tbody tr[data-id="${id}"]`).remove();
 
@@ -28,7 +28,7 @@ const deleteOrder = (e, id) => {
 }
 
 $(document).ready(function () {
-    $('.orderStatus').on('change',function (e) {
+    $('.orderStatus').on('change', function (e) {
         e.preventDefault();
 
         $current = $(this).val();
@@ -38,16 +38,32 @@ $(document).ready(function () {
             'status': $current
         }
 
-        axios.get(`/admin/order/${$orderId}/status/change`, {params: $data})
+        axios.get(`/admin/orders/${$orderId}/status/change`, { params: $data })
             .then((res) => {
-                Swal.fire({
-                    title: 'Success!',
-                    text: res.data.message,
-                    icon: 'success',
-                })
+                $('#successAlert').text(res.data.message);
+                $('#successAlert').addClass('show');
+
+                // Hide the success alert
+                setTimeout(function () {
+                    $('#successAlert').removeClass('show');
+                }, 2000); // Time in milliseconds (2 seconds)
             })
-            .catch((err) => {
-                console.log(err);
+            .catch((e) => {
+                console.log(e);
             })
     })
-})
+
+    $('.form-check-input').on('change', function (e) {
+        e.preventDefault();
+
+        $status = $(this).is(':checked') ? 1 : 0;
+        $orderId = $(this).closest('tr').data('id');
+
+        $data = {
+            'status': $status
+        };
+
+        axios.get(`/admin/orders/${$orderId}/deivered/status/change`, { params: $data })
+            .then((res) => {
+                $('#successAlert').text(res.data.message);
+                $('#successAlert').addClass('show');

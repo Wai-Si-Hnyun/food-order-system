@@ -12,6 +12,7 @@ class BillingDetails extends Model
     use HasFactory;
 
     protected $fillable = [
+        'order_code',
         'name',
         'country',
         'state',

@@ -9,7 +9,6 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\User\AjaxController;
 use App\Http\Controllers\User\UserProductController;
-use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -82,6 +81,12 @@ Route::middleware('role:admin')->group(function () {
     Route::delete('admin/order/{id}/delete', [OrderController::class, 'destroy'])->name('order.delete');
     Route::get('/admin/order/{id}/status/change', [OrderController::class, 'changeStatus']);
 
+    // Order
+    Route::get('/admin/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/admin/order/{id}/show', [OrderController::class, 'show'])->name('order.show');
+    Route::delete('admin/orders/{id}/delete', [OrderController::class, 'destroy'])->name('order.delete');
+    Route::get('/admin/orders/{id}/status/change', [OrderController::class, 'changeOrderStatus']);
+    Route::get('/admin/orders/{id}/deivered/status/change', [OrderController::class, 'changeDeliverStatus']);
     //review
     Route::get('/review-list',[ReviewController::class,'reviewList'])->name('review.list');
     Route::delete('/user-review/{review}',[ReviewController::class,'reviewDestory'])->name('review.destory');

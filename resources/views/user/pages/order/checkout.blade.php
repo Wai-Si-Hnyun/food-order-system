@@ -29,6 +29,7 @@
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
                             <h6 class="checkout__title">Billing Details</h6>
+                            <input type="hidden" name="id" id="id" value="{{ Auth::user()->id }}">
                             <div class="checkout__input">
                                 <p>Full Name<span>*</span></p>
                                 <input type="text" name="name" id="name">
@@ -86,11 +87,11 @@
                                 </ul>
                                 <ul class="checkout__total__all">
                                     <li>Subtotal <span>$750.99</span></li>
-                                    <li>Total <span>$750.99</span></li>
+                                    <li>Total <span id="total-price">$750.99</span></li>
                                 </ul>
-                                <a href="#" class="text-dark"><i class="fa-regular fa-credit-card mr-3"></i>Go to
+                                <a href="{{ route('user.payment') }}" class="text-dark"><i class="fa-regular fa-credit-card mr-3"></i>Go to
                                     Payment</a>
-                                <button type="submit" data-payment-complete="false" id="order-btn" class="site-btn">PLACE ORDER</button>
+                                <button type="submit" id="order-btn" class="site-btn">PLACE ORDER</button>
                             </div>
                         </div>
                     </div>
