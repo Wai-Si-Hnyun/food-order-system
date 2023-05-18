@@ -41,7 +41,11 @@ class ProductService implements ProductServiceInterface
      */
     public function createProduct(array $data): void
     {
-        // Mail Send Code
+        //store image
+        $image = $data["productImage"];
+        $fileName = uniqid() . $image->getClientOriginalName();
+        $image->storeAs('public', $fileName);
+        $data['productImage'] = $fileName;
         $this->productDao->createProduct($data);
     }
 
@@ -63,6 +67,11 @@ class ProductService implements ProductServiceInterface
      */
     public function updateProduct(array $data, int $id): void
     {
+        //store image
+        $image = $data["productImage"];
+        $fileName = uniqid() . $image->getClientOriginalName();
+        $image->storeAs('public', $fileName);
+        $data['productImage'] = $fileName;
         $this->productDao->updateProduct($data, $id);
     }
 

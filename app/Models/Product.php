@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use App\Models\Category;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Wishlist;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
@@ -48,5 +49,14 @@ class Product extends Model
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);
+    }
+    /**
+     * Get all of the wishlists for the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function wishlists(): HasMany
+    {
+        return $this->hasMany(Wishlist::class);
     }
 }

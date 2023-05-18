@@ -43,7 +43,6 @@
                             <li>Product-Id : <span>{{ $products->id }}</span></li>
                         </ul>
                         <div class="product__details__option">
-
                             <form action="{{ url('add-cart/'.$products->id) }}" method="post" class="d-inline-block ">
                                 @csrf
                                 <div class="quantity">

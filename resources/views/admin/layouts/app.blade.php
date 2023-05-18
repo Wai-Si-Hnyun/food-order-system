@@ -128,6 +128,10 @@
                         <a href="{{ route('q&a.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-message-dots"></i>
                             <div>Q&A</div>
+                    <li class="menu-item" id="feedback">
+                        <a href="{{route('feedback.list')}}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div>FeedBack</div>
                         </a>
                     </li>
                 </ul>

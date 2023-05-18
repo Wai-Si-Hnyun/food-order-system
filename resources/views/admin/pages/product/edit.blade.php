@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 @section('content')
     <div class="container">
-        <div class="card col-8 offset-2 mt-5">
+        <div class="card col-7 mx-auto mt-5">
             <div class="card-header text-center">
                 <h4><b> Edit Product</b></h4>
             </div>
@@ -32,7 +32,8 @@
                                     <option value="">Choose category</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}"
-                                            @if ($product->category_id == $category->id) selected @endif>{{ $category->name }}</option>
+                                            @if ($product->category_id == $category->id) selected @endif>
+                                            {{ $category->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('category')
@@ -79,8 +80,8 @@
                         </div>
                     </div>
                     <div class="col-10 offset-1">
-                        <input type="submit" value="Update" class="btn btn-sm btn-info my-3 text-dark">
-                        <a href="{{ route('products.index') }}" class="btn btn-sm btn-dark my-3 ms-5 float-end">Back</a>
+                        <input type="submit" value="Update" class="btn btn-info my-3 text-dark">
+                        <a href="{{ route('products.index') }}" class="btn btn-dark my-3 ms-5 float-end">Back</a>
                     </div>
                 </form>
             </div>

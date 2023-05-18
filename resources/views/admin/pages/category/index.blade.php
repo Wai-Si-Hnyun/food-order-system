@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('content')
-    <div class="container col-8 offset-2 mt-3">
+    <div class="container mt-3">
         <a href="{{ route('categories.create') }}" class="btn btn-primary my-2">Create</a>
 
         <div class="float-end mt-2 col-4">
@@ -41,7 +41,7 @@
                     <h4><b>Category Lists</b></h4>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped">
+                    <table class="table table-striped text-center">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -58,12 +58,11 @@
                                     <td>{{ $category->created_at->format('j-F-Y') }}</td>
                                     <td>
                                         <a href="{{ route('categories.edit', $category->id) }}">
-                                            <button class='btn btn-sm btn-success'><i
+                                            <button class='btn btn-success'><i
                                                     class="fa-solid fa-pen-to-square"></i></button>
                                         </a>
                                         <a href="{{ route('categories.destroy', $category->id) }}">
-                                            <button class='btn btn-sm btn-danger'><i
-                                                    class="fa-solid fa-trash-can"></i></button>
+                                            <button class='btn btn-danger'><i class="fa-solid fa-trash-can"></i></button>
                                         </a>
                                     </td>
                                 </tr>
