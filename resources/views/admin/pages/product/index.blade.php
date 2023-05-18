@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 @section('content')
-    <div class="container col-10 offset-1 mt-3">
-        <a href="{{ route('products.create') }}" class="btn btn-info my-2"><i class="fa-regular fa-plus me-2"></i>Create</a>
+    <div class="container mt-3">
+        <a href="{{ route('products.create') }}" class="btn btn-primary my-2"></i>Create</a>
 
         <div class="float-end mt-2 col-4">
             <form action="{{ route('products.index') }}" class="" method="get">
@@ -41,7 +41,7 @@
                     <h4><b>Product Lists</b></h4>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped">
+                    <table class="table table-striped text-center">
                         <thead>
                             <tr>
                                 <th>Image</th>
@@ -57,21 +57,20 @@
                                 <tr>
                                     <td class="col-2"><img src="{{ asset('storage/' . $product->image) }}"
                                             class="img-thumbnail shadow-sm"></td>
-                                    <td>{{ $product->name }}</td>
-                                    <td>{{ $product->category_name }}</td>
-                                    <td>{{ Str::words($product->description, 2, '...') }}</td>
-                                    <td>${{ $product->price }}</td>
-                                    <td>
+                                    <td class="col-1">{{ $product->name }}</td>
+                                    <td class="col-1">{{ $product->category_name }}</td>
+                                    <td class="col-2">{{ Str::words($product->description, 2, '...') }}</td>
+                                    <td class="col-1">${{ $product->price }}</td>
+                                    <td class="col-3">
                                         <a href="{{ route('products.details', $product->id) }}">
-                                            <button class='btn btn-sm btn-warning'><i class="fa-solid fa-eye"></i></button>
+                                            <button class='btn btn-warning'><i class="fa-solid fa-eye"></i></button>
                                         </a>
                                         <a href="{{ route('products.edit', $product->id) }}">
-                                            <button class='btn btn-sm btn-success'><i
+                                            <button class='btn btn-success'><i
                                                     class="fa-solid fa-pen-to-square"></i></button>
                                         </a>
                                         <a href="{{ route('products.destroy', $product->id) }}">
-                                            <button class='btn btn-sm btn-danger'><i
-                                                    class="fa-solid fa-trash-can"></i></button>
+                                            <button class='btn btn-danger'><i class="fa-solid fa-trash-can"></i></button>
                                         </a>
                                     </td>
                                 </tr>

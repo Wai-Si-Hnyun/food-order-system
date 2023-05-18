@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Services\CategoryServiceInterface;
+use App\Http\Requests\CategoryCreateRequest;
+use App\Http\Requests\CategoryUpdateRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -35,25 +36,22 @@ class CategoryController extends Controller
         return view('admin.pages.category.create');
     }
 
-    /**
-     * function store category
-     */
-    public function store(Request $request)
+/**
+ * Save Category
+ *
+ * @param \App\Http\Requests\CategoryCreateRequest $request
+ * @return \Illuminate\Http\Response
+ */
+    public function store(CategoryCreateRequest $request)
     {
-        Validator::make($request->all(), [
-            'categoryName' => 'required|min:5|unique:categories,name',
-        ], [
-            'categoryName.required' => 'Category Name field is required!',
-        ])->validate();
-        $data = [
-            'name' => $request->categoryName,
-        ];
+        $this->categoryService->createCategory($request->only([
+            'categoryName',
 
-        $this->categoryService->createCategory($data);
+        ]));
 
         return redirect()->route('categories.index')->with(['createSuccess' => 'Category created Successfully!']);
-    }
 
+    }
     /**
      * edit function
      */
@@ -64,20 +62,21 @@ class CategoryController extends Controller
     }
 
     /**
-     * update function
+     * Update user
+     *
+     * @param  \App\Http\Requests\CategoryUpdateRequest
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryUpdateRequest $request, $id)
     {
-        Validator::make($request->all(), [
-            'categoryName' => 'required|min:5|unique:categories,name',
-        ], [
-            'categoryName.required' => 'Category name Field is required!',
-        ])->validate();
-        $data = [
-            'name' => $request->categoryName,
-        ];
-        $this->categoryService->updateCategory($data, $id);
+        $this->categoryService->updateCategory($request->only([
+            'categoryName',
+
+        ]), $id);
+
         return redirect()->route('categories.index')->with(['updateSuccess' => 'Category updated Successfully!']);
+
     }
 
     /**
