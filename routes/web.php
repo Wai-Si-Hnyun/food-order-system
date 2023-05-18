@@ -7,7 +7,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\User\AjaxController;
@@ -61,7 +60,7 @@ Route::middleware('role:user')->group(function () {
 
     //cart
     Route::post('add-cart/{product}', [CartController::class, 'addToCart'])->name('add.cart');
-    Route::get('cart', [CartController::class, 'cart'])->name('show.cart');
+    Route::get('/cart', [CartController::class, 'cart'])->name('show.cart');
     Route::delete('/deleteCart/{id}', [CartController::class, 'remove'])->name('remove.cart');
 
     //reviews
@@ -108,7 +107,7 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::delete('/user-review/{review}',[ReviewController::class,'reviewDestory'])->name('review.destory');
     
     //UserList
-    Route::get('/user-list', [UserdataController::class, 'userList'])->name('userData.list');
+    Route::get('/users/list', [UserdataController::class, 'userList'])->name('userData.list');
     Route::put('/user/{user}', [UserdataController::class, 'roleUpdate'])->name('role.update');
     Route::get('/user/{user}/info', [UserdataController::class, 'userInfo'])->name('user.info');
     Route::delete('/user-delete/{user}', [UserdataController::class, 'userDelete'])->name('user.destory');

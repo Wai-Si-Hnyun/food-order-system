@@ -21,8 +21,10 @@ class UserProductController extends Controller
      * @param UserProductServiceInterface $userServiceInterface
      * @return void
      */
-    public function __construct(UserProductServiceInterface $userProductServiceInterface,ReviewServiceInterface $reviewServiceInterface)
-    {
+    public function __construct(
+        UserProductServiceInterface $userProductServiceInterface,
+        ReviewServiceInterface $reviewServiceInterface
+    ) {
         $this->userProductService = $userProductServiceInterface;
         $this->reviewService = $reviewServiceInterface;
     }

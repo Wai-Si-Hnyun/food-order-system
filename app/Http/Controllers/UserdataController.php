@@ -40,7 +40,7 @@ class UserdataController extends Controller
         $roleUpdate = $this->userService->updateRole($request->only([
             'role',
         ]),$id);
-          return response()->json(['msg'=>'success'],200);
+        return response()->json(['msg'=>'success'],200);
     }
 
     /**
