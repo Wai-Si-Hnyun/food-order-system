@@ -1,5 +1,16 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\User\AjaxController;
+use App\Http\Controllers\User\UserProductController;
+use App\Http\Controllers\UserdataController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
@@ -93,11 +104,17 @@ Route::middleware('role:admin')->group(function () {
     Route::delete('admin/orders/{id}/delete', [OrderController::class, 'destroy'])->name('order.delete');
     Route::get('/admin/orders/{id}/status/change', [OrderController::class, 'changeOrderStatus']);
     Route::get('/admin/orders/{id}/deivered/status/change', [OrderController::class, 'changeDeliverStatus']);
-    
+
     //review
     Route::get('/review-list',[ReviewController::class,'reviewList'])->name('review.list');
     Route::delete('/user-review/{review}',[ReviewController::class,'reviewDestory'])->name('review.destory');
 
+    //UserList
+    Route::get('/user-list',[UserdataController::class,'userList'])->name('userData.list');
+    Route::put('/user/{user}',[UserdataController::class,'roleUpdate'])->name('role.update');
+    Route::get('/user/{user}/info',[UserdataController::class,'userInfo'])->name('user.info');
+    Route::delete('/user-delete/{user}',[UserdataController::class,'userDelete'])->name('user.destory');
+  
     // Mail
     Route::get('/admin/mail', [MailController::class, 'index'])->name('mail.index');
     Route::post('/admin/mail/send', [MailController::class, 'send'])->name('mail.send');

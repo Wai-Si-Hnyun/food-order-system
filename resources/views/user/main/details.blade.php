@@ -113,7 +113,10 @@
             <div class="card-body">
                 <form action="{{route('review.create')}}" method="post">
                     @csrf
-                    <input type="hidden" name="userId" class="ms-2" value="{{ $user[$id]['user_id'] }}">
+                    @foreach($user as $item)
+                    <input type="hidden" name="userId" class="ms-2" value="{{ $item['user_id'] }}">
+                    @endforeach
+                    
                     <input type="hidden" name="productId" value="{{ $products->id }}">
                     <label for="">Content</label>
                     <textarea name="content" id="" cols="30" rows="3" class="form-control" >Good</textarea>
