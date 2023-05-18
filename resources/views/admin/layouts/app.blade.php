@@ -90,38 +90,44 @@
                     </li>
                     <li class="menu-item" id="categories">
                         <a href="{{ route('categories.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <i class="menu-icon tf-icons bx bx-category"></i>
                             <div>Categories</div>
                         </a>
                     </li>
                     <li class="menu-item" id="products">
                         <a href="{{ route('products.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <i class="menu-icon tf-icons bx bx-cake"></i>
                             <div>Products</div>
                         </a>
                     </li>
                     <li class="menu-item" id="orders">
                         <a href="{{ route('orders.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <i class="menu-icon tf-icons bx bx-receipt"></i>
                             <div>Orders</div>
                         </a>
                     </li>
                     <li class="menu-item" id="reviews">
-                        <a href="#" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                        <a href="{{ route('review.list') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-note"></i>
                             <div>Reviews</div>
                         </a>
                     </li>
                     <li class="menu-item" id="users">
                         <a href="#" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <i class="menu-icon tf-icons bx bx-user"></i>
                             <div>Users</div>
                         </a>
                     </li>
                     <li class="menu-item" id="mail">
                         <a href="{{ route('mail.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <i class="menu-icon tf-icons bx bx-mail-send"></i>
                             <div>Mail</div>
+                        </a>
+                    </li>
+                    <li class="menu-item" id="questions">
+                        <a href="{{ route('q&a.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-message-dots"></i>
+                            <div>Q&A</div>
                         </a>
                     </li>
                 </ul>
@@ -207,7 +213,10 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="auth-login-basic.html">
+                                        <form action="{{ route('logout') }}" method="POST" id="logoutForm">
+                                            @csrf
+                                        </form>
+                                        <a class="dropdown-item" href="#" onclick="handleFormSubmit(event)">
                                             <i class="bx bx-power-off me-2"></i>
                                             <span class="align-middle">Log Out</span>
                                         </a>
@@ -223,35 +232,6 @@
 
                 <div class="content-wrapper">
                     @yield('content')
-
-                    <!-- Footer -->
-                    <footer class="content-footer footer bg-footer-theme">
-                        <div
-                            class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                            <div class="mb-2 mb-md-0">
-                                ©
-                                <script>
-                                    document.write(new Date().getFullYear());
-                                </script>
-                                , made with ❤️ by
-                                <a href="https://themeselection.com" target="_blank"
-                                    class="footer-link fw-bolder">ThemeSelection</a>
-                            </div>
-                            <div>
-                                <a href="https://themeselection.com/license/" class="footer-link me-4"
-                                    target="_blank">License</a>
-                                <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More
-                                    Themes</a>
-
-                                <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                                    target="_blank" class="footer-link me-4">Documentation</a>
-
-                                <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                                    target="_blank" class="footer-link me-4">Support</a>
-                            </div>
-                        </div>
-                    </footer>
-                    <!-- / Footer -->
 
                     <div class="content-backdrop fade"></div>
                 </div>
@@ -283,7 +263,6 @@
         <script src="{{ asset('js/app.js') }}"></script>
 
         <script src="{{ asset('js/admin/menu.js') }}"></script>
-
 
         @stack('script')
 </body>

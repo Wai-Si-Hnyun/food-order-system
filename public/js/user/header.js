@@ -3,8 +3,14 @@ $(document).ready(function () {
         // Get the current URL path
         const currentPath = window.location.pathname;
 
+        // Check if the current path is the root
+        if (currentPath === '/') {
+            $('#home').addClass('active');
+            return;
+        }
+
         // Use a regular expression to find the route name in the URL
-        const routeNameMatch = currentPath.match(/\/admin\/(\w+)/);
+        const routeNameMatch = currentPath.match(/\/(\w+)/);
 
         if (routeNameMatch) {
             const routeName = routeNameMatch[1];
@@ -19,7 +25,7 @@ $(document).ready(function () {
         }
     })();
 
-    window.handleFormSubmit = function(e) {
+    window.handleFormSubmit = function (e) {
         e.preventDefault();
         $('#logoutForm').submit();
     }

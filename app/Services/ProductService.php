@@ -29,9 +29,9 @@ class ProductService implements ProductServiceInterface
      * Get Product list
      * @return object
      */
-    public function getProduct(): object
+    public function getProduct(string $page): object
     {
-        return $this->productDao->getProduct();
+        return $this->productDao->getProduct($page);
     }
 
     /**

@@ -9,17 +9,23 @@ class CategoryDao implements CategoryDaoInterface
 {
     /**
      * Get Category list
+     * 
+     * @param string $page
      * @return object
      */
-    public function getCategory(): object
+    public function getCategory($page): object
     {
-        return Category::when(request('key'), function ($query) {
-            $query->where('name', 'LIKE', '%' . request('key') . '%');
-        })
-            ->orderBy('created_at', 'asc')
-            ->paginate(10)
-            ->appends(request()->all());
-
+        if ($page == 'admin') {
+            return Category::when(request('key'), function ($query) {
+                $query->where('name', 'LIKE', '%' . request('key') . '%');
+            })
+                ->orderBy('created_at', 'asc')
+                ->paginate(10)
+                ->appends(request()->all());
+        } elseif ($page == 'user') {
+            return Category::all();
+        }
+        return Category::all();
     }
 
     /**

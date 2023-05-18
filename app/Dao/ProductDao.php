@@ -11,17 +11,25 @@ class ProductDao implements ProductDaoInterface
      * Get Product list
      * @return object
      */
-    public function getProduct(): object
+    public function getProduct($page): object
     {
-        return Product::select('products.*', 'categories.name as category_name')
-            ->when(request('key'), function ($query) {
+        if ($page == 'admin') {
+            return Product::select('products.*', 'categories.name as category_name')
+                ->when(request('key'), function ($query) {
+                    $query->where('products.name', 'LIKE', '%' . request('key') . '%');
+                })
+                ->leftJoin('categories', 'products.category_id', 'categories.id')
+                ->orderBy('products.created_at', 'desc')
+                ->paginate(10)
+                ->appends(request()->all());
+        } elseif ($page == 'user') {
+            return Product::when(request('key'), function ($query) {
                 $query->where('products.name', 'LIKE', '%' . request('key') . '%');
-            })
-            ->leftJoin('categories', 'products.category_id', 'categories.id')
-            ->orderBy('products.created_at', 'desc')
-            ->paginate(10)
-            ->appends(request()->all());
 
+            })
+                ->get();
+        }
+        return Product::all();
     }
 
     /**
