@@ -36,19 +36,12 @@
                             </div>
                             <div class="checkout__input mb-3">
                                 <p>Country<span>*</span></p>
-                                <select name="country" id="country" class="w-50">
-                                    <option value="" selected>Choose Country</option>
-                                    @forelse ($countries as $country)
-                                        <option value="{{ $country }}">{{ $country }}</option>
-                                    @empty
-                                        <option value="">Loading...</option>
-                                    @endforelse
-                                </select>
+                                <input type="text" name="country" id="country" value="Myanmar" disabled>
                             </div>
                             <div class="checkout__input mb-3">
                                 <p>State<span>*</span></p>
-                                <select name="state" id="state" class="w-50" disabled>
-                                    <option value="" selected>Choose State</option>
+                                <select name="state" id="state" class="w-50">
+                                    <option id="0" value="" selected>Choose State</option>
                                 </select>
                             </div>
                             <div class="checkout__input mb-3">

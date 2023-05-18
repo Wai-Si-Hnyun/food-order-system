@@ -113,7 +113,7 @@
                         </a>
                     </li>
                     <li class="menu-item" id="users">
-                        <a href="#" class="menu-link">
+                        <a href="{{ route('userData.list') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-user"></i>
                             <div>Users</div>
                         </a>
@@ -128,6 +128,8 @@
                         <a href="{{ route('q&a.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-message-dots"></i>
                             <div>Q&A</div>
+                        </a>
+                    </li>
                     <li class="menu-item" id="feedback">
                         <a href="{{route('feedback.list')}}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\OrderRequest;
 use App\Contracts\Services\OrderServiceInterface;
-use App\Contracts\Services\LocationServiceInterface;
 
 class OrderController extends Controller
 {
@@ -14,18 +13,14 @@ class OrderController extends Controller
      */
     private $orderService;
 
-    protected $locationService;
-
     /**
      * Constructor for OrderController
      *
      * @param \App\Contracts\Services\OrderServiceInterface $orderService
-     * @param \App\Contracts\Services\LocationServiceInterface $locationService
      */
-    public function __construct(OrderServiceInterface $orderService, LocationServiceInterface $locationService)
+    public function __construct(OrderServiceInterface $orderService)
     {
         $this->orderService = $orderService;
-        $this->locationService = $locationService;
     }
 
     /**
@@ -90,9 +85,7 @@ class OrderController extends Controller
      */
     public function checkout()
     {
-        $countries = $this->locationService->countries();
-
-        return view('user.pages.order.checkout', compact('countries'));
+        return view('user.pages.order.checkout');
     }
 
     /**

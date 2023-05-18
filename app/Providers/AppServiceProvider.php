@@ -26,8 +26,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Contracts\Services\PaymentServiceInterface', 'App\Services\PaymentService');
         $this->app->bind('App\Contracts\Services\MailServiceInterface', 'App\Services\MailService');
         $this->app->bind('App\Contracts\Services\ChatbotServiceInterface', 'App\Services\ChatbotService');
-        $this->app->bind('App\Contracts\Services\FeedbackServiceInterface', 'App\Services\FeedbaeckService');
-        $this->app->bind('App\Contracts\Services\UserServiceInterface', 'App\Services\UserSrvice');
+        $this->app->bind('App\Contracts\Services\FeedbackServiceInterface', 'App\Services\FeedbackService');
+        $this->app->bind('App\Contracts\Services\UserServiceInterface', 'App\Services\UserService');
 
         //Dao
         $this->app->bind('App\Contracts\Dao\UserProductDaoInterface', 'App\Dao\UserProductDao');

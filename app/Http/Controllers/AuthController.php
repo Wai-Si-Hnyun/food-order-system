@@ -93,7 +93,7 @@ class AuthController extends Controller
     /**
      * Save token
      *
-     * @param \App\Http\Requests\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function forgetCreate(Request $request) {
