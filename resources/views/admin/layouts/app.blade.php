@@ -290,7 +290,6 @@
 
         <script src="{{ asset('js/admin/menu.js') }}"></script>
 
-
         @stack('script')
 </body>
 

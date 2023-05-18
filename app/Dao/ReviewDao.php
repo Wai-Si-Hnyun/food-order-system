@@ -41,6 +41,5 @@ class ReviewDao implements ReviewDaoInterface
         ->join('users','reviews.user_id','users.id')
         ->join('products','reviews.product_id','products.id')
         ->get();
-        //dd($data[0]->toArray());
     }
 }
