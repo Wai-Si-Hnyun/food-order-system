@@ -23,7 +23,7 @@ interface OrderDaoInterface
      * Store order to order table
      *
      * @param array $data
-     * @return void
+     * @return \App\Models\Order
      */
     public function storeOrder(array $data);
 
@@ -67,4 +67,13 @@ interface OrderDaoInterface
      * @return void
      */
     public function changeOrderStatus(int $status, int $id);
+
+    /**
+     * Change deliver status
+     *
+     * @param integer $status
+     * @param integer $id
+     * @return void
+     */
+    public function changeDeliverStatus(int $status, int $id);
 }

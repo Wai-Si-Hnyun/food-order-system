@@ -118,6 +118,12 @@
                             <div>Users</div>
                         </a>
                     </li>
+                    <li class="menu-item" id="mail">
+                        <a href="{{ route('mail.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div>Mail</div>
+                        </a>
+                    </li>
                 </ul>
             </aside>
             <!-- / Menu -->

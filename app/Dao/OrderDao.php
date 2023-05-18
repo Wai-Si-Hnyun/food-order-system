@@ -16,7 +16,7 @@ class OrderDao implements OrderDaoInterface
      */
     public function getOrders()
     {
-        return Order::with('user')->get();
+        return Order::with('user')->paginate(10);
     }
 
     /**
@@ -27,18 +27,18 @@ class OrderDao implements OrderDaoInterface
      */
     public function getOrderById(int $id)
     {
-        return Order::where('id', $id)->with('user', 'orderlists.product', 'billingdetail')->first();
+        return Order::where('id', $id)->with('user', 'orderlists.product', 'billingdetail', 'payment')->first();
     }
 
     /**
      * Store order to order table
      *
      * @param array $data
-     * @return void
+     * @return \App\Models\Order
      */
     public function storeOrder(array $data)
     {
-        Order::create($data);
+        return Order::create($data);
     }
 
     /**
@@ -98,5 +98,17 @@ class OrderDao implements OrderDaoInterface
     public function changeOrderStatus(int $status, int $id)
     {
         Order::where('id', $id)->update(['status' => $status]);
+    }
+
+    /**
+     * Change deliver status function
+     *
+     * @param integer $status
+     * @param integer $id
+     * @return void
+     */
+    public function changeDeliverStatus(int $status, int $id)
+    {
+        Order::where('id', $id)->update(['delivered' => $status]);
     }
 }

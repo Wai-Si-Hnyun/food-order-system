@@ -36,7 +36,7 @@
                 <span class="text-danger">{{ $message }}</span>
         @enderror
         <div>
-        <a href="#" class="mb-3">forget password?</a>
+        <a href="{{route('auth.forgetPass')}}" class="mb-3">forget password?</a>
         </div>
 
         <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">register</button>

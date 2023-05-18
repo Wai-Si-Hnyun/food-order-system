@@ -10,16 +10,16 @@
             </div>
             <div class="row card-body">
                 <div class="col-3">
-                    <img src="{{ asset('storage/' . $product->image) }}" class="img-thumbnail ms-5 shadow-sm">
+                    <img src="{{ asset('storage/' . $product->image) }}" class="img-thumbnail shadow-sm ms-5">
                 </div>
                 <div class="col-5 offset-2">
-                    <h6 class="mb-4"><i class="fa-brands fa-product-hunt me-3"></i>{{ $product->category_id }}</h6>
-                    <h6 class="mb-4"><i class="fa-solid fa-utensils me-3"></i>{{ $product->name }}</h6>
-                    <h6 class="mb-4"><i class="fa-solid fa-money-bill-wave me-3"></i>${{ $product->price }}</h6>
-                    <h6 class="mb-4"><i class="fa-regular fa-calendar-days me-3">
+                    <h5 class="mb-4"><i class="fa-solid fa-clipboard-list me-3"></i>{{ $product->category_id }}</h5>
+                    <h5 class="mb-4"><i class="fa-solid fa-utensils me-3"></i>{{ $product->name }}</h5>
+                    <h5 class="mb-4"><i class="fa-solid fa-money-bill-wave me-3"></i>${{ $product->price }}</h5>
+                    <h5 class="mb-4"><i class="fa-regular fa-calendar-days me-3">
                         </i>{{ $product->created_at->format('j-F-Y') }}
-                    </h6>
-                    <h6 class="mb-4"><i class="fa-solid fa-receipt me-3"></i>{{ $product->description }}</h6>
+                    </h5>
+                    <h5 class="mb-4"><i class="fa-solid fa-receipt me-3"></i>{{ $product->description }}</h5>
                 </div>
             </div>
         </div>

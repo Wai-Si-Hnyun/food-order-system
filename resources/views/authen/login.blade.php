@@ -17,7 +17,7 @@
                 <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
             </div>
 
-            <a href="#" class="mb-3">forget password?</a>
+            <a href="{{route('auth.forgetPass')}}" class="mb-3">forget password?</a>
             <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
 
         </form>

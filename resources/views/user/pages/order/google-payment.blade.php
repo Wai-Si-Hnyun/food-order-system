@@ -1,0 +1,53 @@
+@extends('user.layouts.app')
+
+@section('content')
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="breadcrumb__text">
+                        <h2>Payment</h2>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="breadcrumb__links">
+                        <a href="{{ route('user.payment') }}">Payment</a>
+                        <span>Card</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Payment Section Begin -->
+    <section class="spad">
+        <div class="container">
+            <div class="col-lg-6 col-md-8 col-12 mx-auto">
+                <div class="alert alert-success text-center mt-3 fade">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <p class="m-0 me-2"></p><span>Click <a href="{{ route('checkout') }}">here</a> to continue order process.</span>
+                </div>
+                <div class="card p-3">
+                    <div class=" card-header">
+                        <h3>Payment Details</h3>
+                    </div>
+                    <div class="card-body text-center pt-5">
+                        <div id="pay-button"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Payment Section End -->
+@endsection
+
+@push('script')
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        window.STRIPE_PUBLIC_KEY = "{{ env('STRIPE_KEY') }}";
+    </script>
+    <script src="{{ asset('js/user/google-payment.js') }}"></script>
+    <script async src="https://pay.google.com/gp/p/js/pay.js" onload="onGooglePayLoaded()"></script>
+@endpush

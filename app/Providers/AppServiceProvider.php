@@ -22,7 +22,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Contracts\Services\LocationServiceInterface', 'App\Services\LocationService');
         $this->app->bind('App\Contracts\Services\UserProductServiceInterface', 'App\Services\UserProductService');
         $this->app->bind('App\Contracts\Services\WishlistServiceInterface', 'App\Services\WishlistService');
-
+        $this->app->bind('App\Contracts\Services\ReviewServiceInterface', 'App\Services\ReviewService');
+        $this->app->bind('App\Contracts\Services\PaymentServiceInterface', 'App\Services\PaymentService');
+        $this->app->bind('App\Contracts\Services\MailServiceInterface', 'App\Services\MailService');
+      
         //Dao
         $this->app->bind('App\Contracts\Dao\UserProductDaoInterface', 'App\Dao\UserProductDao');
         $this->app->bind('App\Contracts\Dao\AjaxDaoInterface', 'App\Dao\AjaxDao');
@@ -32,7 +35,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Contracts\Dao\OrderDaoInterface', 'App\Dao\OrderDao');
         $this->app->bind('App\Contracts\Dao\LocationDaoInterface', 'App\Dao\LocationDao');
         $this->app->bind('App\Contracts\Dao\WishlistDaoInterface', 'App\Dao\WishlistDao');
-
+        $this->app->bind('App\Contracts\Dao\ReviewDaoInterface', 'App\Dao\ReviewDao');
+        $this->app->bind('App\Contracts\Dao\PaymentDaoInterface', 'App\Dao\PaymentDao');
     }
 
     /**

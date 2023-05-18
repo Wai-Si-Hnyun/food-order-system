@@ -12,7 +12,7 @@
                         <div class="col-6 offset-3">
                             <div class="form-group mb-3">
                                 <img src="{{ asset('storage/' . $product->image) }}" alt="product image"
-                                    class="img-thumbnail">
+                                    class="img-thumbnail shadow-sm">
                                 <input class="form-control mt-2 @error('productImage') is-invalid @enderror" type="file"
                                     name="productImage" id="product-image">
                                 @error('productImage')
@@ -22,8 +22,8 @@
                                 @enderror
                             </div>
                         </div>
-                        <div>
-                        </div>
+                    </div>
+                    <div>
                         <div class="col-10 offset-1">
                             <div class="form-group mb-3">
                                 <label for="">Category</label>
