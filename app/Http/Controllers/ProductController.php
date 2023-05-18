@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Services\ProductServiceInterface;
+use App\Http\Requests\ProductCreateRequest;
+use App\Http\Requests\ProductUpdateRequest;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
@@ -41,30 +41,21 @@ class ProductController extends Controller
         $categories = Category::select('id', 'name')->get();
         return view('admin.pages.product.create', compact('categories'));
     }
-    /**
-     * function store
-     *
-     */
-    public function store(Request $request)
+/**
+ * Save Product
+ *
+ * @param \App\Http\Requests\ProductCreateRequest $request
+ * @return \Illuminate\Http\Response
+ */
+    public function store(ProductCreateRequest $request)
     {
-        Validator::make($request->all(), [
-            'category' => 'required',
-            'productName' => 'required|min:5',
-            'productImage' => 'required|mimes:jpg,jpeg,png,webp|file',
-            'productDescription' => 'required|min:10',
-            'productPrice' => 'required',
-        ])->validate();
-        $data = [
-            'category_id' => $request->category,
-            'name' => $request->productName,
-            'description' => $request->productDescription,
-            'price' => $request->productPrice,
-        ];
-
-        $fileName = uniqid() . $request->file('productImage')->getClientOriginalName();
-        $request->file('productImage')->storeAs('public', $fileName);
-        $data['image'] = $fileName;
-        $this->productService->createProduct($data);
+        $this->productService->createProduct($request->only([
+            'category',
+            'productName',
+            'productImage',
+            'productDescription',
+            'productPrice',
+        ]));
 
         return redirect()->route('products.index')->with(['createSuccess' => 'Product created Successfully!']);
     }
@@ -78,7 +69,7 @@ class ProductController extends Controller
 
         return view('admin.pages.product.details', compact('product'));
     }
-  
+
     /**
      * function edit
      */
@@ -91,36 +82,23 @@ class ProductController extends Controller
     }
 
     /**
-     * update function
+     * Update user
+     *
+     * @param  \App\Http\Requests\ProductUpdateRequest
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductUpdateRequest $request, $id)
     {
-        Validator::make($request->all(), [
-            'category' => 'required',
-            'productName' => 'required|min:5',
-            'productImage' => 'mimes:jpg,jpeg,png,webp|file',
-            'productDescription' => 'required|min:10',
-            'productPrice' => 'required',
-        ])->validate();
-        $data = [
-            'category_id' => $request->category,
-            'name' => $request->productName,
-            'description' => $request->productDescription,
-            'price' => $request->productPrice,
-        ];
-        if ($request->hasFile('productImage')) {
-            $oldImageName = Product::where('id', $request->id)->first();
-            $oldImageName = $oldImageName->image;
-            if ($oldImageName != null) {
-                Storage::delete('public/' . $oldImageName);
-            }
-            $fileName = uniqid() . $request->file('productImage')->getClientOriginalName();
-            $request->file('productImage')->storeAs('public', $fileName);
-            $data['image'] = $fileName;
-        }
-        $this->productService->updateProduct($data, $id);
-        return redirect()->route('products.index')->with(['updateSuccess' => 'Product updated Successfully!']);
+        $this->productService->updateProduct($request->only([
+            'category',
+            'productName',
+            'productImage',
+            'productDescription',
+            'productPrice',
+        ]), $id);
 
+        return redirect()->route('products.index')->with(['updateSuccess' => 'Product updated Successfully!']);
     }
     /***
      * function delete

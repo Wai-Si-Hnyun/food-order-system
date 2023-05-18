@@ -31,7 +31,13 @@ class ProductDao implements ProductDaoInterface
      */
     public function createProduct(array $data): void
     {
-        Product::create($data);
+        Product::create([
+            'category_id' => $data['category'],
+            'name' => $data['productName'],
+            'image' => $data['productImage'],
+            'description' => $data['productDescription'],
+            'price' => $data['productPrice'],
+        ]);
 
     }
 
@@ -53,8 +59,15 @@ class ProductDao implements ProductDaoInterface
      */
     public function updateProduct(array $data, $id): void
     {
+
         $product = Product::findOrFail($id);
-        $product->update($data);
+        $product->update([
+            'category_id' => $data['category'],
+            'name' => $data['productName'],
+            'image' => $data['productImage'],
+            'description' => $data['productDescription'],
+            'price' => $data['productPrice'],
+        ]);
 
     }
 

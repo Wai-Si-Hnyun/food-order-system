@@ -29,7 +29,10 @@ class CategoryDao implements CategoryDaoInterface
      */
     public function createCategory(array $data): void
     {
-        Category::create($data);
+        // Category::create($data);
+        Category::create([
+            'name' => $data['categoryName'],
+        ]);
 
     }
 
@@ -51,8 +54,13 @@ class CategoryDao implements CategoryDaoInterface
      */
     public function updateCategory(array $data, $id): void
     {
+
         $category = Category::findOrFail($id);
-        $category->update($data);
+        $category->update([
+            'name' => $data['categoryName'],
+
+        ]);
+
     }
 
     /**
