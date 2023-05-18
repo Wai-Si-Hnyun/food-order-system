@@ -1,18 +1,21 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CartController;
+
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MailController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\UserdataController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\User\AjaxController;
 use App\Http\Controllers\User\UserProductController;
-use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\UserdataController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MailController;
+use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\FeedbackController;
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
@@ -63,6 +66,9 @@ Route::middleware('role:user')->group(function () {
     Route::put('/review/{review}', [ReviewController::class, 'reviewUpdate'])->name('review.update');
     Route::delete('/review-delete/{review}', [ReviewController::class, 'reviewDelete'])->name('review.delete');
 
+    //feedback
+    Route::get('/feed-back',[FeedbackController::class,'feedback'])->name('feedback.page');
+    Route::post('/feedback-create',[FeedbackController::class,'feedbackCreate'])->name('feedback.create');
 });
 
 Route::middleware('role:admin')->group(function () {
@@ -106,4 +112,8 @@ Route::middleware('role:admin')->group(function () {
     // Mail
     Route::get('/admin/mail', [MailController::class, 'index'])->name('mail.index');
     Route::post('/admin/mail/send', [MailController::class, 'send'])->name('mail.send');
+  
+    //feedback
+    Route::get('/feedback-list',[FeedbackController::class,'feedbackList'])->name('feedback.list');
+    Route::delete('/feedback-delete/{feedback}',[FeedbackController::class,'feedbackDestory'])->name('feedback.destory');
 });

@@ -107,14 +107,12 @@
                         </a>
                     </li>
                     <li class="menu-item" id="reviews">
-                        <a href="{{route('review.list')}}" class="menu-link">
                         <a href="#" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div>Reviews</div>
                         </a>
                     </li>
                     <li class="menu-item" id="users">
-                        <a href="{{route('userData.list')}}" class="menu-link">
                         <a href="#" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div>Users</div>
@@ -124,6 +122,12 @@
                         <a href="{{ route('mail.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div>Mail</div>
+                        </a>
+                    </li>
+                    <li class="menu-item" id="feedback">
+                        <a href="{{route('feedback.list')}}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div>FeedBack</div>
                         </a>
                     </li>
                 </ul>
@@ -285,9 +289,6 @@
         <script src="{{ asset('js/app.js') }}"></script>
 
         <script src="{{ asset('js/admin/menu.js') }}"></script>
-        
-        <!--axios -->
-        <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 
         @stack('script')
 </body>
