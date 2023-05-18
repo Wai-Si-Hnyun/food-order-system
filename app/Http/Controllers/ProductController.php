@@ -28,9 +28,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = $this->productService->getProduct();
-        return view('admin.pages.product.index', compact('products'));
+        $products = $this->productService->getProduct('admin');
 
+        return view('admin.pages.product.index', compact('products'));
     }
     /**
      * create function

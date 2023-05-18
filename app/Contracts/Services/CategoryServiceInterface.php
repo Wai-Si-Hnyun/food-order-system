@@ -11,7 +11,7 @@ interface CategoryServiceInterface
      * Get Category list
      * @return object
      */
-    public function getCategory(): object;
+    public function getCategory($page): object;
 
     /**
      * Save Category

@@ -25,7 +25,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = $this->categoryService->getCategory();
+        $categories = $this->categoryService->getCategory('admin');
         return view('admin.pages.category.index', compact('categories'));
     }
     /**

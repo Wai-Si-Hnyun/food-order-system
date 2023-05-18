@@ -27,11 +27,13 @@ class CategoryService implements CategoryServiceInterface
 
     /**
      * Get Category list
+     * 
+     * @param string $page
      * @return object
      */
-    public function getCategory(): object
+    public function getCategory($page): object
     {
-        return $this->categoryDao->getCategory();
+        return $this->categoryDao->getCategory($page);
     }
 
     /**

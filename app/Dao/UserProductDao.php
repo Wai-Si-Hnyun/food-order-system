@@ -17,9 +17,7 @@ class UserProductDao implements UserProductDaoInterface
         return Product::when(request('key'), function ($query) {
             $query->where('products.name', 'LIKE', '%' . request('key') . '%');
 
-        })
-            ->get();
-
+        })->get();
     }
 
     /**

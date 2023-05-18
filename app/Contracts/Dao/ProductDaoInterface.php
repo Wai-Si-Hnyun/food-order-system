@@ -11,7 +11,7 @@ interface ProductDaoInterface
      * Get Product list
      * @return object
      */
-    public function getProduct(): object;
+    public function getProduct($page): object;
 
     /**
      * Save Product

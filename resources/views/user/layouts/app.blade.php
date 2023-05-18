@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="{{ asset('assets/user/css/owl.carousel.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('assets/user/css/slicknav.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('assets/user/css/style.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -47,19 +48,21 @@
                         <div class="header__top__inner">
                             <div class="header__top__left">
                                 <ul>
-                                    <li>USD <span class="arrow_carrot-down"></span>
-                                        <ul>
-                                            <li>EUR</li>
-                                            <li>USD</li>
-                                        </ul>
-                                    </li>
-                                    <li>ENG <span class="arrow_carrot-down"></span>
-                                        <ul>
-                                            <li>Spanish</li>
-                                            <li>ENG</li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Sign in</a> <span class="arrow_carrot-down"></span></li>
+                                    @if (Auth::user())
+                                        <li>
+                                            <form action="{{ route('logout') }}" method="POST" id="logoutForm">
+                                                @csrf
+                                            </form>
+                                            <a href="#" onclick="handleFormSubmit(event)">Logout</a>
+                                        </li>
+                                    @else
+                                        <li>
+                                            <a href="{{ route('auth.login') }}">Login</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('auth.registerPage') }}">Register</a>
+                                        </li>
+                                    @endif
                                 </ul>
                             </div>
                             <div class="header__logo">
@@ -68,14 +71,12 @@
                             </div>
                             <div class="header__top__right">
                                 <div class="header__top__right__links">
-                                    <a href="#" class="search-switch"><img
-                                            src="{{ asset('assets/user/img/icon/search.png') }}" alt=""></a>
                                     <a href="#"><img src="{{ asset('assets/user/img/icon/heart.png') }}"
                                             alt=""></a>
                                 </div>
                                 <div class="header__top__right__cart">
                                     <a href="#"><img src="{{ asset('assets/user/img/icon/cart.png') }}"
-                                            alt=""> <span>0</span></a>
+                                            alt=""></a>
                                     <div class="cart__price">Cart: <span>$0.00</span></div>
                                 </div>
                             </div>
@@ -90,21 +91,11 @@
                 <div class="col-lg-12">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="./about.html">About</a></li>
-                            <li><a href="./shop.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./wisslist.html">Wisslist</a></li>
-                                    <li><a href="./Class.html">Class</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="{{route('feedback.page')}}">Contact</a></li>
+                            <li id="home"><a href="{{ route('home') }}">Home</a></li>
+                            <li id="shop"><a href="{{ route('users.shop') }}">Shop</a></li>
+                            <li id="order"><a href="#">Order</a></li>
+                            <li id="about"><a href="./about.html">About</a></li>
+                            <li id="contact"><a href="./contact.html">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -199,7 +190,6 @@
     <script src="{{ asset('assets/user/js/jquery.slicknav.js') }}"></script>
     <script src="{{ asset('assets/user/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('assets/user/js/jquery.nicescroll.min.js') }}"></script>
-    <script src="{{ asset('assets/user/js/main.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
 
     <!-- Select2 -->
@@ -207,6 +197,8 @@
         integrity="sha512-i9cEfJwUwViEPFKdC1enz4ZRGBj8YQo6QByFTF92YXHi7waCqyexvRD75S5NVTsSiTv7rKWqG9Y5eFxmRsOn0A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script src="{{ asset('js/user/header.js') }}"></script>
 
     @stack('script')
     @yield('scriptSource')

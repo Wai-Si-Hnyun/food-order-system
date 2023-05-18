@@ -39,6 +39,7 @@ class UserProductController extends Controller
         $products = $this->userProductService->getUsersProduct();
         return view('user.main.home', compact('products'));
     }
+
     /**
      * shop function
      */
@@ -46,6 +47,7 @@ class UserProductController extends Controller
     {
         $products = $this->userProductService->getUsersProduct();
         $categories = Category::get();
+
         return view('user.main.shop', compact('products', 'categories'));
     }
 
@@ -70,6 +72,5 @@ class UserProductController extends Controller
         $products = $this->userProductService->getUserProductById($id);
         $categories = $this->userProductService->getUserProductById($id);
         return view('user.main.shop', compact('products', 'categories'));
-
     }
 }

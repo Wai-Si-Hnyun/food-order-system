@@ -2,10 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Contracts\Services\ChatbotServiceInterface;
+use App\Contracts\Services\UserProductServiceInterface;
+use App\Services\CategoryService;
 
 class HomeController extends Controller
 {
+    private $userProductService;
+    private $categoryService;
+    private $chatbotService;
+
+    public function __construct(
+        UserProductServiceInterface $userProductService, 
+        CategoryService $categoryService,
+        ChatbotServiceInterface $chatbotService
+    ) {
+        $this->userProductService = $userProductService;
+        $this->categoryService = $categoryService;
+        $this->chatbotService = $chatbotService;
+    }
+
     /**
      * Go to home page
      *
@@ -13,7 +29,10 @@ class HomeController extends Controller
      */
     public function home()
     {
-        return view('user.pages.home');
+        $products = $this->userProductService->getUsersProduct();
+        $questions = $this->chatbotService->getAllQuestions();
+
+        return view('user.main.home', compact('products', 'questions'));
     }
 
     /**
@@ -24,5 +43,13 @@ class HomeController extends Controller
     public function adminDashboard()
     {
         return view('admin.pages.dashboard');
+    }
+
+    public function shop()
+    {
+        $products = $this->userProductService->getUsersProduct('user');
+        $categories = $this->categoryService->getCategory('user');
+
+        return view('user.main.shop', compact('products', 'categories'));
     }
 }
