@@ -11,6 +11,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\User\AjaxController;
 use App\Http\Controllers\User\UserProductController;
+use App\Http\Controllers\WishlistController;
+use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
@@ -45,6 +47,9 @@ Route::middleware('role:user')->group(function () {
     Route::get('/users/filter/{id}', [UserProductController::class, 'filter'])->name('users.filter');
     Route::get('/users/details/{id}', [UserProductController::class, 'details'])->name('users.details');
 
+    // for wishlists
+    Route::get('/users/wishlists', [WishlistController::class, 'addWishlist'])->name('users.wishlist');
+
     // ajax
     Route::get('/ajax/products', [AjaxController::class, 'index'])->name('ajax.index');
 
@@ -67,8 +72,8 @@ Route::middleware('role:admin')->group(function () {
 
     // for category
     Route::get('/admin/categories', [CategoryController::class, 'index'])->name('categories.index');
-    Route::get('/create', [CategoryController::class, 'create'])->name('categories.create');
-    Route::post('/store', [CategoryController::class, 'store'])->name('categories.store');
+    Route::get('/create/categories', [CategoryController::class, 'create'])->name('categories.create');
+    Route::post('/store/categories', [CategoryController::class, 'store'])->name('categories.store');
     Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('categories.edit');
     Route::post('/categories/update/{id}', [CategoryController::class, 'update'])->name('categories.update');
     Route::get('/categories/delete/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');

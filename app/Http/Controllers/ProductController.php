@@ -49,7 +49,7 @@ class ProductController extends Controller
     {
         Validator::make($request->all(), [
             'category' => 'required',
-            'productName' => 'required|min:5|unique:products,name',
+            'productName' => 'required|min:5',
             'productImage' => 'required|mimes:jpg,jpeg,png,webp|file',
             'productDescription' => 'required|min:10',
             'productPrice' => 'required',
@@ -97,7 +97,7 @@ class ProductController extends Controller
     {
         Validator::make($request->all(), [
             'category' => 'required',
-            'productName' => 'required',
+            'productName' => 'required|min:5',
             'productImage' => 'mimes:jpg,jpeg,png,webp|file',
             'productDescription' => 'required|min:10',
             'productPrice' => 'required',
