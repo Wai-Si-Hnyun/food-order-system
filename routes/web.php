@@ -12,7 +12,16 @@ use App\Http\Controllers\User\AjaxController;
 use App\Http\Controllers\User\UserProductController;
 use App\Http\Controllers\UserdataController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MailController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\User\AjaxController;
+use App\Http\Controllers\User\UserProductController;
 
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
@@ -100,4 +109,8 @@ Route::middleware('role:admin')->group(function () {
     Route::put('/user/{user}',[UserdataController::class,'roleUpdate'])->name('role.update');
     Route::get('/user/{user}/info',[UserdataController::class,'userInfo'])->name('user.info');
     Route::delete('/user-delete/{user}',[UserdataController::class,'userDelete'])->name('user.destory');
+  
+    // Mail
+    Route::get('/admin/mail', [MailController::class, 'index'])->name('mail.index');
+    Route::post('/admin/mail/send', [MailController::class, 'send'])->name('mail.send');
 });
