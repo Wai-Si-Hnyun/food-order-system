@@ -21,6 +21,7 @@ class UserdataController extends Controller
     {
         $this->userService = $userService;
     }
+
     /**
      * function user list
      */
@@ -40,7 +41,7 @@ class UserdataController extends Controller
         $roleUpdate = $this->userService->updateRole($request->only([
             'role',
         ]),$id);
-        return response()->json(['msg'=>'success'],200);
+          return response()->json(['msg'=>'success'],200);
     }
 
     /**
@@ -61,6 +62,9 @@ class UserdataController extends Controller
         return response()->json(['userDelete' => $userDelete,'msg'=>'success'],200);
     }
 
+    /**
+     * function user profile show
+     */
     public function userProfile($id) {
         $user= $this->userService->getUserById($id);
         return view('profile.profile', [
@@ -68,6 +72,9 @@ class UserdataController extends Controller
         ]);
     }
 
+        /**
+     * function user profile update
+     */
     public function profileUpdate (Request $request,$id)
     {
         $validator = Validator::make($request->all(),[
@@ -87,12 +94,20 @@ class UserdataController extends Controller
 
     }
 
+        /**
+     * function user pass change
+     */
+
     public function passChange($id) {
         $user= $this->userService->getUserById($id);
         return view('profile.change.password', [
             'user' => $user
         ]);
     }
+
+        /**
+     * function user pass update
+     */
 
     public function passwordUpdate(Request $request){
         $validator = Validator::make($request->all(),[
@@ -109,9 +124,14 @@ class UserdataController extends Controller
             $user = Auth::user();
             $update = $this->userService->passUpdate($request,$user);
             return redirect()->back();
+        }else {
+            return redirect()->back();
         }
     }
 
+        /**
+     * function user acc delete
+     */
     public function accountDelete($id) {
         $userDelete = User::findOrFail($id);
         $userDelete->delete();

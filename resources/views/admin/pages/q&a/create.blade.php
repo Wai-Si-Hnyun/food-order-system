@@ -11,7 +11,7 @@
                 <form action="{{ route('q&a.store') }}" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <label for="question">Question</label>
+                        <label for="question">Question<span class="text-danger">*</span></label>
                         <input class="form-control @error('question') is-invalid @enderror" name="question" id="question"
                             type="text" value="{{ old('question') }}">
                         @error('question')
@@ -21,7 +21,7 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="answer">Answer</label>
+                        <label for="answer">Answer<span class="text-danger">*</span></label>
                         <textarea class="form-control @error('answer') is-invalid @enderror" 
                             name="answer" id="answer" cols="30" rows="10">{{ old('answer') }}</textarea>
                         @error('answer')

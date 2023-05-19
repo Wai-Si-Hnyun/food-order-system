@@ -5,7 +5,7 @@
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Orders /</span> Order Detail</h4>
         <a href="{{ route('orders.index') }}" class="btn btn-dark mb-3">Back</a>
         <div class="card">
-            <h5 class="card-header">Order Code&nbsp;-&nbsp;<span class="text-primary">EF45VC</span></h5>
+            <h5 class="card-header">Order Code&nbsp;-&nbsp;<span class="text-primary">{{ $order->order_code }}</span></h5>
             <div class="card-body">
                 <ul class="list-group col-5">
                     <li class="list-group-item">Name&nbsp;-&nbsp; {{ $order->user->name }}</li>

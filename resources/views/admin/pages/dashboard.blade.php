@@ -1,5 +1,6 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    <div>This is admin dashboard</div>
+    <div>Welcome {{$user->name}} , This is admin dashboard</div>
+
 @endsection

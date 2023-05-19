@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\CategoryService;
+use Illuminate\Support\Facades\Auth;
 use App\Contracts\Services\ChatbotServiceInterface;
 use App\Contracts\Services\UserProductServiceInterface;
-use App\Services\CategoryService;
 
 class HomeController extends Controller
 {
@@ -42,7 +43,9 @@ class HomeController extends Controller
      */
     public function adminDashboard()
     {
-        return view('admin.pages.dashboard');
+        $user = Auth::user();
+
+        return view('admin.pages.dashboard', compact('user'));
     }
 
     public function shop()

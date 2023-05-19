@@ -49,6 +49,20 @@
                             <div class="header__top__left">
                                 <ul>
                                     @if (Auth::user())
+                                        <li style="width:11%;">
+                                            @if (Auth::user()->image == null)
+                                                <img src="{{ asset('image/profile.png') }}" alt
+                                                    class="w-50 h-auto rounded-circle" />
+                                            @else
+                                                <img src="{{ asset('image/profile/' . Auth::user()->image) }}" alt
+                                                    class="w-px-40 h-auto rounded-circle" />
+                                            @endif
+                                            <span class="arrow_carrot-down"></span>
+                                            <ul>
+                                                <li><a href="{{ url('userprofile/' . Auth::user()->id) }}"
+                                                        class="text-light">Profile</a></li>
+                                            </ul>
+                                        </li>
                                         <li>
                                             <form action="{{ route('logout') }}" method="POST" id="logoutForm">
                                                 @csrf
@@ -66,7 +80,7 @@
                                 </ul>
                             </div>
                             <div class="header__logo">
-                                <a href="./index.html"><img src="{{ asset('assets/user/img/logo.png') }}"
+                                <a href="{{ route('home') }}"><img src="{{ asset('assets/user/img/logo.png') }}"
                                         alt=""></a>
                             </div>
                             <div class="header__top__right">
@@ -93,8 +107,10 @@
                         <ul>
                             <li id="home"><a href="{{ route('home') }}">Home</a></li>
                             <li id="shop"><a href="{{ route('users.shop') }}">Shop</a></li>
-                            <li id="order"><a href="#">Order</a></li>
-                            <li id="about"><a href="{{ route('users.about') }}">About</a></li>
+                            @if (Auth::user())
+                                <li id="order"><a href="{{ route('user.order') }}">Order</a></li>
+                            @endif
+                            <li id="about"><a href="./about.html">About</a></li>
                             <li id="contact"><a href="./contact.html">Contact</a></li>
                         </ul>
                     </nav>

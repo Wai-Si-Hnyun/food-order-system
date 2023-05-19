@@ -38,6 +38,7 @@ Route::middleware('role:user')->group(function () {
     // Order
     Route::post('/order/create', [OrderController::class, 'store'])->name('order.store');
     Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
+    Route::get('/orders', [OrderController::class, 'index'])->name('user.order');
 
     // Payment
     Route::get('/payment/choose', [PaymentController::class, 'index'])->name('user.payment');
@@ -125,4 +126,15 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('/questions-and-answers', [ChatbotController::class, 'index'])->name('q&a.index');
     Route::get('/questions-and-answers/create', [ChatbotController::class, 'create'])->name('q&a.create');
     Route::post('/questions-and-answers/store', [ChatbotController::class, 'store'])->name('q&a.store');
+    Route::get('/questions-and-answers/{id}/show', [ChatbotController::class, 'show'])->name('q&a.show');
+    Route::get('/questions-and-answers/{id}/edit', [ChatbotController::class, 'edit'])->name('q&a.edit');
+    Route::put('/questions-and-answers/{id}/update', [ChatbotController::class, 'update'])->name('q&a.update');
+    Route::delete('/questions-and-answers/{id}/delete', [ChatbotController::class, 'delete'])->name('q&a.delete');
 });
+
+//userProfile (for admin and user)
+Route::get('/userprofile/{user}',[UserdataController::class,'userProfile'])->name('user.profile');
+Route::post('/profile-update/{user}',[UserdataController::class,'profileUpdate'])->name('profile.update');
+Route::get('/password/{user}',[UserdataController::class,'passChange'])->name('pass.change');
+Route::post('/pass-change',[UserdataController::class,'passwordUpdate'])->name('password.change');
+Route::delete('/delete-account/{user}',[UserdataController::class,'accountDelete'])->name('account.destroy');

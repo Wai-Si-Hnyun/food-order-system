@@ -17,14 +17,14 @@
                 <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
             </div>
 
-            <a href="{{route('auth.forgetPass')}}" class="mb-3">forget password?</a>
-            <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
+            <a href="{{route('auth.forgetPass')}}" class="mb-3 text-primary">forget password?</a>
+            <button class="au-btn au-btn--block au-btn--orange m-b-20" type="submit">sign in</button>
 
         </form>
         <div class="register-link">
             <p>
                 Don't you have account?
-                <a href="{{ route('auth.registerPage') }}">Sign Up Here</a>
+                <a class="text-primary" href="{{ route('auth.registerPage') }}">Sign Up Here</a>
             </p>
         </div>
     </div>

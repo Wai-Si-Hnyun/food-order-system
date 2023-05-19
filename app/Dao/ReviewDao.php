@@ -2,6 +2,8 @@
 namespace App\Dao;
 
 use App\Contracts\Dao\ReviewDaoInterface;
+use App\Models\User;
+use Illuminate\Http\Request;
 use App\Models\Review;
 
 class ReviewDao implements ReviewDaoInterface
