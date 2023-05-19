@@ -24,6 +24,17 @@ class ChatbotService implements ChatbotServiceInterface
     }
 
     /**
+     * Get question and answer by id
+     *
+     * @param integer $id
+     * @return \App\Models\Chatbot
+     */
+    public function getQAById(int $id)
+    {
+        return $this->chatbotDao->getQAById($id);
+    }
+
+    /**
      * Get all questions from  database
      *
      * @return \App\Models\Chatbot
@@ -53,5 +64,28 @@ class ChatbotService implements ChatbotServiceInterface
     public function store(array $data)
     {
         $this->chatbotDao->store($data);
+    }
+
+    /**
+     * Update data
+     *
+     * @param array $data
+     * @param integer $id
+     * @return void
+     */
+    public function update(array $data, int $id)
+    {
+        $this->chatbotDao->update($data, $id);
+    }
+
+    /**
+     * Delete data
+     *
+     * @param integer $id
+     * @return void
+     */
+    public function delete(int $id)
+    {
+        $this->chatbotDao->delete($id);
     }
 }
