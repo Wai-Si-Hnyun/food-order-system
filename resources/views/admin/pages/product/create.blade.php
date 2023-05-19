@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 @section('content')
     <div class="container">
-        <div class="card col-7 offset-3 mt-5">
+        <div class="card col-7 mx-auto mt-5">
             <div class="card-header text-center">
                 <h4><b> Create Product</b></h4>
             </div>
@@ -68,8 +68,8 @@
                             </div>
                         @enderror
                     </div>
-                    <input type="submit" value="Create" class="btn btn-sm btn-info my-3 text-dark">
-                    <a href="{{ route('products.index') }}" class="btn btn-sm btn-dark float-end my-3">Back</a>
+                    <input type="submit" value="Create" class="btn btn-info my-3 text-dark">
+                    <a href="{{ route('products.index') }}" class="btn btn-dark float-end my-3">Back</a>
                 </form>
             </div>
         </div>

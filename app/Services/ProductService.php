@@ -29,9 +29,9 @@ class ProductService implements ProductServiceInterface
      * Get Product list
      * @return object
      */
-    public function getProduct(): object
+    public function getProduct(string $page): object
     {
-        return $this->productDao->getProduct();
+        return $this->productDao->getProduct($page);
     }
 
     /**
@@ -41,7 +41,11 @@ class ProductService implements ProductServiceInterface
      */
     public function createProduct(array $data): void
     {
-        // Mail Send Code
+        //store image
+        $image = $data["productImage"];
+        $fileName = uniqid() . $image->getClientOriginalName();
+        $image->storeAs('public', $fileName);
+        $data['productImage'] = $fileName;
         $this->productDao->createProduct($data);
     }
 
@@ -63,8 +67,24 @@ class ProductService implements ProductServiceInterface
      */
     public function updateProduct(array $data, int $id): void
     {
+        //store image
+        $image = $data["productImage"];
+        $fileName = uniqid() . $image->getClientOriginalName();
+        $image->storeAs('public', $fileName);
+        $data['productImage'] = $fileName;
         $this->productDao->updateProduct($data, $id);
     }
+
+    /**
+     * Delete Product by id
+     * @param int $id
+     * @return void
+     */
+    public function deleteProductById(int $id): void
+    {
+        $this->productDao->deleteProductById($id);
+    }
+}
 
     /**
      * Delete Product by id

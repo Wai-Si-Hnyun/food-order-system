@@ -4,6 +4,7 @@ namespace App\Dao;
 
 use App\Contracts\Dao\UserProductDaoInterface;
 use App\Models\Product;
+use App\Models\User;
 
 class UserProductDao implements UserProductDaoInterface
 {
@@ -16,9 +17,7 @@ class UserProductDao implements UserProductDaoInterface
         return Product::when(request('key'), function ($query) {
             $query->where('products.name', 'LIKE', '%' . request('key') . '%');
 
-        })
-            ->get();
-
+        })->get();
     }
 
     /**

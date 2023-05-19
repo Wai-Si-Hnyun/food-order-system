@@ -11,7 +11,7 @@ interface ProductServiceInterface
      * Get Product list
      * @return object
      */
-    public function getProduct(): object;
+    public function getProduct(string $page): object;
 
     /**
      * Save Product

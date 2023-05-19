@@ -43,7 +43,6 @@
                             <li>Product-Id : <span>{{ $products->id }}</span></li>
                         </ul>
                         <div class="product__details__option">
-
                             <form action="{{ url('add-cart/'.$products->id) }}" method="post" class="d-inline-block ">
                                 @csrf
                                 <div class="quantity">
@@ -114,12 +113,12 @@
             <div class="card-body">
                 <form action="{{route('review.create')}}" method="post">
                     @csrf
-                    <input type="hidden" name="userId" class="ms-2" value="{{$user->id}}">
+                    <input type="hidden" name="userId" class="ms-2" value="{{ $user[$id]['user_id'] }}">
                     <input type="hidden" name="productId" value="{{ $products->id }}">
                     <label for="">Content</label>
                     <textarea name="content" id="" cols="30" rows="3" class="form-control" >Good</textarea>
                     <button type="submit" class="btn btn-success btn-sm ">Create</button>
-                    <a href="{{route('users.home')}}" class="btn btn-sm btn-dark float-end my-3">Back</a>
+                    <a href="#" class="btn btn-sm btn-dark float-end my-3">Back</a>
                     <button type="button" class="btn btn-secondary ms-3 btn-sm" data-toggle="modal" data-target="#reviewModal"><i class="fa-regular fa-rectangle-list"></i></button>
                 </form>
             </div>

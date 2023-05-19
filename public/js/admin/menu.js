@@ -4,14 +4,23 @@ $(document).ready(function () {
         const currentPath = window.location.pathname;
 
         // Use a regular expression to find the route name in the URL
-        const routeName = currentPath.match(/\/admin\/(\w+)/)[1];
+        const routeNameMatch = currentPath.match(/\/admin\/(\w+)/);
 
-        // Find the menu item with the matching id
-        const activeMenuItem = $('#' + routeName);
+        if (routeNameMatch) {
+            const routeName = routeNameMatch[1];
 
-        // If the menu item is found, add the 'active' class
-        if (activeMenuItem.length) {
-            $(activeMenuItem).addClass('active');
+            // Find the menu item with the matching id
+            const activeMenuItem = $('#' + routeName);
+
+            // If the menu item is found, add the 'active' class
+            if (activeMenuItem.length) {
+                $(activeMenuItem).addClass('active');
+            }
         }
-    }) ();
+    })();
+
+    window.handleFormSubmit = function(e) {
+        e.preventDefault();
+        $('#logoutForm').submit();
+    }
 })

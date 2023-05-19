@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 @section('content')
     <div class="container">
-        <div class="card col-7 offset-3 mt-5">
+        <div class="card col-7 mt-5 mx-auto">
             <div class="card-header text-center">
                 <h4><b> Category Create</b></h4>
                 <hr>
@@ -17,8 +17,8 @@
                             {{ $message }}
                         </div>
                     @enderror
-                    <input type="submit" value="Create" class="btn btn-sm btn-info my-3 text-dark">
-                    <a href="{{ route('categories.index') }}" class="btn btn-sm btn-dark float-end my-3">Back</a>
+                    <input type="submit" value="Create" class="btn btn-info my-3 text-dark" autofocus>
+                    <a href="{{ route('categories.index') }}" class="btn btn-dark float-end my-3">Back</a>
                 </form>
             </div>
         </div>

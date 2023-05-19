@@ -72,7 +72,7 @@ class AuthController extends Controller
             if ($user->role == 'admin') {
                 return redirect()->route('admin.dashboard');
             } elseif ($user->role == 'user') {
-                return redirect()->route('users.home');
+                return redirect()->route('home');
             } else {
                 return redirect()->route('auth.login');
             }
@@ -93,7 +93,7 @@ class AuthController extends Controller
     /**
      * Save token
      *
-     * @param \App\Http\Requests\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function forgetCreate(Request $request) {

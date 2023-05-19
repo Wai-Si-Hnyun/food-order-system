@@ -34,11 +34,11 @@ class OrderDao implements OrderDaoInterface
      * Store order to order table
      *
      * @param array $data
-     * @return void
+     * @return \App\Models\Order
      */
     public function storeOrder(array $data)
     {
-        Order::create($data);
+        return Order::create($data);
     }
 
     /**

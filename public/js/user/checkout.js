@@ -8,7 +8,6 @@ const loadBillingDetails = () => {
         const billingDetails = JSON.parse(savedBillingDetails);
 
         $('#name').val(billingDetails.name);
-        $('#country').val(billingDetails.country);
         $('#state').val(billingDetails.state);
         $('#city').val(billingDetails.city);
         $('#address').val(billingDetails.address);
@@ -30,41 +29,50 @@ $(document).ready(function () {
     // Get old data from session
     loadBillingDetails();
 
-    // Add scrollable select
-    $('#country, #state, #city').select2({
-        dropdownCssClass: 'custom-dropdown-height',
-    })
-
-    // Listen for the change event on the country select box
-    $('#country').on('change', function (e) {
-        e.preventDefault();
-
-        const country = $(this).val();
-        const $stateSelect = $('#state');
-
-        // Clear and disable the state select box if no country is chosen
-        if (!country) {
-            $stateSelect.empty().append('<option value="" selected>Choose State</option>').prop('disabled', true);
-            return;
+    // Get States from myanmar
+    const getStates = () => {
+        const states = MyanmarCities.getRegions();
+        if (states.length === 0) {
+            $('#state').append(`<option value="">No State</option>`);
+        } else {
+            states.forEach(state => {
+                $('#state').append(`<option id="${state.id}" value="${state.name_en}">${state.name_en}</option>`);
+            });
         }
+    };
+    getStates();
 
-        fetchStates(country, $stateSelect);
+    // Get cities by state id
+    const getCities = (stateId) => {
+        const cities = MyanmarCities.getCities(stateId);
+        if (cities.length === 0) {
+            $('#city').append(`<option value="">No City</option>`);
+        } else {
+            $('#city').empty();
+            cities.forEach(city => {
+                $('#city').append(`<option value="${city.name_en}">${city.name_en}</option>`).prop('disabled', false);
+            });
+        }
+    }
+
+    // Add scrollable select
+    $('#state, #city').select2({
+        dropdownCssClass: 'custom-dropdown-height',
     })
 
     // Listen for the change event on the state select box
     $('#state').on('change', function (e) {
         e.preventDefault();
 
-        const state = $(this).val();
-        const $citySelect = $('#city');
+        const stateId = $('option:selected', this).attr('id');
 
         // Clear and disable the state select box if no country is chosen
-        if (!state) {
-            $citySelect.empty().append('<option value="" selected>Choose City</option>').prop('disabled', true);
+        if (stateId == 0) {
+            $$('#city').empty().append('<option value="" selected>Choose City</option>').prop('disabled', true);
             return;
         }
 
-        fetchCities(state, $citySelect);
+        getCities(stateId);
     })
 
     // Listen for the change event on the city select box'))
@@ -115,7 +123,7 @@ $(document).ready(function () {
 
         saveBillingDetails($data);
 
-        await axios.post('/user/order/create', $data)
+        await axios.post('/order/create', $data)
             .then(function (res) {
                 sessionStorage.removeItem('billing-details');
                 window.location.href = '/';
@@ -123,7 +131,7 @@ $(document).ready(function () {
             .catch(function (e) {
                 if (e.response.status == 422) {
                     displayValidationErrors(e.response.data.errors);
-                } else if(e.response.status == 402) {
+                } else if (e.response.status == 402) {
                     window.location.href = '/payment/choose';
                 }
             })
@@ -181,43 +189,5 @@ $(document).ready(function () {
         const billingDetails = data.billingInfo;
 
         sessionStorage.setItem('billing-details', JSON.stringify(billingDetails));
-    }
-
-    const fetchStates = async (country, $stateSelect) => {
-        // Fetch state data
-        await axios.get(`/api/states/${country}`)
-            .then(function (response) {
-                const states = response.data;
-
-                // Clear and enable the state select box
-                $stateSelect.empty().append('<option value="" selected>Choose State</option>').prop('disabled', false);
-
-                // Add states to the state select box
-                states.forEach(function (state) {
-                    $stateSelect.append(`<option value="${state}">${state}</option>`);
-                });
-            })
-            .catch(function (error) {
-                console.error('Error fetching states:', error);
-            });
-    }
-
-    const fetchCities = async (state, $citySelect) => {
-        // Fetch state data
-        await axios.get(`/api/cities/${state}`)
-            .then(function (response) {
-                const cities = response.data;
-
-                // Clear and enable the city select box
-                $citySelect.empty().append('<option value="" selected>Choose City</option>').prop('disabled', false);
-
-                // Add cities to the city select box
-                cities.forEach(function (city) {
-                    $citySelect.append(`<option value="${city}">${city}</option>`);
-                });
-            })
-            .catch(function (error) {
-                console.error('Error fetching states:', error);
-            });
     }
 })

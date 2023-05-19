@@ -90,35 +90,46 @@
                     </li>
                     <li class="menu-item" id="categories">
                         <a href="{{ route('categories.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <i class="menu-icon tf-icons bx bx-category"></i>
                             <div>Categories</div>
                         </a>
                     </li>
                     <li class="menu-item" id="products">
                         <a href="{{ route('products.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <i class="menu-icon tf-icons bx bx-cake"></i>
                             <div>Products</div>
                         </a>
                     </li>
                     <li class="menu-item" id="orders">
                         <a href="{{ route('orders.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <i class="menu-icon tf-icons bx bx-receipt"></i>
                             <div>Orders</div>
                         </a>
                     </li>
                     <li class="menu-item" id="reviews">
-                        <a href="{{route('review.list')}}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                        <a href="{{ route('review.list') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-note"></i>
                             <div>Reviews</div>
                         </a>
                     </li>
                     <li class="menu-item" id="users">
-                        <a href="{{route('userData.list')}}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                        <a href="{{ route('userData.list') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-user"></i>
                             <div>Users</div>
                         </a>
                     </li>
-
+                    <li class="menu-item" id="mail">
+                        <a href="{{ route('mail.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-mail-send"></i>
+                            <div>Mail</div>
+                        </a>
+                    </li>
+                    <li class="menu-item" id="questions">
+                        <a href="{{ route('q&a.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-message-dots"></i>
+                            <div>Q&A</div>
+                        </a>
+                    </li>
                     <li class="menu-item" id="feedback">
                         <a href="{{route('feedback.list')}}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
@@ -154,39 +165,27 @@
                             </li>
 
                             <!-- User -->
-                            @if(Auth::check())
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
-
-                                    @if(Auth::user()->image == null)
                                     <div class="avatar avatar-online">
-                                        <img src="{{ asset('image/profile.png') }}" alt
+                                        <img src="{{ asset('assets/admin/img/avatars/1.png') }}" alt
                                             class="w-px-40 h-auto rounded-circle" />
                                     </div>
-                                    @else
-                                    <div class="avatar avatar-online">
-                                        <img src="{{ asset('image/profile/'.Auth::user()->image) }}" alt
-                                            class="w-px-40 h-auto rounded-circle" />
-                                    </div>
-                                    @endif
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
                                         <a class="dropdown-item" href="#">
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
-                                                    @if(Auth::user()->image == null)
-                                                        <img src="{{ asset('image/profile.png') }}"
+                                                    <div class="avatar avatar-online">
+                                                        <img src="{{ asset('assets/admin/img/avatars/1.png') }}"
                                                             alt="Profile" class="w-px-40 h-auto rounded-circle" />
-                                                    @else
-                                                        <img src="{{ asset('image/profile/'.Auth::user()->image) }}"
-                                                            alt="Profile" class="w-px-50 h-auto rounded-circle" />
-                                                    @endif
+                                                    </div>
                                                 </div>
                                                 <div class="flex-grow-1">
-                                                    <span class="fw-semibold d-block">{{Auth::user()->name}}</span>
-                                                    <small class="text-muted">{{Auth::user()->role}}</small>
+                                                    <span class="fw-semibold d-block">John Doe</span>
+                                                    <small class="text-muted">Admin</small>
                                                 </div>
                                             </div>
                                         </a>
@@ -195,11 +194,16 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="{{url('userprofile/'.Auth::user()->id )}}">
+                                        <a class="dropdown-item" href="#">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle">My Profile</span>
                                         </a>
-                                        @endif
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="bx bx-cog me-2"></i>
+                                            <span class="align-middle">Settings</span>
+                                        </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="#">
@@ -215,7 +219,10 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="{{route('auth.login')}}">
+                                        <form action="{{ route('logout') }}" method="POST" id="logoutForm">
+                                            @csrf
+                                        </form>
+                                        <a class="dropdown-item" href="#" onclick="handleFormSubmit(event)">
                                             <i class="bx bx-power-off me-2"></i>
                                             <span class="align-middle">Log Out</span>
                                         </a>
@@ -231,35 +238,6 @@
 
                 <div class="content-wrapper">
                     @yield('content')
-
-                    <!-- Footer -->
-                    <footer class="content-footer footer bg-footer-theme">
-                        <div
-                            class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                            <div class="mb-2 mb-md-0">
-                                ©
-                                <script>
-                                    document.write(new Date().getFullYear());
-                                </script>
-                                , made with ❤️ by
-                                <a href="https://themeselection.com" target="_blank"
-                                    class="footer-link fw-bolder">ThemeSelection</a>
-                            </div>
-                            <div>
-                                <a href="https://themeselection.com/license/" class="footer-link me-4"
-                                    target="_blank">License</a>
-                                <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More
-                                    Themes</a>
-
-                                <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                                    target="_blank" class="footer-link me-4">Documentation</a>
-
-                                <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                                    target="_blank" class="footer-link me-4">Support</a>
-                            </div>
-                        </div>
-                    </footer>
-                    <!-- / Footer -->
 
                     <div class="content-backdrop fade"></div>
                 </div>
@@ -291,9 +269,6 @@
         <script src="{{ asset('js/app.js') }}"></script>
 
         <script src="{{ asset('js/admin/menu.js') }}"></script>
-        <!--axios -->
-        <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
-
 
         @stack('script')
 </body>
