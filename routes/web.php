@@ -38,6 +38,7 @@ Route::middleware('role:user')->group(function () {
     // Order
     Route::post('/order/create', [OrderController::class, 'store'])->name('order.store');
     Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
+    Route::get('/orders', [OrderController::class, 'index'])->name('user.order');
 
     // Payment
     Route::get('/payment/choose', [PaymentController::class, 'index'])->name('user.payment');

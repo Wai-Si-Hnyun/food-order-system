@@ -108,17 +108,15 @@
                     </li>
                     <li class="menu-item" id="reviews">
                         <a href="{{ route('review.list') }}" class="menu-link">
-                            <a href="#" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                                <div>Reviews</div>
-                            </a>
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div>Reviews</div>
+                        </a>
                     </li>
                     <li class="menu-item" id="users">
                         <a href="{{ route('userData.list') }}" class="menu-link">
-                            <a href="#" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                                <div>Users</div>
-                            </a>
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div>Users</div>
+                        </a>
                     </li>
                     <li class="menu-item" id="mail">
                         <a href="{{ route('mail.index') }}" class="menu-link">
@@ -225,10 +223,9 @@
                                             @csrf
                                         </form>
                                         <a class="dropdown-item" href="#" onclick="handleFormSubmit(event)">
-                                            <a class="dropdown-item" href="auth-login-basic.html">
-                                                <i class="bx bx-power-off me-2"></i>
-                                                <span class="align-middle">Log Out</span>
-                                            </a>
+                                            <i class="bx bx-power-off me-2"></i>
+                                            <span class="align-middle">Log Out</span>
+                                        </a>
                                     </li>
                                 </ul>
                             </li>

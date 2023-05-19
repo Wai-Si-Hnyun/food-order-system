@@ -107,7 +107,9 @@
                         <ul>
                             <li id="home"><a href="{{ route('home') }}">Home</a></li>
                             <li id="shop"><a href="{{ route('users.shop') }}">Shop</a></li>
-                            <li id="order"><a href="{{ route('user.order') }}">Order</a></li>
+                            @if (Auth::user())
+                                <li id="order"><a href="{{ route('user.order') }}">Order</a></li>
+                            @endif
                             <li id="about"><a href="./about.html">About</a></li>
                             <li id="contact"><a href="./contact.html">Contact</a></li>
                         </ul>
