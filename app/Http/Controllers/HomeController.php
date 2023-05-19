@@ -42,7 +42,9 @@ class HomeController extends Controller
      */
     public function adminDashboard()
     {
-        return view('admin.pages.dashboard');
+        $user = Auth::user();
+
+        return view('admin.pages.dashboard', compact('user'));
     }
 
     public function shop()

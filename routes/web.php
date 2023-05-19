@@ -125,3 +125,10 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('/questions-and-answers/create', [ChatbotController::class, 'create'])->name('q&a.create');
     Route::post('/questions-and-answers/store', [ChatbotController::class, 'store'])->name('q&a.store');
 });
+
+//userProfile (for admin and user)
+Route::get('/userprofile/{user}',[UserdataController::class,'userProfile'])->name('user.profile');
+Route::post('/profile-update/{user}',[UserdataController::class,'profileUpdate'])->name('profile.update');
+Route::get('/password/{user}',[UserdataController::class,'passChange'])->name('pass.change');
+Route::post('/pass-change',[UserdataController::class,'passwordUpdate'])->name('password.change');
+Route::delete('/delete-account/{user}',[UserdataController::class,'accountDelete'])->name('account.destroy');

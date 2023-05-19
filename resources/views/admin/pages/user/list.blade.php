@@ -77,7 +77,7 @@
     {
         if (confirm('Are your sure to change this user into admin?')) {
             axios.put('/user/'+userId,{
-                role: 'Admin',
+                role: 'admin',
             })
             .then(response => {
                 location.reload();

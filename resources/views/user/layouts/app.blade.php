@@ -48,6 +48,20 @@
                         <div class="header__top__inner">
                             <div class="header__top__left">
                                 <ul>
+                                    <li style="width:11%;">
+                                        @if(Auth::user()->image == null)
+                                        <img src="{{ asset('image/profile.png') }}" alt
+                                                class="w-50 h-auto rounded-circle" />
+                                        @else
+                                            <img src="{{ asset('image/profile/'.Auth::user()->image) }}" alt
+                                                class="w-px-40 h-auto rounded-circle" />
+                                        @endif
+                                            <span class="arrow_carrot-down"></span>
+                                            <ul>
+                                                <li><a href="{{url('userprofile/'.Auth::user()->id )}}" class="text-light">Profile</a></li>
+                                                <li><a href="{{route('auth.login')}}" class="text-light">Log Out</a></li>
+                                            </ul>
+                                        </li>
                                     @if (Auth::user())
                                         <li>
                                             <form action="{{ route('logout') }}" method="POST" id="logoutForm">
