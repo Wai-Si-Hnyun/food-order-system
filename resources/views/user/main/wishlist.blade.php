@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="breadcrumb__links">
-                        <a href="{{ route('users.home') }}">Home</a>
+                        <a href="#">Home</a>
                         <a href="{{ route('users.shop') }}">Shop</a>
                     </div>
                 </div>
@@ -33,27 +33,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($products as $product)
-                                    <tr>
-                                        <td class="product__cart__item">
-                                            <div class="product__cart__item__pic">
-                                                <img src="{{ asset('storage/' . $product->image) }}" alt=""
-                                                    class="img-thumbnail" style="height:200px;width:220px">
-                                            </div>
-                                            <div class="product__cart__item__text">
-                                                <h6 class="mt-5">{{ $product->name }}</h6>
-                                            </div>
-                                        </td>
-                                        <td class="cart__price">${{ $product->price }}</td>
-                                        <td class="cart__stock">In stock</td>
-                                        <td class="cart__btn"><a href="{{ route('users.details', $product->id) }}"
-                                                class="primary-btn">Add
-                                                to cart</a></td>
-                                        <td class="cart__close">
-                                            <span class="icon_close"></span>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                {{-- @foreach ($products as $product) --}}
+                                <tr>
+                                    <td class="product__cart__item">
+                                        <div class="product__cart__item__pic">
+                                            <img src="{{ asset('assets/user/img/blog/blog-1.jpg') }}" alt=""
+                                                class="img-thumbnail" style="height:200px;width:220px">
+                                        </div>
+                                        <div class="product__cart__item__text">
+                                            <h6 class="mt-5">Chocolate</h6>
+                                        </div>
+                                    </td>
+                                    <td class="cart__price">$100</td>
+                                    <td class="cart__stock">In stock</td>
+                                    <td class="cart__btn"><a href="" class="primary-btn">Add
+                                            to cart</a></td>
+                                    <td class="cart__close">
+                                        <a href=""><span class="icon_close"></span></a>
+                                    </td>
+                                </tr>
+                                {{-- @endforeach --}}
 
                             </tbody>
                         </table>
@@ -64,7 +63,7 @@
         </div>
     </section>
 @endsection
-@section('scriptSource')
+{{-- @section('scriptSource')
     <script>
         $(document).ready(function() {
             $('.icon_close').click(function() {
@@ -74,4 +73,4 @@
 
         })
     </script>
-@endsection
+@endsection --}}
