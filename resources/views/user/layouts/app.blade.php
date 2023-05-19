@@ -48,21 +48,21 @@
                         <div class="header__top__inner">
                             <div class="header__top__left">
                                 <ul>
-                                    <li style="width:11%;">
-                                        @if(Auth::user()->image == null)
-                                        <img src="{{ asset('image/profile.png') }}" alt
-                                                class="w-50 h-auto rounded-circle" />
-                                        @else
-                                            <img src="{{ asset('image/profile/'.Auth::user()->image) }}" alt
-                                                class="w-px-40 h-auto rounded-circle" />
-                                        @endif
+                                    @if (Auth::user())
+                                        <li style="width:11%;">
+                                            @if (Auth::user()->image == null)
+                                                <img src="{{ asset('image/profile.png') }}" alt
+                                                    class="w-50 h-auto rounded-circle" />
+                                            @else
+                                                <img src="{{ asset('image/profile/' . Auth::user()->image) }}" alt
+                                                    class="w-px-40 h-auto rounded-circle" />
+                                            @endif
                                             <span class="arrow_carrot-down"></span>
                                             <ul>
-                                                <li><a href="{{url('userprofile/'.Auth::user()->id )}}" class="text-light">Profile</a></li>
-                                                <li><a href="{{route('auth.login')}}" class="text-light">Log Out</a></li>
+                                                <li><a href="{{ url('userprofile/' . Auth::user()->id) }}"
+                                                        class="text-light">Profile</a></li>
                                             </ul>
                                         </li>
-                                    @if (Auth::user())
                                         <li>
                                             <form action="{{ route('logout') }}" method="POST" id="logoutForm">
                                                 @csrf
@@ -80,7 +80,7 @@
                                 </ul>
                             </div>
                             <div class="header__logo">
-                                <a href="./index.html"><img src="{{ asset('assets/user/img/logo.png') }}"
+                                <a href="{{ route('home') }}"><img src="{{ asset('assets/user/img/logo.png') }}"
                                         alt=""></a>
                             </div>
                             <div class="header__top__right">
@@ -89,8 +89,8 @@
                                             alt=""></a>
                                 </div>
                                 <div class="header__top__right__cart">
-                                    <a href="{{ route('show.cart') }}"><img src="{{ asset('assets/user/img/icon/cart.png') }}"
-                                            alt=""></a>
+                                    <a href="{{ route('show.cart') }}"><img
+                                            src="{{ asset('assets/user/img/icon/cart.png') }}" alt=""></a>
                                     <div class="cart__price">Cart: <span>$0.00</span></div>
                                 </div>
                             </div>
@@ -107,7 +107,7 @@
                         <ul>
                             <li id="home"><a href="{{ route('home') }}">Home</a></li>
                             <li id="shop"><a href="{{ route('users.shop') }}">Shop</a></li>
-                            <li id="order"><a href="#">Order</a></li>
+                            <li id="order"><a href="{{ route('user.order') }}">Order</a></li>
                             <li id="about"><a href="./about.html">About</a></li>
                             <li id="contact"><a href="./contact.html">Contact</a></li>
                         </ul>
