@@ -12,6 +12,14 @@ interface OrderServiceInterface
     public function index();
 
     /**
+     * Get user's orders
+     *
+     * @param integer $id
+     * @return object
+     */
+    public function getOrdersByUserId(int $id);
+
+    /**
      * Get order by id
      *
      * @param integer $id

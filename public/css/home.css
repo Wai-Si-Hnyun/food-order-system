@@ -19,3 +19,12 @@
     background-color: transparent !important;
     color: #000ba5 !important;
 }
+
+.custom-card-header:hover {
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
+.custom-card-header button:hover {
+    text-decoration: none; /* Removes the underline */
+}

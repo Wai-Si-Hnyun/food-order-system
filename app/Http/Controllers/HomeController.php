@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\CategoryService;
+use Illuminate\Support\Facades\Auth;
 use App\Contracts\Services\ChatbotServiceInterface;
 use App\Contracts\Services\UserProductServiceInterface;
-use App\Services\CategoryService;
 
 class HomeController extends Controller
 {
