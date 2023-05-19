@@ -75,8 +75,8 @@
                                             alt=""></a>
                                 </div>
                                 <div class="header__top__right__cart">
-                                    <a href="{{ route('show.cart') }}"><img src="{{ asset('assets/user/img/icon/cart.png') }}"
-                                            alt=""></a>
+                                    <a href="{{ route('show.cart') }}"><img
+                                            src="{{ asset('assets/user/img/icon/cart.png') }}" alt=""></a>
                                     <div class="cart__price">Cart: <span>$0.00</span></div>
                                 </div>
                             </div>
@@ -94,7 +94,7 @@
                             <li id="home"><a href="{{ route('home') }}">Home</a></li>
                             <li id="shop"><a href="{{ route('users.shop') }}">Shop</a></li>
                             <li id="order"><a href="#">Order</a></li>
-                            <li id="about"><a href="./about.html">About</a></li>
+                            <li id="about"><a href="{{ route('users.about') }}">About</a></li>
                             <li id="contact"><a href="./contact.html">Contact</a></li>
                         </ul>
                     </nav>

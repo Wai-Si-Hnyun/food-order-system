@@ -92,7 +92,8 @@
                         <div id="questions" class="d-none">
                             <h4 class="mb-4">Questions:</h4>
                             @forelse ($questions as $question)
-                                <button class="btn btn-primary question mb-2" data-question="{{ $question }}">{{ $question }}</button>
+                                <button class="btn btn-primary question mb-2"
+                                    data-question="{{ $question }}">{{ $question }}</button>
                             @empty
                                 <p>There is no question currently available.</p>
                             @endforelse
