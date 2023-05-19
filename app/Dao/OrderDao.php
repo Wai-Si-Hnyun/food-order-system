@@ -38,7 +38,7 @@ class OrderDao implements OrderDaoInterface
      */
     public function getOrdersByUserId(int $userId)
     {
-        return Order::where('user_id', $userId)->with('orderlists.product')->paginate(10);
+        return Order::where('user_id', $userId)->with('orderlists.product')->paginate(5);
     }
 
     /**

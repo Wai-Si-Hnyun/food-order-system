@@ -125,6 +125,10 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('/questions-and-answers', [ChatbotController::class, 'index'])->name('q&a.index');
     Route::get('/questions-and-answers/create', [ChatbotController::class, 'create'])->name('q&a.create');
     Route::post('/questions-and-answers/store', [ChatbotController::class, 'store'])->name('q&a.store');
+    Route::get('/questions-and-answers/{id}/show', [ChatbotController::class, 'show'])->name('q&a.show');
+    Route::get('/questions-and-answers/{id}/edit', [ChatbotController::class, 'edit'])->name('q&a.edit');
+    Route::put('/questions-and-answers/{id}/update', [ChatbotController::class, 'update'])->name('q&a.update');
+    Route::delete('/questions-and-answers/{id}/delete', [ChatbotController::class, 'delete'])->name('q&a.delete');
 });
 
 //userProfile (for admin and user)

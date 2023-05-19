@@ -81,7 +81,9 @@
         @else
             <p class="text-center my-5 py-5">There is no order yet.</p>
         @endif
-        {{ $orders->links() }}
+        <div class="my-3">
+            {{ $orders->links() }}
+        </div>
     </div>
     <!-- Order -->
 @endsection
