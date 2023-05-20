@@ -14,7 +14,7 @@ class HomeController extends Controller
     private $chatbotService;
 
     public function __construct(
-        UserProductServiceInterface $userProductService, 
+        UserProductServiceInterface $userProductService,
         CategoryService $categoryService,
         ChatbotServiceInterface $chatbotService
     ) {
@@ -54,5 +54,10 @@ class HomeController extends Controller
         $categories = $this->categoryService->getCategory('user');
 
         return view('user.main.shop', compact('products', 'categories'));
+    }
+
+    public function about()
+    {
+        return view('user.main.about');
     }
 }

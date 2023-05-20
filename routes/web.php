@@ -1,21 +1,21 @@
 <?php
 
-use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ChatbotController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CartController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\UserdataController;
 use App\Http\Controllers\User\AjaxController;
 use App\Http\Controllers\User\UserProductController;
-use App\Http\Controllers\UserdataController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MailController;
 use App\Http\Controllers\WishlistController;
-use App\Http\Controllers\FeedbackController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
@@ -50,6 +50,7 @@ Route::middleware('role:user')->group(function () {
     // for users
     Route::get('/users/{id}', [UserProductController::class, 'home'])->name('users.home');
     Route::get('/shop', [HomeController::class, 'shop'])->name('users.shop');
+    Route::get('/users/about/page', [HomeController::class, 'about'])->name('users.about');
     Route::get('/users/{id}/filter', [UserProductController::class, 'filter'])->name('users.filter');
     Route::get('/users/{id}/details', [UserProductController::class, 'details'])->name('users.details');
 
@@ -71,8 +72,8 @@ Route::middleware('role:user')->group(function () {
     Route::delete('/review-delete/{review}', [ReviewController::class, 'reviewDelete'])->name('review.delete');
 
     //feedback
-    Route::get('/feed-back',[FeedbackController::class,'feedback'])->name('feedback.page');
-    Route::post('/feedback-create',[FeedbackController::class,'feedbackCreate'])->name('feedback.create');
+    Route::get('/feed-back', [FeedbackController::class, 'feedback'])->name('feedback.page');
+    Route::post('/feedback-create', [FeedbackController::class, 'feedbackCreate'])->name('feedback.create');
 });
 
 Route::middleware('role:admin')->prefix('admin')->group(function () {
@@ -102,20 +103,20 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::delete('/orders/{id}/delete', [OrderController::class, 'destroy'])->name('order.delete');
     Route::get('/orders/{id}/status/change', [OrderController::class, 'changeOrderStatus']);
     Route::get('/orders/{id}/deivered/status/change', [OrderController::class, 'changeDeliverStatus']);
-    
+
     //review
-    Route::get('/reviews/list',[ReviewController::class,'reviewList'])->name('review.list');
-    Route::delete('/user-review/{review}',[ReviewController::class,'reviewDestory'])->name('review.destory');
-    
+    Route::get('/reviews/list', [ReviewController::class, 'reviewList'])->name('review.list');
+    Route::delete('/user-review/{review}', [ReviewController::class, 'reviewDestory'])->name('review.destory');
+
     //UserList
     Route::get('/users/list', [UserdataController::class, 'userList'])->name('userData.list');
     Route::put('/user/{user}', [UserdataController::class, 'roleUpdate'])->name('role.update');
     Route::get('/user/{user}/info', [UserdataController::class, 'userInfo'])->name('user.info');
     Route::delete('/user-delete/{user}', [UserdataController::class, 'userDelete'])->name('user.destory');
-  
+
     //feedback
-    Route::get('/feedback-list',[FeedbackController::class,'feedbackList'])->name('feedback.list');
-    Route::delete('/feedback-delete/{feedback}',[FeedbackController::class,'feedbackDestory'])->name('feedback.destory');
+    Route::get('/feedback-list', [FeedbackController::class, 'feedbackList'])->name('feedback.list');
+    Route::delete('/feedback-delete/{feedback}', [FeedbackController::class, 'feedbackDestory'])->name('feedback.destory');
 
     // Mail
     Route::get('/mail', [MailController::class, 'index'])->name('mail.index');
