@@ -14,13 +14,6 @@
                     <div class="breadcrumb__links">
                         <a href="#">Home</a>
                         <a href="{{ route('users.shop') }}">Shop</a>
-                        <button type="button" class="btn btn-outline-warning position-relative">
-                            <span class="text-dark icon_heart_alt"></span>
-                            <span
-                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark text-white">
-                                9
-                            </span>
-                        </button>
                     </div>
                 </div>
             </div>
@@ -59,12 +52,11 @@
                                 </div>
                                 <button type="submit" class="primary-btn border border-0">Add to cart</button>
                             </form>
-                            <a href="{{ route('users.wishlist') }}">
-                                <button class="btn btn-outline-warning btn-lg heart__btn  mr-3">
+                            <a href="{{ route('users.storeWishlist', ['productId' => $products->id]) }}">
+                                <button type="submit" class="btn btn-outline-warning btn-lg heart__btn  mr-3">
                                     <span class="icon_heart_alt"></span>
                                 </button>
                             </a>
-
                         </div>
                     </div>
                 </div>

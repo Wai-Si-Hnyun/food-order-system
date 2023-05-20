@@ -85,8 +85,8 @@
                             </div>
                             <div class="header__top__right">
                                 <div class="header__top__right__links">
-                                    <a href="#"><img src="{{ asset('assets/user/img/icon/heart.png') }}"
-                                            alt=""></a>
+                                    <a href="{{ route('users.wishlist') }}"><img
+                                            src="{{ asset('assets/user/img/icon/heart.png') }}" alt=""></a>
                                 </div>
                                 <div class="header__top__right__cart">
                                     <a href="{{ route('show.cart') }}"><img
@@ -209,6 +209,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
 
     <!-- Select2 -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"
         integrity="sha512-i9cEfJwUwViEPFKdC1enz4ZRGBj8YQo6QByFTF92YXHi7waCqyexvRD75S5NVTsSiTv7rKWqG9Y5eFxmRsOn0A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>

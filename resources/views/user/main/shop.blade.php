@@ -79,8 +79,9 @@
                                     <img src="{{ asset('storage/' . $product->image) }}" alt=""
                                         style="height:200px">
                                     <div class="product__label">
-                                        <span><a class="text-dark"
-                                                href="{{ route('users.details', $product->id) }}">cakes</a></span>
+                                        <span>
+                                            <a class="text-dark" href="{{ route('users.details', $product->id) }}">cakes</a>
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="product__item__text">
@@ -131,7 +132,9 @@
                                     <div class="product__item__pic set-bg">
                                         <img src="{{ asset('storage/${response[$i] . image}') }}" alt="" style="height:200px">
                                         <div class="product__label">
-                                            <span>Foods</span>
+                                            <span>
+                                            <a class="text-dark" href="{{ route('users.details', $product->id) }}">cakes</a>
+                                        </span>
                                         </div>
                                     </div>
                                     <div class="product__item__text">
@@ -168,7 +171,9 @@
                                         <div class="product__item__pic set-bg">
                                             <img src="{{ asset('storage/${response[$i] . image}') }}" alt="" style="height:200px">
                                             <div class="product__label">
-                                                <span>Foods</span>
+                                                <span>
+                                            <a class="text-dark" href="{{ route('users.details', $product->id) }}">cakes</a>
+                                                </span>
                                             </div>
                                         </div>
                                         <div class="product__item__text">

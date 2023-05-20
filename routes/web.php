@@ -55,9 +55,8 @@ Route::middleware('role:user')->group(function () {
 
     // for wishlists
     Route::get('/users/wishlists/page', [WishlistController::class, 'addWishlist'])->name('users.wishlist');
-    Route::post('/users/store/wishlists', [WishlistController::class, 'storeWishlist'])->name('users.storeWishlist');
-    Route::post('/users/destroy/{id}/wishlists', [WishlistController::class, 'destroyWishlist'])->name('users.destroyWishlist');
-
+    Route::get('/users/store/wishlists/{productId}', [WishlistController::class, 'storeWishlist'])->name('users.storeWishlist');
+    Route::get('/users/destroy/{id}/wishlists', [WishlistController::class, 'destroyWishlist'])->name('users.destroyWishlist');
 
     // ajax
     Route::get('/ajax/products', [AjaxController::class, 'index'])->name('ajax.index');

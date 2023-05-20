@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\Services\WishlistServiceInterface;
+use App\Models\Product;
 use App\Models\Wishlist;
-use Google\Service\Docs\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Contracts\Services\WishlistServiceInterface;
 
 class WishlistController extends Controller
 {
@@ -13,36 +13,40 @@ class WishlistController extends Controller
      * wishlist interface
      */
 
-    // private $wishlistService;
+    private $wishlistService;
     /**
      * Create a new controller instance.
      * @param WishlistServiceInterface $wishlistServiceInterface
      * @return void
      */
-    // public function __construct(WishlistServiceInterface $wishlistServiceInterface)
-    // {
-    //     $this->wishlistService = $wishlistServiceInterface;
-    // }
+    public function __construct(WishlistServiceInterface $wishlistServiceInterface)
+    {
+        $this->wishlistService = $wishlistServiceInterface;
+    }
     /**
      * function wishlist
      */
     public function addWishlist()
     {
 
-        $wishlists = Wishlist::select('wishlists.*', 'products.name as product_name', 'products.image as product_image', 'products.price as product_price')
-            ->leftJoin('products', 'products.id', 'wishlists.product_id')
-            ->where('wishlists.user_id', Auth::user()->id)
-            ->get();
-        dd($wishlists->toArray());
-        return view('user.main.wishlist', compact('wishlists'));
+        $products = Product::select('id', 'name', 'image', 'price')->get();
+        $wishlists = $this->wishlistService->getWishlists();
+        return view('user.main.wishlist', compact('wishlists', 'products'));
     }
 
-    public function storeWishlist(Request $request)
+    public function storeWishlist($productId)
     {
-        dd($request);
+        Wishlist::create([
+            'product_id' => $productId,
+            'user_id' => Auth::user()->id,
+        ]);
+
+        return redirect()->route('users.details', $productId);
     }
+
     public function destroyWishlist($id)
     {
-        dd($id);
+        $this->wishlistService->deleteWishlistById($id);
+        return redirect()->route('users.wishlist')->with(['deleteSuccess' => 'Wishlist delete successfully!']);
     }
 }
