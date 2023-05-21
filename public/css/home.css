@@ -1,0 +1,21 @@
+.chatbot .btn-chatbot {
+    position: fixed;
+    bottom: 3rem;
+    right: 1.625rem;
+    z-index: 999999;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 0 1px 20px 1px #0408ff;
+    width: 50px; /* Adjust this value according to the desired size of your SVG image */
+    height: auto;
+}
+
+.chatbot .btn-chatbot:hover {
+    box-shadow: none;
+}
+
+.active-question {
+    border: 1px solid #000fff;
+    background-color: transparent !important;
+    color: #000ba5 !important;
+}
