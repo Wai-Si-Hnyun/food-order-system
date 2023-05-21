@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('order_code')->unique();
-            $table->integer('total_price');
+            $table->decimal('total_price', 20, 2);
             $table->string('status', 1)->default('2'); // 2: pending, 1: success, 0: reject; 
             $table->boolean('delivered')->default(false);
             $table->timestamps();

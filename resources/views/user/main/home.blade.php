@@ -49,12 +49,10 @@
                             <div class="product__item__text">
                                 <h6><a href="#">{{ $product->name }}</a></h6>
                                 <div class="product__item__price">${{ $product->price }}</div>
-                                <div class="cart_add">
-                                    <form action="{{ url('add-cart/' . $product->id) }}" method="post">
-                                        @csrf
-                                        <input type="hidden" value="1" name="quantity">
-                                        <button type="submit" class="border border-warning">Add to cart</button>
-                                    </form>
+                                <div class="cart_add" data-id="{{ $product->id }}"
+                                    data-name="{{ $product->name }}" data-price="{{ $product->price }}"
+                                    data-image="{{ $product->image }}" data-quantity="1">
+                                    <a href="#" class="add-to-cart-btn">Add to cart</a>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +77,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="chatbotModalLabel">Simple Chatbot</h5>
+                    <h5 class="modal-title" id="chatbotModalLabel">Frequently Asked Questions</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -92,7 +90,8 @@
                         <div id="questions" class="d-none">
                             <h4 class="mb-4">Questions:</h4>
                             @forelse ($questions as $question)
-                                <button class="btn btn-primary question mb-2" data-question="{{ $question }}">{{ $question }}</button>
+                                <button class="btn btn-primary question mb-2 text-left"
+                                    data-question="{{ $question }}">{{ $question }}</button>
                             @empty
                                 <p>There is no question currently available.</p>
                             @endforelse
@@ -110,4 +109,5 @@
 
 @push('script')
     <script src="{{ asset('js/user/home.js') }}"></script>
+    <script src="{{ asset('js/user/add-to-cart.js') }}"></script>
 @endpush

@@ -14,11 +14,11 @@ class AjaxController extends Controller
     public function index(Request $request)
     {
         if ($request->status == 'desc') {
-            $data = Product::orderBy('created_at', 'desc')
+            $data = Product::with('category')->orderBy('created_at', 'desc')
                 ->get();
 
         } else {
-            $data = Product::orderBy('created_at', 'asc')
+            $data = Product::with('category')->orderBy('created_at', 'asc')
                 ->get();
 
         }

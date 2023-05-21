@@ -17,19 +17,30 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\FeedbackController;
 
-Route::get('/', [HomeController::class, 'home'])->name('home');
-
 //login/register
 Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
+Route::post('/login', [AuthController::class, 'authLogin'])->name('auth.loginCheck');
 Route::get('/register', [AuthController::class, 'registerPage'])->name('auth.registerPage');
 Route::post('/register', [AuthController::class, 'authRegisterStore'])->name('auth.store');
-Route::post('/login', [AuthController::class, 'authLogin'])->name('auth.loginCheck');
+
+// Unauthenticated Routes
+Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/shop', [HomeController::class, 'shop'])->name('users.shop');
+Route::post('/ajax/products', [AjaxController::class, 'index'])->name('ajax.index');
+Route::get('/users/{id}/filter', [UserProductController::class, 'filter'])->name('users.filter');
+Route::get('/users/{id}/details', [UserProductController::class, 'details'])->name('users.details');
 
 //forget/reset password
 Route::get('/forget-password-page', [AuthController::class, 'forgetPass'])->name('auth.forgetPass');
 Route::post('/forget-create', [AuthController::class, 'forgetCreate'])->name('auth.forgetCreate');
 Route::get('/reset-password-page', [AuthController::class, 'resetPass'])->name('auth.resetPass');
 Route::post('/pass-change', [AuthController::class, 'passChange'])->name('auth.passChange');
+
+//cart
+Route::post('/cart/{product}/add', [CartController::class, 'addToCart'])->name('add.cart');
+Route::get('/cart', [CartController::class, 'cart'])->name('show.cart');
+Route::delete('/cart/{id}/delete', [CartController::class, 'remove'])->name('remove.cart');
+Route::delete('/cart/clear', [CartController::class, 'clear']);
 
 // Chat bot
 Route::post('/chat/get-answer', [ChatbotController::class, 'getAnswer']);
@@ -47,22 +58,8 @@ Route::middleware('role:user')->group(function () {
     Route::get('/payment/google-pay', [PaymentController::class, 'google'])->name('payment.google');
     Route::post('/payment/google-pay', [PaymentController::class, 'chargeGooglePay'])->name('stripe.google');
 
-    // for users
-    Route::get('/users/{id}', [UserProductController::class, 'home'])->name('users.home');
-    Route::get('/shop', [HomeController::class, 'shop'])->name('users.shop');
-    Route::get('/users/{id}/filter', [UserProductController::class, 'filter'])->name('users.filter');
-    Route::get('/users/{id}/details', [UserProductController::class, 'details'])->name('users.details');
-
     // for wishlists
     Route::get('/users/wishlists', [WishlistController::class, 'addWishlist'])->name('users.wishlist');
-
-    // ajax
-    Route::get('/ajax/products', [AjaxController::class, 'index'])->name('ajax.index');
-
-    //cart
-    Route::post('add-cart/{product}', [CartController::class, 'addToCart'])->name('add.cart');
-    Route::get('/cart', [CartController::class, 'cart'])->name('show.cart');
-    Route::delete('/deleteCart/{id}', [CartController::class, 'remove'])->name('remove.cart');
 
     //reviews
     Route::post('/review', [ReviewController::class, 'review'])->name('review.create');

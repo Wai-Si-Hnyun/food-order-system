@@ -17,7 +17,7 @@ $(document).ready(function () {
                 var words = res.data.split(" ");
                 var i = 0;
                 $('#answer').html('<div class="alert alert-info" id="content"></div>');
-                var intervalId = setInterval(function(){
+                var intervalId = setInterval(function () {
                     if (i >= words.length) {
                         clearInterval(intervalId);
                     } else {

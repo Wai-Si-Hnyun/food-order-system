@@ -31,7 +31,7 @@
                             <div class="d-flex justify-content-between w-100" type="button" data-toggle="collapse"
                                     data-target="#collapse{{ $order->id }}" aria-expanded="true"
                                     aria-controls="collapse{{ $order->id }}">
-                                <p class="d-inline-block mb-0">Order #{{ $order->order_code }}</p>
+                                <p class="d-inline-block mb-0">Order # {{ $order->order_code }}</p>
                                 <p class="d-inline-block mb-0">Total Cost - ${{ $order->total_price }}</p>
                                 <i class="text-dark fa-solid fa-chevron-down"></i>
                             </div>

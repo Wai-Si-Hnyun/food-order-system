@@ -28,3 +28,7 @@
 .custom-card-header button:hover {
     text-decoration: none; /* Removes the underline */
 }
+
+.checkout__form .checkout__input .select2-container {
+    display: inline;
+}
