@@ -50,6 +50,7 @@ Route::middleware('role:user')->group(function () {
     // for users
     Route::get('/users/{id}', [UserProductController::class, 'home'])->name('users.home');
     Route::get('/shop', [HomeController::class, 'shop'])->name('users.shop');
+    Route::get('/users/about/page', [HomeController::class, 'about'])->name('users.about');
     Route::get('/users/{id}/filter', [UserProductController::class, 'filter'])->name('users.filter');
     Route::get('/users/{id}/details', [UserProductController::class, 'details'])->name('users.details');
 
@@ -127,6 +128,10 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('/questions-and-answers', [ChatbotController::class, 'index'])->name('q&a.index');
     Route::get('/questions-and-answers/create', [ChatbotController::class, 'create'])->name('q&a.create');
     Route::post('/questions-and-answers/store', [ChatbotController::class, 'store'])->name('q&a.store');
+    Route::get('/questions-and-answers/{id}/show', [ChatbotController::class, 'show'])->name('q&a.show');
+    Route::get('/questions-and-answers/{id}/edit', [ChatbotController::class, 'edit'])->name('q&a.edit');
+    Route::put('/questions-and-answers/{id}/update', [ChatbotController::class, 'update'])->name('q&a.update');
+    Route::delete('/questions-and-answers/{id}/delete', [ChatbotController::class, 'delete'])->name('q&a.delete');
 });
 
 //userProfile (for admin and user)

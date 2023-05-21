@@ -75,4 +75,5 @@ class UserProductController extends Controller
         $categories = $this->userProductService->getUserProductById($id);
         return view('user.main.shop', compact('products', 'categories'));
     }
+
 }
