@@ -33,6 +33,12 @@
                     </div>
                 </div>
                 <div class="col-lg-7">
+                    @if (session('addSuccess'))
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            {{ session('addSuccess') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <div class="product__details__text">
                         <h4>{{ $products->name }}</h4>
                         <h5>${{ $products->price }}</h5>

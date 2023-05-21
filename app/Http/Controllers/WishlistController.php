@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Services\WishlistServiceInterface;
 use App\Models\Product;
 use App\Models\Wishlist;
 use Illuminate\Support\Facades\Auth;
-use App\Contracts\Services\WishlistServiceInterface;
 
 class WishlistController extends Controller
 {
@@ -41,7 +41,7 @@ class WishlistController extends Controller
             'user_id' => Auth::user()->id,
         ]);
 
-        return redirect()->route('users.details', $productId);
+        return redirect()->route('users.details', $productId)->with(['addSuccess' => 'Add to Wishlist!']);
     }
 
     public function destroyWishlist($id)
