@@ -14,7 +14,7 @@
             <form action="{{ route('mail.send') }}" method="post">
                 @csrf
                 <div class="mb-3">
-                    <label for="recipient_email" class="form-label">Recipient Email:</label>
+                    <label for="recipient_email" class="form-label">Recipient Email:<span class="text-danger">*</span></label>
                     <input type="email" name="recipient_email" id="recipient_email" value="{{ old('recipient_email') }}"
                         class="form-control @error('recipient_email') is-invalid @enderror">
                     @error('recipient_email')
@@ -24,7 +24,7 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="recipient_name" class="form-label">Name:</label>
+                    <label for="recipient_name" class="form-label">Name:<span class="text-danger">*</span></label>
                     <input type="text" name="recipient_name" id="recipient_name" value="{{ old('recipient_name') }}"
                         class="form-control @error('recipient_name') is-invalid @enderror">
                     @error('recipient_name')
@@ -34,7 +34,7 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="subject" class="form-label">Subject:</label>
+                    <label for="subject" class="form-label">Subject:<span class="text-danger">*</span></label>
                     <input type="text" name="subject" id="subject" value="{{ old('subject') }}"
                         class="form-control @error('subject') is-invalid @enderror">
                     @error('subject')
@@ -44,7 +44,7 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="body" class="form-label">Body:</label>
+                    <label for="body" class="form-label">Body:<span class="text-danger">*</span></label>
                     <textarea name="body" id="body" class="form-control @error('body') is-invalid @enderror" rows="5">{{ old('body') }}</textarea>
                     @error('body')
                         <div class="invalid-feedback">

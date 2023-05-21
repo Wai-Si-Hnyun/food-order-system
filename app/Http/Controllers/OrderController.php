@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\OrderRequest;
 use App\Contracts\Services\OrderServiceInterface;
+use App\Http\Requests\OrderRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -30,9 +31,18 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = $this->orderService->index();
+        $role = Auth::user()->role;
 
-        return view('admin.pages.orders.index', compact('orders'));
+        if ($role == 'admin') {
+            $orders = $this->orderService->index();
+
+            return view('admin.pages.orders.index', compact('orders'));
+        } elseif  ($role == 'user') {
+            $orders = $this->orderService->getOrdersByUserId(Auth::user()->id);
+
+            return view('user.pages.order.list', compact('orders'));
+        }
+
     }
 
     /**

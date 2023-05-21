@@ -75,7 +75,7 @@
                                             </ul>
                                         </li>
                                         <li>
-                                            <form action="#" method="POST" id="logoutForm">
+                                            <form action="{{ route('logout') }}" method="POST" id="logoutForm">
                                                 @csrf
                                             </form>
                                             <a href="#" onclick="handleFormSubmit(event)">Logout</a>
@@ -91,7 +91,7 @@
                                             <a href="{{ route('auth.registerPage') }}">Register</a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('auth.registerPage') }}">Help</a>
+                                            <a href="{{ route('customer.care') }}">Help</a>
                                         </li>
                                     @endif
                                 </ul>
@@ -102,8 +102,8 @@
                             </div>
                             <div class="header__top__right">
                                 <div class="header__top__right__links">
-                                    <a href="#"><img src="{{ asset('assets/user/img/icon/heart.png') }}"
-                                            alt=""></a>
+                                    <a href="{{ route('users.wishlist') }}"><img
+                                            src="{{ asset('assets/user/img/icon/heart.png') }}" alt=""></a>
                                 </div>
                                 <div class="header__top__right__cart">
                                     <a href="{{ route('show.cart') }}"><img
@@ -124,7 +124,9 @@
                         <ul>
                             <li id="home"><a href="{{ route('home') }}">Home</a></li>
                             <li id="shop"><a href="{{ route('users.shop') }}">Shop</a></li>
-                            <li id="order"><a href="#">Order</a></li>
+                            @if (Auth::user())
+                                <li id="order"><a href="{{ route('user.order') }}">Order</a></li>
+                            @endif
                             <li id="about"><a href="./about.html">About</a></li>
                             <li id="contact"><a href="{{route('feedback.page')}}">Contact</a></li>
                         </ul>
@@ -224,11 +226,19 @@
     <script src="{{ asset('js/app.js') }}"></script>
 
     <!-- Select2 -->
+<<<<<<< HEAD
+=======
+
+>>>>>>> e5688e08452e08276fc2d4ea81c8e98857856be6
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"
         integrity="sha512-i9cEfJwUwViEPFKdC1enz4ZRGBj8YQo6QByFTF92YXHi7waCqyexvRD75S5NVTsSiTv7rKWqG9Y5eFxmRsOn0A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> e5688e08452e08276fc2d4ea81c8e98857856be6
     <script src="{{ asset('js/user/header.js') }}"></script>
 
     @stack('script')

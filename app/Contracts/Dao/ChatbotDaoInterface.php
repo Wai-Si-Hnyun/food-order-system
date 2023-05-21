@@ -12,6 +12,14 @@ interface ChatbotDaoInterface
     public function getAll();
 
     /**
+     * Get question and answer data by id
+     *
+     * @param integer $id
+     * @return \App\Models\Chatbot
+     */
+    public function getQAById(int $id);
+
+    /**
      * Get all questions
      *
      * @return \App\Models\Chatbot
@@ -33,4 +41,21 @@ interface ChatbotDaoInterface
      * @return void
      */
     public function store(array $data);
+
+    /**
+     * Updaet data
+     *
+     * @param array $data
+     * @param integer $id
+     * @return void
+     */
+    public function update(array $data, int $id);
+
+    /**
+     * Delete data from database
+     *
+     * @param integer $id
+     * @return void
+     */
+    public function delete(int $id);
 }

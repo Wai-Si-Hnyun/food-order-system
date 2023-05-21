@@ -55,4 +55,9 @@ class HomeController extends Controller
 
         return view('user.main.shop', compact('products', 'categories'));
     }
+
+    public function about()
+    {
+        return view('user.main.about');
+    }
 }

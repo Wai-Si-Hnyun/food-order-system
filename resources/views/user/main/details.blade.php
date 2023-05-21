@@ -24,7 +24,11 @@
     <section class="product-details spad">
         <div class="container">
             <div class="row">
+<<<<<<< HEAD
                 <div class="col-lg-6">
+=======
+                <div class="col-lg-5">
+>>>>>>> e5688e08452e08276fc2d4ea81c8e98857856be6
                     <div class="product__details__img">
                         <div class="">
                             <img class="img-thumbnail w-75" src="{{ asset('storage/' . $products->image) }}"
@@ -32,7 +36,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-7">
+                    @if (session('addSuccess'))
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            {{ session('addSuccess') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <div class="product__details__text">
                         <h4>{{ $products->name }}</h4>
                         <h5>${{ $products->price }}</h5>
@@ -52,7 +62,11 @@
                                 </div>
                                 <button type="submit" class="primary-btn border border-0">Add to cart</button>
                             </form>
-                            <a href="#" class="heart__btn  me-2"><span class="icon_heart_alt"></span></a>
+                            <a href="{{ route('users.storeWishlist', ['productId' => $products->id]) }}">
+                                <button type="submit" class="btn btn-outline-warning btn-lg heart__btn  mr-3">
+                                    <span class="icon_heart_alt"></span>
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>

@@ -45,6 +45,39 @@ class ChatbotController extends Controller
     }
 
     /**
+     * Go to detail page
+     *
+     * @param integer $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function show(int $id)
+    {
+        $qaData = $this->chatbotService->getQAById($id);
+
+        return view('admin.pages.q&a.detail', compact('qaData'));
+    }
+
+    /**
+     * Go to edit page
+     *
+     * @param integer $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function edit(int $id)
+    {
+        $qa = $this->chatbotService->getQAById($id);
+
+        return view('admin.pages.q&a.edit', compact('qa'));
+    }
+
+    public function update(QuestionAnswerRequest $request, int $id)
+    {
+        $this->chatbotService->update($request->all(), $id);
+
+        return redirect()->route('q&a.index')->with('success', 'Question and answer successfully updated!');
+    }
+
+    /**
      * Get answer for specific question
      *
      * @param Request $request
@@ -57,5 +90,18 @@ class ChatbotController extends Controller
         $answer = $this->chatbotService->getAnswer($question);
 
         return response()->json($answer, 200);
+    }
+
+    /**
+     * Delete data from table
+     *
+     * @param integer $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function delete (int $id)
+    {
+        $this->chatbotService->delete($id);
+
+        return response()->json(['success' => 'Question and answer successfully deleted'], 200);
     }
 }

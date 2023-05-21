@@ -40,6 +40,17 @@ class OrderService implements OrderServiceInterface
     }
 
     /**
+     * Get user's orders
+     *
+     * @param integer $id
+     * @return object
+     */
+    public function getOrdersByUserId(int $id)
+    {
+        return $this->orderDao->getOrdersByUserId($id);
+    }
+
+    /**
      * Get order by id
      *
      * @param integer $id

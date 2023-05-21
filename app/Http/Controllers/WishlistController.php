@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Services\WishlistServiceInterface;
+use App\Models\Product;
 use App\Models\Wishlist;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,9 +28,25 @@ class WishlistController extends Controller
      */
     public function addWishlist()
     {
-        $products = $this->wishlistService->getWishlist();
-        $wishlists = Wishlist::where('user_id', Auth::user()->id)->first();
 
-        return view('user.main.wishlist', compact('products', 'wishlists'));
+        $products = Product::select('id', 'name', 'image', 'price')->get();
+        $wishlists = $this->wishlistService->getWishlists();
+        return view('user.main.wishlist', compact('wishlists', 'products'));
+    }
+
+    public function storeWishlist($productId)
+    {
+        Wishlist::create([
+            'product_id' => $productId,
+            'user_id' => Auth::user()->id,
+        ]);
+
+        return redirect()->route('users.details', $productId)->with(['addSuccess' => 'Add to Wishlist!']);
+    }
+
+    public function destroyWishlist($id)
+    {
+        $this->wishlistService->deleteWishlistById($id);
+        return redirect()->route('users.wishlist')->with(['deleteSuccess' => 'Wishlist delete successfully!']);
     }
 }

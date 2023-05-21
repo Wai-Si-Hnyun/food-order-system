@@ -1,22 +1,22 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ChatbotController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ReviewController;
-use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserdataController;
-use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\User\AjaxController;
 use App\Http\Controllers\User\UserProductController;
+use App\Http\Controllers\WishlistController;
+use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
@@ -74,10 +74,25 @@ Route::middleware('role:user')->group(function () {
     Route::put('/review/{review}', [ReviewController::class, 'reviewUpdate'])->name('review.update');
     Route::delete('/review-delete/{review}', [ReviewController::class, 'reviewDelete'])->name('review.delete');
 
+    // Questions and Answers
+    Route::get('/questions-and-answers', [ChatbotController::class, 'index'])->name('q&a.index');
+    Route::get('/questions-and-answers/create', [ChatbotController::class, 'create'])->name('q&a.create');
+    Route::post('/questions-and-answers/store', [ChatbotController::class, 'store'])->name('q&a.store');
+    Route::get('/questions-and-answers/{id}/show', [ChatbotController::class, 'show'])->name('q&a.show');
+    Route::get('/questions-and-answers/{id}/edit', [ChatbotController::class, 'edit'])->name('q&a.edit');
+    Route::put('/questions-and-answers/{id}/update', [ChatbotController::class, 'update'])->name('q&a.update');
+    Route::delete('/questions-and-answers/{id}/delete', [ChatbotController::class, 'delete'])->name('q&a.delete');
     //feedback
     Route::get('/feed-back',[FeedbackController::class,'feedback'])->name('feedback.page');
     Route::post('/feedback-create',[FeedbackController::class,'feedbackCreate'])->name('feedback.create');
 });
+
+//userProfile (for admin and user)
+Route::get('/userprofile/{user}', [UserdataController::class, 'userProfile'])->name('user.profile');
+Route::post('/profile-update/{user}', [UserdataController::class, 'profileUpdate'])->name('profile.update');
+Route::get('/password/{user}', [UserdataController::class, 'passChange'])->name('pass.change');
+Route::post('/pass-change', [UserdataController::class, 'passwordUpdate'])->name('password.change');
+Route::delete('/delete-account/{user}', [UserdataController::class, 'accountDelete'])->name('account.destroy');
 
 //Route::middleware('role:admin')->prefix('admin')->group(function () {
     // Dashboard

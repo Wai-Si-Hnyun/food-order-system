@@ -20,6 +20,14 @@ interface OrderDaoInterface
     public function getOrderById(int $id);
 
     /**
+     * Get user's orders
+     *
+     * @param integer $userId
+     * @return object
+     */
+    public function getOrdersByUserId(int $userId);
+
+    /**
      * Store order to order table
      *
      * @param array $data
@@ -60,7 +68,7 @@ interface OrderDaoInterface
     public function checkOrderCode(string $orderCode);
 
     /**
-     * Change order status 
+     * Change order status
      *
      * @param integer $status
      * @param integer $id
