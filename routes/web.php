@@ -55,7 +55,9 @@ Route::middleware('role:user')->group(function () {
     Route::get('/users/{id}/details', [UserProductController::class, 'details'])->name('users.details');
 
     // for wishlists
-    Route::get('/users/wishlists', [WishlistController::class, 'addWishlist'])->name('users.wishlist');
+    Route::get('/users/wishlists/page', [WishlistController::class, 'addWishlist'])->name('users.wishlist');
+    Route::get('/users/store/wishlists/{productId}', [WishlistController::class, 'storeWishlist'])->name('users.storeWishlist');
+    Route::get('/users/destroy/{id}/wishlists', [WishlistController::class, 'destroyWishlist'])->name('users.destroyWishlist');
 
     // ajax
     Route::get('/ajax/products', [AjaxController::class, 'index'])->name('ajax.index');
@@ -133,8 +135,8 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
 });
 
 //userProfile (for admin and user)
-Route::get('/userprofile/{user}',[UserdataController::class,'userProfile'])->name('user.profile');
-Route::post('/profile-update/{user}',[UserdataController::class,'profileUpdate'])->name('profile.update');
-Route::get('/password/{user}',[UserdataController::class,'passChange'])->name('pass.change');
-Route::post('/pass-change',[UserdataController::class,'passwordUpdate'])->name('password.change');
-Route::delete('/delete-account/{user}',[UserdataController::class,'accountDelete'])->name('account.destroy');
+Route::get('/userprofile/{user}', [UserdataController::class, 'userProfile'])->name('user.profile');
+Route::post('/profile-update/{user}', [UserdataController::class, 'profileUpdate'])->name('profile.update');
+Route::get('/password/{user}', [UserdataController::class, 'passChange'])->name('pass.change');
+Route::post('/pass-change', [UserdataController::class, 'passwordUpdate'])->name('password.change');
+Route::delete('/delete-account/{user}', [UserdataController::class, 'accountDelete'])->name('account.destroy');

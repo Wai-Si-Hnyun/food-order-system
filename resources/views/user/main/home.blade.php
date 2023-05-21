@@ -10,7 +10,7 @@
                         <div class="col-lg-8">
                             <div class="hero__text">
                                 <h2>When you have a lot to do,start with a meal!</h2>
-                                <a href="{{ route('users.shop') }}" class="primary-btn">Our Foods</a>
+                                <a href="{{ route('users.shop') }}" class="primary-btn">Our cakes</a>
                             </div>
                         </div>
                     </div>
@@ -22,7 +22,7 @@
                         <div class="col-lg-8">
                             <div class="hero__text">
                                 <h2>When you have a lot to do,start with a meal!</h2>
-                                <a href="{{ route('users.shop') }}" class="primary-btn">Our Foods</a>
+                                <a href="{{ route('users.shop') }}" class="primary-btn">Our cakes</a>
                             </div>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                             <div class="product__item__pic set-bg">
                                 <img src="{{ asset('storage/' . $product->image) }}" alt="">
                                 <div class="product__label">
-                                    <span>Foods</span>
+                                    <span>cakes</span>
                                 </div>
                             </div>
                             <div class="product__item__text">
@@ -97,18 +97,18 @@
                             @empty
                                 <p>There is no question currently available.</p>
                             @endforelse
+                        </div> --}}
                         </div>
+                        <div id="answer" class="mt-4"></div>
                     </div>
-                    <div id="answer" class="mt-4"></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection
 
-@push('script')
-    <script src="{{ asset('js/user/home.js') }}"></script>
-@endpush
+    @push('script')
+        <script src="{{ asset('js/user/home.js') }}"></script>
+    @endpush

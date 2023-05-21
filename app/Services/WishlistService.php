@@ -6,32 +6,52 @@ use App\Contracts\Dao\WishlistDaoInterface;
 use App\Contracts\Services\WishlistServiceInterface;
 
 /**
- * User Service class
+ * Wishlist Service class
  */
 class WishlistService implements WishlistServiceInterface
 {
     /**
-     * wishlist Dao
+     * Wishlist Dao
      */
-    private $wishlistDao;
+    private $WishlistDao;
 
     /**
      * Class Constructor
      * @param WishlistDaoInterface
      * @return void
      */
-    public function __construct(WishlistDaoInterface $wishlistDao)
+    public function __construct(WishlistDaoInterface $WishlistDao)
     {
-        $this->wishlistDao = $wishlistDao;
+        $this->WishlistDao = $WishlistDao;
     }
 
     /**
-     * Get user list
+     * Get Wishlist list
      * @return object
      */
-    public function getWishlist(): object
+    public function getWishlists(): object
     {
-        return $this->wishlistDao->getWishlist();
+        return $this->WishlistDao->getWishlists();
     }
 
+    /**
+     * Save Wishlist
+     * @param array
+     * @return void
+     */
+    public function createWishlist(array $data): void
+    {
+
+        $this->WishlistDao->createWishlist($data);
+    }
+
+    /**
+     * Delete Wishlist by id
+     * @param int $id
+     * @return void
+     */
+    public function deleteWishlistById(int $id): void
+    {
+        $this->WishlistDao->deleteWishlistById($id);
+    }
 }
