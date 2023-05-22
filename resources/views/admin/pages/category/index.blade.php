@@ -58,11 +58,10 @@
                                     <td>{{ $category->created_at->format('j-F-Y') }}</td>
                                     <td>
                                         <a href="{{ route('categories.edit', $category->id) }}">
-                                            <button class='btn btn-success'><i
-                                                    class="fa-solid fa-pen-to-square"></i></button>
+                                            <i class='bx bxs-edit-alt mr-3'></i>
                                         </a>
                                         <a href="{{ route('categories.destroy', $category->id) }}">
-                                            <button class='btn btn-danger'><i class="fa-solid fa-trash-can"></i></button>
+                                            <i class='bx bxs-trash text-danger'></i>
                                         </a>
                                     </td>
                                 </tr>

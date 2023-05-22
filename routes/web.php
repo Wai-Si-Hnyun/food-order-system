@@ -50,12 +50,12 @@ Route::middleware('role:user')->group(function () {
     // for users
     Route::get('/users/{id}', [UserProductController::class, 'home'])->name('users.home');
     Route::get('/shop', [HomeController::class, 'shop'])->name('users.shop');
-    Route::get('/users/about/page', [HomeController::class, 'about'])->name('users.about');
-    Route::get('/users/{id}/filter', [UserProductController::class, 'filter'])->name('users.filter');
-    Route::get('/users/{id}/details', [UserProductController::class, 'details'])->name('users.details');
+    Route::get('/about/page', [HomeController::class, 'about'])->name('products.about');
+    Route::get('/products/{id}/filter', [UserProductController::class, 'filter'])->name('products.filter');
+    Route::get('/products/{id}/details', [UserProductController::class, 'details'])->name('products.details');
 
     // for wishlists
-    Route::get('/users/wishlists', [WishlistController::class, 'addWishlist'])->name('users.wishlist');
+    Route::get('/products/wishlists', [WishlistController::class, 'addWishlist'])->name('users.wishlist');
 
     // ajax
     Route::get('/ajax/products', [AjaxController::class, 'index'])->name('ajax.index');
@@ -133,8 +133,8 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
 });
 
 //userProfile (for admin and user)
-Route::get('/userprofile/{user}',[UserdataController::class,'userProfile'])->name('user.profile');
-Route::post('/profile-update/{user}',[UserdataController::class,'profileUpdate'])->name('profile.update');
-Route::get('/password/{user}',[UserdataController::class,'passChange'])->name('pass.change');
-Route::post('/pass-change',[UserdataController::class,'passwordUpdate'])->name('password.change');
-Route::delete('/delete-account/{user}',[UserdataController::class,'accountDelete'])->name('account.destroy');
+Route::get('/userprofile/{user}', [UserdataController::class, 'userProfile'])->name('user.profile');
+Route::post('/profile-update/{user}', [UserdataController::class, 'profileUpdate'])->name('profile.update');
+Route::get('/password/{user}', [UserdataController::class, 'passChange'])->name('pass.change');
+Route::post('/pass-change', [UserdataController::class, 'passwordUpdate'])->name('password.change');
+Route::delete('/delete-account/{user}', [UserdataController::class, 'accountDelete'])->name('account.destroy');
