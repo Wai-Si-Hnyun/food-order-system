@@ -2,10 +2,11 @@
 
 namespace App\Dao;
 
+use App\Contracts\Dao\OrderDaoInterface;
 use App\Models\BillingDetails;
 use App\Models\Order;
-use App\Contracts\Dao\OrderDaoInterface;
 use App\Models\OrderList;
+use Carbon\Carbon;
 
 class OrderDao implements OrderDaoInterface
 {
@@ -42,6 +43,98 @@ class OrderDao implements OrderDaoInterface
             ->with('orderlists.product')
             ->orderBy('created_at', 'desc')
             ->paginate(5);
+    }
+
+    /**
+     * Get delivered orders
+     *
+     * @return object
+     */
+    public function getDeliveredOrders()
+    {
+        return Order::where('delivered', 1)->get();
+    }
+
+    /**
+     * Get total revenue of the website
+     *
+     * @return integer
+     */
+    public function getTotalRevenue()
+    {
+        return Order::where('status', 1)->sum('total_price');
+    }
+
+    /**
+     * Get monthly revenue
+     *
+     * @return array
+     */
+    public function getMonthlyRevenueInfo()
+    {
+        // Get the current date
+        $now = Carbon::now();
+
+        // Calculate the total revenue for the current month
+        $currentMonthRevenue = Order::whereMonth('created_at', $now->month)
+            ->whereYear('created_at', $now->year)
+            ->where('status', 1)
+            ->sum('total_price');
+
+        // Calculate the total revenue for the previous month
+        $previousMonth = $now->copy()->subMonth();
+        $previousMonthRevenue = Order::whereMonth('created_at', $previousMonth->month)
+            ->whereYear('created_at', $previousMonth->year)
+            ->where('status', 1)
+            ->sum('total_price');
+
+        // Calculate the change in revenue
+        $revenueChange = $currentMonthRevenue - $previousMonthRevenue;
+
+        // Calculate the percentage change in revenue
+        $percentageChange = ($previousMonthRevenue != 0) ? ($revenueChange / $previousMonthRevenue) * 100 : 0;
+
+        $revenueData = [
+            'currentMonthRevenue' => $currentMonthRevenue,
+            'percentageChange' => $percentageChange,
+        ];
+
+        return $revenueData;
+    }
+
+    /**
+     * Get yearly revenue
+     *
+     * @return array
+     */
+    public function getYearlyRevenueInfo()
+    {
+        // Get the current date
+        $now = Carbon::now();
+
+        // Calculate the total revenue for the current year
+        $currentYearRevenue = Order::whereYear('created_at', $now->year)
+            ->where('status', 1)
+            ->sum('total_price');
+
+        // Calculate the total revenue for the previous year
+        $previousYear = $now->copy()->subYear();
+        $previousYearRevenue = Order::whereYear('created_at', $previousYear->year)
+            ->where('status', 1)
+            ->sum('total_price');
+
+        // Calculate the change in revenue
+        $revenueChange = $currentYearRevenue - $previousYearRevenue;
+
+        // Calculate the percentage change in revenue
+        $percentageChange = ($previousYearRevenue != 0) ? ($revenueChange / $previousYearRevenue) * 100 : 0;
+
+        $revenueData = [
+            'currentYearRevenue' => $currentYearRevenue,
+            'percentageChange' => $percentageChange,
+        ];
+
+        return $revenueData;
     }
 
     /**

@@ -51,6 +51,46 @@ class OrderService implements OrderServiceInterface
     }
 
     /**
+     * Get delivered orders
+     *
+     * @return object
+     */
+    public function getDeliveredOrders()
+    {
+        return $this->orderDao->getDeliveredOrders();
+    }
+
+    /**
+     * Get total revenue of the website
+     *
+     * @return integer
+     */
+    public function getTotalRevenue()
+    {
+        return $this->orderDao->getTotalRevenue();
+    }
+
+    /**
+     * Get monthly revenue
+     *
+     * @return array
+     */
+    public function getMonthlyRevenueInfo()
+    {
+        return $this->orderDao->getMonthlyRevenueInfo();
+    }
+
+    /**
+     * Get yearly revenue
+     *
+     * @return array
+     */
+    public function getYearlyRevenueInfo()
+    {
+        return $this->orderDao->getYearlyRevenueInfo();
+    }
+
+    /**
      * Get order by id
      *
      * @param integer $id

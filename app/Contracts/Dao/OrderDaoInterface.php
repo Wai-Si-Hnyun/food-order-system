@@ -28,6 +28,34 @@ interface OrderDaoInterface
     public function getOrdersByUserId(int $userId);
 
     /**
+     * Get delivered orders
+     *
+     * @return object
+     */
+    public function getDeliveredOrders();
+
+    /**
+     * Get total revenue of the website
+     *
+     * @return integer
+     */
+    public function getTotalRevenue();
+
+    /**
+     * Get monthly revenue
+     *
+     * @return array
+     */
+    public function getMonthlyRevenueInfo();
+
+    /**
+     * Get yearly revenue
+     *
+     * @return array
+     */
+    public function getYearlyRevenueInfo();
+
+    /**
      * Store order to order table
      *
      * @param array $data
