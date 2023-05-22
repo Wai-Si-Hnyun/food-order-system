@@ -5,23 +5,19 @@ body {
 @media only screen and (min-width: 767px) {}
 
 body {
-    font-size: 2.34vw;
+    font-size: 1.9vw;
 }
 
 .table th {
-    font-size: 1.88vw;
+    font-size: 1.68vw;
 }
 
 .table td {
-    font-size: 1.98vw;
-}
-
-.table .data {
-    width: 12.5vw;
+    font-size: 1.9vw;
 }
 
 .table .bx {
-    font-size: 2.19vw;
+    font-size: 1.9vw;
 }
 
 @media screen and (min-width: 654px) {
