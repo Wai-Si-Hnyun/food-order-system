@@ -8,7 +8,7 @@ $('.show_confirm').click(function(event) {
 
     swal({
 
-        title: `Are you sure you want to delete this category?`,
+        title: `Are you sure you want to delete this product?`,
 
         text: "If you delete this, it will be gone forever.",
 

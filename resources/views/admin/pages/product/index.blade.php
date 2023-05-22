@@ -62,16 +62,21 @@
                                         <td>{{ $product->category_name }}</td>
                                         <td class="text-right">{{ Str::words($product->description, 2, '...') }}</td>
                                         <td class="text-right">${{ $product->price }}</td>
-                                        <td class="text-right">
+                                        <td class="text-right d-flex">
                                             <a href="{{ route('products.details', $product->id) }}">
-                                                <i class='bx bx-detail text-warning'></i>
+                                                <i class='bx bx-detail text-warning my-5 me-2'></i>
                                             </a>
                                             <a href="{{ route('products.edit', $product->id) }}">
-                                                <i class='bx bxs-edit-alt'></i>
+                                                <i class='bx bxs-edit-alt my-5'></i>
                                             </a>
-                                            <a href="{{ route('products.destroy', $product->id) }}">
-                                                <i class='bx bxs-trash text-danger'></i>
-                                            </a>
+                                            <form method="POST" action="{{ route('products.destroy', $product->id) }}">
+                                                @csrf
+                                                <input name="_method" type="hidden" value="DELETE">
+                                                <button type="submit" class="btn btn-default btn-xs btn-flat show_confirm"
+                                                    data-toggle="tooltip" title='Delete'>
+                                                    <i class='bx bxs-trash text-danger my-5'></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -88,3 +93,6 @@
         </div>
     </div>
 @endsection
+@push('script')
+    <script src="{{ asset('assets/admin/js/product.js') }}"></script>
+@endpush

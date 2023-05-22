@@ -58,14 +58,18 @@
                                         <td>{{ $category->id }}</td>
                                         <td>{{ $category->name }}</td>
                                         <td class="text-right">{{ $category->created_at->format('j-F-Y') }}</td>
-                                        <td class="text-right">
+                                        <td class="text-right d-flex">
                                             <a href="{{ route('categories.edit', $category->id) }}">
-                                                <i class='bx bxs-edit-alt mr-3'></i>
+                                                <i class='bx bxs-edit-alt mr-3 mt-1'></i>
                                             </a>
-                                            <a href="{{ route('categories.destroy', $category->id) }}">
-                                                <i class='bx bxs-trash text-danger'></i>
-                                            </a>
-
+                                            <form method="POST" action="{{ route('categories.destroy', $category->id) }}">
+                                                @csrf
+                                                <input name="_method" type="hidden" value="DELETE">
+                                                <button type="submit" class="btn btn-default btn-xs btn-flat show_confirm"
+                                                    data-toggle="tooltip" title='Delete'>
+                                                    <i class='bx bxs-trash text-danger'></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -84,5 +88,5 @@
 
 @endsection
 @push('script')
-    <script src="{{ asset('js/admin/category.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/category.js') }}"></script>
 @endpush

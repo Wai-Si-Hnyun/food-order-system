@@ -86,7 +86,7 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store');
     Route::get('/categories/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
     Route::post('/categories/update', [CategoryController::class, 'update'])->name('categories.update');
-    Route::get('/categories/{id}/delete', [CategoryController::class, 'destroy'])->name('categories.destroy');
+    Route::delete('/categories/{id}/delete', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
     // for product
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
@@ -95,7 +95,7 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('/products/{id}/details', [ProductController::class, 'detail'])->name('products.details');
     Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
     Route::post('/products/{id}/update', [ProductController::class, 'update'])->name('products.update');
-    Route::get('/products/{id}/delete', [ProductController::class, 'destroy'])->name('products.destroy');
+    Route::delete('/products/{id}/delete', [ProductController::class, 'destroy'])->name('products.destroy');
 
     // Order
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
