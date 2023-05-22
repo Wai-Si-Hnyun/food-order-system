@@ -36,7 +36,7 @@
             </div>
         @endif
         @if (count($categories) != 0)
-            <div class="card">
+            {{-- <div class="card">
                 <div class="card-header">
                     <h4><b>Category Lists</b></h4>
                 </div>
@@ -68,6 +68,43 @@
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+            </div> --}}
+            <div class="card">
+
+                <div class="table-responsive table--no-card m-b-30">
+                    <h4 class="card-header">
+                        Category Lists
+                    </h4>
+                    <div class="card-body">
+                        <table class="table table-borderless table-striped table-earning">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Created Date</th>
+                                    <th class="text-right">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($categories as $category)
+                                    <tr>
+                                        <td>{{ $category->id }}</td>
+                                        <td>{{ $category->name }}</td>
+                                        <td class="text-right">{{ $category->created_at->format('j-F-Y') }}</td>
+                                        <td class="text-right">
+                                            <a href="{{ route('categories.edit', $category->id) }}">
+                                                <i class='bx bxs-edit-alt mr-3'></i>
+                                            </a>
+                                            <a href="{{ route('categories.destroy', $category->id) }}">
+                                                <i class='bx bxs-trash text-danger'></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         @else

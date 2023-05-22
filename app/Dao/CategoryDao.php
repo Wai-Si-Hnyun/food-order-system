@@ -9,7 +9,7 @@ class CategoryDao implements CategoryDaoInterface
 {
     /**
      * Get Category list
-     * 
+     *
      * @param string $page
      * @return object
      */
