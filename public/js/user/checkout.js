@@ -1,28 +1,50 @@
-/**
- *Load billing details from session storage
- */
-const loadBillingDetails = () => {
-    const savedBillingDetails = sessionStorage.getItem('billing-details');
-
-    if (savedBillingDetails) {
-        const billingDetails = JSON.parse(savedBillingDetails);
-
-        $('#name').val(billingDetails.name);
-        $('#state').val(billingDetails.state);
-        $('#city').val(billingDetails.city);
-        $('#address').val(billingDetails.address);
-        $('#phone').val(billingDetails.phone);
-        $('#note').val(billingDetails.note);
-    }
-}
-
-const storeTotalPriceInLocalStorage = () => {
-    $selectText = $('#total-price').text();
-    $totalPrice = parseFloat($selectText.replace('$', ''));
-    localStorage.setItem('order-total-price', $totalPrice);
-}
-
 $(document).ready(function () {
+    // Login user id
+    const userId = $('body').data('user-id');
+
+    // Check guset item and add to cart
+    if (localStorage.getItem('cart_guest')) {
+        const guestCart = JSON.parse(localStorage.getItem('cart_guest'));
+        localStorage.setItem('cart_' + userId, JSON.stringify(guestCart));
+        localStorage.removeItem('cart_guest');
+    }
+
+    var cart = JSON.parse(localStorage.getItem('cart_' + userId));
+    /**
+     *Load billing details from session storage
+    **/
+    const loadBillingDetails = () => {
+        const savedBillingDetails = sessionStorage.getItem('billing-details');
+
+        if (savedBillingDetails) {
+            const billingDetails = JSON.parse(savedBillingDetails);
+
+            $('#name').val(billingDetails.name);
+            $('#state').val(billingDetails.state);
+            $('#city').val(billingDetails.city);
+            $('#address').val(billingDetails.address);
+            $('#phone').val(billingDetails.phone);
+            $('#note').val(billingDetails.note);
+        }
+    }
+
+    (function () {
+        var totalPrice = 0;
+        cart.forEach((item, index) => {
+            $('.checkout__total__products').append(
+                `<li><samp>${index + 1}. </samp>${item.name} <span>$ ${(item.price * item.quantity).toFixed(2)}</span></li>`
+            );
+
+            totalPrice += item.price * item.quantity;
+        });
+
+        $('#total-price').text(`$ ${(totalPrice).toFixed(2)}`);
+
+        $('#cart-total-price').text(`$ ${(totalPrice).toFixed(2)}`);
+
+        sessionStorage.setItem('order-total-price', totalPrice);
+    })();
+
     // Remove build in select
     $('.nice-select').remove();
 
@@ -75,6 +97,11 @@ $(document).ready(function () {
         getCities(stateId);
     })
 
+    // Save order information in session storage
+    const saveOrderDetails = (data) => {
+        sessionStorage.setItem('order-data', JSON.stringify(data));
+    }
+
     // Listen for the change event on the city select box'))
 
     $('#order-btn').click(async function (event) {
@@ -82,9 +109,6 @@ $(document).ready(function () {
 
         // Find parent node for all
         $parentNode = $(this).parents('.checkout__form');
-
-        // Get user id
-        $user_id = $parentNode.find('#id').val();
 
         // Get data for billing details
         $name = $parentNode.find('#name').val();
@@ -98,7 +122,7 @@ $(document).ready(function () {
 
         // Create data to pass
         $data = {
-            user_id: $user_id,
+            user_id: userId,
             billingInfo: {
                 name: $name,
                 country: $country,
@@ -109,24 +133,23 @@ $(document).ready(function () {
                 note: $note,
                 password: $password
             },
-            items: [
-                {
-                    product: {
-                        id: 1,
-                        name: 'Product1',
-                        price: 50,
-                    },
-                    quantity: 10
-                },
-            ]
+            items: cart
         }
 
-        saveBillingDetails($data);
+        saveOrderDetails($data);
 
         await axios.post('/order/create', $data)
             .then(function (res) {
-                sessionStorage.removeItem('billing-details');
-                window.location.href = '/';
+                sessionStorage.removeItem('order-data');
+                Swal.fire({
+                    title: 'Success',
+                    text: res.data.message,
+                    icon: 'success',
+                    showConfirmButton: false,
+                    showCancelButton: false,
+                    timer: 2000,
+                });
+                window.location.href = '/orders';
             })
             .catch(function (e) {
                 if (e.response.status == 422) {
@@ -176,18 +199,5 @@ $(document).ready(function () {
                 console.warn('Input element not found');
             }
         }
-    }
-
-    /**
-     * Save billing details to session storage
-     * to get the old data when user go back 
-     * checkout page
-     * 
-     * @param {*} data 
-     */
-    const saveBillingDetails = (data) => {
-        const billingDetails = data.billingInfo;
-
-        sessionStorage.setItem('billing-details', JSON.stringify(billingDetails));
     }
 })

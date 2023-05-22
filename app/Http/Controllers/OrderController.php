@@ -42,14 +42,14 @@ class OrderController extends Controller
 
             return view('user.pages.order.list', compact('orders'));
         }
-
+        return view('user.pages.orders.index');
     }
 
     /**
      * Get order by id
      *
      * @param integer $id
-     * @return \\Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View
      */
     public function show(int $id)
     {
@@ -95,7 +95,9 @@ class OrderController extends Controller
      */
     public function checkout()
     {
-        return view('user.pages.order.checkout');
+        $cart = session('cart');
+
+        return view('user.pages.order.checkout', ['cart' => $cart]);
     }
 
     /**

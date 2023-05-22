@@ -12,7 +12,7 @@
 
     <div class="login-form">
         <form action="{{ route('auth.loginCheck') }}" method="post">
-            {{ csrf_field() }}
+            @csrf
             <div class="form-group">
                 <label>Email Address <span class="text-danger">*</span></label>
                 <input class="form-control" type="email" name="email" placeholder="example@gmail.com" value="{{old('email')}}">

@@ -27,7 +27,7 @@
                 <div class="col-lg-5">
                     <div class="product__details__img">
                         <div class="">
-                            <img class="img-thumbnail w-75" src="{{ asset('storage/' . $products->image) }}"
+                            <img class="img-thumbnail w-75" src="{{ asset('storage/' . $product->image) }}"
                                 alt="productimg">
                         </div>
                     </div>
@@ -40,29 +40,28 @@
                         </div>
                     @endif
                     <div class="product__details__text">
-                        <h4>{{ $products->name }}</h4>
-                        <h5>${{ $products->price }}</h5>
+                        <h4>{{ $product->name }}</h4>
+                        <h5>${{ $product->price }}</h5>
                         <p>
-                            {{ $products->description }}
+                            {{ $product->description }}
                         </p>
                         <ul>
-                            <li>Product-Id : <span>{{ $products->id }}</span></li>
+                            <li>Product-Id : <span>{{ $product->id }}</span></li>
                         </ul>
-                        <div class="product__details__option">
-                            <form action="{{ url('add-cart/'.$products->id) }}" method="post" class="d-inline-block ">
-                                @csrf
+                        <div class="product__details__option" data-id="{{ $product->id }}"
+                            data-name="{{ $product->name }}" data-price="{{ $product->price }}"
+                            data-image="{{ $product->image }}">
                                 <div class="quantity">
                                     <div class="pro-qty">
-                                        <input type="text" name="quantity" value="3">
+                                        <input type="text" name="quantity" value="1" class="product-qty">
                                     </div>
                                 </div>
-                                <button type="submit" class="primary-btn border border-0">Add to cart</button>
-                            </form>
-                            <a href="{{ route('users.storeWishlist', ['productId' => $products->id]) }}">
-                                <button type="submit" class="btn btn-outline-warning btn-lg heart__btn  mr-3">
-                                    <span class="icon_heart_alt"></span>
-                                </button>
-                            </a>
+                                <a href="#" class="primary-btn add-to-cart-btn">Add to cart</a>
+                                <a href="{{ route('users.storeWishlist', ['productId' => $products->id]) }}">
+                                  <button type="submit" class="btn btn-outline-warning btn-lg heart__btn  mr-3">
+                                      <span class="icon_heart_alt"></span>
+                                  </button>
+                                </a>
                         </div>
                     </div>
                 </div>
@@ -81,7 +80,6 @@
                 </div>
             </div>
             <div class="row">
-
                 <div class="related__products__slider owl-carousel">
                     @foreach ($productList as $list)
                         <div class="col-lg-3">
@@ -99,11 +97,7 @@
                                     <h6><a href="#">{{ $list->name }}</a></h6>
                                     <div class="product__item__price">${{ $list->price }}</div>
                                     <div class="cart_add">
-                                    <form action="{{ url('add-cart/' . $list->id) }}" method="post">
-                                        @csrf
-                                        <input type="hidden" value="1" name="quantity">
-                                        <button type="submit" class="border border-warning">Add to cart</button>
-                                    </form>
+                                        <a href="#" class="add-to-cart-btn">Add to cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -136,9 +130,7 @@
                     <button type="button" class="btn btn-secondary ms-3 btn-sm" data-toggle="modal" data-target="#reviewModal"><i class="fa-regular fa-rectangle-list"></i></button>
                 </form>
             </div>
-        </div>
-    </div>
-    </section>
+        </section>
 
 <!-- reviews Display Modal -->
     <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -149,7 +141,7 @@
         <button type="button" class="btn-close border border-0" data-dismiss="modal" ><i class="fa-solid fa-circle-xmark"></i></button>
       </div>
 
-    <table class="table table-striped task-table ms-auto me-auto" style="width:95%;">
+                    <table class="table table-striped task-table ms-auto me-auto" style="width:95%;">
 
     <thead >
         <tr>
@@ -176,11 +168,11 @@
     </div>
       </div>
 
-      <div class="modal-footer">
+            <div class="modal-footer">
 
-      </div>
-    </div>
-    <!--review display end -->
+            </div>
+        </div>
+        <!--review display end -->
 
        <!-- reviews Edit Modal -->
    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -202,10 +194,12 @@
              <div class="form-group d-flex justify-content-center">
                 <button type="submit" class="btn btn-primary ms-1 form-control btn-sm">Update</button>
             </div>
-             </div>
+            </div>
+        </form>
+       </div>
       </div>
+        <!--edit model end -->
 
-      <div class="modal-footer">
 
       </div>
       </form>
@@ -226,11 +220,12 @@
                      .catch(err => {
                     console.log(err.response)
                 });
-    }
+        }
 
         // reviews update
 
         reviewEditForm.onsubmit = function(e) {
+
         e.preventDefault();
         axios.put('/review/'+reviewId.value,{
             comment: reviewComment.value,
@@ -243,31 +238,35 @@
         });
         }
 
-    var nameList = document.getElementsByClassName('namelist');
-    var commentList = document.getElementsByClassName('commentlist');
-    var actionList = document.getElementsByClassName('actionlist');
-    var idList = document.getElementsByClassName('idlist');
-    function deleteBtn(deleteId) {
-    if (confirm('Sure to delete?')) {
-        axios.delete('/review-delete/'+deleteId)
-          .then(response => {
-            console.log(response.data.deletedReview.comment);
-            for (var i = 0; i < commentList.length; i++) {
-                console.log(idList[i].innerHTML);
-                if (idList[i].innerHTML == response.data.deletedReview.id) {
-                    nameList[i].style.display = 'none';
-                    commentList[i].style.display = 'none';
-                    actionList[i].style.display = 'none';
-                    idList[i].style.display = 'none';
-                }
+        var nameList = document.getElementsByClassName('namelist');
+        var commentList = document.getElementsByClassName('commentlist');
+        var actionList = document.getElementsByClassName('actionlist');
+        var idList = document.getElementsByClassName('idlist');
+
+        function deleteBtn(deleteId) {
+            if (confirm('Sure to delete?')) {
+                axios.delete('/review-delete/' + deleteId)
+                    .then(response => {
+                        console.log(response.data.deletedReview.comment);
+                        for (var i = 0; i < commentList.length; i++) {
+                            console.log(idList[i].innerHTML);
+                            if (idList[i].innerHTML == response.data.deletedReview.id) {
+                                nameList[i].style.display = 'none';
+                                commentList[i].style.display = 'none';
+                                actionList[i].style.display = 'none';
+                                idList[i].style.display = 'none';
+                            }
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err.response)
+                    });
+
             }
-          })
-          .catch(err => {
-            console.log(err.response)
-        });
-
-    }
-}
-
-</script>
+        }
+    </script>
 @endsection
+
+@push('script')
+    <script src="{{ asset('js/user/product-detail.js') }}"></script>
+@endpush

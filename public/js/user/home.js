@@ -17,7 +17,7 @@ $(document).ready(function () {
                 var words = res.data.split(" ");
                 var i = 0;
                 $('#answer').html('<div class="alert alert-info" id="content"></div>');
-                var intervalId = setInterval(function(){
+                var intervalId = setInterval(function () {
                     if (i >= words.length) {
                         clearInterval(intervalId);
                     } else {
@@ -30,6 +30,12 @@ $(document).ready(function () {
                 $("#answer").html('<div class="alert alert-danger">An error occurred. Please try again.</div>');
             });
     });
+
+    $('.detail-view').on('click', function() {
+        $id = $(this).data('id');
+
+        window.location.href = '/products/' + $id + '/details';
+    })
 
     // Reset modal to original state when it's hidden
     $("#chatbotModal").on("hidden.bs.modal", function () {

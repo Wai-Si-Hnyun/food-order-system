@@ -75,23 +75,22 @@
                     @foreach ($products as $product)
                         <div class="col-lg-3 col-md-6 col-sm-6">
                             <div class="product__item" id="myForm">
-                                <div class="product__item__pic set-bg">
-                                    <img src="{{ asset('storage/' . $product->image) }}" alt=""
-                                        style="height:200px">
+                                <div class="product__item__pic set-bg detail-view" data-id="{{ $product->id }}"
+                                    data-setbg="{{ asset('storage/' . $product->image) }}" style="cursor: pointer">
                                     <div class="product__label">
-                                        <span><a class="text-dark"
-                                                href="{{ route('users.details', $product->id) }}">Foods</a></span>
+                                        <span>
+                                            {{ $product->category->name }}
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="product__item__text">
                                     <h6><a href="#">{{ $product->name }}</a></h6>
                                     <div class="product__item__price">${{ $product->price }}</div>
-                                    <div class="cart_add">
-                                    <form action="{{ url('add-cart/'.$product->id) }}" method="post">
-                                        @csrf
-                                        <input type="hidden" value="1" name="quantity">
-                                        <button type="submit" class="border border-warning">Add to cart</button>
-                                    </form>
+                                    <div class="cart_add" data-id="{{ $product->id }}" data-name="{{ $product->name }}"
+                                        data-user_id="{{ Auth::check() ? Auth::user()->id : 'guest' }}"
+                                        data-price="{{ $product->price }}" data-image="{{ $product->image }}"
+                                        data-quantity="1">
+                                        <a href="#" class="add-to-cart-btn">Add to cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -106,88 +105,8 @@
     </section>
     <!-- Shop Section End -->
 @endsection
-@section('scriptSource')
-    <script>
-        $(document).ready(function() {
-            $('#sorting').change(function() {
-                $option = $('#sorting').val();
-                console.log($option);
-                if ($option == 'asc') {
-                    $.ajax({
-                        type: 'get',
-                        url: 'http://127.0.0.1:8000/ajax/products',
-                        data: {
-                            'status': 'asc'
-                        },
-                        dataType: 'json',
-                        success: function(response) {
-                            $list = '';
-                            for ($i = 0; $i < response.length; $i++) {
-                                $list += '';
-                                for ($i = 0; $i < response.length; $i++) {
-                                    $list += `
-                            <div class="col-lg-3 col-md-6 col-sm-6">
-                                 <div class="product__item" id="myForm">
-                                    <div class="product__item__pic set-bg">
-                                        <img src="{{ asset('storage/${response[$i] . image}') }}" alt="" style="height:200px">
-                                        <div class="product__label">
-                                            <span>Foods</span>
-                                        </div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        <h6><a href="#">${response[$i].name}</a></h6>
-                                        <div class="product__item__price">$${ response[$i].price }</div>
-                                        <div class="cart_add">
-                                            <a href="#">Add to cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                                `;
-                                }
-                            }
-                            $('#dataList').html($list);
-                        }
-                    })
-                } else if ($option == 'desc') {
-                    $.ajax({
-                        type: 'get',
-                        url: 'http://127.0.0.1:8000/ajax/products',
-                        data: {
-                            'status': 'desc'
-                        },
-                        dataType: 'json',
-                        success: function(response) {
-                            $list = '';
-                            for ($i = 0; $i < response.length; $i++) {
-                                $list += '';
-                                for ($i = 0; $i < response.length; $i++) {
-                                    $list += `
-                                <div class="col-lg-3 col-md-6 col-sm-6">
-                                    <div class="product__item" id="myForm">
-                                        <div class="product__item__pic set-bg">
-                                            <img src="{{ asset('storage/${response[$i] . image}') }}" alt="" style="height:200px">
-                                            <div class="product__label">
-                                                <span>Foods</span>
-                                            </div>
-                                        </div>
-                                        <div class="product__item__text">
-                                            <h6><a href="#">${response[$i].name}</a></h6>
-                                            <div class="product__item__price">$${ response[$i].price }</div>
-                                            <div class="cart_add">
-                                                <a href="#">Add to cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                `;
-                                }
-                            }
-                            $('#dataList').html($list);
-                        }
-                    })
-                }
-            })
-        })
-    </script>
-@endsection
+
+@push('script')
+    <script src="{{ asset('js/user/add-to-cart.js') }}"></script>
+    <script src="{{ asset('js/user/shop.js') }}"></script>
+@endpush
