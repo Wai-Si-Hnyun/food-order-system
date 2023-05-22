@@ -18,7 +18,11 @@ class ChatbotDao implements ChatbotDaoInterface
      */
     public function getAll()
     {
-        return Chatbot::all();
+        return Chatbot::when(request('key'), function($query) {
+            $query->where('question', 'LIKE', '%'.request('key').'%');
+        })
+        ->orderBy('created_at', 'desc')
+        ->get();
     }
 
     /**

@@ -123,7 +123,7 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
   
     //feedback
     Route::get('/feedback-list', [FeedbackController::class, 'feedbackList'])->name('feedback.list');
-    Route::delete('/feedback-delete/{feedback}', [FeedbackController::class, 'feedbackDestory'])->name('feedback.destory');
+    Route::delete('/feedback/{feedback}/delete', [FeedbackController::class, 'feedbackDestory'])->name('feedback.destory');
 
     // Mail
     Route::get('/mail', [MailController::class, 'index'])->name('mail.index');

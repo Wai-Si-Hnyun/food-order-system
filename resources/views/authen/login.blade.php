@@ -22,7 +22,7 @@
             @enderror
             <div class="form-group">
                 <label>Password <span class="text-danger">*</span></label>
-                <input class="form-control au-input--full" type="password" name="password" placeholder="******" value="{{old('password')}}">
+                <input class="form-control au-input--full" type="password" name="password" placeholder="******">
             </div>
             @error('password')
                 <span class="text-danger">{{ $message }}</span>

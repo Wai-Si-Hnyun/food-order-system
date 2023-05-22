@@ -1,6 +1,10 @@
 @extends('admin.layouts.app')
 @section('content')
     <div class="container mt-3">
+        <h4 class="fw-bold">Products List</h4>
+        <div class='mt-4 mb-1'>
+            <h5>Total - ({{ $products->total() }})</h5>
+        </div>
         <a href="{{ route('products.create') }}" class="btn btn-primary my-2"></i>Create</a>
 
         <div class="float-end mt-2 col-4">
@@ -13,9 +17,6 @@
                             class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </form>
-        </div>
-        <div class='my-3'>
-            <h5>Total - ({{ $products->total() }})</h5>
         </div>
         @if (session('createSuccess'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -37,9 +38,6 @@
         @endif
         @if (count($products) != 0)
             <div class="card">
-                <div class="card-header">
-                    <h4><b>Product Lists</b></h4>
-                </div>
                 <div class="card-body">
                     <table class="table table-striped text-center">
                         <thead>
