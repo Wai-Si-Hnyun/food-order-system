@@ -76,7 +76,6 @@ class CategoryDao implements CategoryDaoInterface
      */
     public function deleteCategoryById($id): void
     {
-        $category = Category::findOrFail($id);
-        $category->delete();
+        Category::findOrFail($id)->delete();
     }
 }

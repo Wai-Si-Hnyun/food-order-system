@@ -65,6 +65,7 @@
                                             <a href="{{ route('categories.destroy', $category->id) }}">
                                                 <i class='bx bxs-trash text-danger'></i>
                                             </a>
+
                                         </td>
                                     </tr>
                                 @endforeach
@@ -80,4 +81,8 @@
             {{ $categories->links() }}
         </div>
     </div>
+
 @endsection
+@push('script')
+    <script src="{{ asset('js/admin/category.js') }}"></script>
+@endpush
