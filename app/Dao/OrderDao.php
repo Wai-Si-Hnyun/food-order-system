@@ -17,7 +17,15 @@ class OrderDao implements OrderDaoInterface
      */
     public function getOrders()
     {
-        return Order::with('user')->paginate(10);
+        return Order::with('user')
+            ->when(request('key'), function($query) {
+                $query->whereHas('user', function ($q) {
+                    $q->where('name', 'LIKE', '%' . request('key') . '%');
+                })
+                ->orWhere('order_code', 'LIKE', '%' . request('key') . '%');
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
     }
 
     /**

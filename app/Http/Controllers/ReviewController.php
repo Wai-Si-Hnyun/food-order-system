@@ -68,6 +68,7 @@ class ReviewController extends Controller
      */
     public function reviewList() {
         $review = $this->reviewService->getReview();
+        
         return view('admin.pages.reviews.list', [
             'review' => $review
         ]);
