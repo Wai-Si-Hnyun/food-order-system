@@ -29,6 +29,7 @@ Route::get('/shop', [HomeController::class, 'shop'])->name('users.shop');
 Route::post('/ajax/products', [AjaxController::class, 'index'])->name('ajax.index');
 Route::get('/products/{id}/filter', [UserProductController::class, 'filter'])->name('users.filter');
 Route::get('/products/{id}/details', [UserProductController::class, 'details'])->name('users.details');
+Route::get('/about', [HomeController::class, 'about'])->name('users.about');
 
 //forget/reset password
 Route::get('/forget-password-page', [AuthController::class, 'forgetPass'])->name('auth.forgetPass');
@@ -63,10 +64,6 @@ Route::middleware('role:user')->group(function () {
 
     // for users
     Route::get('/users', [UserProductController::class, 'home'])->name('users.home');
-    Route::get('/shop', [HomeController::class, 'shop'])->name('users.shop');
-    Route::get('/users/about/page', [HomeController::class, 'about'])->name('users.about');
-    Route::get('/users/{id}/filter', [UserProductController::class, 'filter'])->name('users.filter');
-    Route::get('/users/{id}/details', [UserProductController::class, 'details'])->name('users.details');
 
     // for wishlists
     Route::get('/users/wishlists/page', [WishlistController::class, 'addWishlist'])->name('users.wishlist');

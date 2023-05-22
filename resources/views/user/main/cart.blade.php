@@ -44,7 +44,6 @@
 
                     <div class="cart__total">
                         <h6>Cart total</h6>
-                        @if(session('item'))
                         <ul>
                             <li>Subtotal <span id="subtotal">$ 100</span></li>
                             <li>Total <span id="total">$ 100</span></li>
@@ -56,17 +55,6 @@
         </div>
     </section>
     <!-- Shopping Cart Section End -->
-    @php
-        function calculateTotal($items)
-        {
-            $total = 0;
-            foreach ($items as $id => $details) {
-            $subtotal = $details['price'] * $details['quantity'];
-            $total += $subtotal;
-        }
-            return number_format($total);
-        }
-    @endphp
 @endsection
 
 @push('script')
