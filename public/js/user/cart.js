@@ -32,7 +32,7 @@ $(document).ready(function () {
                             </div>
                         </td>
                         <td class="cart__price">${item.price * item.quantity}</td>
-                        <td class="cart__close"><span class="icon_close"></span></td>
+                        <td class="cart__close" style="cursor: pointer;"><span class="icon_close"></span></td>
                     </tr>
                 `);
 

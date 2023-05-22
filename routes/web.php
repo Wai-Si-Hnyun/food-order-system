@@ -27,8 +27,8 @@ Route::post('/register', [AuthController::class, 'authRegisterStore'])->name('au
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/shop', [HomeController::class, 'shop'])->name('users.shop');
 Route::post('/ajax/products', [AjaxController::class, 'index'])->name('ajax.index');
-Route::get('/products/{id}/filter', [UserProductController::class, 'filter'])->name('users.filter');
-Route::get('/products/{id}/details', [UserProductController::class, 'details'])->name('users.details');
+Route::get('/products/{id}/filter', [UserProductController::class, 'filter'])->name('products.filter');
+Route::get('/products/{id}/details', [UserProductController::class, 'details'])->name('products.details');
 Route::get('/about', [HomeController::class, 'about'])->name('products.about');
 
 //forget/reset password
