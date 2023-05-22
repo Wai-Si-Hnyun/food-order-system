@@ -32,12 +32,16 @@ class PaymentDao implements PaymentDaoInterface
         // Set the Stripe API key
         Stripe::setApiKey(config('services.stripe.secret'));
 
-        $charge = Charge::create([
-            'amount' => $price * 100,
-            'currency' => 'usd',
-            'source' => $stripeToken,
-            'description' => 'Test payment for food order system',
-        ]);
+        try {
+            $charge = Charge::create([
+                'amount' => $price * 100,
+                'currency' => 'usd',
+                'source' => $stripeToken,
+                'description' => 'Test payment for food order system',
+            ]);
+        } catch (\Exception $e) {
+            logger($e);
+        }
 
         return $charge;
     }

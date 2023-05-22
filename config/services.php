@@ -33,4 +33,11 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+    'captcha' => [
+        'sitekey' => env('NOCAPTCHA_SITEKEY', ''),
+        'secret' => env('NOCAPTCHA_SECRET', ''),
+        'options' => [
+            'timeout' => 30,
+        ],
+    ],    
 ];

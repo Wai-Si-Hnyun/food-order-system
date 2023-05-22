@@ -51,6 +51,46 @@ class OrderService implements OrderServiceInterface
     }
 
     /**
+     * Get delivered orders
+     *
+     * @return object
+     */
+    public function getDeliveredOrders()
+    {
+        return $this->orderDao->getDeliveredOrders();
+    }
+
+    /**
+     * Get total revenue of the website
+     *
+     * @return integer
+     */
+    public function getTotalRevenue()
+    {
+        return $this->orderDao->getTotalRevenue();
+    }
+
+    /**
+     * Get monthly revenue
+     *
+     * @return array
+     */
+    public function getMonthlyRevenueInfo()
+    {
+        return $this->orderDao->getMonthlyRevenueInfo();
+    }
+
+    /**
+     * Get yearly revenue
+     *
+     * @return array
+     */
+    public function getYearlyRevenueInfo()
+    {
+        return $this->orderDao->getYearlyRevenueInfo();
+    }
+
+    /**
      * Get order by id
      *
      * @param integer $id
@@ -92,7 +132,7 @@ class OrderService implements OrderServiceInterface
             // Calculate the total price of all products in the order
             $totalPrice = 0;
             foreach ($data->items as $item) {
-                $totalPrice += $item['product']['price'] * $item['quantity'];
+                $totalPrice += $item['price'] * $item['quantity'];
             }
 
             // Create the order record
@@ -115,9 +155,9 @@ class OrderService implements OrderServiceInterface
             foreach ($data->items as $item) {
                 $orderListsData = [
                     'user_id' => $data['user_id'],
-                    'product_id' => $item['product']['id'],
+                    'product_id' => $item['id'],
                     'quantity' => $item['quantity'],
-                    'total' => $item['product']['price'] * $item['quantity'],
+                    'total' => $item['price'] * $item['quantity'],
                     'order_code' => $orderCode,
                 ];
                 // Store order lists in order list database
@@ -131,7 +171,7 @@ class OrderService implements OrderServiceInterface
             // Queue the confirmation email
             Mail::to($order->user->email)->queue(new OrderPlaced($order));
 
-            Session::forget(['payment-complete', 'payment_data']);
+            Session::forget(['payment-complete', 'payment_data', 'cart']);
 
             return true;
         } else {

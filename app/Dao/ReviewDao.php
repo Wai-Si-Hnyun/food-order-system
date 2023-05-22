@@ -42,6 +42,10 @@ class ReviewDao implements ReviewDaoInterface
         return Review::select('reviews.*','users.name as user','products.name as product')
         ->join('users','reviews.user_id','users.id')
         ->join('products','reviews.product_id','products.id')
-        ->get();
+        ->when(request('key'), function($query) {
+            $query->where('users.name', 'LIKE', '%'.request('key').'%')
+                ->orWhere('products.name', 'LIKE', '%'.request('key').'%');
+        })
+        ->paginate(10);
     }
 }

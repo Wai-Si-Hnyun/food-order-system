@@ -9,7 +9,18 @@
                 {{ session()->get('success') }}
             </div>
         @endif
-        <a href="{{ route('q&a.create') }}" class="btn btn-primary mb-4">Create</a>
+        <div class="mt-5 d-flex justify-content-between">
+            <a href="{{ route('q&a.create') }}" class="btn btn-primary mb-4">Create</a>
+            <form action="{{ route('q&a.index') }}" method="get">
+                @csrf
+                <div class="d-flex">
+                    <input class="form-control" name="key" type="text" value="{{ request('key') }}" id="key"
+                        placeholder="Search..">
+                    <button class='btn btn-sm btn-dark ms-2' type="submit"><i
+                            class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </form>
+        </div>
         <div class="row mb-5">
             @forelse ($qaData as $qa)
                 <div class="col-md-6 col-lg-4 d-flex align-items-stretch" id="qa-{{ $qa->id }}">
@@ -26,7 +37,7 @@
                     </div>
                 </div>
             @empty
-                <div class="text-danger text-center">There is no question and answer.</div>
+                <h3 class="text-center my-5">There is no Question and Answer Here!</h3>
             @endforelse
         </div>
     </div>

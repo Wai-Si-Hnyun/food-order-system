@@ -19,8 +19,6 @@
   </div>
 </div>
 <!--modal end -->
-
-<!--<p class="fw-bold py-3 mb-4">User List</p>-->
 <div class="container-xxl flex-grow-1 container-p-y">
 <h4 class="fw-bold py-3 mb-4">User List</h4>
 <div class="card">
@@ -69,6 +67,8 @@
 </div>
 </div>
 </div>
+@endsection
+@push('script')
 <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -113,8 +113,28 @@
                         '<p class="text-center mt-1">'+'name - '+response.data.name+'</p>'+
                         '<p class="text-center mt-1" id="email">'+'email - '+response.data.email+'</p>';
 
+                        }
                     }
-                }
+                    else {
+                        if (response.data.role == 'user') {
+                            mainBody.innerHTML +=
+                            '<p class="text-center">'+
+                            '<img src="{{asset('image/profile/'+response.data.image)}}" alt="profile" width="100px" height="100px">'+
+                            '</p>'+
+                            '<p class="text-center mt-1">'+'User'+'</p>'+
+                            '<p class="text-center mt-1">'+'name - '+response.data.name+'</p>'+
+                            '<p class="text-center mt-1" id="email">'+'email - '+response.data.email+'</p>';
+                        }else {
+                            mainBody.innerHTML +=
+                            '<p class="text-center" id="image">'+
+                            '<img src="{{asset('image/profile/'+response.data.image)}}" alt="profile" width="100px" height="100px">'+
+                            '</p>'+
+                            '<p class="text-center mt-1">'+'Admin'+'</p>'+
+                            '<p class="text-center mt-1">'+'name - '+response.data.name+'</p>'+
+                            '<p class="text-center mt-1" id="email">'+'email - '+response.data.email+'</p>';
+
+                        }
+                    }
 
             })
             .catch(err => {
@@ -152,5 +172,4 @@
         }
     }
 </script>
-
-@endsection
+@endpush

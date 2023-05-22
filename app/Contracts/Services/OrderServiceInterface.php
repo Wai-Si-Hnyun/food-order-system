@@ -20,6 +20,34 @@ interface OrderServiceInterface
     public function getOrdersByUserId(int $id);
 
     /**
+     * Get delivered orders
+     *
+     * @return object
+     */
+    public function getDeliveredOrders();
+
+    /**
+     * Get total revenue of the website
+     *
+     * @return integer
+     */
+    public function getTotalRevenue();
+
+    /**
+     * Get monthly revenue
+     *
+     * @return array
+     */
+    public function getMonthlyRevenueInfo();
+
+    /**
+     * Get yearly revenue
+     *
+     * @return array
+     */
+    public function getYearlyRevenueInfo();
+
+    /**
      * Get order by id
      *
      * @param integer $id

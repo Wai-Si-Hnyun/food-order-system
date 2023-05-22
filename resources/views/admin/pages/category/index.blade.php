@@ -1,6 +1,10 @@
 @extends('admin.layouts.app')
 @section('content')
     <div class="container mt-3">
+        <h4 class="fw-bold">Categories List</h4>
+        <div class='my-3'>
+            <h5>Total - ({{ $categories->total() }})</h5>
+        </div>
         <a href="{{ route('categories.create') }}" class="btn btn-primary my-2">Create</a>
 
         <div class="float-end mt-2 col-4">
@@ -13,9 +17,6 @@
                             class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </form>
-        </div>
-        <div class='my-3'>
-            <h5>Total - ({{ $categories->total() }})</h5>
         </div>
         @if (session('createSuccess'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -79,7 +80,7 @@
                 </div>
             </div>
         @else
-            <h3 class="text-center my-5">There is no Category Here!</h3>
+            <h3 class="text-center my-5">There is no Feedback Here!</h3>
         @endif
         <div class="mt-3">
             {{ $categories->links() }}

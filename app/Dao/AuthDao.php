@@ -1,11 +1,12 @@
 <?php
 namespace App\Dao;
 
-use App\Contracts\Dao\AuthDaoInterface;
-use App\Models\User;
 use Carbon\Carbon;
-use App\Models\PasswordReset;
+use App\Models\User;
 use Illuminate\Support\Str;
+use App\Models\PasswordReset;
+use Illuminate\Support\Facades\Auth;
+use App\Contracts\Dao\AuthDaoInterface;
 
 class AuthDao implements AuthDaoInterface
 {
@@ -55,5 +56,10 @@ class AuthDao implements AuthDaoInterface
     public function getNameById(int $id): object
     {
         return User::findOrFail($id);
+    }
+
+    public function authCheck($request) : bool
+    {
+        return Auth::attempt(['email' => $request->email, 'password' => $request->password]);
     }
 }
