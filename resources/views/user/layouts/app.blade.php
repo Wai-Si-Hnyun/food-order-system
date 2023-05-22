@@ -110,7 +110,7 @@
                             @if (Auth::user())
                                 <li id="order"><a href="{{ route('user.order') }}">Order</a></li>
                             @endif
-                            <li id="about"><a href="./about.html">About</a></li>
+                            <li id="about"><a href="{{ route('products.about') }}">About</a></li>
                             <li id="contact"><a href="./contact.html">Contact</a></li>
                         </ul>
                     </nav>
