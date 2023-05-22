@@ -1,6 +1,14 @@
 @extends('user.layouts.app')
 
 @section('content')
+@if (session('alert'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+       <p class="text-center text-success">Your message send successfully.</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+ @endif
 <!-- Contact Section Begin -->
 <section class="contact spad">
         <div class="container">

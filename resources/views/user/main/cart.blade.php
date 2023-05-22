@@ -1,25 +1,24 @@
 @extends('user.layouts.app')
 
 @section('content')
-    <!-- Shopping Cart Section Begin -->
-    <section class="shopping-cart spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="shopping__cart__table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                            </tbody>
-                        </table>
+<!-- Shopping Cart Section Begin -->
+<section class="shopping-cart spad">
+    <div class="container">
+        <div class="row">
+        <div class="col-lg-8">
+            <div class="shopping__cart__table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                        <tbody>
+                        </tbody>
+             </table>
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6">
@@ -42,8 +41,10 @@
                             <button type="submit">Apply</button>
                         </form>
                     </div>
+
                     <div class="cart__total">
                         <h6>Cart total</h6>
+                        @if(session('item'))
                         <ul>
                             <li>Subtotal <span id="subtotal">$ 100</span></li>
                             <li>Total <span id="total">$ 100</span></li>
@@ -55,6 +56,17 @@
         </div>
     </section>
     <!-- Shopping Cart Section End -->
+    @php
+        function calculateTotal($items)
+        {
+            $total = 0;
+            foreach ($items as $id => $details) {
+            $subtotal = $details['price'] * $details['quantity'];
+            $total += $subtotal;
+        }
+            return number_format($total);
+        }
+    @endphp
 @endsection
 
 @push('script')

@@ -5,32 +5,32 @@
     <form action="{{route('auth.store')}}" method="post">
     {{ csrf_field() }}
         <div class="form-group">
-            <label>Username</label>
-            <input class="au-input au-input--full" type="text" name="name" placeholder="Username">
+            <label>Username <span class="text-danger">*</span></label>
+            <input class="form-control" type="text" name="name" placeholder="Username" value="{{old('name')}}">
         </div>
         @error('name')
                 <span class="text-danger">{{ $message }}</span>
         @enderror
 
         <div class="form-group">
-            <label>Email</label>
-            <input class="au-input au-input--full" type="email" name="email" placeholder="Email">
+            <label>Email <span class="text-danger">*</span></label>
+            <input class="form-control" type="email" name="email" placeholder="example@gmail.com" value="{{old('email')}}">
         </div>
         @error('email')
                 <span class="text-danger">{{ $message }}</span>
         @enderror
 
         <div class="form-group">
-             <label>Password</label>
-            <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
+             <label>Password <span class="text-danger">*</span></label>
+            <input class="form-control" type="password" name="password" placeholder="******" value="{{old('password')}}">
         </div>
         @error('password')
                 <span class="text-danger">{{ $message }}</span>
         @enderror
 
         <div class="form-group">
-            <label>Password</label>
-            <input class="au-input au-input--full" type="password" name="confirm_password" placeholder="Confirm Password">
+            <label>Confirm Password <span class="text-danger">*</span></label>
+            <input class="form-control" type="password" name="confirm_password" placeholder="******" value="{{old('confirm_password')}}">
         </div>
         @error('confirm_password')
                 <span class="text-danger">{{ $message }}</span>
@@ -39,13 +39,13 @@
         <a href="{{route('auth.forgetPass')}}" class="mb-3">forget password?</a>
         </div>
 
-        <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">register</button>
+        <button class="text-light pt-2 pb-2 au-btn--block au-btn--orange m-b-20" type="submit">REGISTER</button>
 
     </form>
         <div class="register-link">
             <p>
                 Already have account?
-                <a href="{{route('auth.login')}}">Sign In</a>
+                <a class="text-primary" href="{{route('auth.login')}}">Sign In</a>
              </p>
         </div>
  </div>

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Contracts\Services\UserProductServiceInterface;
-use App\Contracts\Services\ReviewServiceInterface;
-use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Product;
+use App\Models\Category;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Contracts\Services\ReviewServiceInterface;
+use App\Contracts\Services\UserProductServiceInterface;
 
 class UserProductController extends Controller
 {
@@ -31,13 +32,8 @@ class UserProductController extends Controller
     /**
      * home function
      */
-    public function home($id)
+    public function home()
     {
-        $user = session()->get('user',[]);
-        $user[$id] = [
-            "user_id"=> $id
-        ];
-        session()->put('user',$user);
         $products = $this->userProductService->getUsersProduct();
         return view('user.main.home', compact('products'));
     }
@@ -58,7 +54,7 @@ class UserProductController extends Controller
      */
     public function details($id)
     {
-        $user = session()->get('user');
+        $user = Auth::user();
         $review = $this->reviewService->reviewShow($id);
         $product = Product::where('id', $id)->first();
         $productList = Product::get();

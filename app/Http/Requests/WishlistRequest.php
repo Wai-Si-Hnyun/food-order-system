@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class CategoryUpdateRequest extends FormRequest
+class WishlistRequest extends FormRequest
 {
     /**
      * Determine if the Category is authorized to make this request.
@@ -25,7 +24,7 @@ class CategoryUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'categoryName' => ['required', 'max:50', 'unique:categories,name'],
+            'product_id' => ['unique:wishlists,product_id'],
         ];
     }
 }

@@ -9,4 +9,5 @@ interface AuthServiceInterface
     public function findToken($request):object;
     public function passUpdate($request,$resetData):void;
     public function getNameById(int $id): object;
+    public function authCheck($request) : bool;
 }

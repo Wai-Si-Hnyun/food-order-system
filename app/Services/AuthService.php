@@ -45,4 +45,9 @@ class AuthService implements AuthServiceInterface
     {
         return $this->authDao->getNameById($id);
     }
+
+    public function authCheck($request): bool
+    {
+        return $this->authDao->authCheck($request);
+    }
 }
