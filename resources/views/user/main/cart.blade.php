@@ -28,18 +28,14 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="continue__btn update__btn">
-                                <a href="#" id="clear-cart-btn"><i class="fa fa-spinner"></i> Clear cart</a>
+                                <a href="#" id="clear-cart-btn"><i class="fa fa-trash"></i> Clear cart</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="cart__discount">
-                        <h6>Discount codes</h6>
-                        <form action="#">
-                            <input type="text" placeholder="Coupon code">
-                            <button type="submit">Apply</button>
-                        </form>
+                        <h6>Order Information</h6>
                     </div>
 
                     <div class="cart__total">
