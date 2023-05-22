@@ -75,8 +75,8 @@
                     @foreach ($products as $product)
                         <div class="col-lg-3 col-md-6 col-sm-6">
                             <div class="product__item" id="myForm">
-                                <div class="product__item__pic set-bg detail-view" data-product-id="{{ $product->id }}"
-                                    data-setbg="{{ asset('storage/' . $product->image) }}">
+                                <div class="product__item__pic set-bg detail-view" data-id="{{ $product->id }}"
+                                    data-setbg="{{ asset('storage/' . $product->image) }}" style="cursor: pointer">
                                     <div class="product__label">
                                         <span>
                                             {{ $product->category->name }}

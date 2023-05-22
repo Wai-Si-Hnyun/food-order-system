@@ -45,7 +45,7 @@
                                 </td>
                                 <td>{{ $order->created_at->format('j-m-Y') }}</td>
                                 <td>
-                                    <div class="d-flex">
+                                    <div class="    ">
                                         <a class="text-primary me-3" href="{{ route('order.show', $order->id) }}">
                                             <i class="bx bx-edit-alt me-1"></i>
                                         </a>

@@ -1,11 +1,17 @@
 $(document).ready(function () {
+    // product detail page
+    $('.detail-view').on('click', function() {
+        $id = $(this).data('id');
+
+        window.location.href = '/products/' + $id + '/details';
+    })
+
     $('#sorting').change(function () {
         $option = $('#sorting').val();
 
         if ($option == 'asc') {
             axios.post('/ajax/products', { status: 'asc' })
                 .then(res => {
-                    console.log(res.data);
                     $list = '';
                     for ($i = 0; $i < res.data.length; $i++) {
                         $list += `
@@ -44,7 +50,6 @@ $(document).ready(function () {
         } else if ($option == 'desc') {
             axios.post('/ajax/products', { status: 'desc' })
                 .then(res => {
-                    console.log(res.data);
                     $list = '';
                     for ($i = 0; $i < res.data.length; $i++) {
                         $list += `

@@ -60,10 +60,10 @@ class UserProductController extends Controller
     {
         $user = session()->get('user');
         $review = $this->reviewService->reviewShow($id);
-        $products = Product::where('id', $id)->first();
+        $product = Product::where('id', $id)->first();
         $productList = Product::get();
 
-        return view('user.main.details', compact('products', 'productList', 'id', 'user','review'));
+        return view('user.main.details', compact('product', 'productList', 'id', 'user','review'));
     }
 
     /**

@@ -40,6 +40,8 @@ $(document).ready(function () {
 
         $('#total-price').text(`$ ${(totalPrice).toFixed(2)}`);
 
+        $('#cart-total-price').text(`$ ${(totalPrice).toFixed(2)}`);
+
         sessionStorage.setItem('order-total-price', totalPrice);
     })();
 

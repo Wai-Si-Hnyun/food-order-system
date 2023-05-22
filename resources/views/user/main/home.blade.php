@@ -40,10 +40,10 @@
                 @foreach ($products as $product)
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="product__item">
-                            <div class="product__item__pic set-bg">
-                                <img src="{{ asset('storage/' . $product->image) }}" alt="">
+                            <div class="product__item__pic set-bg detail-view" data-id="{{ $product->id }}"
+                                data-setbg="{{ asset('storage/' . $product->image) }}" style="cursor: pointer">
                                 <div class="product__label">
-                                    <span>Foods</span>
+                                    <span>{{ $product->category->name }}</span>
                                 </div>
                             </div>
                             <div class="product__item__text">

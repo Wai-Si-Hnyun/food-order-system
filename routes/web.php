@@ -27,8 +27,8 @@ Route::post('/register', [AuthController::class, 'authRegisterStore'])->name('au
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/shop', [HomeController::class, 'shop'])->name('users.shop');
 Route::post('/ajax/products', [AjaxController::class, 'index'])->name('ajax.index');
-Route::get('/users/{id}/filter', [UserProductController::class, 'filter'])->name('users.filter');
-Route::get('/users/{id}/details', [UserProductController::class, 'details'])->name('users.details');
+Route::get('/products/{id}/filter', [UserProductController::class, 'filter'])->name('users.filter');
+Route::get('/products/{id}/details', [UserProductController::class, 'details'])->name('users.details');
 
 //forget/reset password
 Route::get('/forget-password-page', [AuthController::class, 'forgetPass'])->name('auth.forgetPass');
@@ -64,8 +64,8 @@ Route::middleware('role:user')->group(function () {
     //reviews
     Route::post('/review', [ReviewController::class, 'review'])->name('review.create');
     Route::get('/review/{review}/edit', [ReviewController::class, 'reviewEdit'])->name('review.edit');
-    Route::put('/review/{review}', [ReviewController::class, 'reviewUpdate'])->name('review.update');
-    Route::delete('/review-delete/{review}', [ReviewController::class, 'reviewDelete'])->name('review.delete');
+    Route::put('/review/{review}/update', [ReviewController::class, 'reviewUpdate'])->name('review.update');
+    Route::delete('/review/{review}/delete', [ReviewController::class, 'reviewDelete'])->name('review.delete');
 
     //feedback
     Route::get('/feed-back',[FeedbackController::class,'feedback'])->name('feedback.page');
@@ -102,13 +102,13 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     
     //review
     Route::get('/reviews/list',[ReviewController::class,'reviewList'])->name('review.list');
-    Route::delete('/user-review/{review}',[ReviewController::class,'reviewDestory'])->name('review.destory');
+    Route::delete('/reviews/{review}/delete',[ReviewController::class,'reviewDestory'])->name('review.destory');
     
     //UserList
     Route::get('/users/list', [UserdataController::class, 'userList'])->name('userData.list');
     Route::put('/user/{user}', [UserdataController::class, 'roleUpdate'])->name('role.update');
     Route::get('/user/{user}/info', [UserdataController::class, 'userInfo'])->name('user.info');
-    Route::delete('/user-delete/{user}', [UserdataController::class, 'userDelete'])->name('user.destory');
+    Route::delete('/users/{user}/delete', [UserdataController::class, 'userDelete'])->name('user.destory');
   
     //feedback
     Route::get('/feedback-list',[FeedbackController::class,'feedbackList'])->name('feedback.list');

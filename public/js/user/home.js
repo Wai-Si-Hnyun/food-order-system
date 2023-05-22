@@ -31,6 +31,12 @@ $(document).ready(function () {
             });
     });
 
+    $('.detail-view').on('click', function() {
+        $id = $(this).data('id');
+
+        window.location.href = '/products/' + $id + '/details';
+    })
+
     // Reset modal to original state when it's hidden
     $("#chatbotModal").on("hidden.bs.modal", function () {
         $(".question").removeClass("active-question");
