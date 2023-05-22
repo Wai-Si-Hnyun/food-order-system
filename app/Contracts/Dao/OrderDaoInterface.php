@@ -68,7 +68,7 @@ interface OrderDaoInterface
     public function checkOrderCode(string $orderCode);
 
     /**
-     * Change order status
+     * Change order status 
      *
      * @param integer $status
      * @param integer $id

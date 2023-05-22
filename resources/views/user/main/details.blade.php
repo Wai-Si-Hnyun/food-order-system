@@ -24,11 +24,7 @@
     <section class="product-details spad">
         <div class="container">
             <div class="row">
-<<<<<<< HEAD
-                <div class="col-lg-6">
-=======
                 <div class="col-lg-5">
->>>>>>> e5688e08452e08276fc2d4ea81c8e98857856be6
                     <div class="product__details__img">
                         <div class="">
                             <img class="img-thumbnail w-75" src="{{ asset('storage/' . $products->image) }}"

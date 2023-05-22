@@ -17,7 +17,6 @@ use App\Http\Controllers\User\UserProductController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
-
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
 //login/register
@@ -35,13 +34,14 @@ Route::post('/pass-change', [AuthController::class, 'passChange'])->name('auth.p
 // Chat bot
 Route::post('/chat/get-answer', [ChatbotController::class, 'getAnswer']);
 
-    //Customer Care
-    Route::get('/customer-care',[CustomerController::class,'care'])->name('customer.care');
+//Customer Care
+Route::get('/customer-care',[CustomerController::class,'care'])->name('customer.care');
 
 Route::middleware('role:user')->group(function () {
     // Order
     Route::post('/order/create', [OrderController::class, 'store'])->name('order.store');
     Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
+    Route::get('/orders', [OrderController::class, 'index'])->name('user.order');
 
     // Payment
     Route::get('/payment/choose', [PaymentController::class, 'index'])->name('user.payment');
@@ -53,11 +53,14 @@ Route::middleware('role:user')->group(function () {
     // for users
     Route::get('/users', [UserProductController::class, 'home'])->name('users.home');
     Route::get('/shop', [HomeController::class, 'shop'])->name('users.shop');
+    Route::get('/users/about/page', [HomeController::class, 'about'])->name('users.about');
     Route::get('/users/{id}/filter', [UserProductController::class, 'filter'])->name('users.filter');
     Route::get('/users/{id}/details', [UserProductController::class, 'details'])->name('users.details');
 
     // for wishlists
-    Route::get('/users/wishlists', [WishlistController::class, 'addWishlist'])->name('users.wishlist');
+    Route::get('/users/wishlists/page', [WishlistController::class, 'addWishlist'])->name('users.wishlist');
+    Route::get('/users/store/wishlists/{productId}', [WishlistController::class, 'storeWishlist'])->name('users.storeWishlist');
+    Route::get('/users/destroy/{id}/wishlists', [WishlistController::class, 'destroyWishlist'])->name('users.destroyWishlist');
 
     // ajax
     Route::get('/ajax/products', [AjaxController::class, 'index'])->name('ajax.index');
@@ -74,27 +77,12 @@ Route::middleware('role:user')->group(function () {
     Route::put('/review/{review}', [ReviewController::class, 'reviewUpdate'])->name('review.update');
     Route::delete('/review-delete/{review}', [ReviewController::class, 'reviewDelete'])->name('review.delete');
 
-    // Questions and Answers
-    Route::get('/questions-and-answers', [ChatbotController::class, 'index'])->name('q&a.index');
-    Route::get('/questions-and-answers/create', [ChatbotController::class, 'create'])->name('q&a.create');
-    Route::post('/questions-and-answers/store', [ChatbotController::class, 'store'])->name('q&a.store');
-    Route::get('/questions-and-answers/{id}/show', [ChatbotController::class, 'show'])->name('q&a.show');
-    Route::get('/questions-and-answers/{id}/edit', [ChatbotController::class, 'edit'])->name('q&a.edit');
-    Route::put('/questions-and-answers/{id}/update', [ChatbotController::class, 'update'])->name('q&a.update');
-    Route::delete('/questions-and-answers/{id}/delete', [ChatbotController::class, 'delete'])->name('q&a.delete');
     //feedback
-    Route::get('/feed-back',[FeedbackController::class,'feedback'])->name('feedback.page');
-    Route::post('/feedback-create',[FeedbackController::class,'feedbackCreate'])->name('feedback.create');
+    Route::get('/feed-back', [FeedbackController::class, 'feedback'])->name('feedback.page');
+    Route::post('/feedback-create', [FeedbackController::class, 'feedbackCreate'])->name('feedback.create');
 });
 
-//userProfile (for admin and user)
-Route::get('/userprofile/{user}', [UserdataController::class, 'userProfile'])->name('user.profile');
-Route::post('/profile-update/{user}', [UserdataController::class, 'profileUpdate'])->name('profile.update');
-Route::get('/password/{user}', [UserdataController::class, 'passChange'])->name('pass.change');
-Route::post('/pass-change', [UserdataController::class, 'passwordUpdate'])->name('password.change');
-Route::delete('/delete-account/{user}', [UserdataController::class, 'accountDelete'])->name('account.destroy');
-
-//Route::middleware('role:admin')->prefix('admin')->group(function () {
+Route::middleware('role:admin')->prefix('admin')->group(function () {
     // Dashboard
     Route::get('/dashboard', [HomeController::class, 'adminDashboard'])->name('admin.dashboard');
 
@@ -123,8 +111,8 @@ Route::delete('/delete-account/{user}', [UserdataController::class, 'accountDele
     Route::get('/orders/{id}/deivered/status/change', [OrderController::class, 'changeDeliverStatus']);
 
     //review
-    Route::get('/reviews/list',[ReviewController::class,'reviewList'])->name('review.list');
-    Route::delete('/user-review/{review}',[ReviewController::class,'reviewDestory'])->name('review.destory');
+    Route::get('/reviews/list', [ReviewController::class, 'reviewList'])->name('review.list');
+    Route::delete('/user-review/{review}', [ReviewController::class, 'reviewDestory'])->name('review.destory');
 
     //UserList
     Route::get('/users/list', [UserdataController::class, 'userList'])->name('userData.list');
@@ -133,8 +121,8 @@ Route::delete('/delete-account/{user}', [UserdataController::class, 'accountDele
     Route::delete('/user-delete/{user}', [UserdataController::class, 'userDelete'])->name('user.destory');
 
     //feedback
-    Route::get('/feedback-list',[FeedbackController::class,'feedbackList'])->name('feedback.list');
-    Route::delete('/feedback-delete/{feedback}',[FeedbackController::class,'feedbackDestory'])->name('feedback.destory');
+    Route::get('/feedback-list', [FeedbackController::class, 'feedbackList'])->name('feedback.list');
+    Route::delete('/feedback-delete/{feedback}', [FeedbackController::class, 'feedbackDestory'])->name('feedback.destory');
 
     // Mail
     Route::get('/mail', [MailController::class, 'index'])->name('mail.index');
@@ -144,11 +132,15 @@ Route::delete('/delete-account/{user}', [UserdataController::class, 'accountDele
     Route::get('/questions-and-answers', [ChatbotController::class, 'index'])->name('q&a.index');
     Route::get('/questions-and-answers/create', [ChatbotController::class, 'create'])->name('q&a.create');
     Route::post('/questions-and-answers/store', [ChatbotController::class, 'store'])->name('q&a.store');
-//});
+    Route::get('/questions-and-answers/{id}/show', [ChatbotController::class, 'show'])->name('q&a.show');
+    Route::get('/questions-and-answers/{id}/edit', [ChatbotController::class, 'edit'])->name('q&a.edit');
+    Route::put('/questions-and-answers/{id}/update', [ChatbotController::class, 'update'])->name('q&a.update');
+    Route::delete('/questions-and-answers/{id}/delete', [ChatbotController::class, 'delete'])->name('q&a.delete');
+});
 
 //userProfile (for admin and user)
-Route::get('/userprofile/{user}',[UserdataController::class,'userProfile'])->name('user.profile');
-Route::post('/profile-update/{user}',[UserdataController::class,'profileUpdate'])->name('profile.update');
-Route::get('/password/{user}',[UserdataController::class,'passChange'])->name('pass.change');
-Route::post('/pass-change',[UserdataController::class,'passwordUpdate'])->name('password.change');
-Route::delete('/delete-account/{user}',[UserdataController::class,'accountDelete'])->name('account.destroy');
+Route::get('/userprofile/{user}', [UserdataController::class, 'userProfile'])->name('user.profile');
+Route::post('/profile-update/{user}', [UserdataController::class, 'profileUpdate'])->name('profile.update');
+Route::get('/password/{user}', [UserdataController::class, 'passChange'])->name('pass.change');
+Route::post('/pass-change', [UserdataController::class, 'passwordUpdate'])->name('password.change');
+Route::delete('/delete-account/{user}', [UserdataController::class, 'accountDelete'])->name('account.destroy');

@@ -71,7 +71,7 @@
                     <li class="list-group-item">Address&nbsp;-&nbsp; {{ $order->billingdetail->address }}</li>
                     <li class="list-group-item">Phone&nbsp;-&nbsp; {{ $order->billingdetail->phone }}</li>
                     <li class="list-group-item">
-                        Additional Note&nbsp;-&nbsp;
+                        Additional Note&nbsp;-&nbsp; 
                         @if (empty($order->billingdetail->note))
                             There is no additional note.
                         @else

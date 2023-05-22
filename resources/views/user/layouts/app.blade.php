@@ -1,14 +1,3 @@
-@php
-    function total($items)
-        {
-            $total = 0;
-            foreach ($items as $id => $details) {
-            $subtotal = $details['price'] * $details['quantity'];
-            $total += $subtotal;
-        }
-            return number_format($total);
-        }
-@endphp
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -224,23 +213,11 @@
     <script src="{{ asset('assets/user/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('assets/user/js/jquery.nicescroll.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
-
-    <!-- Select2 -->
-<<<<<<< HEAD
-=======
-
->>>>>>> e5688e08452e08276fc2d4ea81c8e98857856be6
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"
         integrity="sha512-i9cEfJwUwViEPFKdC1enz4ZRGBj8YQo6QByFTF92YXHi7waCqyexvRD75S5NVTsSiTv7rKWqG9Y5eFxmRsOn0A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-<<<<<<< HEAD
-=======
-
->>>>>>> e5688e08452e08276fc2d4ea81c8e98857856be6
     <script src="{{ asset('js/user/header.js') }}"></script>
-
     @stack('script')
     @yield('scriptSource')
 </body>
