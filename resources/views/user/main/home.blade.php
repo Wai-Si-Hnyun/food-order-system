@@ -95,7 +95,7 @@
                             @empty
                                 <p>There is no question currently available.</p>
                             @endforelse
-                        </div> --}}
+                        </div>
                         </div>
                         <div id="answer" class="mt-4"></div>
                     </div>

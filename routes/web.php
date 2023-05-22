@@ -38,10 +38,7 @@ Route::get('/reset-password-page', [AuthController::class, 'resetPass'])->name('
 Route::post('/pass-change', [AuthController::class, 'passChange'])->name('auth.passChange');
 
 //cart
-Route::post('/cart/{product}/add', [CartController::class, 'addToCart'])->name('add.cart');
 Route::get('/cart', [CartController::class, 'cart'])->name('show.cart');
-Route::delete('/cart/{id}/delete', [CartController::class, 'remove'])->name('remove.cart');
-Route::delete('/cart/clear', [CartController::class, 'clear']);
 
 // Chat bot
 Route::post('/chat/get-answer', [ChatbotController::class, 'getAnswer']);
@@ -71,10 +68,9 @@ Route::middleware('role:user')->group(function () {
     Route::get('/users/destroy/{id}/wishlists', [WishlistController::class, 'destroyWishlist'])->name('users.destroyWishlist');
 
     //cart
-    Route::post('add-cart/{product}', [CartController::class, 'addToCart'])->name('add.cart');
-    Route::get('/cart', [CartController::class, 'cart'])->name('show.cart');
-    Route::delete('/deleteCart/{id}', [CartController::class, 'remove'])->name('remove.cart');
-    Route::post('update-cart/{product}',[CartController::class, 'updateCart'])->name('update.cart');
+    // Route::post('add-cart/{product}', [CartController::class, 'addToCart'])->name('add.cart');
+    // Route::delete('/deleteCart/{id}', [CartController::class, 'remove'])->name('remove.cart');
+    // Route::post('update-cart/{product}',[CartController::class, 'updateCart'])->name('update.cart');
 
     //reviews
     Route::post('/review', [ReviewController::class, 'review'])->name('review.create');

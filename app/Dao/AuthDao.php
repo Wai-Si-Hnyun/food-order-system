@@ -63,9 +63,3 @@ class AuthDao implements AuthDaoInterface
         return Auth::attempt(['email' => $request->email, 'password' => $request->password]);
     }
 }
-
-    public function getNameById(int $id): object
-    {
-        return User::findOrFail($id);
-    }
-}
