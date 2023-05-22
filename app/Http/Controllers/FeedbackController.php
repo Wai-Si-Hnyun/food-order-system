@@ -48,7 +48,7 @@ class FeedbackController extends Controller
         $feedback =$this->feedbackService->createFeedback($request->only([
             'name','email','message',
         ]));
-        return redirect()->back();
+        return redirect()->back()->with('alert', "Your message send successfully");
 
 
     }

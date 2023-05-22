@@ -34,6 +34,9 @@ Route::post('/pass-change', [AuthController::class, 'passChange'])->name('auth.p
 // Chat bot
 Route::post('/chat/get-answer', [ChatbotController::class, 'getAnswer']);
 
+//Customer Care
+Route::get('/customer-care',[CustomerController::class,'care'])->name('customer.care');
+
 Route::middleware('role:user')->group(function () {
     // Order
     Route::post('/order/create', [OrderController::class, 'store'])->name('order.store');
@@ -48,7 +51,7 @@ Route::middleware('role:user')->group(function () {
     Route::post('/payment/google-pay', [PaymentController::class, 'chargeGooglePay'])->name('stripe.google');
 
     // for users
-    Route::get('/users/{id}', [UserProductController::class, 'home'])->name('users.home');
+    Route::get('/users', [UserProductController::class, 'home'])->name('users.home');
     Route::get('/shop', [HomeController::class, 'shop'])->name('users.shop');
     Route::get('/users/about/page', [HomeController::class, 'about'])->name('users.about');
     Route::get('/users/{id}/filter', [UserProductController::class, 'filter'])->name('users.filter');
@@ -66,6 +69,7 @@ Route::middleware('role:user')->group(function () {
     Route::post('add-cart/{product}', [CartController::class, 'addToCart'])->name('add.cart');
     Route::get('/cart', [CartController::class, 'cart'])->name('show.cart');
     Route::delete('/deleteCart/{id}', [CartController::class, 'remove'])->name('remove.cart');
+    Route::post('update-cart/{product}',[CartController::class, 'updateCart'])->name('update.cart');
 
     //reviews
     Route::post('/review', [ReviewController::class, 'review'])->name('review.create');

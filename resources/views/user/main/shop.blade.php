@@ -79,20 +79,19 @@
                                     <img src="{{ asset('storage/' . $product->image) }}" alt=""
                                         style="height:200px">
                                     <div class="product__label">
-                                        <span>
-                                            <a class="text-dark" href="{{ route('users.details', $product->id) }}">cakes</a>
-                                        </span>
+                                        <span><a class="text-dark"
+                                                href="{{ route('users.details', $product->id) }}">Foods</a></span>
                                     </div>
                                 </div>
                                 <div class="product__item__text">
                                     <h6><a href="#">{{ $product->name }}</a></h6>
                                     <div class="product__item__price">${{ $product->price }}</div>
                                     <div class="cart_add">
-                                        <form action="{{ url('add-cart/' . $product->id) }}" method="post">
-                                            @csrf
-                                            <input type="hidden" value="1" name="quantity">
-                                            <button type="submit" class="border border-warning">Add to cart</button>
-                                        </form>
+                                    <form action="{{ url('add-cart/'.$product->id) }}" method="post">
+                                        @csrf
+                                        <input type="hidden" value="1" name="quantity">
+                                        <button type="submit" class="border border-warning">Add to cart</button>
+                                    </form>
                                     </div>
                                 </div>
                             </div>
@@ -132,9 +131,7 @@
                                     <div class="product__item__pic set-bg">
                                         <img src="{{ asset('storage/${response[$i] . image}') }}" alt="" style="height:200px">
                                         <div class="product__label">
-                                            <span>
-                                            <a class="text-dark" href="{{ route('users.details', $product->id) }}">cakes</a>
-                                        </span>
+                                            <span>Foods</span>
                                         </div>
                                     </div>
                                     <div class="product__item__text">
@@ -171,9 +168,7 @@
                                         <div class="product__item__pic set-bg">
                                             <img src="{{ asset('storage/${response[$i] . image}') }}" alt="" style="height:200px">
                                             <div class="product__label">
-                                                <span>
-                                            <a class="text-dark" href="{{ route('users.details', $product->id) }}">cakes</a>
-                                                </span>
+                                                <span>Foods</span>
                                             </div>
                                         </div>
                                         <div class="product__item__text">

@@ -67,7 +67,17 @@ class AuthController extends Controller
      */
     public function authLogin(Request $request)
     {
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        $validator = Validator::make($request->all(),[
+            'email'=>'required|max:255',
+            'password'=>'required'
+        ]);
+        if ($validator->fails()){
+            return redirect()->back()
+                ->withInput()
+                ->withErrors($validator);
+        }
+        $auth =$this->authService->authCheck($request);
+        if ($auth) {
             $user = Auth::user();
             if ($user->role == 'admin') {
                 return redirect()->route('admin.dashboard');
@@ -77,7 +87,7 @@ class AuthController extends Controller
                 return redirect()->route('auth.login');
             }
         } else {
-            return redirect()->route('auth.login')->with('alert', "<script>alert('email or password may be wrong')</script>");
+            return redirect()->route('auth.login')->with('alert', "email or password may be wrong");
         }
     }
 

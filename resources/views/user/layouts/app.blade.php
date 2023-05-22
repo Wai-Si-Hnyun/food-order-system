@@ -69,12 +69,18 @@
                                             </form>
                                             <a href="#" onclick="handleFormSubmit(event)">Logout</a>
                                         </li>
+                                        <li>
+                                            <a href="{{route('customer.care')}}">Help</a>
+                                        </li>
                                     @else
                                         <li>
                                             <a href="{{ route('auth.login') }}">Login</a>
                                         </li>
                                         <li>
                                             <a href="{{ route('auth.registerPage') }}">Register</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('customer.care') }}">Help</a>
                                         </li>
                                     @endif
                                 </ul>
@@ -91,7 +97,7 @@
                                 <div class="header__top__right__cart">
                                     <a href="{{ route('show.cart') }}"><img
                                             src="{{ asset('assets/user/img/icon/cart.png') }}" alt=""></a>
-                                    <div class="cart__price">Cart: <span>$0.00</span></div>
+                                    <div class="cart__price">Cart: <span>$ {{ total(session('item')) }}</span></div>
                                 </div>
                             </div>
                         </div>
@@ -111,7 +117,7 @@
                                 <li id="order"><a href="{{ route('user.order') }}">Order</a></li>
                             @endif
                             <li id="about"><a href="./about.html">About</a></li>
-                            <li id="contact"><a href="./contact.html">Contact</a></li>
+                            <li id="contact"><a href="{{route('feedback.page')}}">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -207,17 +213,11 @@
     <script src="{{ asset('assets/user/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('assets/user/js/jquery.nicescroll.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
-
-    <!-- Select2 -->
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"
         integrity="sha512-i9cEfJwUwViEPFKdC1enz4ZRGBj8YQo6QByFTF92YXHi7waCqyexvRD75S5NVTsSiTv7rKWqG9Y5eFxmRsOn0A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-
     <script src="{{ asset('js/user/header.js') }}"></script>
-
     @stack('script')
     @yield('scriptSource')
 </body>

@@ -70,4 +70,19 @@ class CartController extends Controller
             return redirect()->back();
         }
     }
+
+    /**
+     * update Item
+     *
+     * @param \App\Http\Requests\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateCart(Request $request,$id) {
+        if($request->quantity) {
+         $item = session()->get('item');
+         $item[$id]['quantity'] = $request->quantity;
+         session()->put('item',$item);
+         return redirect()->back();
+        }
+     }
 }
