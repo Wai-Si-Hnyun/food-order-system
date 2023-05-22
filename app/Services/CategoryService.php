@@ -27,7 +27,7 @@ class CategoryService implements CategoryServiceInterface
 
     /**
      * Get Category list
-     * 
+     *
      * @param string $page
      * @return object
      */
@@ -63,9 +63,9 @@ class CategoryService implements CategoryServiceInterface
      * @param int $id
      * @return void
      */
-    public function updateCategory(array $data, int $id): void
+    public function updateCategory(string $categoryName, int $id): void
     {
-        $this->categoryDao->updateCategory($data, $id);
+        $this->categoryDao->updateCategory($categoryName, $id);
     }
 
     /**

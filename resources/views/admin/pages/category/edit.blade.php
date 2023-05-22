@@ -10,6 +10,7 @@
                 <form action="{{ route('categories.update', $category->id) }}" method="post">
                     @csrf
                     <label for="">Category</label>
+                    <input type="hidden" name="categoryId" value="{{ $category->id }}">
                     <input class="form-control @error('categoryName') is-invalid @enderror" type="text"
                         value="{{ old('categoryName', $category->name) }}" name="categoryName" id="category-name"
                         placeholder="Name...">

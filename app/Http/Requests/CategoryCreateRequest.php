@@ -21,10 +21,10 @@ class CategoryCreateRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules($request)
     {
         return [
-            'categoryName' => ['required', 'max:50', 'unique:categories,name'],
+            'categoryName' => ['required', 'max:50', 'unique:categories,name,' . $request->categoryId],
         ];
     }
 }
