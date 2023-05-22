@@ -2,7 +2,7 @@ $(document).ready(function () {
     $("#get-started").on("click", function () {
         $(this).parent().addClass("d-none");
         $("#questions").removeClass("d-none");
-        $("#answer").html('<div class="alert alert-info">Get Started. Here are the questions you can ask:</div>');
+        $("#answer").html('<div class="alert alert-info" style="font-size: 14px">Get Started. Here are the questions you can ask:</div>');
     });
 
     $(".question").on("click", function () {
@@ -16,7 +16,7 @@ $(document).ready(function () {
             .then(function (res) {
                 var words = res.data.split(" ");
                 var i = 0;
-                $('#answer').html('<div class="alert alert-info" id="content"></div>');
+                $('#answer').html('<div class="alert alert-info fs-6" style="font-size: 14px" id="content"></div>');
                 var intervalId = setInterval(function () {
                     if (i >= words.length) {
                         clearInterval(intervalId);

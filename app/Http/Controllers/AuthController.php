@@ -67,16 +67,20 @@ class AuthController extends Controller
      */
     public function authLogin(Request $request)
     {
-        $validator = Validator::make($request->all(),[
-            'email'=>'required|max:255',
-            'password'=>'required'
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|max:255',
+            'password' => 'required',
+            'g-recaptcha-response' => 'required|captcha',
+        ], [
+            'g-recaptcha-response.required' => 'Please verify that you are not a robot.',
+            'g-recaptcha-response.captcha' => 'Failed to verify that you are not a robot. Please try again.',
         ]);
-        if ($validator->fails()){
+        if ($validator->fails()) {
             return redirect()->back()
                 ->withInput()
                 ->withErrors($validator);
         }
-        $auth =$this->authService->authCheck($request);
+        $auth = $this->authService->authCheck($request);
         if ($auth) {
             $user = Auth::user();
 

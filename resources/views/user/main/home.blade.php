@@ -88,9 +88,9 @@
                             <button class="btn btn-primary mt-4" id="get-started">Click to Get Started</button>
                         </div>
                         <div id="questions" class="d-none">
-                            <h4 class="mb-4">Questions:</h4>
+                            <h4 class="mb-4" style="font-size: 14px">Questions:</h4>
                             @forelse ($questions as $question)
-                                <button class="btn btn-primary question mb-2 text-left"
+                                <button class="btn btn-primary question mb-2 text-left" style="font-size: 14px"
                                     data-question="{{ $question }}">{{ $question }}</button>
                             @empty
                                 <p>There is no question currently available.</p>
