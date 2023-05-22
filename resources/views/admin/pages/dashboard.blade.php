@@ -8,8 +8,7 @@
                     <div class="card-body">
                         <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
-                                <img src="{{ asset('assets/admin/img/icons/unicons/wallet-info.png') }}" alt="Credit Card"
-                                    class="rounded" />
+                                    <svg class="p-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="apps"><path fill="#6563FF" d="M10,13H3a1,1,0,0,0-1,1v7a1,1,0,0,0,1,1h7a1,1,0,0,0,1-1V14A1,1,0,0,0,10,13ZM9,20H4V15H9ZM21,2H14a1,1,0,0,0-1,1v7a1,1,0,0,0,1,1h7a1,1,0,0,0,1-1V3A1,1,0,0,0,21,2ZM20,9H15V4h5Zm1,4H14a1,1,0,0,0-1,1v7a1,1,0,0,0,1,1h7a1,1,0,0,0,1-1V14A1,1,0,0,0,21,13Zm-1,7H15V15h5ZM10,2H3A1,1,0,0,0,2,3v7a1,1,0,0,0,1,1h7a1,1,0,0,0,1-1V3A1,1,0,0,0,10,2ZM9,9H4V4H9Z"></path></svg>
                             </div>
                         </div>
                         <span>Total Categories</span>
@@ -22,8 +21,7 @@
                     <div class="card-body">
                         <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
-                                <img src="{{ asset('assets/admin/img/icons/unicons/wallet-info.png') }}" alt="Credit Card"
-                                    class="rounded" />
+                                <svg class="p-1" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24" id="gold"><path fill="#6563FF" d="M8,11h8a1,1,0,0,0,.77-.37A1,1,0,0,0,17,9.8l-1-5A1,1,0,0,0,15,4H9a1,1,0,0,0-1,.8l-1,5a1,1,0,0,0,.21.83A1,1,0,0,0,8,11ZM9.82,6h4.36l.6,3H9.22ZM22,13.8a1,1,0,0,0-1-.8H15a1,1,0,0,0-1,.8l-1,5a1,1,0,0,0,.21.83A1,1,0,0,0,14,20h8a1,1,0,0,0,.77-.37A1,1,0,0,0,23,18.8ZM15.22,18l.6-3h4.36l.6,3ZM9,13H3a1,1,0,0,0-1,.8l-1,5a1,1,0,0,0,.21.83A1,1,0,0,0,2,20h8a1,1,0,0,0,.77-.37A1,1,0,0,0,11,18.8l-1-5A1,1,0,0,0,9,13ZM3.22,18l.6-3H8.18l.6,3Z"></path></svg>
                             </div>
                         </div>
                         <span>Total Products</span>
@@ -36,8 +34,7 @@
                     <div class="card-body">
                         <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
-                                <img src="{{ asset('assets/admin/img/icons/unicons/wallet-info.png') }}" alt="Credit Card"
-                                    class="rounded" />
+                                <svg class="p-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="user"><path fill="#6563FF" d="M15.71,12.71a6,6,0,1,0-7.42,0,10,10,0,0,0-6.22,8.18,1,1,0,0,0,2,.22,8,8,0,0,1,15.9,0,1,1,0,0,0,1,.89h.11a1,1,0,0,0,.88-1.1A10,10,0,0,0,15.71,12.71ZM12,12a4,4,0,1,1,4-4A4,4,0,0,1,12,12Z"></path></svg>
                             </div>
                         </div>
                         <span>Total Customers</span>
@@ -52,7 +49,7 @@
                     <div class="card-body">
                         <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
-                                <img src="{{ asset('assets/admin/img/icons/unicons/wallet-info.png') }}" alt="Credit Card"
+                                <img src="{{ asset('assets/admin/img/icons/unicons/chart.png') }}" alt="Orders"
                                     class="rounded" />
                             </div>
                         </div>
@@ -66,7 +63,7 @@
                     <div class="card-body">
                         <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
-                                <img src="{{ asset('assets/admin/img/icons/unicons/wallet-info.png') }}" alt="Credit Card"
+                                <img src="{{ asset('assets/admin/img/icons/unicons/chart-success.png') }}" alt="Delivered Orders"
                                     class="rounded" />
                             </div>
                         </div>
@@ -80,7 +77,7 @@
                     <div class="card-body">
                         <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
-                                <img src="{{ asset('assets/admin/img/icons/unicons/wallet-info.png') }}" alt="Credit Card"
+                                <img src="{{ asset('assets/admin/img/icons/unicons/chart.png') }}" alt="Processing Orders"
                                     class="rounded" />
                             </div>
                         </div>
@@ -96,7 +93,7 @@
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
-                                <img src="{{ asset('assets/admin/img/icons/unicons/wallet-info.png') }}" alt="Credit Card"
+                                <img src="{{ asset('assets/admin/img/icons/unicons/wallet-info.png') }}" alt="Total Revenue"
                                     class="rounded" />
                             </div>
                         </div>
@@ -110,7 +107,7 @@
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
-                                <img src="{{ asset('assets/admin/img/icons/unicons/wallet-info.png') }}" alt="Credit Card"
+                                <img src="{{ asset('assets/admin/img/icons/unicons/wallet.png') }}" alt="Monthly Revenue"
                                     class="rounded" />
                             </div>
                         </div>
@@ -128,7 +125,7 @@
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
-                                <img src="{{ asset('assets/admin/img/icons/unicons/wallet-info.png') }}" alt="Credit Card"
+                                <img src="{{ asset('assets/admin/img/icons/unicons/wallet-info.png') }}" alt="Yearly Revenue"
                                     class="rounded" />
                             </div>
                         </div>

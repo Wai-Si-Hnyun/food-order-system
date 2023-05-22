@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Dao\UserDaoInterface;
 use App\Contracts\Services\CategoryServiceInterface;
 use App\Contracts\Services\OrderServiceInterface;
 use App\Contracts\Services\ProductServiceInterface;
@@ -16,17 +17,20 @@ class HomeController extends Controller
     private $productService;
     private $orderService;
     private $chatbotService;
+    private $userDao;
 
     public function __construct(
         UserProductServiceInterface $userProductService,
         CategoryServiceInterface $categoryService,
         ProductServiceInterface $productService,
+        UserDaoInterface $userDao,
         OrderServiceInterface $orderService,
         ChatbotServiceInterface $chatbotService
     ) {
         $this->userProductService = $userProductService;
         $this->categoryService = $categoryService;
         $this->productService = $productService;
+        $this->userDao = $userDao;
         $this->orderService = $orderService;
         $this->chatbotService = $chatbotService;
     }
@@ -53,7 +57,7 @@ class HomeController extends Controller
     {
         $totalCategories = count($this->categoryService->getCategory('admin'));
         $totalProducts = count($this->productService->getProduct('admin'));
-        $totalUsers = count(Auth::user()->all());
+        $totalUsers = count($this->userDao->getUsersByRole('user'));
         $totalOrders = count($this->orderService->index());
         $deliveredOrders = count($this->orderService->getDeliveredOrders());
         $processingOrders = $totalOrders - $deliveredOrders;
