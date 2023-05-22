@@ -38,38 +38,45 @@
         @endif
         @if (count($categories) != 0)
             <div class="card">
-                <div class="card-header">
-                    <h4><b>Category Lists</b></h4>
-                </div>
-                <div class="card-body">
-                    <table class="table table-striped text-center">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Created Date</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($categories as $category)
+
+                <div class="table-responsive table--no-card m-b-30">
+                    <h4 class="card-header">
+                        Category Lists
+                    </h4>
+                    <div class="card-body">
+                        <table class="table table-borderless table-striped table-earning">
+                            <thead>
                                 <tr>
-                                    <td>{{ $category->id }} </td>
-                                    <td>{{ $category->name }}</td>
-                                    <td>{{ $category->created_at->format('j-F-Y') }}</td>
-                                    <td>
-                                        <a href="{{ route('categories.edit', $category->id) }}">
-                                            <button class='btn btn-success'><i
-                                                    class="fa-solid fa-pen-to-square"></i></button>
-                                        </a>
-                                        <a href="{{ route('categories.destroy', $category->id) }}">
-                                            <button class='btn btn-danger'><i class="fa-solid fa-trash-can"></i></button>
-                                        </a>
-                                    </td>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Created Date</th>
+                                    <th class="text-right">Action</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($categories as $category)
+                                    <tr>
+                                        <td>{{ $category->id }}</td>
+                                        <td>{{ $category->name }}</td>
+                                        <td class="text-right">{{ $category->created_at->format('j-F-Y') }}</td>
+                                        <td class="text-right d-flex">
+                                            <a href="{{ route('categories.edit', $category->id) }}">
+                                                <i class='bx bxs-edit-alt mr-3 mt-1'></i>
+                                            </a>
+                                            <form method="POST" action="{{ route('categories.destroy', $category->id) }}">
+                                                @csrf
+                                                <input name="_method" type="hidden" value="DELETE">
+                                                <button type="submit" class="btn btn-default btn-xs btn-flat show_confirm"
+                                                    data-toggle="tooltip" title='Delete'>
+                                                    <i class='bx bxs-trash text-danger'></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         @else
@@ -79,4 +86,8 @@
             {{ $categories->links() }}
         </div>
     </div>
+
 @endsection
+@push('script')
+    <script src="{{ asset('assets/admin/js/category.js') }}"></script>
+@endpush

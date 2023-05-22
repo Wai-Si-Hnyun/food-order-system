@@ -6,6 +6,7 @@ use App\Contracts\Services\CategoryServiceInterface;
 use App\Http\Requests\CategoryCreateRequest;
 use App\Http\Requests\CategoryUpdateRequest;
 use App\Models\Category;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -67,12 +68,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryUpdateRequest $request, $id)
+    public function update(CategoryUpdateRequest $request)
     {
-        $this->categoryService->updateCategory($request->only([
-            'categoryName',
-
-        ]), $id);
+        $this->categoryService->updateCategory($request->categoryName, $request->categoryId);
 
         return redirect()->route('categories.index')->with(['updateSuccess' => 'Category updated Successfully!']);
 
@@ -84,7 +82,8 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $this->categoryService->deleteCategoryById($id);
-        return redirect()->route('categories.index')->with(['deleteSuccess' => 'Category deleted Successfully!']);
+        // return redirect()->route('categories.index')->with(['deleteSuccess' => 'Category deleted Successfully!']);
+        return back();
     }
 
 }

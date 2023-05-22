@@ -9,7 +9,7 @@ interface CategoryDaoInterface
 {
     /**
      * Get Category list
-     * 
+     *
      * @param string $page
      * @return object
      */
@@ -35,7 +35,7 @@ interface CategoryDaoInterface
      * @param int $id
      * @return void
      */
-    public function updateCategory(array $data, int $id): void;
+    public function updateCategory(string $categoryName, int $id): void;
 
     /**
      * Delete Category by id

@@ -45,7 +45,7 @@
                                         @foreach ($categories as $category)
                                             <div>
                                                 <a class="dropdown-item"
-                                                    href="{{ route('users.filter', $category->id) }}">{{ $category->name }}
+                                                    href="{{ route('products.filter', $category->id) }}">{{ $category->name }}
                                                 </a>
                                             </div>
                                         @endforeach

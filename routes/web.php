@@ -29,7 +29,7 @@ Route::get('/shop', [HomeController::class, 'shop'])->name('users.shop');
 Route::post('/ajax/products', [AjaxController::class, 'index'])->name('ajax.index');
 Route::get('/products/{id}/filter', [UserProductController::class, 'filter'])->name('users.filter');
 Route::get('/products/{id}/details', [UserProductController::class, 'details'])->name('users.details');
-Route::get('/about', [HomeController::class, 'about'])->name('users.about');
+Route::get('/about', [HomeController::class, 'about'])->name('products.about');
 
 //forget/reset password
 Route::get('/forget-password-page', [AuthController::class, 'forgetPass'])->name('auth.forgetPass');
@@ -92,8 +92,8 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
     Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store');
     Route::get('/categories/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
-    Route::post('/categories/{id}/update', [CategoryController::class, 'update'])->name('categories.update');
-    Route::get('/categories/{id}/delete', [CategoryController::class, 'destroy'])->name('categories.destroy');
+    Route::post('/categories/update', [CategoryController::class, 'update'])->name('categories.update');
+    Route::delete('/categories/{id}/delete', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
     // for product
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
@@ -102,7 +102,7 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('/products/{id}/details', [ProductController::class, 'detail'])->name('products.details');
     Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
     Route::post('/products/{id}/update', [ProductController::class, 'update'])->name('products.update');
-    Route::get('/products/{id}/update', [ProductController::class, 'destroy'])->name('products.destroy');
+    Route::get('/products/{id}/delete', [ProductController::class, 'destroy'])->name('products.destroy');
 
     // Order
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
