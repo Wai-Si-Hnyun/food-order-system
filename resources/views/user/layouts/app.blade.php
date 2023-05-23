@@ -49,20 +49,22 @@
                             <div class="header__top__left">
                                 <ul>
                                     @if (Auth::user())
-                                        <li style="width:11%;">
-                                            @if (Auth::user()->image == null)
-                                                <img src="{{ asset('image/profile.png') }}" alt
-                                                    class="w-50 h-auto rounded-circle" />
-                                            @else
-                                                <img src="{{ asset('image/profile/' . Auth::user()->image) }}" alt
-                                                    class="w-px-40 h-auto rounded-circle" />
-                                            @endif
-                                            <span class="arrow_carrot-down"></span>
-                                            <ul>
-                                                <li><a href="{{ url('userprofile/' . Auth::user()->id) }}"
-                                                        class="text-light">Profile</a></li>
-                                            </ul>
-                                        </li>
+                                        @if (Auth::user()->role == 'user')
+                                            <li style="width:11%;">
+                                                @if (Auth::user()->image == null)
+                                                    <img src="{{ asset('image/profile.png') }}" alt
+                                                        class="w-50 h-auto rounded-circle" />
+                                                @else
+                                                    <img src="{{ asset('image/profile/' . Auth::user()->image) }}" alt
+                                                        class="w-px-40 h-auto rounded-circle" />
+                                                @endif
+                                                <span class="arrow_carrot-down"></span>
+                                                <ul>
+                                                    <li><a href="{{ url('userprofile/' . Auth::user()->id) }}"
+                                                            class="text-light">Profile</a></li>
+                                                </ul>
+                                            </li>
+                                        @endif
                                         <li>
                                             <form action="{{ route('logout') }}" method="POST" id="logoutForm">
                                                 @csrf
@@ -97,7 +99,7 @@
                                 <div class="header__top__right__cart">
                                     <a href="{{ route('show.cart') }}"><img
                                             src="{{ asset('assets/user/img/icon/cart.png') }}" alt=""></a>
-                                    <div class="cart__price">Cart: <span id="cart-total-price">$0.00</span></div>
+                                    <div class="cart__price">Cart: <span id="cart-total-price">0 MMK</span></div>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +115,7 @@
                         <ul>
                             <li id="home"><a href="{{ route('home') }}">Home</a></li>
                             <li id="shop"><a href="{{ route('users.shop') }}">Shop</a></li>
-                            @if (Auth::user())
+                            @if (Auth::user() && Auth::user()->role == 'user')
                                 <li id="orders"><a href="{{ route('user.order') }}">Order</a></li>
                             @endif
                             <li id="about"><a href="{{ route('products.about') }}">About</a></li>

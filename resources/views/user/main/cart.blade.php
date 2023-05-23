@@ -12,7 +12,7 @@
                     <tr>
                         <th>Product</th>
                         <th>Quantity</th>
-                        <th>Total</th>
+                        <th>Total(MMK)</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -39,10 +39,10 @@
                     </div>
 
                     <div class="cart__total">
-                        <h6>Cart total</h6>
+                        <h6>Cart total(<span class="">MMK</span>)</h6>
                         <ul>
-                            <li>Subtotal <span id="subtotal">$ 100</span></li>
-                            <li>Total <span id="total">$ 100</span></li>
+                            <li>Subtotal <span id="subtotal">0</span></li>
+                            <li>Total <span id="total">0</span></li>
                         </ul>
                         <a href="#" class="primary-btn" id="checkout">Proceed to checkout</a>
                     </div>

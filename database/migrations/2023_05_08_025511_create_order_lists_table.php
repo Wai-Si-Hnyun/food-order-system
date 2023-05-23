@@ -18,7 +18,7 @@ class CreateOrderListsTable extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
             $table->integer('quantity');
-            $table->decimal('total', 20, 2);
+            $table->integer('total');
             $table->string('order_code');
             $table->timestamps();
 

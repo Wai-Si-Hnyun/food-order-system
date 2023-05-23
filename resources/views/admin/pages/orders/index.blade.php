@@ -27,7 +27,7 @@
                                 <th>ID</th>
                                 <th>User</th>
                                 <th>Order Code</th>
-                                <th>Total Price</th>
+                                <th>Total Price(MMK)</th>
                                 <th>Status</th>
                                 <th>Delivered?</th>
                                 <th>Date</th>

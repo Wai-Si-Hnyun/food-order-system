@@ -2176,6 +2176,11 @@ ol {
     font-weight: 600;
 }
 
+.cart__total h6 span {
+    font-weight: 600;
+    color: #e26b0c;
+}
+
 .cart__total ul {
     margin-bottom: 25px;
 }
@@ -2256,7 +2261,6 @@ ol {
     font-size: 14px;
     color: #666666;
     padding-left: 20px;
-    margin-bottom: 20px;
 }
 
 .checkout__input input::-webkit-input-placeholder {

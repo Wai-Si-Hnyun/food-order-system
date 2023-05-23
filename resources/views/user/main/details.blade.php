@@ -35,7 +35,7 @@
                 <div class="col-lg-7">
                     <div class="product__details__text">
                         <h4>{{ $product->name }}</h4>
-                        <h5>${{ $product->price }}</h5>
+                        <h5>{{ $product->price }} MMK</h5>
                         <p>
                             {{ $product->description }}
                         </p>
@@ -84,9 +84,7 @@
                     @foreach ($productList as $list)
                         <div class="col-lg-3">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg">
-                                    <img src="{{ asset('storage/' . $list->image) }}" alt="product-image"
-                                        style="height:200px">
+                                <div class="product__item__pic set-bg" data-setbg="{{ asset('storage/' . $list->image) }}">
                                     <div class="product__label">
                                         <span>
                                             <a href="{{ route('product.details', $list->id) }}"
@@ -96,8 +94,10 @@
                                 </div>
                                 <div class="product__item__text">
                                     <h6><a href="#">{{ $list->name }}</a></h6>
-                                    <div class="product__item__price">${{ $list->price }}</div>
-                                    <div class="cart_add">
+                                    <div class="product__item__price">{{ $list->price }} MMK</div>
+                                    <div class="cart_add" data-id="{{ $list->id }}" data-name="{{ $list->name }}"
+                                        data-price="{{ $list->price }}" data-image="{{ $list->image }}"
+                                        data-quantity="1">
                                         <a href="#" class="add-to-cart-btn">Add to cart</a>
                                     </div>
                                 </div>
@@ -267,8 +267,12 @@
                     .catch(err => {
                         console.log(err.response)
                     });
-
             }
         }
     </script>
 @endsection
+
+@push('script')
+    <script src="{{ asset('js/user/add-to-cart.js') }}"></script>
+    <script src="{{ asset('js/user/product-detail.js') }}"></script>
+@endpush

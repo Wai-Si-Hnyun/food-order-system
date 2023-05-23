@@ -13,7 +13,7 @@
                 <div class="col-5 offset-1" id='data'>
                     <h6 class="mb-4"><i class="fa-regular fa-file-code me-3"></i>{{ $product->category_id }}</h6>
                     <h6 class="mb-4"><i class="fa-solid fa-burger me-3"></i>{{ $product->name }}</h6>
-                    <h6 class="mb-4"><i class="fa-solid fa-money-bill-wave me-3"></i>${{ $product->price }}</h6>
+                    <h6 class="mb-4"><i class="fa-solid fa-money-bill-wave me-3"></i>{{ $product->price }} MMK</h6>
                     <h6 class="mb-4"><i class="fa-regular fa-calendar-days me-3">
                         </i>{{ $product->created_at->format('j-F-Y') }}
                     </h6>

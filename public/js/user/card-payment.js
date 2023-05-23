@@ -2,6 +2,9 @@ $(document).ready(function () {
     // Login user id
     const userId = $('body').data('user-id');
 
+    // Get total price of order
+    const totalPrice = sessionStorage.getItem('order-total-price');
+
     // Initialize Stripe with your publishable key
     const stripe = Stripe(window.STRIPE_PUBLIC_KEY);
     const elements = stripe.elements();
@@ -25,6 +28,9 @@ $(document).ready(function () {
         }
     });
 
+    // Add price to show
+    $('#submit-btn').text('Pay - ' + totalPrice + ' MMK');
+
     function getOrderData() {
         const orderDataFromSession = sessionStorage.getItem('order-data');
 
@@ -46,7 +52,6 @@ $(document).ready(function () {
                 stripeTokenInput.value = token;
 
                 const orderData = getOrderData();
-                const totalPrice = sessionStorage.getItem('order-total-price');
                 const data = {
                     price: totalPrice,
                     stripeToken: token,

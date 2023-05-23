@@ -29,7 +29,7 @@
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
                             <h6 class="checkout__title">Billing Details</h6>
-                            <div class="checkout__input">
+                            <div class="checkout__input mb-3">
                                 <p>Full Name<span>*</span></p>
                                 <input type="text" name="name" id="name">
                             </div>
@@ -39,25 +39,25 @@
                             </div>
                             <div class="checkout__input mb-3">
                                 <p>State<span>*</span></p>
-                                <select name="state" id="state">
+                                <select name="state" class="state-select" id="state" style="width: 100%;">
                                     <option id="0" value="" selected>Choose State</option>
                                 </select>
                             </div>
                             <div class="checkout__input mb-3">
                                 <p>Town/City<span>*</span></p>
-                                <select name="city" id="city" disabled>
+                                <select name="city" id="city" style="width: 100%;" disabled>
                                     <option value="" selected>Choose City</option>
                                 </select>
                             </div>
-                            <div class="checkout__input">
+                            <div class="checkout__input mb-3">
                                 <p>Address<span>*</span></p>
                                 <input type="text" placeholder="Street Address" name="address" id="address">
                             </div>
-                            <div class="checkout__input">
+                            <div class="checkout__input mb-3">
                                 <p>Phone<span>*</span></p>
                                 <input type="text" name="phone" id="phone">
                             </div>
-                            <div class="checkout__input">
+                            <div class="checkout__input mb-3">
                                 <p>Account Password<span>*</span></p>
                                 <input type="password" name="password" id="password">
                             </div>
@@ -70,7 +70,7 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">
                                 <h6 class="order__title">Your order</h6>
-                                <div class="checkout__order__products">Product <span>Total</span></div>
+                                <div class="checkout__order__products">Product <span>Total(MMK)</span></div>
                                 <ul class="checkout__total__products">
                                 </ul>
                                 <ul class="checkout__total__all">

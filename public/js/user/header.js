@@ -35,7 +35,7 @@ $(document).ready(function () {
                 totalPrice += item.price * item.quantity;
             });
     
-            $('#cart-total-price').text(`$ ${(totalPrice).toFixed(2)}`);
+            $('#cart-total-price').text(`${totalPrice} MMK`);
         }
     }
     getCartTotal();

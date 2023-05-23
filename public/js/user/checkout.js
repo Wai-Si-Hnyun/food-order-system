@@ -32,15 +32,15 @@ $(document).ready(function () {
         var totalPrice = 0;
         cart.forEach((item, index) => {
             $('.checkout__total__products').append(
-                `<li><samp>${index + 1}. </samp>${item.name} <span>$ ${(item.price * item.quantity).toFixed(2)}</span></li>`
+                `<li><samp>${index + 1}. </samp>${item.name} <span>${item.price * item.quantity}</span></li>`
             );
 
             totalPrice += item.price * item.quantity;
         });
 
-        $('#total-price').text(`$ ${(totalPrice).toFixed(2)}`);
+        $('#total-price').text(`${totalPrice} MMK`);
 
-        $('#cart-total-price').text(`$ ${(totalPrice).toFixed(2)}`);
+        $('#cart-total-price').text(`${totalPrice} MMK`);
 
         sessionStorage.setItem('order-total-price', totalPrice);
     })();
@@ -71,6 +71,7 @@ $(document).ready(function () {
             $('#city').append(`<option value="">No City</option>`);
         } else {
             $('#city').empty();
+            $('#city').append(`<option value="" selected>Choose City</option>`);
             cities.forEach(city => {
                 $('#city').append(`<option value="${city.name_en}">${city.name_en}</option>`).prop('disabled', false);
             });
@@ -93,7 +94,6 @@ $(document).ready(function () {
             $$('#city').empty().append('<option value="" selected>Choose City</option>').prop('disabled', true);
             return;
         }
-
         getCities(stateId);
     })
 

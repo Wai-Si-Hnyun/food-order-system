@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4">Custom Mail Send</h4>
+        <h4 class="fw-bold pb-3 mb-4">Custom Mail Send</h4>
         @if (session('success'))
             <div class="alert alert-success alert-dismissible border border-success mx-auto col-lg-8 col-md-9 col-sm-10" role="alert">
                 {{ session('success') }}

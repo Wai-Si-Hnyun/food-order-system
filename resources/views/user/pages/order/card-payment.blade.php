@@ -57,7 +57,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <button class="btn btn-primary btn-block" id="submit-btn" type="submit">Pay
+                                    <button class="primary-btn border-0 w-100" id="submit-btn" type="submit">Pay
                                         Now</button>
                                 </div>
                             </div>

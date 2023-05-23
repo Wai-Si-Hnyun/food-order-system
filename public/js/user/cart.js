@@ -21,7 +21,7 @@ $(document).ready(function () {
                             </div>
                             <div class="product__cart__item__text">
                                 <h6>${item.name}</h6>
-                                <h5>$${item.price}</h5>
+                                <h5>${item.price}MMK</h5>
                             </div>
                         </td>
                         <td class="quantity__item">
@@ -39,13 +39,13 @@ $(document).ready(function () {
                 totalPrice += item.price * item.quantity;
             });
         }
-        $('#subtotal, #total').text('$ ' + totalPrice.toFixed(2));
+        $('#subtotal, #total').text(totalPrice);
     })();
 
     $('.cart__close').on('click', function () {
         var row = $(this).closest('tr');
         var id = row.data('id');
-        var price = parseFloat(row.find('.cart__price').text().replace('$', ''));
+        var price = parseInt(row.find('.cart__price').text().replace('MMK', ''));
 
         // Load the existing cart from localStorage
         var cart = JSON.parse(localStorage.getItem('cart_' + userId)) || [];
@@ -59,16 +59,16 @@ $(document).ready(function () {
         // Subtract the price from the total
         var $subtotal = $('#subtotal');
         var $total = $('#total');
-        var newTotal = parseFloat($total.text().replace('$', '')) - price;
+        var newTotal = parseInt($total.text()) - price;
 
         // Save update value in the header
-        var oldTotal = parseFloat($('#cart-total-price').text().replace('$', ''));
+        var oldTotal = parseInt($('#cart-total-price').text().replace('MMK', ''));
         oldTotal -= price;
-        $('#cart-total-price').text('$' + oldTotal.toFixed(2));
+        $('#cart-total-price').text(oldTotal + 'MMK');
 
         // Update the total in the HTML
-        $subtotal.text('$ ' + newTotal.toFixed(2));
-        $total.text('$ ' + newTotal.toFixed(2));
+        $subtotal.text(newTotal);
+        $total.text(newTotal);
 
         // Find and remove of this product
         row.remove();
@@ -98,11 +98,11 @@ $(document).ready(function () {
         $('table').append('<tr><td class="text-danger">There is no product in cart.</td></tr>');
 
         // Set the total values to 0
-        $('#subtotal').text('$ 0');
-        $('#total').text('$ 0');
+        $('#subtotal').text('0');
+        $('#total').text('0');
 
         // Save update value in the header
-        $('#cart-total-price').text('$ 0');
+        $('#cart-total-price').text('0 MMK');
     })
 
     $('#checkout').on('click', function () {

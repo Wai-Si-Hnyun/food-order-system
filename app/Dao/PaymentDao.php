@@ -35,7 +35,7 @@ class PaymentDao implements PaymentDaoInterface
         try {
             $charge = Charge::create([
                 'amount' => $price * 100,
-                'currency' => 'usd',
+                'currency' => 'mmk',
                 'source' => $stripeToken,
                 'description' => 'Test payment for food order system',
             ]);

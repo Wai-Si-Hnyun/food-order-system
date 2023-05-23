@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4">Customer Feedback</h4>
+        <h4 class="fw-bold pb-3 mb-4">Customer Feedback</h4>
         @if (count($message) > 0)
             <div class="card">
                 <div class="table-responsive text-nowrap">
@@ -43,7 +43,7 @@
                 </div>
             </div>
         @else
-            <h3 class="text-center my-5">There is no Category Here!</h3>
+            <h3 class="text-center my-5">There is no Feedback Here!</h3>
         @endif
     </div>
     <script>

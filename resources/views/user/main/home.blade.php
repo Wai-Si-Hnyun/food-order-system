@@ -48,11 +48,15 @@
                             </div>
                             <div class="product__item__text">
                                 <h6><a href="#">{{ $product->name }}</a></h6>
-                                <div class="product__item__price">${{ $product->price }}</div>
+                                <div class="product__item__price">{{ $product->price }} MMK</div>
                                 <div class="cart_add" data-id="{{ $product->id }}"
                                     data-name="{{ $product->name }}" data-price="{{ $product->price }}"
                                     data-image="{{ $product->image }}" data-quantity="1">
-                                    <a href="#" class="add-to-cart-btn">Add to cart</a>
+                                    @if (Auth::check())
+                                    <a href="javascript:void(0);" class="@if (Auth::user()->role == 'user') add-to-cart-btn @else '' @endif">Add to cart</a>
+                                    @else
+                                    <a href="javascript:void(0);" class="add-to-cart-btn">Add to cart</a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -90,7 +94,7 @@
                         <div id="questions" class="d-none">
                             <h4 class="mb-4" style="font-size: 14px">Questions:</h4>
                             @forelse ($questions as $question)
-                                <button class="btn btn-primary question mb-2 text-left" style="font-size: 14px"
+                                <button class="btn btn-primary question mb-2 text-left text-wrap w-100 overflow-hidden" style="font-size: 14px"
                                     data-question="{{ $question }}">{{ $question }}</button>
                             @empty
                                 <p>There is no question currently available.</p>
