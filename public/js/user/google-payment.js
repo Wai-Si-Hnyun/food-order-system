@@ -3,6 +3,10 @@ function onGooglePayLoaded() {
         // Login user id
         const userId = $('body').data('user-id');
 
+        // routes
+        const createOrderUrl = window.routes.createOrderUrl;
+        const googlePayUrl = window.routes.googlePayUrl;
+
         const paymentsClient = new google.payments.api.PaymentsClient({
             environment: 'TEST', // Use 'PRODUCTION' for the production environment
         });
@@ -77,10 +81,10 @@ function onGooglePayLoaded() {
 
             var orderData = loadOrderData();
 
-            await axios.post('/payment/google-pay', $data)
+            await axios.post(googlePayUrl, $data)
                 .then(async function (res) {
                     if (res.status == 200) {
-                        await axios.post('/order/create', orderData)
+                        await axios.post(createOrderUrl, orderData)
                             .then(function (res) {
                                 sessionStorage.removeItem('order-data', 'order-total-price');
                                 localStorage.removeItem('cart_' + userId);

@@ -2,6 +2,10 @@ $(document).ready(function () {
     // Login user id
     const userId = $('body').data('user-id');
 
+    // Routes
+    const orderCreateUrl = window.routes.orderCreateUrl;
+    const stripeUrl = window.routes.stripeUrl;
+
     // Get total price of order
     const totalPrice = sessionStorage.getItem('order-total-price');
 
@@ -57,9 +61,9 @@ $(document).ready(function () {
                     stripeToken: token,
                 }
 
-                await axios.post('/payment/card', data)
+                await axios.post(stripeUrl, data)
                     .then(async (res) => {
-                        await axios.post('/order/create', orderData)
+                        await axios.post(orderCreateUrl, orderData)
                             .then(function (res) {
                                 sessionStorage.removeItem('order-data', 'order-total-price');
                                 localStorage.removeItem('cart_' + userId);

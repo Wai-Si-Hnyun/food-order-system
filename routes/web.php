@@ -42,7 +42,7 @@ Route::post('/pass-change', [AuthController::class, 'passChange'])->name('auth.p
 Route::get('/cart', [CartController::class, 'cart'])->name('show.cart');
 
 // Chat bot
-Route::post('/chat/get-answer', [ChatbotController::class, 'getAnswer']);
+Route::post('/chat/get-answer', [ChatbotController::class, 'getAnswer'])->name('chat.getAnswer');
 
 //Customer Care
 Route::get('/customer-care', [CustomerController::class, 'care'])->name('customer.care');
@@ -111,8 +111,8 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{id}/show', [OrderController::class, 'show'])->name('order.show');
     Route::delete('/orders/{id}/delete', [OrderController::class, 'destroy'])->name('order.delete');
-    Route::get('/orders/{id}/status/change', [OrderController::class, 'changeOrderStatus']);
-    Route::get('/orders/{id}/deivered/status/change', [OrderController::class, 'changeDeliverStatus']);
+    Route::get('/orders/{id}/status/change', [OrderController::class, 'changeOrderStatus'])->name('order.status.change');
+    Route::get('/orders/{id}/deivered/status/change', [OrderController::class, 'changeDeliverStatus'])->name('order.deliver.status.change');
 
     //review
     Route::get('/reviews/list', [ReviewController::class, 'reviewList'])->name('review.list');

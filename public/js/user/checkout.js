@@ -2,6 +2,9 @@ $(document).ready(function () {
     // Login user id
     const userId = $('body').data('user-id');
 
+    // routes
+    const orderCreateUrl = window.routes.orderCreateUrl;
+
     // Check guset item and add to cart
     if (localStorage.getItem('cart_guest')) {
         const guestCart = JSON.parse(localStorage.getItem('cart_guest'));
@@ -102,8 +105,6 @@ $(document).ready(function () {
         sessionStorage.setItem('order-data', JSON.stringify(data));
     }
 
-    // Listen for the change event on the city select box'))
-
     $('#order-btn').click(async function (event) {
         event.preventDefault();
 
@@ -138,18 +139,9 @@ $(document).ready(function () {
 
         saveOrderDetails($data);
 
-        await axios.post('/order/create', $data)
+        await axios.post(orderCreateUrl, $data)
             .then(function (res) {
-                sessionStorage.removeItem('order-data');
-                Swal.fire({
-                    title: 'Success',
-                    text: res.data.message,
-                    icon: 'success',
-                    showConfirmButton: false,
-                    showCancelButton: false,
-                    timer: 2000,
-                });
-                window.location.href = '/orders';
+                console.log(res.data);
             })
             .catch(function (e) {
                 if (e.response.status == 422) {

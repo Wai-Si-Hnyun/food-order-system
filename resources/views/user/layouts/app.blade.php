@@ -225,6 +225,18 @@
     <script src="{{ asset('js/user/header.js') }}"></script>
     {{-- sweet alert --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+
+    <!-- routes -->
+    <script>
+        window.routes = {
+            'orderCreateUrl': '{{ route('order.store') }}',
+            'stripeUrl': '{{ route('stripe.card') }}',
+            'googlePayUrl': '{{ route('stripe.google') }}',
+            'chatGetAnswerUrl': '{{ route('chat.getAnswer') }}',
+            'ajaxIndexUrl': '{{ route('ajax.index') }}',
+        }
+    </script>
+
     @stack('script')
     @yield('scriptSource')
 </body>

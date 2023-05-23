@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    // routes
+    const ajaxIndexUrl = window.routes.ajaxIndexUrl;
+
     // product detail page
     $('.detail-view').on('click', function() {
         $id = $(this).data('id');
@@ -10,7 +13,7 @@ $(document).ready(function () {
         $option = $('#sorting').val();
 
         if ($option == 'asc') {
-            axios.post('/ajax/products', { status: 'asc' })
+            axios.post(ajaxIndexUrl, { status: 'asc' })
                 .then(res => {
                     $list = '';
                     for ($i = 0; $i < res.data.length; $i++) {
@@ -25,7 +28,7 @@ $(document).ready(function () {
                                         </div>
                                         <div class="product__item__text">
                                             <h6><a href="#">${res.data[$i].name}</a></h6>
-                                            <div class="product__item__price">K ${res.data[$i].price}</div>
+                                            <div class="product__item__price">${res.data[$i].price} MMK</div>
                                             <div class="cart_add" data-id="${res.data[$i].id}" data-name="${res.data[$i].name}"
                                                 data-price="${res.data[$i].price}" data-image="${res.data[$i].image}"
                                                 data-quantity="1">
@@ -48,7 +51,7 @@ $(document).ready(function () {
                     console.log(err);
                 })
         } else if ($option == 'desc') {
-            axios.post('/ajax/products', { status: 'desc' })
+            axios.post(ajaxIndexUrl, { status: 'desc' })
                 .then(res => {
                     $list = '';
                     for ($i = 0; $i < res.data.length; $i++) {
@@ -63,7 +66,7 @@ $(document).ready(function () {
                                     </div>
                                     <div class="product__item__text">
                                         <h6><a href="#">${res.data[$i].name}</a></h6>
-                                        <div class="product__item__price">K ${res.data[$i].price}</div>
+                                        <div class="product__item__price">${res.data[$i].price} MMK</div>
                                         <div class="cart_add" data-id="${res.data[$i].id}" data-name="${res.data[$i].name}"
                                             data-price="${res.data[$i].price}" data-image="${res.data[$i].image}"
                                             data-quantity="1">
