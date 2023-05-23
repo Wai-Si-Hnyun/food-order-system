@@ -52,7 +52,11 @@
                                 <div class="cart_add" data-id="{{ $product->id }}"
                                     data-name="{{ $product->name }}" data-price="{{ $product->price }}"
                                     data-image="{{ $product->image }}" data-quantity="1">
-                                    <a href="#" class="add-to-cart-btn">Add to cart</a>
+                                    @if (Auth::check())
+                                    <a href="javascript:void(0);" class="@if (Auth::user()->role == 'user') add-to-cart-btn @else '' @endif">Add to cart</a>
+                                    @else
+                                    <a href="javascript:void(0);" class="add-to-cart-btn">Add to cart</a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
