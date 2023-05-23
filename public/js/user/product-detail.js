@@ -34,9 +34,9 @@ $(document).ready(function() {
         localStorage.setItem('cart_' + userId, JSON.stringify(cart));
 
         // Save update value in the header
-        var oldTotal = parseFloat($('#cart-total-price').text().replace('K', ''));
+        var oldTotal = parseFloat($('#cart-total-price').text().replace('MMK', ''));
         oldTotal += price *quantity;
-        $('#cart-total-price').text('K ' + oldTotal);
+        $('#cart-total-price').text(oldTotal + ' MMK');
 
         // Show alert of success
         Swal.fire({
