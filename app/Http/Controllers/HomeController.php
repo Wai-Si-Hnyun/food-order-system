@@ -86,7 +86,7 @@ class HomeController extends Controller
 
     public function shop()
     {
-        $products = $this->userProductService->getUsersProduct();
+        $products = $this->productService->getProduct('user');
         $categories = $this->categoryService->getCategory('user');
 
         return view('user.main.shop', compact('products', 'categories'));

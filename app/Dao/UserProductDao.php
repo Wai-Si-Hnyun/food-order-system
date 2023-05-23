@@ -27,8 +27,7 @@ class UserProductDao implements UserProductDaoInterface
      */
     public function getUserProductById($id): object
     {
-        return Product::where('category_id', $id)->orderBy('created_at', 'desc')->get();
-
+        return Product::where('category_id', $id)->with('category')->orderBy('created_at', 'desc')->get();
     }
 
 }

@@ -1,6 +1,7 @@
 $(document).ready(function () {
     // routes
     const ajaxIndexUrl = window.routes.ajaxIndexUrl;
+    const getProductsUrl = window.routes.getProductsUrl;
 
     // product detail page
     $('.detail-view').on('click', function() {
@@ -79,6 +80,92 @@ $(document).ready(function () {
                     }
                     $('#dataList').html($list);
 
+                    // After appending the list, apply the background images
+                    $('.set-bg').each(function () {
+                        let imgUrl = $(this).data('setbg');
+                        $(this).css('background-image', 'url(' + imgUrl + ')');
+                    });
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
+    })
+
+    // Filtering by category\
+    $('#filterByCategory').on('change', function(e) {
+        e.preventDefault();
+
+        $categoryId = $(this).val();
+        const filterProductsUrl = window.routes.filterProductsUrl.replace('__id__', $categoryId);
+        
+        if ($categoryId == 'all') {
+            axios.get(getProductsUrl)
+                .then(res => {
+                    $('#dataList').empty();
+                    res.data.forEach(product => {
+                        $('#dataList').append(`
+                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                <div class="product__item" id="myForm">
+                                    <div class="product__item__pic set-bg detail-view" data-id="${product.id}"
+                                        data-setbg="/storage/${product.image}" style="cursor: pointer">
+                                        <div class="product__label">
+                                            <span>
+                                                ${product.category.name}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h6><a href="#">${product.name}</a></h6>
+                                        <div class="product__item__price">${product.price} MMK</div>
+                                        <div class="cart_add" data-id="${product.id}" data-name="${product.name}"
+                                            data-price="${product.price}" data-image="${product.image}"
+                                            data-quantity="1">
+                                            <a href="#" class="add-to-cart-btn">Add to cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `);
+                    })
+                    // After appending the list, apply the background images
+                    $('.set-bg').each(function () {
+                        let imgUrl = $(this).data('setbg');
+                        $(this).css('background-image', 'url(' + imgUrl + ')');
+                    });
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        } else {
+            axios.get(filterProductsUrl)
+                .then(res => {
+                    $('#dataList').empty();
+                    res.data.forEach(product => {
+                        $('#dataList').append(`
+                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                <div class="product__item" id="myForm">
+                                    <div class="product__item__pic set-bg detail-view" data-id="${product.id}"
+                                        data-setbg="/storage/${product.image}" style="cursor: pointer">
+                                        <div class="product__label">
+                                            <span>
+                                                ${product.category.name}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h6><a href="#">${product.name}</a></h6>
+                                        <div class="product__item__price">${product.price} MMK</div>
+                                        <div class="cart_add" data-id="${product.id}" data-name="${product.name}"
+                                            data-price="${product.price}" data-image="${product.image}"
+                                            data-quantity="1">
+                                            <a href="#" class="add-to-cart-btn">Add to cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `);
+                    })
                     // After appending the list, apply the background images
                     $('.set-bg').each(function () {
                         let imgUrl = $(this).data('setbg');
