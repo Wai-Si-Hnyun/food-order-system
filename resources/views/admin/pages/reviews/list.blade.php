@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4">Reviews List</h4>
+        <h4 class="fw-bold pb-3 mb-4">Reviews List</h4>
         <div class="d-flex justify-content-between mb-3">
             <h5>Total - ({{ count($review) }})</h5>
             <div class="">

@@ -7,9 +7,9 @@ $(document).ready(function() {
         let userId = $('body').data('user-id');
         let id = parentDiv.data('id');
         let name = parentDiv.data('name');
-        let price = parentDiv.data('price');
+        let price = parseInt(parentDiv.data('price'));
         let image = parentDiv.data('image');
-        var quantity = $('.quantity .pro-qty .product-qty').val();
+        var quantity = parseInt($('.quantity .pro-qty .product-qty').val());
 
         // Load the existing cart from localStorage
         let cart = JSON.parse(localStorage.getItem('cart_' + userId)) || [];
