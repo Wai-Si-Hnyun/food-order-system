@@ -66,6 +66,7 @@
     </section>
     @push('script')
         <script src="{{ asset('assets/user/js/addFavorite.js') }}"></script>
+        <script src="{{ asset('assets/user/js/product-detail.js') }}"></script>
     @endpush
     <!-- Shop Details Section End -->
     <!-- Related Products Section Begin -->
@@ -88,7 +89,8 @@
                                         style="height:200px">
                                     <div class="product__label">
                                         <span>
-                                            <a href="{{ route('product.details', $list->id) }}" class="text-dark">Foods</a>
+                                            <a href="{{ route('product.details', $list->id) }}"
+                                                class="text-dark">{{ $list->category->name }}</a>
                                         </span>
                                     </div>
                                 </div>
@@ -270,7 +272,3 @@
         }
     </script>
 @endsection
-
-@push('script')
-    <script src="{{ asset('js/user/product-detail.js') }}"></script>
-@endpush
