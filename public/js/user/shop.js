@@ -25,7 +25,7 @@ $(document).ready(function () {
                                         </div>
                                         <div class="product__item__text">
                                             <h6><a href="#">${res.data[$i].name}</a></h6>
-                                            <div class="product__item__price">$ ${res.data[$i].price}</div>
+                                            <div class="product__item__price">K ${res.data[$i].price}</div>
                                             <div class="cart_add" data-id="${res.data[$i].id}" data-name="${res.data[$i].name}"
                                                 data-price="${res.data[$i].price}" data-image="${res.data[$i].image}"
                                                 data-quantity="1">
@@ -63,7 +63,7 @@ $(document).ready(function () {
                                     </div>
                                     <div class="product__item__text">
                                         <h6><a href="#">${res.data[$i].name}</a></h6>
-                                        <div class="product__item__price">$ ${res.data[$i].price}</div>
+                                        <div class="product__item__price">K ${res.data[$i].price}</div>
                                         <div class="cart_add" data-id="${res.data[$i].id}" data-name="${res.data[$i].name}"
                                             data-price="${res.data[$i].price}" data-image="${res.data[$i].image}"
                                             data-quantity="1">

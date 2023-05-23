@@ -48,7 +48,7 @@
                             </div>
                             <div class="product__item__text">
                                 <h6><a href="#">{{ $product->name }}</a></h6>
-                                <div class="product__item__price">${{ $product->price }}</div>
+                                <div class="product__item__price">K {{ $product->price }}</div>
                                 <div class="cart_add" data-id="{{ $product->id }}"
                                     data-name="{{ $product->name }}" data-price="{{ $product->price }}"
                                     data-image="{{ $product->image }}" data-quantity="1">

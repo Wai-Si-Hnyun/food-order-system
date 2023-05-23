@@ -71,6 +71,7 @@ $(document).ready(function () {
             $('#city').append(`<option value="">No City</option>`);
         } else {
             $('#city').empty();
+            $('#city').append(`<option value="" selected>Choose City</option>`);
             cities.forEach(city => {
                 $('#city').append(`<option value="${city.name_en}">${city.name_en}</option>`).prop('disabled', false);
             });
@@ -81,6 +82,24 @@ $(document).ready(function () {
     $('#state, #city').select2({
         dropdownCssClass: 'custom-dropdown-height',
     })
+
+    //Styling select box
+    $('.state-select').select2({
+        width: '100%',
+        height: '50px',
+        width: '100%',
+        border: '1px solid #e1e1e1',
+        color: '#666666',
+    })
+
+    // $('.checkout__input select2.').css({
+    //     'height': '50px',
+    //     'width': '100%',
+    //     'border': '1px solid #e1e1e1',
+    //     'font-size': '14px',
+    //     'color': '#666666',
+    //     'padding-left': '20px',
+    // });
 
     // Listen for the change event on the state select box
     $('#state').on('change', function (e) {
@@ -93,7 +112,6 @@ $(document).ready(function () {
             $$('#city').empty().append('<option value="" selected>Choose City</option>').prop('disabled', true);
             return;
         }
-
         getCities(stateId);
     })
 

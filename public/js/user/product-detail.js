@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('.add-to-cart-btn').on('click', function(e) {
+    $('.add-to-cart-btn-detail').on('click', function(e) {
         e.preventDefault();
         
         let parentDiv = $(this).parent('.product__details__option');
@@ -7,7 +7,7 @@ $(document).ready(function() {
         let userId = $('body').data('user-id');
         let id = parentDiv.data('id');
         let name = parentDiv.data('name');
-        let price = parseFloat(parentDiv.data('price'));
+        let price = parentDiv.data('price');
         let image = parentDiv.data('image');
         var quantity = $('.quantity .pro-qty .product-qty').val();
 
@@ -34,9 +34,9 @@ $(document).ready(function() {
         localStorage.setItem('cart_' + userId, JSON.stringify(cart));
 
         // Save update value in the header
-        var oldTotal = parseFloat($('#cart-total-price').text().replace('$', ''));
+        var oldTotal = parseFloat($('#cart-total-price').text().replace('K', ''));
         oldTotal += price *quantity;
-        $('#cart-total-price').text('$' + oldTotal.toFixed(2));
+        $('#cart-total-price').text('K ' + oldTotal);
 
         // Show alert of success
         Swal.fire({

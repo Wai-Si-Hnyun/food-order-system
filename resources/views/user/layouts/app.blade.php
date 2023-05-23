@@ -97,7 +97,7 @@
                                 <div class="header__top__right__cart">
                                     <a href="{{ route('show.cart') }}"><img
                                             src="{{ asset('assets/user/img/icon/cart.png') }}" alt=""></a>
-                                    <div class="cart__price">Cart: <span id="cart-total-price">$0.00</span></div>
+                                    <div class="cart__price">Cart: <span id="cart-total-price"></span></div>
                                 </div>
                             </div>
                         </div>

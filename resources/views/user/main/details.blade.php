@@ -41,7 +41,7 @@
                     @endif
                     <div class="product__details__text">
                         <h4>{{ $product->name }}</h4>
-                        <h5>${{ $product->price }}</h5>
+                        <h5>K {{ $product->price }}</h5>
                         <p>
                             {{ $product->description }}
                         </p>
@@ -55,7 +55,7 @@
                                     <input type="text" name="quantity" value="1" class="product-qty">
                                 </div>
                             </div>
-                            <a href="#" class="primary-btn add-to-cart-btn">Add to cart</a>
+                            <a href="#" class="primary-btn add-to-cart-btn-detail">Add to cart</a>
                             <a href="{{ route('users.storeWishlist', ['productId' => $product->id]) }}">
                                 <button type="submit" class="btn btn-outline-warning btn-lg heart__btn  mr-3">
                                     <span class="icon_heart_alt"></span>
@@ -83,19 +83,19 @@
                     @foreach ($productList as $list)
                         <div class="col-lg-3">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg">
-                                    <img src="{{ asset('storage/' . $list->image) }}" alt="product-image"
-                                        style="height:200px">
+                                <div class="product__item__pic set-bg" data-setbg="{{ asset('storage/' . $list->image) }}">
                                     <div class="product__label">
                                         <span>
-                                            <a href="{{ route('users.details', $list->id) }}" class="text-dark">Foods</a>
+                                            {{ $list->category->name }}
                                         </span>
                                     </div>
                                 </div>
                                 <div class="product__item__text">
                                     <h6><a href="#">{{ $list->name }}</a></h6>
-                                    <div class="product__item__price">${{ $list->price }}</div>
-                                    <div class="cart_add">
+                                    <div class="product__item__price">K {{ $list->price }}</div>
+                                    <div class="cart_add" data-id="{{ $list->id }}" data-name="{{ $list->name }}"
+                                        data-price="{{ $list->price }}" data-image="{{ $list->image }}"
+                                        data-quantity="1">
                                         <a href="#" class="add-to-cart-btn">Add to cart</a>
                                     </div>
                                 </div>
@@ -265,12 +265,12 @@
                     .catch(err => {
                         console.log(err.response)
                     });
-
             }
         }
     </script>
 @endsection
 
 @push('script')
+    <script src="{{ asset('js/user/add-to-cart.js') }}"></script>
     <script src="{{ asset('js/user/product-detail.js') }}"></script>
 @endpush

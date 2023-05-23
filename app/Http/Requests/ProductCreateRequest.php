@@ -28,7 +28,14 @@ class ProductCreateRequest extends FormRequest
             'productName' => ['required', 'max:50'],
             'productImage' => ['required', 'mimes:jpg,jpeg,png,webp', 'file'],
             'productDescription' => ['required', 'min:10'],
-            'productPrice' => ['required'],
+            'productPrice' => ['required', 'min:3000'],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'productPrice.min' => 'Product price must be greater than 3000 MMK',
         ];
     }
 }

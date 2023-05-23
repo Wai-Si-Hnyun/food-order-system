@@ -51,8 +51,8 @@ function onGooglePayLoaded() {
             paymentDataRequest.transactionInfo = {
                 totalPriceStatus: 'FINAL',
                 totalPrice: totalPrice,
-                currencyCode: 'USD',
-                countryCode: 'US',
+                currencyCode: 'MMK',
+                countryCode: 'MM',
             };
 
             paymentsClient.loadPaymentData(paymentDataRequest)
