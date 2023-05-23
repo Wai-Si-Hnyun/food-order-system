@@ -33,12 +33,6 @@
                     </div>
                 </div>
                 <div class="col-lg-7">
-                    @if (session('addSuccess'))
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                            {{ session('addSuccess') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
                     <div class="product__details__text">
                         <h4>{{ $product->name }}</h4>
                         <h5>${{ $product->price }}</h5>
@@ -56,17 +50,23 @@
                                 </div>
                             </div>
                             <a href="#" class="primary-btn add-to-cart-btn">Add to cart</a>
-                            <a href="{{ route('users.storeWishlist', ['productId' => $product->id]) }}">
+                            <form action="{{ route('products.storeWishlist') }}" id="contact_form" method="post">
+                                @csrf
+                                <input name="user_id" type="hidden" value="{{ Auth::user()->id }}" />
+                                <input name="product_id" type="hidden" value="{{ $product->id }}" />
                                 <button type="submit" class="btn btn-outline-warning btn-lg heart__btn  mr-3">
                                     <span class="icon_heart_alt"></span>
                                 </button>
-                            </a>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    @push('script')
+        <script src="{{ asset('assets/user/js/addFavorite.js') }}"></script>
+    @endpush
     <!-- Shop Details Section End -->
     <!-- Related Products Section Begin -->
     <section class="related-products spad">
@@ -88,7 +88,7 @@
                                         style="height:200px">
                                     <div class="product__label">
                                         <span>
-                                            <a href="{{ route('users.details', $list->id) }}" class="text-dark">Foods</a>
+                                            <a href="{{ route('product.details', $list->id) }}" class="text-dark">Foods</a>
                                         </span>
                                     </div>
                                 </div>

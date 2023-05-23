@@ -28,7 +28,7 @@ Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/shop', [HomeController::class, 'shop'])->name('users.shop');
 Route::post('/ajax/products', [AjaxController::class, 'index'])->name('ajax.index');
 Route::get('/products/{id}/filter', [UserProductController::class, 'filter'])->name('products.filter');
-Route::get('/products/{id}/details', [UserProductController::class, 'details'])->name('products.details');
+Route::get('/products/{id}/details', [UserProductController::class, 'details'])->name('product.details');
 Route::get('/about', [HomeController::class, 'about'])->name('products.about');
 
 //forget/reset password
@@ -63,9 +63,11 @@ Route::middleware('role:user')->group(function () {
     Route::get('/users', [UserProductController::class, 'home'])->name('users.home');
 
     // for wishlists
-    Route::get('/users/wishlists/page', [WishlistController::class, 'addWishlist'])->name('users.wishlist');
-    Route::get('/users/store/wishlists/{productId}', [WishlistController::class, 'storeWishlist'])->name('users.storeWishlist');
-    Route::get('/users/destroy/{id}/wishlists', [WishlistController::class, 'destroyWishlist'])->name('users.destroyWishlist');
+    Route::get('/users/wishlists/page', [WishlistController::class, 'addWishList'])->name('products.wishlist');
+    // Route::get('/users/store/wishlists/{productId}', [WishlistController::class, 'storeWishlist'])->name('products.storeWishlist');
+    Route::post('/users/store/wishlists', [WishlistController::class, 'storeWishlist'])->name('products.storeWishlist');
+
+    Route::delete('/users/destroy/{id}/wishlists', [WishlistController::class, 'destroyWishlist'])->name('products.destroyWishlist');
 
     //cart
     // Route::post('add-cart/{product}', [CartController::class, 'addToCart'])->name('add.cart');

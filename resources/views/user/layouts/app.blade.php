@@ -70,7 +70,7 @@
                                             <a href="#" onclick="handleFormSubmit(event)">Logout</a>
                                         </li>
                                         <li>
-                                            <a href="{{route('customer.care')}}">Help</a>
+                                            <a href="{{ route('customer.care') }}">Help</a>
                                         </li>
                                     @else
                                         <li>
@@ -91,7 +91,7 @@
                             </div>
                             <div class="header__top__right">
                                 <div class="header__top__right__links">
-                                    <a href="{{ route('users.wishlist') }}"><img
+                                    <a href="{{ route('products.wishlist') }}"><img
                                             src="{{ asset('assets/user/img/icon/heart.png') }}" alt=""></a>
                                 </div>
                                 <div class="header__top__right__cart">
@@ -117,7 +117,7 @@
                                 <li id="orders"><a href="{{ route('user.order') }}">Order</a></li>
                             @endif
                             <li id="about"><a href="{{ route('products.about') }}">About</a></li>
-                            <li id="contact"><a href="{{route('feedback.page')}}">Contact</a></li>
+                            <li id="contact"><a href="{{ route('feedback.page') }}">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -221,6 +221,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('js/user/header.js') }}"></script>
+    {{-- sweet alert --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
     @stack('script')
     @yield('scriptSource')
 </body>

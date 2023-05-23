@@ -74,7 +74,7 @@
                 </div>
             </div>
         @else
-            <h3 class="text-center my-5">There is no Feedback Here!</h3>
+            <h3 class="text-center my-5">There is no Categories Here!</h3>
         @endif
         <div class="mt-3">
             {{ $categories->links() }}
