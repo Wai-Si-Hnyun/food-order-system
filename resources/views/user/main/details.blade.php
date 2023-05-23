@@ -41,7 +41,7 @@
                     @endif
                     <div class="product__details__text">
                         <h4>{{ $product->name }}</h4>
-                        <h5>K {{ $product->price }}</h5>
+                        <h5>{{ $product->price }} MMK</h5>
                         <p>
                             {{ $product->description }}
                         </p>
@@ -92,7 +92,7 @@
                                 </div>
                                 <div class="product__item__text">
                                     <h6><a href="#">{{ $list->name }}</a></h6>
-                                    <div class="product__item__price">K {{ $list->price }}</div>
+                                    <div class="product__item__price">{{ $list->price }} MMK</div>
                                     <div class="cart_add" data-id="{{ $list->id }}" data-name="{{ $list->name }}"
                                         data-price="{{ $list->price }}" data-image="{{ $list->image }}"
                                         data-quantity="1">

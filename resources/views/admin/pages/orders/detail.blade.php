@@ -9,7 +9,7 @@
             <div class="card-body">
                 <ul class="list-group col-5">
                     <li class="list-group-item">Name&nbsp;-&nbsp; {{ $order->user->name }}</li>
-                    <li class="list-group-item">Total Price&nbsp;-&nbsp; ${{ $order->total_price }}</li>
+                    <li class="list-group-item">Total Price&nbsp;-&nbsp; {{ $order->total_price }} MMK</li>
                     <li class="list-group-item">
                         Status&nbsp;-&nbsp;@if ($order->status == 0)
                             <span class="text-danger">Reject</span>
@@ -36,7 +36,7 @@
                                 <th></th>
                                 <th>Image</th>
                                 <th>Name</th>
-                                <th>Price</th>
+                                <th>Price(MMK)</th>
                                 <th>Quantity</th>
                                 <th>Total</th>
                             </tr>
@@ -50,9 +50,9 @@
                                             alt="">
                                     </td>
                                     <td>{{ $orderlist->product->name }}</td>
-                                    <td>${{ $orderlist->product->price }}</td>
+                                    <td>{{ $orderlist->product->price }}</td>
                                     <td>{{ $orderlist->quantity }}</td>
-                                    <td>${{ $orderlist->total }}</td>
+                                    <td>{{ $orderlist->total }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

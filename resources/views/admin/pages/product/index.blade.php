@@ -50,7 +50,7 @@
                                     <th>Name</th>
                                     <th>Category</th>
                                     <th class="text-right">Description</th>
-                                    <th class="text-right">price</th>
+                                    <th class="text-right">Price(MMK)</th>
                                     <th class="text-right">Action</th>
                                 </tr>
                             </thead>
@@ -62,16 +62,16 @@
                                         <td>{{ $product->name }}</td>
                                         <td>{{ $product->category_name }}</td>
                                         <td class="text-right">{{ Str::words($product->description, 2, '...') }}</td>
-                                        <td class="text-right">${{ $product->price }}</td>
+                                        <td class="text-right">{{ $product->price }}</td>
                                         <td class="text-right">
                                             <a href="{{ route('products.details', $product->id) }}">
                                                 <i class='bx bx-detail text-warning'></i>
                                             </a>
                                             <a href="{{ route('products.edit', $product->id) }}">
-                                                <i class='bx bxs-edit-alt'></i>
+                                                <i class='bx bxs-edit-alt ms-2'></i>
                                             </a>
                                             <a href="{{ route('products.destroy', $product->id) }}">
-                                                <i class='bx bxs-trash text-danger'></i>
+                                                <i class='bx bxs-trash text-danger ms-2'></i>
                                             </a>
                                         </td>
                                     </tr>

@@ -29,11 +29,20 @@
                     <div class="card">
                         <div class="card-header mb-2 custom-card-header" id="heading{{ $order->id }}">
                             <div class="d-flex justify-content-between w-100" type="button" data-toggle="collapse"
-                                    data-target="#collapse{{ $order->id }}" aria-expanded="true"
-                                    aria-controls="collapse{{ $order->id }}">
+                                data-target="#collapse{{ $order->id }}" aria-expanded="true"
+                                aria-controls="collapse{{ $order->id }}">
                                 <p class="d-inline-block mb-0">Order # {{ $order->order_code }}</p>
-                                <p class="d-inline-block mb-0">Total Cost - ${{ $order->total_price }}</p>
-                                <i class="text-dark fa-solid fa-chevron-down"></i>
+                                <div>Order Status -
+                                    @if ($order->status == 0)
+                                        <span class="text-danger">Rejected</span>
+                                    @elseif ($order->status == 1)
+                                        <span class="text-success">Accepted</span>
+                                    @elseif ($order->status == 2)
+                                        <span class="text-warning">Pending</span>
+                                    @endif
+                                </div>
+                                <p class="d-inline-block mb-0">Total Cost - {{ $order->total_price }} MMK</p>
+                                <i class="text-dark fa fa-sort-desc" aria-hidden="true"></i>
                             </div>
                         </div>
 
@@ -61,13 +70,13 @@
                                                     <p>{{ $orderlist->product->name }}</p>
                                                 </td>
                                                 <td>
-                                                    <p>${{ $orderlist->product->price }}</p>
+                                                    <p>{{ $orderlist->product->price }} MMK</p>
                                                 </td>
                                                 <td>
                                                     <p>{{ $orderlist->quantity }}</p>
                                                 </td>
                                                 <td>
-                                                    <p>${{ $orderlist->total }}</p>
+                                                    <p>{{ $orderlist->total }} MMK</p>
                                                 </td>
                                             </tr>
                                         @endforeach

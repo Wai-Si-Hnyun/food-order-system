@@ -32,15 +32,15 @@ $(document).ready(function () {
         var totalPrice = 0;
         cart.forEach((item, index) => {
             $('.checkout__total__products').append(
-                `<li><samp>${index + 1}. </samp>${item.name} <span>$ ${(item.price * item.quantity).toFixed(2)}</span></li>`
+                `<li><samp>${index + 1}. </samp>${item.name} <span>${item.price * item.quantity}</span></li>`
             );
 
             totalPrice += item.price * item.quantity;
         });
 
-        $('#total-price').text(`$ ${(totalPrice).toFixed(2)}`);
+        $('#total-price').text(`${totalPrice} MMK`);
 
-        $('#cart-total-price').text(`$ ${(totalPrice).toFixed(2)}`);
+        $('#cart-total-price').text(`${totalPrice} MMK`);
 
         sessionStorage.setItem('order-total-price', totalPrice);
     })();
@@ -82,24 +82,6 @@ $(document).ready(function () {
     $('#state, #city').select2({
         dropdownCssClass: 'custom-dropdown-height',
     })
-
-    //Styling select box
-    $('.state-select').select2({
-        width: '100%',
-        height: '50px',
-        width: '100%',
-        border: '1px solid #e1e1e1',
-        color: '#666666',
-    })
-
-    // $('.checkout__input select2.').css({
-    //     'height': '50px',
-    //     'width': '100%',
-    //     'border': '1px solid #e1e1e1',
-    //     'font-size': '14px',
-    //     'color': '#666666',
-    //     'padding-left': '20px',
-    // });
 
     // Listen for the change event on the state select box
     $('#state').on('change', function (e) {
