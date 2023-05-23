@@ -8,9 +8,9 @@ $('.show_confirm').click(function(event) {
 
     swal({
 
-        title: `Are you sure you want to delete this category?`,
+        title: ``,
 
-        text: "If you delete this, it will be gone forever.",
+        text: "Are you sure you want to delete this category?",
 
         icon: "warning",
 

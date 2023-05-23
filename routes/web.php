@@ -29,7 +29,7 @@ Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/shop', [HomeController::class, 'shop'])->name('users.shop');
 Route::post('/ajax/products', [AjaxController::class, 'index'])->name('ajax.index');
 Route::get('/products/{id}/filter', [UserProductController::class, 'filter'])->name('products.filter');
-Route::get('/products/{id}/details', [UserProductController::class, 'details'])->name('products.details');
+Route::get('/products/{id}/details', [UserProductController::class, 'details'])->name('product.details');
 Route::get('/about', [HomeController::class, 'about'])->name('products.about');
 
 //forget/reset password
@@ -45,7 +45,7 @@ Route::get('/cart', [CartController::class, 'cart'])->name('show.cart');
 Route::post('/chat/get-answer', [ChatbotController::class, 'getAnswer']);
 
 //Customer Care
-Route::get('/customer-care',[CustomerController::class,'care'])->name('customer.care');
+Route::get('/customer-care', [CustomerController::class, 'care'])->name('customer.care');
 
 Route::middleware('role:user')->group(function () {
     // Order
@@ -64,9 +64,11 @@ Route::middleware('role:user')->group(function () {
     Route::get('/users', [UserProductController::class, 'home'])->name('users.home');
 
     // for wishlists
-    Route::get('/users/wishlists/page', [WishlistController::class, 'addWishlist'])->name('users.wishlist');
-    Route::get('/users/store/wishlists/{productId}', [WishlistController::class, 'storeWishlist'])->name('users.storeWishlist');
-    Route::get('/users/destroy/{id}/wishlists', [WishlistController::class, 'destroyWishlist'])->name('users.destroyWishlist');
+    Route::get('/users/wishlists/page', [WishlistController::class, 'addWishList'])->name('products.wishlist');
+    // Route::get('/users/store/wishlists/{productId}', [WishlistController::class, 'storeWishlist'])->name('products.storeWishlist');
+    Route::post('/users/store/wishlists', [WishlistController::class, 'storeWishlist'])->name('products.storeWishlist');
+
+    Route::delete('/users/destroy/{id}/wishlists', [WishlistController::class, 'destroyWishlist'])->name('products.destroyWishlist');
 
     //cart
     // Route::post('add-cart/{product}', [CartController::class, 'addToCart'])->name('add.cart');
@@ -103,7 +105,7 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('/products/{id}/details', [ProductController::class, 'detail'])->name('products.details');
     Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
     Route::post('/products/{id}/update', [ProductController::class, 'update'])->name('products.update');
-    Route::get('/products/{id}/delete', [ProductController::class, 'destroy'])->name('products.destroy');
+    Route::delete('/products/{id}/delete', [ProductController::class, 'destroy'])->name('products.destroy');
 
     // Order
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
@@ -113,15 +115,15 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('/orders/{id}/deivered/status/change', [OrderController::class, 'changeDeliverStatus']);
 
     //review
-    Route::get('/reviews/list',[ReviewController::class,'reviewList'])->name('review.list');
-    Route::delete('/reviews/{review}/delete',[ReviewController::class,'reviewDestory'])->name('review.destory');
-   
+    Route::get('/reviews/list', [ReviewController::class, 'reviewList'])->name('review.list');
+    Route::delete('/reviews/{review}/delete', [ReviewController::class, 'reviewDestory'])->name('review.destory');
+
     //UserList
     Route::get('/users/list', [UserdataController::class, 'userList'])->name('userData.list');
     Route::put('/user/{user}', [UserdataController::class, 'roleUpdate'])->name('role.update');
     Route::get('/user/{user}/info', [UserdataController::class, 'userInfo'])->name('user.info');
     Route::delete('/users/{user}/delete', [UserdataController::class, 'userDelete'])->name('user.destory');
-  
+
     //feedback
     Route::get('/feedback-list', [FeedbackController::class, 'feedbackList'])->name('feedback.list');
     Route::delete('/feedback/{feedback}/delete', [FeedbackController::class, 'feedbackDestory'])->name('feedback.destory');

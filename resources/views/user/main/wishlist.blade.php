@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="breadcrumb__text">
-                        <h2>Wishlist</h2>
+                        <h2>Favorites</h2>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
@@ -28,12 +28,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    @if (session('deleteSuccess'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            {{ session('deleteSuccess') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
                     <div class="wishlist__cart__table">
                         <table>
                             <thead>
@@ -59,11 +53,18 @@
                                         </td>
                                         <td class="cart__price">${{ $list->product_price }}</td>
                                         <td class="cart__stock">In stock</td>
-                                        <td class="cart__btn"><a href="#" class="primary-btn">Add
+                                        <td class="cart__btn"><a href="{{ route('payment.card') }}" class="primary-btn">Add
                                                 to cart</a></td>
                                         <td class="cart__close">
-                                            <a href="{{ route('users.destroyWishlist', $list->id) }}"><span
-                                                    class="icon_close"></span></a>
+                                            <form method="POST"
+                                                action="{{ route('products.destroyWishlist', $list->id) }}">
+                                                @csrf
+                                                <input name="_method" type="hidden" value="DELETE">
+                                                <button type="submit" class="btn btn-default btn-xs btn-flat show_confirm"
+                                                    data-toggle="tooltip" title='Delete'>
+                                                    <span class="icon_close"></span>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -79,3 +80,6 @@
         </div>
     </section>
 @endsection
+@push('script')
+    <script src="{{ asset('assets/user/js/addFavorite.js') }}"></script>
+@endpush
