@@ -70,7 +70,7 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">
                                 <h6 class="order__title">Your order</h6>
-                                <div class="checkout__order__products">Product <span>Total</span></div>
+                                <div class="checkout__order__products">Product <span>Total(MMK)</span></div>
                                 <ul class="checkout__total__products">
                                 </ul>
                                 <ul class="checkout__total__all">

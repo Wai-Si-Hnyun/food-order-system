@@ -9,6 +9,9 @@ function onGooglePayLoaded() {
 
         const totalPrice = sessionStorage.getItem('order-total-price');
 
+        // Show total price
+        $('#order-total-price').text('Total Cost - ' + totalPrice + ' MMK');
+
         const tokenizationSpecification = {
             type: 'PAYMENT_GATEWAY',
             parameters: {

@@ -34,6 +34,7 @@
                         <h3>Payment Details</h3>
                     </div>
                     <div class="card-body text-center pt-5">
+                        <div class="mb-3" id="order-total-price">Total Cost - 0 MMK</div>
                         <div id="pay-button"></div>
                     </div>
                 </div>
