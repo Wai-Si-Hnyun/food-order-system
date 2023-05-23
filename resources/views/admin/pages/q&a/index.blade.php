@@ -23,7 +23,7 @@
         </div>
         <div class="row mb-5">
             @forelse ($qaData as $qa)
-                <div class="col-md-6 col-lg-4 d-flex align-items-stretch" id="qa-{{ $qa->id }}">
+                <div class="col-md-6 col-lg-4 d-flex align-items-stretch qa-card" id="qa-{{ $qa->id }}">
                     <div class="card mb-3 w-100">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">{{ $qa->question }}</h5>
@@ -37,7 +37,7 @@
                     </div>
                 </div>
             @empty
-                <h3 class="text-center my-5">There is no Question and Answer Here!</h3>
+                <h4 class="text-center my-5">There is no Question and Answer Here!</h4>
             @endforelse
         </div>
     </div>

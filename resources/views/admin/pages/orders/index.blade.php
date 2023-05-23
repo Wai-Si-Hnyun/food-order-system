@@ -89,7 +89,7 @@
                 {{ $orders->links() }}
             </div>
         @else
-            <h4 class="mt-5 text-center">No Orders here!</h4>
+            <h4 class="mt-5 text-center">No Order here!</h4>
         @endif
     </div>
 @endsection

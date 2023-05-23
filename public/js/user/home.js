@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    // routes
+    const chatGetAnswerUrl = window.routes.chatGetAnswerUrl;
+
     $("#get-started").on("click", function () {
         $(this).parent().addClass("d-none");
         $("#questions").removeClass("d-none");
@@ -12,7 +15,7 @@ $(document).ready(function () {
 
         const question = $(this).data("question");
 
-        axios.post('/chat/get-answer', { question })
+        axios.post(chatGetAnswerUrl, { question })
             .then(function (res) {
                 var words = res.data.split(" ");
                 var i = 0;

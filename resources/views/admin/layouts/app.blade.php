@@ -274,6 +274,16 @@
         <!--axios -->
         <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 
+        <!-- routes -->
+    <script>
+        window.routes = {
+            'orderDeleteUrl': '{{ route('order.delete', ['id' => '__orderId__']) }}',
+            'orderStatusChgUrl': '{{ route('order.status.change', ['id' => '__orderId']) }}',
+            'orderDeliverStatusChgUrl': '{{ route('order.deliver.status.change', ['id' => '__orderId__']) }}',
+            'qaDeleteUrl': '{{ route('q&a.delete', ['id' => '__qaId__']) }}',
+        }
+    </script>
+
         @stack('script')
 </body>
 
