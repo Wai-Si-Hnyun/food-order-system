@@ -27,6 +27,7 @@ Route::post('/register', [AuthController::class, 'authRegisterStore'])->name('au
 // Unauthenticated Routes
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/shop', [HomeController::class, 'shop'])->name('users.shop');
+Route::get('/products', [ProductController::class, 'getAllProducts'])->name('products.all');
 Route::post('/ajax/products', [AjaxController::class, 'index'])->name('ajax.index');
 Route::get('/products/{id}/filter', [UserProductController::class, 'filter'])->name('products.filter');
 Route::get('/products/{id}/details', [UserProductController::class, 'details'])->name('product.details');

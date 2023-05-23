@@ -24,9 +24,10 @@ class ProductDao implements ProductDaoInterface
                 ->appends(request()->all());
         } elseif ($page == 'user') {
             return Product::when(request('key'), function ($query) {
-                $query->where('products.name', 'LIKE', '%' . request('key') . '%');
-
-            })
+                    $query->where('products.name', 'LIKE', '%' . request('key') . '%');
+                })
+                ->with('category')
+                ->orderBy('products.created_at', 'desc')
                 ->get();
         }
         return Product::all();

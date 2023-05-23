@@ -234,6 +234,8 @@
             'googlePayUrl': '{{ route('stripe.google') }}',
             'chatGetAnswerUrl': '{{ route('chat.getAnswer') }}',
             'ajaxIndexUrl': '{{ route('ajax.index') }}',
+            'getProductsUrl': '{{ route('products.all') }}',
+            'filterProductsUrl': '{{ route('products.filter', ['id' => '__id__']) }}',
         }
     </script>
 

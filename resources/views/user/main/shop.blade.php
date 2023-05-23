@@ -24,7 +24,7 @@
     <section class="shop spad">
         <div class="container">
             <div class="shop__option">
-                <div class="row mb-5">
+                {{-- <div class="row mb-5">
                     <div class="col-lg-7 col-md-7">
                         <div class="shop__option__search row mb-5">
 
@@ -68,6 +68,32 @@
                             </select>
                         </div>
                     </div>
+                </div> --}}
+                <div class="row">
+                    <div class="col-lg-7 col-md-7">
+                        <div class="shop__option__search">
+                            <form action="{{ route('users.shop') }}">
+                                <select id="filterByCategory">
+                                    <option value="all">All</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                                <input type="text" name="key" value="{{ request('key') }}" old="{{ request('key') }}"
+                                    placeholder="Search">
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-5">
+                        <div class="shop__option__right">
+                            <select id="sorting" name="sorting">
+                                <option value="">Sorting By</option>
+                                <option value="asc">Asending</option>
+                                <option value="desc">Desending</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row mt-5" id='dataList'>
@@ -87,7 +113,6 @@
                                     <h6><a href="#">{{ $product->name }}</a></h6>
                                     <div class="product__item__price">{{ $product->price }} MMK</div>
                                     <div class="cart_add" data-id="{{ $product->id }}" data-name="{{ $product->name }}"
-                                        data-user_id="{{ Auth::check() ? Auth::user()->id : 'guest' }}"
                                         data-price="{{ $product->price }}" data-image="{{ $product->image }}"
                                         data-quantity="1">
                                         <a href="#" class="add-to-cart-btn">Add to cart</a>

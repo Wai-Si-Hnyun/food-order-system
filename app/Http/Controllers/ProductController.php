@@ -108,4 +108,11 @@ class ProductController extends Controller
         $this->productService->deleteProductById($id);
         return back();
     }
+
+    public function getAllProducts()
+    {
+        $products = $this->productService->getProduct('user');
+
+        return response()->json($products, 200);
+    }
 }

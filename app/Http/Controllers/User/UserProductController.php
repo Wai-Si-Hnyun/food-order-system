@@ -68,7 +68,7 @@ class UserProductController extends Controller
     public function filter($id)
     {
         $products = $this->userProductService->getUserProductById($id);
-        $categories = $this->userProductService->getUserProductById($id);
-        return view('user.main.shop', compact('products', 'categories'));
+
+        return response()->json($products, 200);
     }
 }
