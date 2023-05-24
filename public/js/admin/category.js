@@ -10,7 +10,7 @@ $('.show_confirm').click(function(event) {
 
         title: ``,
 
-        text: "Are you sure you want to delete this category?",
+        text: "Are you sure you want to delete this Category?",
 
         icon: "warning",
 

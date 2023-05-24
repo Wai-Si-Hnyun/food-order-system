@@ -164,69 +164,73 @@
                                     aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
                             </li>
 
-                           <!-- User -->
-                           @if(Auth::check())
-                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
-                                    data-bs-toggle="dropdown">
+                            <!-- User -->
+                            @if (Auth::check())
+                                <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                                    <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
+                                        data-bs-toggle="dropdown">
 
-                                    @if(Auth::user()->image == null)
-                                    <div class="avatar avatar-online">
-                                        <img src="{{ asset('image/profile.png') }}" alt
-                                            class="w-100 h-100 rounded-circle" />
-                                    </div>
-                                    @else
-                                    <div class="avatar avatar-online">
-                                        <img src="{{ asset('image/profile/'.Auth::user()->image) }}" alt
-                                            class="w-100 h-100 rounded-circle" />
-                                    </div>
-                                    @endif
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <div class="d-flex">
-                                                <div class="flex-shrink-0 me-3">
-                                                    @if(Auth::user()->image == null)
-                                                        <img src="{{ asset('image/profile.png') }}"
-                                                            alt="Profile" class="w-px-40 h-auto rounded-circle" />
-                                                    @else
-                                                        <img src="{{ asset('image/profile/'.Auth::user()->image) }}"
-                                                            alt="Profile" class="w-px-40 h-auto rounded-circle" />
-                                                    @endif
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <span class="fw-semibold d-block">{{Auth::user()->name}}</span>
-                                                    <small class="text-muted">{{Auth::user()->role}}</small>
-                                                </div>
+                                        @if (Auth::user()->image == null)
+                                            <div class="avatar avatar-online">
+                                                <img src="{{ asset('image/profile.png') }}" alt
+                                                    class="w-100 h-100 rounded-circle" />
                                             </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <div class="dropdown-divider"></div>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="{{url('userprofile/'.Auth::user()->id )}}">
-                                            <i class="bx bx-user me-2"></i>
-                                            <span class="align-middle">My Profile</span>
-                                        </a>
+                                        @else
+                                            <div class="avatar avatar-online">
+                                                <img src="{{ asset('image/profile/' . Auth::user()->image) }}" alt
+                                                    class="w-100 h-100 rounded-circle" />
+                                            </div>
                                         @endif
-                                    </li>
-                                    <li>
-                                        <div class="dropdown-divider"></div>
-                                    </li>
-                                    <li>
-                                        <form action="{{ route('logout') }}" method="POST" id="logoutForm">
-                                            @csrf
-                                        </form>
-                                        <a class="dropdown-item" href="#" onclick="handleFormSubmit(event)">
-                                            <i class="bx bx-power-off me-2"></i>
-                                            <span class="align-middle">Log Out</span>
-                                        </a>
-                                    </li>
-                                </ul>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li>
+                                            <a class="dropdown-item" href="#">
+                                                <div class="d-flex">
+                                                    <div class="flex-shrink-0 me-3">
+                                                        @if (Auth::user()->image == null)
+                                                            <img src="{{ asset('image/profile.png') }}"
+                                                                alt="Profile"
+                                                                class="w-px-40 h-auto rounded-circle" />
+                                                        @else
+                                                            <img src="{{ asset('image/profile/' . Auth::user()->image) }}"
+                                                                alt="Profile"
+                                                                class="w-px-40 h-auto rounded-circle" />
+                                                        @endif
+                                                    </div>
+                                                    <div class="flex-grow-1">
+                                                        <span
+                                                            class="fw-semibold d-block">{{ Auth::user()->name }}</span>
+                                                        <small class="text-muted">{{ Auth::user()->role }}</small>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <div class="dropdown-divider"></div>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item"
+                                                href="{{ url('userprofile/' . Auth::user()->id) }}">
+                                                <i class="bx bx-user me-2"></i>
+                                                <span class="align-middle">My Profile</span>
+                                            </a>
+                            @endif
                             </li>
-                            <!--/ User -->
+                            <li>
+                                <div class="dropdown-divider"></div>
+                            </li>
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST" id="logoutForm">
+                                    @csrf
+                                </form>
+                                <a class="dropdown-item" href="#" onclick="handleFormSubmit(event)">
+                                    <i class="bx bx-power-off me-2"></i>
+                                    <span class="align-middle">Log Out</span>
+                                </a>
+                            </li>
+                        </ul>
+                        </li>
+                        <!--/ User -->
                         </ul>
                     </div>
                 </nav>
@@ -269,6 +273,8 @@
 
         <!--axios -->
         <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+        {{-- sweet alert --}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
 
         <!-- routes -->
         <script>

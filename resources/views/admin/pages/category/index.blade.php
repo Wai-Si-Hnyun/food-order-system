@@ -66,6 +66,7 @@
                                                 <i class='bx bxs-trash text-danger'></i>
                                             </button>
                                         </form>
+
                                     </td>
                                 </tr>
                             @endforeach

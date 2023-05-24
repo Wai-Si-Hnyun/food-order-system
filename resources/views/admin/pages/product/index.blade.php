@@ -58,7 +58,7 @@
                                     <td>{{ $product->name }}</td>
                                     <td>{{ $product->category_name }}</td>
                                     <td class="text-right">{{ Str::words($product->description, 2, '...') }}</td>
-                                    <td class="text-right">${{ $product->price }}</td>
+                                    <td class="text-right">{{ $product->price }}MMK</td>
                                     <td class="text-right d-flex">
                                         <a href="{{ route('products.details', $product->id) }}">
                                             <i class='bx bx-detail text-warning my-5 me-2'></i>
