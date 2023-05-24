@@ -40,6 +40,71 @@
 </head>
 
 <body data-user-id="{{ Auth::check() ? Auth::user()->id : 'guest' }}">
+    <!-- Offcanvas Menu Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="offcanvas__cart">
+            <div class="offcanvas__cart__links">
+                <a href="#"><img src="{{ asset('assets/user/img/icon/heart.png') }}" alt=""></a>
+            </div>
+            <div class="offcanvas__cart__item">
+                <a href="#"><img src="{{ asset('assets/user/img/icon/cart.png') }}" alt=""></a>
+                <div class="cart__price">Cart: <span id="cart-total-price">0 MMK</span></div>
+            </div>
+        </div>
+        <div class="offcanvas__logo">
+            <a href="{{ route('home') }}"><img src="{{ asset('assets/user/img/logo.png') }}" alt=""></a>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+        <div class="offcanvas__option">
+            <ul>
+                @if (Auth::user())
+                    @if (Auth::user()->role == 'user')
+                        <li style="width:25%;">
+                            @if (Auth::user()->image == null)
+                                <a href="#" class="display-picture"><img src="{{ asset('image/profile.png') }}"
+                                        alt class=" rounded-circle" /></a>
+                            @else
+                                <a href="#" class="display-picture"><img
+                                        src="{{ asset('image/profile/' . Auth::user()->image) }}" alt
+                                        class=" rounded-circle" /></a>
+                            @endif
+                            <div class="profileimg hidden">
+                                <ul class=" mt-3 " style="background: none;">
+                                    <!--MENU-->
+                                    <li style="background: #E78341;" class="rounded"><a
+                                            href="{{ url('userprofile/' . Auth::user()->id) }}"
+                                            class="text-white">Profile</li></a>
+                                </ul>
+                            </div>
+
+                        </li>
+                    @endif
+                    <li>
+                        <form action="{{ route('logout') }}" method="POST" id="logoutForm">
+                            @csrf
+                        </form>
+                        <a href="#" onclick="handleFormSubmit(event)">Logout</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('customer.care') }}">Help</a>
+                    </li>
+                @else
+                    <li>
+                        <a href="{{ route('auth.login') }}">Login</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('auth.registerPage') }}">Register</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('customer.care') }}">Help</a>
+                    </li>
+                @endif
+            </ul>
+        </div>
+    </div>
+    <!-- Offcanvas Menu End -->
+
     <!-- Header Section Begin -->
     <header class="header">
         <div class="header__top">

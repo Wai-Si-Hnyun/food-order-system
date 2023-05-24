@@ -1,3 +1,7 @@
+function goShop() {
+    window.location.href = '/shop';
+}
+
 $(document).ready(function () {
     // routes
     const chatGetAnswerUrl = window.routes.chatGetAnswerUrl;
@@ -55,5 +59,4 @@ $(document).ready(function () {
     displayPicture.on("click", function () { // on click on profile picture toggle hidden class from CSS
         card.toggleClass("hidden");
     });
-
 });

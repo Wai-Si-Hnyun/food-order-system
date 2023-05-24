@@ -5,7 +5,7 @@
 
 <div class="container">
 <div class="mt-5">
-      <div class="d-style  border-2 bgc-white w-100 my-2 py-3 shadow-sm bg-light">
+      <div class="d-style  border-2 bgc-white w-100 my-3 py-3 shadow-sm bg-light">
         <!-- Basic Plan -->
         <div class="row align-items-center">
           <div class="col-12 col-md-4 ">
@@ -30,13 +30,13 @@
           </ul>
 
           <div class="col-12 col-md-4 text-center">
-            <a href="#" class="f-n-hover btn btn-info btn-raised px-4 py-25 w-75 text-600">To Ask More questions</a>
+            <a href="#" data-toggle="modal" data-target="#chatbotModal" class="f-n-hover btn btn-info btn-raised px-4 py-25 w-75 text-600">To Ask More questions</a>
           </div>
         </div>
 
       </div>
 
-      <div class="d-style  border-2 bgc-white w-100 my-2 py-3 shadow-sm bg-light">
+      <div class="d-style  border-2 bgc-white w-100 my-3 py-3 shadow-sm bg-light">
         <!-- Basic Plan -->
         <div class="row align-items-center">
           <div class="col-12 col-md-4 ">
@@ -68,13 +68,13 @@
           </ul>
 
           <div class="col-12 col-md-4 text-center">
-            <a href="#" class="f-n-hover btn btn-warning text-light btn-raised px-4 py-25 w-75 text-600">To Ask More questions</a>
+            <a href="#" data-toggle="modal" data-target="#chatbotModal" class="f-n-hover btn btn-warning text-light btn-raised px-4 py-25 w-75 text-600">To Ask More questions</a>
           </div>
         </div>
 
       </div>
 
-      <div class="d-style  border-2 bgc-white w-100 my-2 py-3 shadow-sm bg-light">
+      <div class="d-style  border-2 bgc-white w-100 my-3 py-3 shadow-sm bg-light">
         <!-- Basic Plan -->
         <div class="row align-items-center">
           <div class="col-12 col-md-4 ">
@@ -99,7 +99,7 @@
           </ul>
 
           <div class="col-12 col-md-4 text-center">
-            <a href="#" class="f-n-hover btn btn-success btn-raised px-4 py-25 w-75 text-600">To Ask More questions</a>
+            <a href="#" data-toggle="modal" data-target="#chatbotModal" class="f-n-hover btn btn-success btn-raised px-4 py-25 w-75 text-600">To Ask More questions</a>
           </div>
         </div>
 
@@ -227,4 +227,44 @@
     </div>
   </div>
 </div>
+
+<!-- Chatbot Modal -->
+<div class="modal fade" id="chatbotModal" tabindex="-1" role="dialog" aria-labelledby="chatbotModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="chatbotModalLabel">Frequently Asked Questions</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <div id="chatbox">
+                  <div id="welcome" class="text-center">
+                      <button class="btn btn-primary mt-4" id="get-started">Click to Get Started</button>
+                  </div>
+                  <div id="questions" class="d-none">
+                      <h4 class="mb-4" style="font-size: 14px">Questions:</h4>
+                      @forelse ($questions as $question)
+                          <button class="btn btn-primary question mb-2 text-left text-wrap w-100 overflow-hidden"
+                              style="font-size: 14px"
+                              data-question="{{ $question }}">{{ $question }}</button>
+                      @empty
+                          <p>There is no question currently available.</p>
+                      @endforelse
+                  </div>
+              </div>
+              <div id="answer" class="mt-4"></div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
 @endsection
+
+@push('script')
+  <script src="{{ asset('js/user/help.js') }}"></script>
+@endpush

@@ -16,18 +16,6 @@
                     </div>
                 </div>
             </div>
-            <div class="hero__item set-bg" data-setbg="{{ asset('assets/user/img/hero/hero-1.jpg') }}">
-                <div class="container">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-lg-8">
-                            <div class="hero__text">
-                                <h2>When you have a lot to do,start with a meal!</h2>
-                                <a href="{{ route('users.shop') }}" class="primary-btn">Our cakes</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
     <!-- Hero Section End -->
