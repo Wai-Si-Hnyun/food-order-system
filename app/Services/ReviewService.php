@@ -3,8 +3,6 @@ namespace App\Services;
 
 use App\Contracts\Dao\ReviewDaoInterface;
 use App\Contracts\Services\ReviewServiceInterface;
-use App\Models\Review;
-use Illuminate\Support\Facades\Validator;
 
 /**
  * User Service class
@@ -22,23 +20,29 @@ class ReviewService implements ReviewServiceInterface
         $this->reviewDao->createReview($data);
     }
 
+    public function updateReview(array $data,int $id): void
+    {
+        $this->reviewDao->updateReview($data,$id);
+    }
+
+
     public function reviewShow(int $id): object
     {
         return $this->reviewDao->reviewShow($id);
     }
 
-    public function updateReview(array $data, int $id): void
+    public function getReview(): object
     {
-        $this->reviewDao->updateReview($data, $id);
+        return $this->reviewDao->getReview();
+    }
+
+    public function searchReview(): object
+    {
+        return $this->reviewDao->searchReview();
     }
 
     public function getReviewById(int $id): object
     {
         return $this->reviewDao->getReviewById($id);
-    }
-
-    public function getReview(): object
-    {
-        return $this->reviewDao->getReview();
     }
 }

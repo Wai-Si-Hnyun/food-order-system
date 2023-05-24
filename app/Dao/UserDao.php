@@ -1,13 +1,14 @@
 <?php
 namespace App\Dao;
 
-use App\Contracts\Dao\UserDaoInterface;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use App\Contracts\Dao\UserDaoInterface;
 
 class UserDao implements UserDaoInterface
 {
     public function getUser():object {
-        return User::orderBy('created_at', 'asc')->get();
+        return User::orderBy('created_at', 'asc')->paginate(5);
     }
 
     public function updateRole(array $data, $id): void
@@ -21,17 +22,6 @@ class UserDao implements UserDaoInterface
     public function getUserById(int $id): object
     {
         return User::findOrFail($id);
-    }
-
-    /**
-     * Get users by role
-     *
-     * @param string $role
-     * @return object
-     */
-    public function getUsersByRole(string $role): object
-    {
-        return User::where('role', $role)->get();
     }
 
     public function updateProfile(array $data,$id): void
@@ -48,6 +38,17 @@ class UserDao implements UserDaoInterface
         ]);
     }
 
+    public function updatefile(array $data,$id): void
+    {
+
+        $user=User::where('id',$id)->first();
+        $user->update([
+            'name'=>$data['name'],
+            'email'=>$data['email'],
+
+        ]);
+    }
+
     public function passUpdate($request,$user):void {
         $userEmail = User::where('email',$user->email)->first();
         $userUpdate = User::find($userEmail->id);
@@ -55,5 +56,20 @@ class UserDao implements UserDaoInterface
         $userUpdate->save();
     }
 
+    public function searchUser():object
+    {
+        $search_name = request()->query('query');
+        $users = User::where('users.name','LIKE','%'.$search_name.'%')
+        ->latest()
+        ->paginate(5);
 
+        $users->appends(['query' => $search_name]);
+
+        return $users;
+    }
+
+    public function authCheck($request) : bool
+    {
+        return Auth::attempt(['id'=>$request->id,'password'=>$request->old_password]);
+    }
 }

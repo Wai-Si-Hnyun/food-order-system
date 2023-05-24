@@ -27,10 +27,20 @@ class ReviewController extends Controller
      */
     public function review(Request $request)
     {
-        $review =$this->reviewService->createReview($request->only([
-            'userId','productId','content',
-        ]));
-        return redirect()->back();
+        $user = Review::where('user_id',$request->userId)->get();
+        if ($user->toArray() == null) {
+            $review =$this->reviewService->createReview($request->only([
+                'userId','productId','content',
+            ]));
+            return redirect()->back();
+        }
+        else {
+            $id = $request->userId;
+            $reviewUpdate = $this->reviewService->updateReview($request->only([
+                'content',
+            ]),$id);
+            return redirect()->back();
+        }
     }
 
     /**
@@ -54,21 +64,12 @@ class ReviewController extends Controller
     }
 
 
-    /**
-     * function review delete
-     */
-    public function reviewDelete($id) {
-        $reviewDelete = Review::findOrFail($id);
-        $reviewDelete->delete();
-        return response()->json(['deletedReview' => $reviewDelete,'msg'=>'success'],200);
-    }
 
     /**
      * function review show(for admin)
      */
     public function reviewList() {
         $review = $this->reviewService->getReview();
-        
         return view('admin.pages.reviews.list', [
             'review' => $review
         ]);
@@ -78,8 +79,22 @@ class ReviewController extends Controller
      * function review delete(for admin)
      */
     public function reviewDestory($id) {
-        $reviewDelete = Review::findOrFail($id);
+        $reviewDelete =$this->reviewService->getReviewById($id);
         $reviewDelete->delete();
         return response()->json(['deletedReview' => $reviewDelete,'msg'=>'success'],200);
+    }
+
+
+    /**
+     * function review delete(for admin)
+     */
+    public function reviewSearch() {
+
+
+        $review=$this->reviewService->searchReview();
+        return view('admin.pages.reviews.list', [
+            'review' => $review
+        ]);
+
     }
 }

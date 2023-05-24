@@ -1,22 +1,35 @@
-@extends('layouts.master')
+@extends('profile.layouts.app')
 
 @section('content')
-@error('image')
-<div class="d-flex justify-content-center">
-    <div class="alert alert-danger alert-dismissable w-50">
-          <a class="panel-close close" data-dismiss="alert">×</a>
-           {{$message}}
+
+
+ @if (session('update'))
+ <div class="d-flex justify-content-center">
+    <div class="alert alert-danger alert-dismissible fade show w-50" role="alert">
+       <p class="text-center text-danger">Update fails!Email or name field is required.</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 </div>
-@enderror
-<div class="col-7 offset-3 mt-5">
-    <button class="btn btn-dark btn-sm" onclick="history.back()">Back</button>
+ @endif
+
+ @if (session('alert'))
+ <div class="d-flex justify-content-center">
+    <div class="alert alert-success alert-dismissible fade show w-50" role="alert">
+       <p class="text-center text-success">Profile update success.</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 </div>
+ @endif
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <section class="vh-100">
   <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col col-lg-6 mb-4 mb-lg-0">
+    <div class="row d-flex justify-content-center align-items-center h-100 w-100">
+      <div class="col col-lg-8 mb-4 mb-lg-0">
         <div class="card mb-3" style="border-radius: .5rem;">
           <div class="row g-0">
             <div class="col-md-4 gradient-custom text-center text-white bg-light"
@@ -26,7 +39,7 @@
                 alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
               @else
               <img src="{{asset('image/profile/'.$user->image) }}"
-                alt="Avatar" class="avatar img-circle mt-4 mb-3" />
+                alt="Avatar" class=" img-circle mt-4 mb-3" />
              @endif
 
               <h5>{{$user->name}}</h5>
@@ -66,23 +79,12 @@
                     <a href="{{url('password/'.$user->id)}}" class="text-success">Change Password</a>
                   </div>
                   <div class="col-4 mb-3">
-                    <h6>Update Profile</h6>
-                    <a href="#" class="text-primary"  id="update-button">Update</a>
+                    <h6>Edit Profile</h6>
+                    <a href="#" class="text-primary"  id="update-button">Edit</a>
                   </div>
                 </div>
-                <div class="d-flex justify-content-between">
-                  <div>
-                    <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
-                    <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
-                    <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
-                  </div>
-                  <div>
-                  <form action="{{url('delete-account/'.$user->id)}}" method="POST" id="delete-account-form">
-                    {{ csrf_field() }}
-                    {{ method_field('DELETE') }}
-                     <button type="submit" class="btn btn-danger btn-sm  delete-account-btn"> Delete Account</button>
-                    </form>
-                  </div>
+                <div class="d-flex justify-content-end">
+                    <a href="{{route('admin.dashboard')}}" class="btn btn-dark btn-sm"> Back</a>
                 </div>
               </div>
             </div>
@@ -100,11 +102,7 @@
       <!-- left column -->
       <div class="col-md-4">
         <div class="text-center">
-        @if($user->image == null)
-          <img src="{{asset('image/profile.png') }}" class="avatar img-circle img-thumbnail w-50 h-50" alt="avatar"  >
-        @else
-        <img src="{{asset('image/profile/'.$user->image) }}" class="img-thumbnail rounded-circle" alt="avatar"  >
-        @endif
+        <img id="output" class="img-thumbnail rounded-circle"  >
           <h6 class="mb-2 mt-2">Upload a different photo...</h6>
         </div>
       </div>
@@ -132,7 +130,7 @@
             <div class="form-group mt-3">
             <label class="col-lg-3 control-label">Image Upload:</label>
             <div class="col-lg-8">
-            <input type="file" class="form-control" name="image">
+            <input type="file" class="form-control" name="image" onchange="loadFile(event)">
             </div>
           </div>
 
@@ -143,20 +141,5 @@
       </div>
   </div>
 </div>
-<script>
-const updateButton = document.getElementById("update-button");
-const myDiv = document.getElementById("my-div");
-
-updateButton.addEventListener("click", function() {
-  myDiv.classList.remove("d-none");
-});
-
-
-    document.querySelector('.delete-account-btn').addEventListener('click', function(event) {
-        event.preventDefault();
-        if (confirm('Are you sure you want to delete your account?')) {
-            document.querySelector('#delete-account-form').submit();
-        }
-    });
-</script>
+    <script src="{{ asset('js/profile/profile.js') }}"></script>
 @endsection

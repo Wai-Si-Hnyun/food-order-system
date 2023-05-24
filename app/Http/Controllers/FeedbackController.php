@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Feedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Contracts\Services\FeedbackServiceInterface;
@@ -67,8 +65,20 @@ class FeedbackController extends Controller
      * function feedback destory
      */
     public function feedbackDestory($id) {
-        $reviewFeedback = Feedback::findOrFail($id);
+        $reviewFeedback = $this->feedbackService->getFeedbackById($id);
         $reviewFeedback->delete();
         return response()->json(['reviewFeedback' => $reviewFeedback,'msg'=>'success'],200);
+    }
+
+
+    /**
+     * function feedback search
+     */
+    public function feedbackSearch() {
+        $message=$this->feedbackService->searchfeedback();
+        return view('admin.pages.feedback.index', [
+            'message' => $message
+        ]);
+
     }
 }

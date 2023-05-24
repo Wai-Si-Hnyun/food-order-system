@@ -1,28 +1,20 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ChatbotController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ReviewController;
-use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserdataController;
-use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\User\AjaxController;
 use App\Http\Controllers\User\UserProductController;
-
-//login/register
-Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
-Route::post('/login', [AuthController::class, 'authLogin'])->name('auth.loginCheck');
-Route::get('/register', [AuthController::class, 'registerPage'])->name('auth.registerPage');
-Route::post('/register', [AuthController::class, 'authRegisterStore'])->name('auth.store');
+use App\Http\Controllers\WishlistController;
+use Illuminate\Support\Facades\Route;
 
 // Unauthenticated Routes
 Route::get('/', [HomeController::class, 'home'])->name('home');
@@ -33,17 +25,20 @@ Route::get('/products/{id}/filter', [UserProductController::class, 'filter'])->n
 Route::get('/products/{id}/details', [UserProductController::class, 'details'])->name('product.details');
 Route::get('/about', [HomeController::class, 'about'])->name('products.about');
 
-//forget/reset password
-Route::get('/forget-password-page', [AuthController::class, 'forgetPass'])->name('auth.forgetPass');
-Route::post('/forget-create', [AuthController::class, 'forgetCreate'])->name('auth.forgetCreate');
-Route::get('/reset-password-page', [AuthController::class, 'resetPass'])->name('auth.resetPass');
-Route::post('/pass-change', [AuthController::class, 'passChange'])->name('auth.passChange');
+//login/register
+Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
+Route::get('/register', [AuthController::class, 'registerPage'])->name('auth.registerPage');
+Route::post('/register', [AuthController::class, 'authRegisterStore'])->name('auth.store');
+Route::post('/login-check', [AuthController::class, 'authLogin'])->name('auth.loginCheck');
 
-//cart
-Route::get('/cart', [CartController::class, 'cart'])->name('show.cart');
+//forget/reset password
+Route::get('/forget-passwordpage', [AuthController::class, 'forgetPass'])->name('auth.forgetPass');
+Route::post('/forget-create', [AuthController::class, 'forgetCreate'])->name('auth.forgetCreate');
+Route::get('/reset-passwordpage', [AuthController::class, 'resetPass'])->name('auth.resetPass');
+Route::post('/password-change', [AuthController::class, 'passwordChange'])->name('auth.passwordChange');
 
 // Chat bot
-Route::post('/chat/get-answer', [ChatbotController::class, 'getAnswer'])->name('chat.getAnswer');
+Route::post('/chat/get-answer', [ChatbotController::class, 'getAnswer']);
 
 //Customer Care
 Route::get('/customer-care', [CustomerController::class, 'care'])->name('customer.care');
@@ -72,13 +67,7 @@ Route::middleware('role:user')->group(function () {
     Route::get('/users/wishlists/page', [WishlistController::class, 'addWishList'])->name('products.wishlist');
     // Route::get('/users/store/wishlists/{productId}', [WishlistController::class, 'storeWishlist'])->name('products.storeWishlist');
     Route::post('/users/store/wishlists', [WishlistController::class, 'storeWishlist'])->name('products.storeWishlist');
-
     Route::delete('/users/destroy/{id}/wishlists', [WishlistController::class, 'destroyWishlist'])->name('products.destroyWishlist');
-
-    //cart
-    // Route::post('add-cart/{product}', [CartController::class, 'addToCart'])->name('add.cart');
-    // Route::delete('/deleteCart/{id}', [CartController::class, 'remove'])->name('remove.cart');
-    // Route::post('update-cart/{product}',[CartController::class, 'updateCart'])->name('update.cart');
 
     //reviews
     Route::post('/review', [ReviewController::class, 'review'])->name('review.create');
@@ -96,8 +85,8 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
     Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store');
     Route::get('/categories/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
-    Route::post('/categories/update', [CategoryController::class, 'update'])->name('categories.update');
-    Route::delete('/categories/{id}/delete', [CategoryController::class, 'destroy'])->name('categories.destroy');
+    Route::post('/categories/{id}/update', [CategoryController::class, 'update'])->name('categories.update');
+    Route::get('/categories/{id}/delete', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
     // for product
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
@@ -112,22 +101,26 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{id}/show', [OrderController::class, 'show'])->name('order.show');
     Route::delete('/orders/{id}/delete', [OrderController::class, 'destroy'])->name('order.delete');
+
     Route::get('/orders/{id}/status/change', [OrderController::class, 'changeOrderStatus'])->name('order.status.change');
     Route::get('/orders/{id}/deivered/status/change', [OrderController::class, 'changeDeliverStatus'])->name('order.deliver.status.change');
 
     //review
     Route::get('/reviews/list', [ReviewController::class, 'reviewList'])->name('review.list');
     Route::delete('/reviews/{review}/delete', [ReviewController::class, 'reviewDestory'])->name('review.destory');
+    Route::get('/review-search', [ReviewController::class, 'reviewSearch'])->name('review.search');
 
     //UserList
     Route::get('/users/list', [UserdataController::class, 'userList'])->name('userData.list');
     Route::put('/user/{user}', [UserdataController::class, 'roleUpdate'])->name('role.update');
     Route::get('/user/{user}/info', [UserdataController::class, 'userInfo'])->name('user.info');
-    Route::delete('/users/{user}/delete', [UserdataController::class, 'userDelete'])->name('user.destory');
+    Route::delete('/user-delete/{user}', [UserdataController::class, 'userDelete'])->name('user.destory');
+    Route::get('/search', [UserdataController::class, 'search'])->name('user.search');
 
     //feedback
     Route::get('/feedback-list', [FeedbackController::class, 'feedbackList'])->name('feedback.list');
-    Route::delete('/feedback/{feedback}/delete', [FeedbackController::class, 'feedbackDestory'])->name('feedback.destory');
+    Route::delete('/feedback-delete/{feedback}', [FeedbackController::class, 'feedbackDestory'])->name('feedback.destory');
+    Route::get('/feedback-search', [FeedbackController::class, 'feedbackSearch'])->name('feedback.search');
 
     // Mail
     Route::get('/mail', [MailController::class, 'index'])->name('mail.index');
@@ -141,11 +134,12 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('/questions-and-answers/{id}/edit', [ChatbotController::class, 'edit'])->name('q&a.edit');
     Route::put('/questions-and-answers/{id}/update', [ChatbotController::class, 'update'])->name('q&a.update');
     Route::delete('/questions-and-answers/{id}/delete', [ChatbotController::class, 'delete'])->name('q&a.delete');
+
 });
 
 //userProfile (for admin and user)
 Route::get('/userprofile/{user}', [UserdataController::class, 'userProfile'])->name('user.profile');
 Route::post('/profile-update/{user}', [UserdataController::class, 'profileUpdate'])->name('profile.update');
 Route::get('/password/{user}', [UserdataController::class, 'passChange'])->name('pass.change');
-Route::post('/pass-change', [UserdataController::class, 'passwordUpdate'])->name('password.change');
+Route::post('/password-update', [UserdataController::class, 'passwordUpdate'])->name('password.change');
 Route::delete('/delete-account/{user}', [UserdataController::class, 'accountDelete'])->name('account.destroy');
