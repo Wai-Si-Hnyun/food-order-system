@@ -1,10 +1,20 @@
 function onGooglePayLoaded() {
     $(document).ready(function () {
+        // Login user id
+        const userId = $('body').data('user-id');
+
+        // routes
+        const createOrderUrl = window.routes.createOrderUrl;
+        const googlePayUrl = window.routes.googlePayUrl;
+
         const paymentsClient = new google.payments.api.PaymentsClient({
             environment: 'TEST', // Use 'PRODUCTION' for the production environment
         });
 
-        const totalPrice = '0.5';
+        const totalPrice = sessionStorage.getItem('order-total-price');
+
+        // Show total price
+        $('#order-total-price').text('Total Cost - ' + totalPrice + ' MMK');
 
         const tokenizationSpecification = {
             type: 'PAYMENT_GATEWAY',
@@ -48,8 +58,8 @@ function onGooglePayLoaded() {
             paymentDataRequest.transactionInfo = {
                 totalPriceStatus: 'FINAL',
                 totalPrice: totalPrice,
-                currencyCode: 'USD',
-                countryCode: 'US',
+                currencyCode: 'MMK',
+                countryCode: 'MM',
             };
 
             paymentsClient.loadPaymentData(paymentDataRequest)
@@ -57,21 +67,50 @@ function onGooglePayLoaded() {
                 .catch(error => console.log('loadPaymentData error: ', error));
         }
 
-        function processPaymentData(paymentData) {
+        function loadOrderData() {
+            const orderDataFromSession = sessionStorage.getItem('order-data');
+
+            return JSON.parse(orderDataFromSession);
+        }
+
+        async function processPaymentData(paymentData) {
             $data = {
                 'paymentData': paymentData,
                 'totalPrice': totalPrice,
             }
 
-            axios.post('/payment/google-pay', $data)
-                .then(function (res) {
+            var orderData = loadOrderData();
+
+            await axios.post(googlePayUrl, $data)
+                .then(async function (res) {
                     if (res.status == 200) {
-                        $('.alert-success').find('p').html(res.data.message);
-                        $('.alert-success').addClass('show');
+                        await axios.post(createOrderUrl, orderData)
+                            .then(function (res) {
+                                sessionStorage.removeItem('order-data', 'order-total-price');
+                                localStorage.removeItem('cart_' + userId);
+                                Swal.fire({
+                                    title: 'Success',
+                                    text: res.data.message,
+                                    icon: 'success',
+                                    showConfirmButton: false,
+                                    showCancelButton: false,
+                                    timer: 2000,
+                                }).then(res => {
+                                    window.location.href = '/orders';
+                                })
+                            })
+                            .catch(function (e) {
+                                if (e.response.status == 402) {
+                                    window.location.href = '/payment/choose';
+                                }
+                            })
                     }
                 })
                 .catch(function (e) {
-                    console.log(e);
+                    if (e.response.status == 400) {
+                        $('.alert-danger p').text(e.response.data.message);
+                        $('.alert-danger').show(500);
+                    }
                 })
         }
 

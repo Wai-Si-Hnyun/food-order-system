@@ -20,6 +20,7 @@ class RoleMiddleware
     {
         $user = Auth::user();
         if (!$user) {
+            session(['url.intended' => $request->fullUrl()]);
             return redirect()->route('auth.login');
         }
 

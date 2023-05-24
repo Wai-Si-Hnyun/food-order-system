@@ -25,15 +25,16 @@
     <section class="spad">
         <div class="container">
             <div class="col-lg-6 col-md-8 col-12 mx-auto">
-                <div class="alert alert-success text-center mt-3 fade">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                    <p class="m-0 me-2"></p><span>Click <a href="{{ route('checkout') }}">here</a> to continue order process.</span>
+                <div class="alert alert-danger text-center mt-3" style="display: none;" id="myAlert">
+                    <a href="javascript:void(0)" class="close" onclick="$('#myAlert').hide(500)" aria-label="close">×</a>
+                    <p class="m-0"></p>
                 </div>
                 <div class="card p-3">
                     <div class=" card-header">
                         <h3>Payment Details</h3>
                     </div>
                     <div class="card-body text-center pt-5">
+                        <div class="mb-3" id="order-total-price">Total Cost - 0 MMK</div>
                         <div id="pay-button"></div>
                     </div>
                 </div>

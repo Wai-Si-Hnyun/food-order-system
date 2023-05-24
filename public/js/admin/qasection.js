@@ -4,6 +4,8 @@ $(document).ready(function () {
 
         var id = $(this).data('id');
 
+        const qaDeleteUrl = window.routes.qaDeleteUrl.replace('__qaId__', id);
+
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -14,10 +16,13 @@ $(document).ready(function () {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`/admin/questions-and-answers/${id}/delete`)
+                axios.delete(qaDeleteUrl)
                     .then((res) => {
                         $(`#qa-${id}`).remove();
                         $('#success').html(`<div class="alert alert-success w-50" role="alert">${res.data.success}</div>`);
+                        if ($('.qa-card').length == 0) {
+                            $('.row.mb-5').append(`<h4 class="mt-5 text-center">No Question and Answer here!</h4>`);
+                        }
 
                         // Remove the success message after 2 seconds
                         setTimeout(function () {

@@ -33,7 +33,7 @@ interface CategoryServiceInterface
      * @param int $id
      * @return void
      */
-    public function updateCategory(array $data, int $id): void;
+    public function updateCategory(string $categoryName, int $id): void;
 
     /**
      * Delete Category by id

@@ -27,6 +27,12 @@
             @error('password')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
+            <div class="form-group">
+                {!! NoCaptcha::display() !!}
+            </div>
+            @if ($errors->has('g-recaptcha-response'))
+                <small class="text-danger">{{ $errors->first('g-recaptcha-response') }}</small>
+            @endif
             <a href="{{route('auth.forgetPass')}}" class="mb-3 text-primary d-block mt-2">forget password?</a>
             <button class="text-light pt-2 pb-2 au-btn--block au-btn--orange m-b-20" type="submit">Sign In</button>
 

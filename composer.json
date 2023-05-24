@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "anhskohbo/no-captcha": "^3.5",
         "fruitcake/laravel-cors": "^2.0",
         "google/apiclient": "^2.14",
         "guzzlehttp/guzzle": "^7.0.1",

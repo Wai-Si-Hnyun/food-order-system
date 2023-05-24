@@ -31,15 +31,15 @@
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
 
     <!-- Select2 -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
-<body>
+<body data-user-id="{{ Auth::check() ? Auth::user()->id : 'guest' }}">
     <!-- Header Section Begin -->
     <header class="header">
         <div class="header__top">
@@ -52,27 +52,32 @@
                                     @if (Auth::user())
                                         <li style="width:25%;">
                                             @if (Auth::user()->image == null)
-                                                <a href="#" class="display-picture"><img src="{{ asset('image/profile.png') }}" alt
-                                                    class=" rounded-circle" /></a>
+                                                <a href="#" class="display-picture"><img
+                                                        src="{{ asset('image/profile.png') }}" alt
+                                                        class=" rounded-circle" /></a>
                                             @else
-                                            <a href="#" class="display-picture"><img src="{{ asset('image/profile/'.Auth::user()->image) }}" alt
-                                                    class=" rounded-circle" /></a>
+                                                <a href="#" class="display-picture"><img
+                                                        src="{{ asset('image/profile/' . Auth::user()->image) }}" alt
+                                                        class=" rounded-circle" /></a>
                                             @endif
-                                            <div class="profileimg hidden" >
-                                                    <ul class=" mt-3 " style="background: none;"><!--MENU-->
-                                                    <li  style="background: #E78341;" class="rounded"><a href="{{url('userprofile/'.Auth::user()->id )}}" class="text-white">Profile</li></a>
-                                                    </ul>
+                                            <div class="profileimg hidden">
+                                                <ul class=" mt-3 " style="background: none;">
+                                                    <!--MENU-->
+                                                    <li style="background: #E78341;" class="rounded"><a
+                                                            href="{{ url('userprofile/' . Auth::user()->id) }}"
+                                                            class="text-white">Profile</li></a>
+                                                </ul>
                                             </div>
 
                                         </li>
-                                        <li >
+                                        <li>
                                             <form action="#" method="POST" id="logoutForm">
                                                 @csrf
                                             </form>
                                             <a href="#" onclick="handleFormSubmit(event)">Logout</a>
                                         </li>
                                         <li>
-                                            <a href="{{route('customer.care')}}">Help</a>
+                                            <a href="{{ route('customer.care') }}">Help</a>
                                         </li>
                                     @else
                                         <li>
@@ -93,14 +98,13 @@
                             </div>
                             <div class="header__top__right">
                                 <div class="header__top__right__links">
-                                    <a href="{{ route('users.wishlist') }}"><img
+                                    <a href="{{ route('products.wishlist') }}"><img
                                             src="{{ asset('assets/user/img/icon/heart.png') }}" alt=""></a>
                                 </div>
                                 <div class="header__top__right__cart">
-
                                     <a href="{{ route('show.cart') }}"><img
                                             src="{{ asset('assets/user/img/icon/cart.png') }}" alt=""></a>
-                                    <div class="cart__price">Cart: <span>0</span></div>
+                                    <div class="cart__price">Cart: <span id="cart-total-price">0 MMK</span></div>
                                 </div>
                             </div>
                         </div>
@@ -109,18 +113,18 @@
                 <div class="canvas__open"><i class="fa fa-bars"></i></div>
             </div>
         </div>
-        <div class="container d-flex justify-content-center">
+        <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <nav class="header__menu mobile-menu">
                         <ul>
                             <li id="home"><a href="{{ route('home') }}">Home</a></li>
                             <li id="shop"><a href="{{ route('users.shop') }}">Shop</a></li>
-                            @if (Auth::user())
-                                <li id="order"><a href="{{ route('user.order') }}">Order</a></li>
+                            @if (Auth::user() && Auth::user()->role == 'user')
+                                <li id="orders"><a href="{{ route('user.order') }}">Order</a></li>
                             @endif
-                            <li id="about"><a href="./about.html">About</a></li>
-                            <li id="contact"><a href="{{route('feedback.page')}}">Contact</a></li>
+                            <li id="about"><a href="{{ route('products.about') }}">About</a></li>
+                            <li id="contact"><a href="{{ route('feedback.page') }}">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -129,9 +133,11 @@
     </header>
     <!-- Header Section End -->
 
+    <!-- Main Section -->
     <main>
         @yield('content')
     </main>
+    <!-- Main Section -->
 
     <!-- Footer Section Begin -->
     <footer class="footer set-bg" data-setbg="{{ asset('assets/user/img/footer-bg.jpg') }}">
@@ -215,21 +221,37 @@
     <script src="{{ asset('assets/user/js/jquery.slicknav.js') }}"></script>
     <script src="{{ asset('assets/user/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('assets/user/js/jquery.nicescroll.min.js') }}"></script>
+    <script src="{{ asset('assets/user/js/main.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"
         integrity="sha512-i9cEfJwUwViEPFKdC1enz4ZRGBj8YQo6QByFTF92YXHi7waCqyexvRD75S5NVTsSiTv7rKWqG9Y5eFxmRsOn0A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('js/user/header.js') }}"></script>
+    {{-- sweet alert --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+
+    <!-- routes -->
     <script>
         let card = document.querySelector(".profileimg"); //declearing profile card element
-    let displayPicture = document.querySelector(".display-picture"); //declearing profile picture
+        let displayPicture = document.querySelector(".display-picture"); //declearing profile picture
 
-    displayPicture.addEventListener("click", function() { //on click on profile picture toggle hidden class from css
-    card.classList.toggle("hidden")})
+        displayPicture.addEventListener("click", function() { //on click on profile picture toggle hidden class from css
+            card.classList.toggle("hidden")
+        })
+
+        window.routes = {
+            'orderCreateUrl': '{{ route('order.store') }}',
+            'stripeUrl': '{{ route('stripe.card') }}',
+            'googlePayUrl': '{{ route('stripe.google') }}',
+            'chatGetAnswerUrl': '{{ route('chat.getAnswer') }}',
+            'ajaxIndexUrl': '{{ route('ajax.index') }}',
+            'getProductsUrl': '{{ route('products.all') }}',
+            'filterProductsUrl': '{{ route('products.filter', ['id' => '__id__']) }}',
+        }
     </script>
     @stack('script')
-    @yield('scriptSource')
+    {{-- @yield('scriptSource') --}}
 </body>
 
 </html>

@@ -63,7 +63,7 @@ class PaymentService implements PaymentServiceInterface
         try {
             $charge = $this->paymentDao->createCharge($price, $request->stripeToken);
             $payment_data = [
-                'payment_amount' => $charge->amount,
+                'payment_amount' => $charge->amount / 100,
                 'payment_currency' => $charge->currency,
                 'payment_method' => $charge->payment_method_details->card->brand,
                 'payment_gateway' => $charge->calculated_statement_descriptor,

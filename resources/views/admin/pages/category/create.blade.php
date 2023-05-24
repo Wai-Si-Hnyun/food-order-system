@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 @section('content')
     <div class="container">
-        <div class="card col-7 mt-5 mx-auto">
+        <div class="card col-8 mt-5 mx-auto">
             <div class="card-header text-center">
                 <h4><b> Category Create</b></h4>
                 <hr>

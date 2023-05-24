@@ -79,7 +79,7 @@ class PaymentController extends Controller
      * Charge function for Card Payment with Stripe
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function chargeCard(Request $request)
     {
@@ -88,9 +88,9 @@ class PaymentController extends Controller
         if ($chargeResult) {
             $this->setStatus(true);
 
-            return redirect()->back()->with('success', 'Payment successful!');
+            return response()->json(['success' => 'Payment successful!'], 200);
         } else {
-            return redirect()->back()->withErrors(['message' => 'Invalid card details.']);
+            return response()->json(['message' => 'Invalid card details.'], 400);
         }
     }
 

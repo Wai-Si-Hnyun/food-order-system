@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Models\Review;
 use App\Models\Product;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
@@ -57,10 +56,10 @@ class UserProductController extends Controller
     {
         $user = Auth::user();
         $review = $this->reviewService->reviewShow($id);
-        $products = Product::where('id', $id)->first();
+        $product = Product::where('id', $id)->first();
         $productList = Product::get();
 
-        return view('user.main.details', compact('products', 'productList', 'id', 'user','review'));
+        return view('user.main.details', compact('product', 'productList', 'id', 'user','review'));
     }
 
     /**
@@ -69,7 +68,7 @@ class UserProductController extends Controller
     public function filter($id)
     {
         $products = $this->userProductService->getUserProductById($id);
-        $categories = $this->userProductService->getUserProductById($id);
-        return view('user.main.shop', compact('products', 'categories'));
+
+        return response()->json($products, 200);
     }
 }

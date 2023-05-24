@@ -9,7 +9,7 @@ class CategoryDao implements CategoryDaoInterface
 {
     /**
      * Get Category list
-     * 
+     *
      * @param string $page
      * @return object
      */
@@ -58,12 +58,12 @@ class CategoryDao implements CategoryDaoInterface
      * @param int $id
      * @return void
      */
-    public function updateCategory(array $data, $id): void
+    public function updateCategory(string $categoryName, $id): void
     {
 
-        $category = Category::findOrFail($id);
+        $category = Category::where('id', $id);
         $category->update([
-            'name' => $data['categoryName'],
+            'name' => $categoryName,
 
         ]);
 
@@ -76,7 +76,6 @@ class CategoryDao implements CategoryDaoInterface
      */
     public function deleteCategoryById($id): void
     {
-        $category = Category::findOrFail($id);
-        $category->delete();
+        Category::findOrFail($id)->delete();
     }
 }

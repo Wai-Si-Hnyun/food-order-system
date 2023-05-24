@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Admin /</span> Mail</h4>
+        <h4 class="fw-bold pb-3 mb-4">Custom Mail Send</h4>
         @if (session('success'))
             <div class="alert alert-success alert-dismissible border border-success mx-auto col-lg-8 col-md-9 col-sm-10" role="alert">
                 {{ session('success') }}
@@ -10,7 +10,7 @@
             </div>
         @endif
         <div class="col-lg-8 col-md-9 col-sm-10 mx-auto my-5 border border-gray-50 p-sm-5 p-2">
-            <h4 class="text-center pb-3">Email Form</h4>
+            <h4 class="text-center pb-3">Email Information</h4>
             <form action="{{ route('mail.send') }}" method="post">
                 @csrf
                 <div class="mb-3">

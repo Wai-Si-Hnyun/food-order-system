@@ -1,74 +1,109 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Product;
+
+use App\Contracts\Services\ProductServiceInterface;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-        /**
+    private $productService;
+
+    public function __construct(ProductServiceInterface $productService)
+    {
+        $this->productService = $productService;
+    }
+
+    /**
      * cart page
      *
      * @return \Illuminate\Contracts\View\View cart page
      */
-    public function cart() {
+    public function cart()
+    {
         return view('user.main.cart');
     }
 
-        /**
+    /**
      * Save Item
      *
-     * @param \App\Http\Requests\Request $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function addToCart(Request $request,$id)
+    public function addToCart(Request $request, $id)
     {
-        $product = Product::findOrFail($id);
-        $item = session()->get('item',[]);
-        if($request->quantity > 1) {
-            $item[$id] = [
-                "product_name" => $product->name,
-                "photo" => $product->image,
-                "price" => $product->price,
-                "quantity"=> $request->quantity
+        $product = $this->productService->getProductById($id);
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity'] += $request->quantity;
+        } else {
+            $cart[$id] = [
+                'id' => $product->id,
+                'name' => $product->name,
+                'price' => $product->price,
+                'image' => $product->image,
+                'quantity' => $request->quantity,
             ];
         }
-        else {
-            if (isset($item[$id])) {
-                $item[$id]['quantity']++;
-            }
-            else {
-                $item[$id] = [
-                    "id"=>$product->id,
-                    "product_name" => $product->name,
-                    "photo" => $product->image,
-                    "price" => $product->price,
-                    "quantity"=> $request->quantity
-                ];
-            }
-        }
 
-
-        session()->put('item',$item);
-        return redirect()->route('show.cart');
+        session(['cart' => $cart]);
+        return response()->json(['success' => 'Product added to cart'], 200);
+        // if($request->quantity > 1) {
+        //     $cart[$id] = [
+        //         "product_name" => $product->name,
+        //         "photo" => $product->image,
+        //         "price" => $product->price,
+        //         "quantity"=> $request->quantity
+        //     ];
+        // }
+        // else {
+        //     if (isset($cart[$id])) {
+        //         $cart[$id]['quantity']++;
+        //     }
+        //     else {
+        //         $cart[$id] = [
+        //             "id"=>$product->id,
+        //             "product_name" => $product->name,
+        //             "photo" => $product->image,
+        //             "price" => $product->price,
+        //             "quantity"=> $request->quantity
+        //         ];
+        //     }
+        // }
     }
 
-        /**
+    /**
      * delete Item
      *
-     * @param \App\Http\Requests\Request $request
-     * @return \Illuminate\Http\Response
+     * @param integer $id
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function remove(Request $request)
+    public function remove(int $id)
     {
-        if ($request->id) {
-            $item = session()->get('item');
-            if(isset($item[$request->id])) {
-                unset($item[$request->id]);
-                session()->put('item',$item);
+        $cart = session()->get('cart');
+
+        if (isset($cart[$id])) {
+            // Remove the item from the cart
+            unset($cart[$id]);
+
+            // If there are no more items in the cart, remove the cart from the session
+            if (empty($cart)) {
+                session()->forget('cart');
+            } else {
+                // Otherwise, replace the cart in the session with the updated cart
+                session()->put('cart', $cart);
             }
-            return redirect()->back();
         }
+
+        return response()->json(['success' => 'Product removed from cart'], 200);
+    }
+
+    public function clear()
+    {
+        session()->forget('cart');
+
+        return response()->json(['success' => 'Cart cleared'], 200);
     }
 
     /**

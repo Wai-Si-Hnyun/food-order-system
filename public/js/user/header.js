@@ -25,6 +25,21 @@ $(document).ready(function () {
         }
     })();
 
+    function getCartTotal() {
+        const userId = $('body').data('user-id');
+        const cart = JSON.parse(localStorage.getItem('cart_' + userId)) || [];
+        var totalPrice = 0;
+        
+        if (cart.length > 0) {
+            cart.forEach(item => {
+                totalPrice += item.price * item.quantity;
+            });
+    
+            $('#cart-total-price').text(`${totalPrice} MMK`);
+        }
+    }
+    getCartTotal();
+
     window.handleFormSubmit = function (e) {
         e.preventDefault();
         $('#logoutForm').submit();

@@ -1,6 +1,10 @@
 @extends('admin.layouts.app')
 @section('content')
     <div class="container mt-3">
+        <h4 class="fw-bold">Products List</h4>
+        <div class='mt-4 mb-1'>
+            <h5>Total - ({{ $products->total() }})</h5>
+        </div>
         <a href="{{ route('products.create') }}" class="btn btn-primary my-2"></i>Create</a>
 
         <div class="float-end mt-2 col-4">
@@ -13,9 +17,6 @@
                             class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </form>
-        </div>
-        <div class='my-3'>
-            <h5>Total - ({{ $products->total() }})</h5>
         </div>
         @if (session('createSuccess'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -36,42 +37,43 @@
             </div>
         @endif
         @if (count($products) != 0)
-            <div class="card">
-                <div class="card-header">
-                    <h4><b>Product Lists</b></h4>
-                </div>
-                <div class="card-body">
-                    <table class="table table-striped text-center">
+            <div class="card my-3">
+                <div class="table-responsive table--no-card m-b-30">
+                    <table class="table table-borderless table-striped table-earning">
                         <thead>
                             <tr>
                                 <th>Image</th>
                                 <th>Name</th>
                                 <th>Category</th>
-                                <th>Description</th>
-                                <th>Price</th>
-                                <th>Actions</th>
+                                <th class="text-right">Description</th>
+                                <th class="text-right">price</th>
+                                <th class="text-right">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($products as $product)
                                 <tr>
                                     <td class="col-2"><img src="{{ asset('storage/' . $product->image) }}"
-                                            class="img-thumbnail shadow-sm"></td>
-                                    <td class="col-1">{{ $product->name }}</td>
-                                    <td class="col-1">{{ $product->category_name }}</td>
-                                    <td class="col-2">{{ Str::words($product->description, 2, '...') }}</td>
-                                    <td class="col-1">${{ $product->price }}</td>
-                                    <td class="col-3">
+                                            class="img-thumbnail shadow-sm" id="product-img"></td>
+                                    <td>{{ $product->name }}</td>
+                                    <td>{{ $product->category_name }}</td>
+                                    <td class="text-right">{{ Str::words($product->description, 2, '...') }}</td>
+                                    <td class="text-right">${{ $product->price }}</td>
+                                    <td class="text-right d-flex">
                                         <a href="{{ route('products.details', $product->id) }}">
-                                            <button class='btn btn-warning'><i class="fa-solid fa-eye"></i></button>
+                                            <i class='bx bx-detail text-warning my-5 me-2'></i>
                                         </a>
                                         <a href="{{ route('products.edit', $product->id) }}">
-                                            <button class='btn btn-success'><i
-                                                    class="fa-solid fa-pen-to-square"></i></button>
+                                            <i class='bx bxs-edit-alt my-5'></i>
                                         </a>
-                                        <a href="{{ route('products.destroy', $product->id) }}">
-                                            <button class='btn btn-danger'><i class="fa-solid fa-trash-can"></i></button>
-                                        </a>
+                                        <form method="POST" action="{{ route('products.destroy', $product->id) }}">
+                                            @csrf
+                                            <input name="_method" type="hidden" value="DELETE">
+                                            <button type="submit" class="btn btn-default btn-xs btn-flat show_confirm"
+                                                data-toggle="tooltip" title='Delete'>
+                                                <i class='bx bxs-trash text-danger my-5'></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -87,3 +89,6 @@
         </div>
     </div>
 @endsection
+@push('script')
+    <script src="{{ asset('assets/admin/js/product.js') }}"></script>
+@endpush

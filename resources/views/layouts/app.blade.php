@@ -1,3 +1,7 @@
+
+@php
+    use Anhskohbo\NoCaptcha\Facades\NoCaptcha;
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 
@@ -76,7 +80,7 @@
 
     <!-- Main JS-->
     <script src="{{asset('auth/js/main.js') }}"></script>
-
+    {!! NoCaptcha::renderJs() !!}
 </body>
 
 </html>
