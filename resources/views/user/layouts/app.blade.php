@@ -50,28 +50,30 @@
                             <div class="header__top__left">
                                 <ul>
                                     @if (Auth::user())
-                                        <li style="width:25%;">
-                                            @if (Auth::user()->image == null)
-                                                <a href="#" class="display-picture"><img
-                                                        src="{{ asset('image/profile.png') }}" alt
-                                                        class=" rounded-circle" /></a>
-                                            @else
-                                                <a href="#" class="display-picture"><img
-                                                        src="{{ asset('image/profile/' . Auth::user()->image) }}" alt
-                                                        class=" rounded-circle" /></a>
-                                            @endif
-                                            <div class="profileimg hidden">
-                                                <ul class=" mt-3 " style="background: none;">
-                                                    <!--MENU-->
-                                                    <li style="background: #E78341;" class="rounded"><a
-                                                            href="{{ url('userprofile/' . Auth::user()->id) }}"
-                                                            class="text-white">Profile</li></a>
-                                                </ul>
-                                            </div>
+                                        @if (Auth::user()->role == 'user')
+                                            <li style="width:25%;">
+                                                @if (Auth::user()->image == null)
+                                                    <a href="#" class="display-picture"><img
+                                                            src="{{ asset('image/profile.png') }}" alt
+                                                            class=" rounded-circle" /></a>
+                                                @else
+                                                    <a href="#" class="display-picture"><img
+                                                            src="{{ asset('image/profile/' . Auth::user()->image) }}"
+                                                            alt class=" rounded-circle" /></a>
+                                                @endif
+                                                <div class="profileimg hidden">
+                                                    <ul class=" mt-3 " style="background: none;">
+                                                        <!--MENU-->
+                                                        <li style="background: #E78341;" class="rounded"><a
+                                                                href="{{ url('userprofile/' . Auth::user()->id) }}"
+                                                                class="text-white">Profile</li></a>
+                                                    </ul>
+                                                </div>
 
-                                        </li>
+                                            </li>
+                                        @endif
                                         <li>
-                                            <form action="#" method="POST" id="logoutForm">
+                                            <form action="{{ route('logout') }}" method="POST" id="logoutForm">
                                                 @csrf
                                             </form>
                                             <a href="#" onclick="handleFormSubmit(event)">Logout</a>
@@ -98,7 +100,7 @@
                             </div>
                             <div class="header__top__right">
                                 <div class="header__top__right__links">
-                                    <a href="{{ route('products.wishlist') }}"><img
+                                    <a href="{{ route('users.wishlist') }}"><img
                                             src="{{ asset('assets/user/img/icon/heart.png') }}" alt=""></a>
                                 </div>
                                 <div class="header__top__right__cart">

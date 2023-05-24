@@ -45,4 +45,9 @@ class ReviewService implements ReviewServiceInterface
     {
         return $this->reviewDao->getReviewById($id);
     }
+
+    public function deleteReviewById(int $id): object
+    {
+        return $this->reviewDao->deleteReviewById($id);
+    }
 }

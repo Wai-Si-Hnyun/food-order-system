@@ -1,20 +1,21 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ChatbotController;
-use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\UserdataController;
+use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\User\AjaxController;
 use App\Http\Controllers\User\UserProductController;
-use App\Http\Controllers\WishlistController;
-use Illuminate\Support\Facades\Route;
 
 // Unauthenticated Routes
 Route::get('/', [HomeController::class, 'home'])->name('home');
@@ -65,7 +66,7 @@ Route::middleware('role:user')->group(function () {
     Route::get('/users', [UserProductController::class, 'home'])->name('users.home');
 
     // for wishlists
-    Route::get('/users/wishlists/page', [WishlistController::class, 'addWishList'])->name('products.wishlist');
+    Route::get('/users/wishlists/page', [WishlistController::class, 'addWishList'])->name('users.wishlist');
     // Route::get('/users/store/wishlists/{productId}', [WishlistController::class, 'storeWishlist'])->name('products.storeWishlist');
     Route::post('/users/store/wishlists', [WishlistController::class, 'storeWishlist'])->name('products.storeWishlist');
     Route::delete('/users/destroy/{id}/wishlists', [WishlistController::class, 'destroyWishlist'])->name('products.destroyWishlist');
@@ -108,7 +109,7 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
 
     //review
     Route::get('/reviews/list', [ReviewController::class, 'reviewList'])->name('review.list');
-    Route::delete('/reviews/{review}/delete', [ReviewController::class, 'reviewDestory'])->name('review.destory');
+    Route::delete('/reviews/{id}/delete', [ReviewController::class, 'reviewDestory'])->name('review.destory');
     Route::get('/review-search', [ReviewController::class, 'reviewSearch'])->name('review.search');
 
     //UserList

@@ -9,4 +9,6 @@ interface ReviewServiceInterface
     public function getReview(): object;
     public function searchReview():object;
     public function updateReview(array $data,int $id): void;
+
+    public function deleteReviewById(int $id): object;
 }

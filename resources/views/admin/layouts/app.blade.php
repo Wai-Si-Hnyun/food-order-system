@@ -65,7 +65,7 @@
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo">
                     <a href="index.html" class="app-brand-link">
-                        <span class="app-brand-text fs-4 menu-text fw-bolder">Food Order System</span>
+                        <span class="app-brand-text fs-4 menu-text fw-bolder">Cake Shop</span>
                     </a>
 
                     <a href="javascript:void(0);"
@@ -213,20 +213,10 @@
                                         @endif
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#">
-                                            <span class="d-flex align-items-center align-middle">
-                                                <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                                                <span class="flex-grow-1 align-middle">Billing</span>
-                                                <span
-                                                    class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <form action="#" method="POST" id="logoutForm">
+                                        <form action="{{ route('logout') }}" method="POST" id="logoutForm">
                                             @csrf
                                         </form>
                                         <a class="dropdown-item" href="#" onclick="handleFormSubmit(event)">
@@ -279,6 +269,16 @@
 
         <!--axios -->
         <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+
+        <!-- routes -->
+        <script>
+            window.routes = {
+                'orderDeleteUrl': '{{ route('order.delete', ['id' => '__orderId__']) }}',
+                'orderStatusChgUrl': '{{ route('order.status.change', ['id' => '__orderId']) }}',
+                'orderDeliverStatusChgUrl': '{{ route('order.deliver.status.change', ['id' => '__orderId__']) }}',
+                'qaDeleteUrl': '{{ route('q&a.delete', ['id' => '__qaId__']) }}',
+            }
+        </script>
 
         @stack('script')
 </body>

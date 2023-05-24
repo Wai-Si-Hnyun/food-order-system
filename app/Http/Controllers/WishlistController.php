@@ -65,6 +65,6 @@ class WishlistController extends Controller
     public function destroyWishlist($id)
     {
         $this->wishlistService->deleteWishlistById($id);
-        return redirect()->route('products.wishlist');
+        return redirect()->route('users.wishlist');
     }
 }

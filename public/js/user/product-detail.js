@@ -10,6 +10,7 @@ $(document).ready(function() {
         let price = parseInt(parentDiv.data('price'));
         let image = parentDiv.data('image');
         var quantity = parseInt($('.quantity .pro-qty .product-qty').val());
+        console.log(price, quantity);
 
         // Load the existing cart from localStorage
         let cart = JSON.parse(localStorage.getItem('cart_' + userId)) || [];
@@ -47,5 +48,11 @@ $(document).ready(function() {
             showCancelButton: false,
             timer: 2500
         });
+    })
+
+    $('.detail-view').on('click', function() {
+        $id = $(this).data('id');
+
+        window.location.href = '/products/' + $id + '/details';
     })
 })

@@ -4,7 +4,7 @@ namespace App\Dao;
 use App\Contracts\Dao\FeedbackDaoInterface;
 use App\Models\Feedback;
 
-class feedbackDao implements FeedbackDaoInterface
+class FeedbackDao implements FeedbackDaoInterface
 {
     public function createFeedback(array $data):void
     {
@@ -17,7 +17,24 @@ class feedbackDao implements FeedbackDaoInterface
 
     public function getMessage():object
     {
-        return Feedback::orderBy('created_at', 'asc')->get();
+        return Feedback::orderBy('created_at', 'asc')->paginate(5);
     }
 
+    public function searchfeedback():object
+    {
+        $search_name = request()->query('query');
+        $students = Feedback::where('name','LIKE','%'.$search_name.'%')
+        ->orwhere('email','LIKE','%'.$search_name.'%')
+        ->latest()
+        ->paginate(5);
+
+        $students->appends(['query' => $search_name]);
+
+        return $students;
+    }
+
+    public function getFeedbackById(int $id): object
+    {
+        return Feedback::findOrFail($id);
+    }
 }

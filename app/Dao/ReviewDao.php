@@ -62,4 +62,12 @@ class ReviewDao implements ReviewDaoInterface
     {
         return Review::findOrFail($id);
     }
+
+    public function deleteReviewById(int $id): object
+    {
+        $review = Review::findOrFail($id);
+        $review->delete();
+
+        return $review;
+    }
 }
