@@ -1,8 +1,8 @@
 @extends('admin.layouts.app')
 @section('content')
-    <div class="container mt-3">
+    <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold">Products List</h4>
-        <div class='mt-4 mb-1'>
+        <div class='d-flex justify-content-between mb-3'>
             <h5>Total - ({{ $products->total() }})</h5>
         </div>
         <a href="{{ route('products.create') }}" class="btn btn-primary my-2"></i>Create</a>
@@ -38,7 +38,7 @@
         @endif
         @if (count($products) != 0)
             <div class="card my-3">
-                <div class="table-responsive table--no-card m-b-30">
+                <div class="table-responsive text-nowrap">
                     <table class="table table-borderless table-striped table-earning">
                         <thead>
                             <tr>
@@ -90,5 +90,5 @@
     </div>
 @endsection
 @push('script')
-    <script src="{{ asset('assets/admin/js/product.js') }}"></script>
+    <script src="{{ asset('js/admin/product.js') }}"></script>
 @endpush

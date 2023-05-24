@@ -54,7 +54,8 @@
                                 @csrf
                                 <input name="user_id" type="hidden" value="{{ Auth::user()->id }}" />
                                 <input name="product_id" type="hidden" value="{{ $product->id }}" />
-                                <button type="submit" class="btn btn-outline-warning btn-lg heart__btn  mr-3">
+                                <button type="submit" id='btn'
+                                    class="btn btn-outline-warning btn-lg heart__btn  mr-3">
                                     <span class="icon_heart_alt"></span>
                                 </button>
                             </form>
@@ -156,7 +157,8 @@
                             <input type="hidden" name="userId" class="ms-2" value="{{ $user->id }}">
                             <input type="hidden" name="productId" value="{{ $product->id }}">
                             <label for="">Content</label>
-                            <textarea name="content" id="" cols="30" rows="3" class="form-control" placeholder="review here..."></textarea>
+                            <textarea name="content" id="" cols="30" rows="3" class="form-control"
+                                placeholder="review here..."></textarea>
                             <button type="submit" class="btn btn-success btn-sm ">Create</button>
                             <a href="#" class="btn btn-sm btn-dark float-end my-3">Back</a>
                         </form>
