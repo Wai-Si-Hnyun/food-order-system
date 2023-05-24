@@ -35,7 +35,7 @@
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
-                            @forelse ($orders as $order)
+                            @foreach ($orders as $order)
                                 <tr data-id="{{ $order->id }}">
                                     <th>{{ $loop->iteration }}</th>
                                     <td>{{ $order->user->name }}</td>
@@ -76,11 +76,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @empty
-                                <tr>
-                                    <td class="text-danger">There is no order.</td>
-                                </tr>
-                            @endforelse
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

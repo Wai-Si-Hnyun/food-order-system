@@ -17,45 +17,49 @@
                 </form>
             </div>
         </div>
-        <div class="card">
-            <div class="table-responsive text-nowrap">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>User Name</th>
-                            <th>User Email</th>
-                            <th>Suggection</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($message as $messages)
+        @if (count($message) > 0)
+            <div class="card">
+                <div class="table-responsive text-nowrap">
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <td class="table-text idlist">
-                                    {{ $messages->id }}
-                                </td>
-                                <td class="table-text namelist">
-                                    {{ $messages->name }}
-                                </td>
-                                <td class="table-text emaillist">
-                                    {{ $messages->email }}
-                                </td>
-                                <td class="table-text messagelist">
-                                    {{ $messages->message }}
-                                </td>
-
-                                <td class="actionlist">
-                                    <a href="#" class="text-danger" onclick="deleteBtn('{{ $messages->id }}')">
-                                        <i class="bx bx-trash me-1"></i>
-                                    </a>
-                                </td>
+                                <th>ID</th>
+                                <th>User Name</th>
+                                <th>User Email</th>
+                                <th>Suggection</th>
+                                <th>Actions</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach ($message as $messages)
+                                <tr>
+                                    <td class="table-text idlist">
+                                        {{ $messages->id }}
+                                    </td>
+                                    <td class="table-text namelist">
+                                        {{ $messages->name }}
+                                    </td>
+                                    <td class="table-text emaillist">
+                                        {{ $messages->email }}
+                                    </td>
+                                    <td class="table-text messagelist">
+                                        {{ $messages->message }}
+                                    </td>
+
+                                    <td class="actionlist">
+                                        <a href="#" class="text-danger" onclick="deleteBtn('{{ $messages->id }}')">
+                                            <i class="bx bx-trash me-1"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
+        @else
+            <h4 class="mt-5 text-center">No Feedback here!</h4>
+        @endif
     </div>
     <div class="d-flex justify-content-center">
         {{ $message->links() }}

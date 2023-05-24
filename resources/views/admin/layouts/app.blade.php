@@ -274,7 +274,7 @@
         <script>
             window.routes = {
                 'orderDeleteUrl': '{{ route('order.delete', ['id' => '__orderId__']) }}',
-                'orderStatusChgUrl': '{{ route('order.status.change', ['id' => '__orderId']) }}',
+                'orderStatusChgUrl': '{{ route('order.status.change', ['id' => '__orderId__']) }}',
                 'orderDeliverStatusChgUrl': '{{ route('order.deliver.status.change', ['id' => '__orderId__']) }}',
                 'qaDeleteUrl': '{{ route('q&a.delete', ['id' => '__qaId__']) }}',
             }

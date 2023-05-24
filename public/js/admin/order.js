@@ -18,6 +18,7 @@ const deleteOrder = (e, id) => {
                     $(`table tbody tr[data-id="${id}"]`).remove();
 
                     if ($('table tbody tr').length === 0) {
+                        $('table').remove();
                         $('.container-xxl').append(`<h4 class="mt-5 text-center">No Order here!</h4>`);
                     }
                 })
