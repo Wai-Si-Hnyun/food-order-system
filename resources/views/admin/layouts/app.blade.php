@@ -260,9 +260,6 @@
         <!-- Page JS -->
         <script src="{{ asset('assets/admin/js/dashboards-analytics.js') }}"></script>
 
-        <!-- Place this tag in your head or just before your close body tag. -->
-        <script async defer src="https://buttons.github.io/buttons.js') }}"></script>
-
         <script src="{{ asset('js/app.js') }}"></script>
 
         <script src="{{ asset('js/admin/menu.js') }}"></script>

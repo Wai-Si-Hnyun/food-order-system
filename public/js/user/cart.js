@@ -112,5 +112,4 @@ $(document).ready(function () {
             window.location.href = '/checkout';
         }
     })
-    console.log(localStorage.getItem('cart_guest'));
 })

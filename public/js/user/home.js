@@ -5,7 +5,6 @@ function goShop() {
 $(document).ready(function () {
     // routes
     const chatGetAnswerUrl = window.routes.chatGetAnswerUrl;
-    console.log(chatGetAnswerUrl);
 
     $("#get-started").on("click", function () {
         $(this).parent().addClass("d-none");

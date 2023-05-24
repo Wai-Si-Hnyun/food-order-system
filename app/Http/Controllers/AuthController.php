@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\Services\AuthServiceInterface;
-use App\Http\Requests\UserCreateRequest;
-use Illuminate\Support\Facades\Validator;
+use Mail;
+use App\Mail\MailNotify;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Mail\mailNotify;
-use Mail;
+use App\Http\Requests\UserCreateRequest;
+use Illuminate\Support\Facades\Validator;
+use App\Contracts\Services\AuthServiceInterface;
 
 class AuthController extends Controller
 {
@@ -126,7 +126,7 @@ class AuthController extends Controller
                 "subject"=>"Please check your token",
                 "body"=>$passwordReset->token
             ];
-            $mail = Mail::to($request->email)->send(new mailNotify($data));
+            $mail = Mail::to($request->email)->send(new MailNotify($data));
             return redirect()->route('auth.resetPass');
 
         }

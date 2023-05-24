@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Feedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Contracts\Services\FeedbackServiceInterface;
@@ -43,12 +44,10 @@ class FeedbackController extends Controller
                 ->withInput()
                 ->withErrors($validator);
         }
-        $feedback =$this->feedbackService->createFeedback($request->only([
+        $this->feedbackService->createFeedback($request->only([
             'name','email','message',
         ]));
         return redirect()->back()->with('alert', "Your message send successfully");
-
-
     }
 
     /**
@@ -80,5 +79,10 @@ class FeedbackController extends Controller
             'message' => $message
         ]);
 
+    }
+
+    public function show(Feedback $feedback)
+    {
+        return view('admin.pages.feedback.detail', compact('feedback'));
     }
 }
