@@ -92,8 +92,23 @@ class HomeController extends Controller
         return view('user.main.shop', compact('products', 'categories'));
     }
 
+    /**
+     * Go to about page
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function about()
     {
         return view('user.main.about');
+    }
+
+    /**
+     * Go to cart page
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function cart()
+    {
+        return view('user.main.cart');
     }
 }

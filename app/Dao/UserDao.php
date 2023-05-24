@@ -24,6 +24,11 @@ class UserDao implements UserDaoInterface
         return User::findOrFail($id);
     }
 
+    public function getUsersByRole(string $role): object
+    {
+        return User::where('role',$role)->get();
+    }
+
     public function updateProfile(array $data,$id): void
     {
         $image_name = time().'.'.$data['image']->extension();

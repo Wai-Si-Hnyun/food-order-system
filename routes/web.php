@@ -24,6 +24,7 @@ Route::post('/ajax/products', [AjaxController::class, 'index'])->name('ajax.inde
 Route::get('/products/{id}/filter', [UserProductController::class, 'filter'])->name('products.filter');
 Route::get('/products/{id}/details', [UserProductController::class, 'details'])->name('product.details');
 Route::get('/about', [HomeController::class, 'about'])->name('products.about');
+Route::get('/cart', [HomeController::class, 'cart'])->name('cart.index');
 
 //login/register
 Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
@@ -38,7 +39,7 @@ Route::get('/reset-passwordpage', [AuthController::class, 'resetPass'])->name('a
 Route::post('/password-change', [AuthController::class, 'passwordChange'])->name('auth.passwordChange');
 
 // Chat bot
-Route::post('/chat/get-answer', [ChatbotController::class, 'getAnswer']);
+Route::post('/chat/get-answer', [ChatbotController::class, 'getAnswer'])->name('chat.getAnswer');
 
 //Customer Care
 Route::get('/customer-care', [CustomerController::class, 'care'])->name('customer.care');
