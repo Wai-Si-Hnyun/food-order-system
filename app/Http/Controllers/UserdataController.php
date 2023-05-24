@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Contracts\Services\UserServiceInterface;
-use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Validator;
 use Auth;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
+use App\Contracts\Services\UserServiceInterface;
 
 class UserdataController extends Controller
 {
@@ -57,7 +58,7 @@ class UserdataController extends Controller
      */
 
     public function userDelete($id) {
-        $userDelete = User::findOrFail($id);
+        $userDelete = $this->userService->getUserById($id);
         $userDelete->delete();
         return response()->json(['userDelete' => $userDelete,'msg'=>'success'],200);
     }
@@ -67,9 +68,16 @@ class UserdataController extends Controller
      */
     public function userProfile($id) {
         $user= $this->userService->getUserById($id);
-        return view('profile.profile', [
-            'user' => $user
-        ]);
+        if($user->role == 'user') {
+            return view('profile.profile', [
+                'user' => $user
+            ]);
+        }
+        else {
+            return view('profile.admin', [
+                'user' => $user
+            ]);
+        }
     }
 
         /**
@@ -79,17 +87,27 @@ class UserdataController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'image' => 'mimes:jpeg,png,jpg,gif|max:1024',
+            'name' => 'required',
+            'email' => 'required|email|' . Rule::unique('users', 'email')->ignore($id),
         ]);
         if ($validator->fails()){
             return redirect()->back()
-                ->withInput()
+                ->with('update','Please Update again!.')
                 ->withErrors($validator);
         }
         else {
-            $userProfile =$this->userService->updateProfile($request->only([
-                'name','email','image',
-            ]),$id);
-            return redirect()->back();
+            if ($request->image == null) {
+                $userProfile =$this->userService->updatefile($request->only([
+                    'name','email'
+                ]),$id);
+                return redirect()->back()->with('alert','Profile update successfully');
+            }
+            else {
+                $userProfile =$this->userService->updateProfile($request->only([
+                    'name','email','image'
+                ]),$id);
+                return redirect()->back()->with('alert','Profile update successfully');
+            }
         }
 
     }
@@ -120,22 +138,27 @@ class UserdataController extends Controller
                 ->withInput()
                 ->withErrors($validator);
         }
+        $auth =$this->userService->authCheck($request);
         if (Auth::attempt(['id'=>$request->id,'password'=>$request->old_password])) {
             $user = Auth::user();
             $update = $this->userService->passUpdate($request,$user);
-            return redirect()->back();
+            return redirect()->back()->with('alert',"Passord change successful");
         }else {
-            return redirect()->back();
+            return redirect()->back()->with('message',"error");
         }
     }
 
-        /**
-     * function user acc delete
+
+    /**
+     * function search user
      */
-    public function accountDelete($id) {
-        $userDelete = User::findOrFail($id);
-        $userDelete->delete();
-        return redirect('/');
+    public function search() {
+
+
+        $user=$this->userService->searchUser();
+        return view('admin.pages.user.list', [
+            'user' => $user
+        ]);
 
     }
 

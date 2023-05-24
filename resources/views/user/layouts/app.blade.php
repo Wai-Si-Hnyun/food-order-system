@@ -28,9 +28,10 @@
     <link rel="stylesheet" href="{{ asset('assets/user/css/slicknav.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('assets/user/css/style.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
 
-    {{-- <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    <!-- Font Awesome -->
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
 
@@ -49,24 +50,28 @@
                             <div class="header__top__left">
                                 <ul>
                                     @if (Auth::user())
-                                        @if (Auth::user()->role == 'user')
-                                            <li style="width:11%;">
-                                                @if (Auth::user()->image == null)
-                                                    <img src="{{ asset('image/profile.png') }}" alt
-                                                        class="w-50 h-auto rounded-circle" />
-                                                @else
-                                                    <img src="{{ asset('image/profile/' . Auth::user()->image) }}" alt
-                                                        class="w-px-40 h-auto rounded-circle" />
-                                                @endif
-                                                <span class="arrow_carrot-down"></span>
-                                                <ul>
-                                                    <li><a href="{{ url('userprofile/' . Auth::user()->id) }}"
-                                                            class="text-light">Profile</a></li>
+                                        <li style="width:25%;">
+                                            @if (Auth::user()->image == null)
+                                                <a href="#" class="display-picture"><img
+                                                        src="{{ asset('image/profile.png') }}" alt
+                                                        class=" rounded-circle" /></a>
+                                            @else
+                                                <a href="#" class="display-picture"><img
+                                                        src="{{ asset('image/profile/' . Auth::user()->image) }}" alt
+                                                        class=" rounded-circle" /></a>
+                                            @endif
+                                            <div class="profileimg hidden">
+                                                <ul class=" mt-3 " style="background: none;">
+                                                    <!--MENU-->
+                                                    <li style="background: #E78341;" class="rounded"><a
+                                                            href="{{ url('userprofile/' . Auth::user()->id) }}"
+                                                            class="text-white">Profile</li></a>
                                                 </ul>
-                                            </li>
-                                        @endif
+                                            </div>
+
+                                        </li>
                                         <li>
-                                            <form action="{{ route('logout') }}" method="POST" id="logoutForm">
+                                            <form action="#" method="POST" id="logoutForm">
                                                 @csrf
                                             </form>
                                             <a href="#" onclick="handleFormSubmit(event)">Logout</a>
@@ -228,6 +233,13 @@
 
     <!-- routes -->
     <script>
+        let card = document.querySelector(".profileimg"); //declearing profile card element
+        let displayPicture = document.querySelector(".display-picture"); //declearing profile picture
+
+        displayPicture.addEventListener("click", function() { //on click on profile picture toggle hidden class from css
+            card.classList.toggle("hidden")
+        })
+
         window.routes = {
             'orderCreateUrl': '{{ route('order.store') }}',
             'stripeUrl': '{{ route('stripe.card') }}',
@@ -238,9 +250,8 @@
             'filterProductsUrl': '{{ route('products.filter', ['id' => '__id__']) }}',
         }
     </script>
-
     @stack('script')
-    @yield('scriptSource')
+    {{-- @yield('scriptSource') --}}
 </body>
 
 </html>

@@ -24,4 +24,14 @@ class FeedbackService implements FeedbackServiceInterface
     {
         return $this->feedbackDao->getMessage();
     }
+
+    public function searchfeedback(): object
+    {
+        return $this->feedbackDao->searchfeedback();
+    }
+
+    public function getFeedbackById(int $id): object
+    {
+        return $this->feedbackDao->getFeedbackById($id);
+    }
 }

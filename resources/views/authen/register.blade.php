@@ -4,38 +4,38 @@
 <div class="login-form">
     <form action="{{route('auth.store')}}" method="post">
     {{ csrf_field() }}
-        <div class="form-group">
+        <div class="form-group mb-0">
             <label>Username <span class="text-danger">*</span></label>
             <input class="form-control" type="text" name="name" placeholder="Username" value="{{old('name')}}">
         </div>
         @error('name')
-                <span class="text-danger">{{ $message }}</span>
+                <small class="text-danger">{{ $message }}</small>
         @enderror
 
-        <div class="form-group">
+        <div class="form-group mb-0 mt-3">
             <label>Email <span class="text-danger">*</span></label>
             <input class="form-control" type="email" name="email" placeholder="example@gmail.com" value="{{old('email')}}">
         </div>
         @error('email')
-                <span class="text-danger">{{ $message }}</span>
+                <small class="text-danger">{{ $message }}</small>
         @enderror
 
-        <div class="form-group">
+        <div class="form-group mb-0 mt-3">
              <label>Password <span class="text-danger">*</span></label>
             <input class="form-control" type="password" name="password" placeholder="******" value="{{old('password')}}">
         </div>
         @error('password')
-                <span class="text-danger">{{ $message }}</span>
+                <small class="text-danger">{{ $message }}</small>
         @enderror
 
-        <div class="form-group">
+        <div class="form-group mb-0 mt-3">
             <label>Confirm Password <span class="text-danger">*</span></label>
             <input class="form-control" type="password" name="confirm_password" placeholder="******" value="{{old('confirm_password')}}">
         </div>
         @error('confirm_password')
-                <span class="text-danger">{{ $message }}</span>
+                <small class="text-danger">{{ $message }}</small>
         @enderror
-        <div>
+        <div class="mt-2">
         <a href="{{route('auth.forgetPass')}}" class="mb-3">forget password?</a>
         </div>
 

@@ -12,30 +12,32 @@
 
     <div class="login-form">
         <form action="{{ route('auth.loginCheck') }}" method="post">
-            @csrf
-            <div class="form-group">
+            {{ csrf_field() }}
+            <div class="form-group mb-0">
                 <label>Email Address <span class="text-danger">*</span></label>
                 <input class="form-control" type="email" name="email" placeholder="example@gmail.com"
                     value="{{ old('email') }}">
             </div>
             @error('email')
-                <span class="text-danger">{{ $message }}</span>
+                <small class="text-danger">{{ $message }}</small>
             @enderror
-            <div class="form-group">
+            <div class="form-group mt-3 mb-0">
                 <label>Password <span class="text-danger">*</span></label>
-                <input class="form-control au-input--full" type="password" name="password" placeholder="******">
+                <input class="form-control au-input--full" type="password" name="password" placeholder="******"
+                    value="{{ old('password') }}">
             </div>
             @error('password')
-                <span class="text-danger">{{ $message }}</span>
+                <small class="text-danger">{{ $message }}</small>
             @enderror
             <div class="form-group">
                 {!! NoCaptcha::display() !!}
             </div>
             @if ($errors->has('g-recaptcha-response'))
-                <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
+                <small class="text-danger">{{ $errors->first('g-recaptcha-response') }}</small>
             @endif
-            <a href="{{ route('auth.forgetPass') }}" class="mb-3 text-primary d-block">forget password?</a>
+            <a href="{{ route('auth.forgetPass') }}" class="mb-3 text-primary d-block mt-2">forget password?</a>
             <button class="text-light pt-2 pb-2 au-btn--block au-btn--orange m-b-20" type="submit">Sign In</button>
+
         </form>
         <div class="register-link">
             <p>

@@ -1,3 +1,4 @@
+
 @php
     use Anhskohbo\NoCaptcha\Facades\NoCaptcha;
 @endphp
@@ -13,7 +14,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Food Order System</title>
+    <title>Cake|shop</title>
 
     <!-- Fontfaces CSS-->
     <link href="{{asset('auth/css/font-face.css') }}" rel="stylesheet" media="all">
@@ -44,10 +45,9 @@
             <div class="container">
                 <div class="login-wrap">
                     <div class="login-content">
-                        <div class="login-logo">
-                            <a href="#">
-                                <p class="text-dark fs-2">Food Order System</p>
-                            </a>
+                    <div class="login-logo">
+                            <a href="./index.html"><img src="{{ asset('assets/user/img/logo.png') }}"
+                            alt=""></a>
                         </div>
                         @yield('content')
                     </div>
