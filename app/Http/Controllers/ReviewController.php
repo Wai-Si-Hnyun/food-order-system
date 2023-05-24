@@ -94,4 +94,17 @@ class ReviewController extends Controller
             'review' => $review
         ]);
     }
+
+    /**
+     * Show review detail page
+     *
+     * @param \App\Models\Review $review
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function show(Review $review)
+    {
+        $review = $review->load('user', 'product');
+
+        return view('admin.pages.reviews.detail', compact('review'));
+    }
 }

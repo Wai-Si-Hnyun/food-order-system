@@ -48,7 +48,12 @@
                                     </td>
 
                                     <td class="actionlist">
-                                        <a href="#" class="text-danger" onclick="deleteBtn('{{ $reviews->id }}')">
+                                        <a class="text-primary me-3" title="Detail"
+                                            href="{{ route('review.show', $reviews->id) }}">
+                                            <i class="bx bxs-detail me-1"></i>
+                                        </a>
+                                        <a href="#" class="text-danger" title="Delete"
+                                            onclick="deleteBtn('{{ $reviews->id }}')">
                                             <i class="bx bx-trash me-1"></i>
                                         </a>
                                     </td>

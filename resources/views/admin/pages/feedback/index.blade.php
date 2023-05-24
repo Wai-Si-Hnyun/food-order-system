@@ -7,7 +7,6 @@
 
             <div class="mt-2 col-4">
                 <form action="{{ route('feedback.search') }}" type="get">
-                    @csrf
                     <div class="d-flex">
                         <input class="form-control" name="query" type="text" value="{{ request('query') }}" id=""
                             placeholder="Enter User Name Or Email Address">
@@ -43,11 +42,15 @@
                                         {{ $messages->email }}
                                     </td>
                                     <td class="table-text messagelist">
-                                        {{ $messages->message }}
+                                        {{ Str::limit($messages->message, 50, '...') }}
                                     </td>
 
                                     <td class="actionlist">
-                                        <a href="#" class="text-danger" onclick="deleteBtn('{{ $messages->id }}')">
+                                        <a class="text-primary me-3" href="{{ route('feedback.show', $messages->id) }}" title="Detail">
+                                            <i class="bx bxs-detail me-1"></i>
+                                        </a>
+                                        <a href="#" class="text-danger" title="Delete"
+                                            onclick="deleteBtn('{{ $messages->id }}')">
                                             <i class="bx bx-trash me-1"></i>
                                         </a>
                                     </td>
