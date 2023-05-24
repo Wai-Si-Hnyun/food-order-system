@@ -6,6 +6,11 @@ use App\Models\Feedback;
 
 class FeedbackDao implements FeedbackDaoInterface
 {
+    public function getAllFeedback():object
+    {
+        return Feedback::all();
+    }
+
     public function createFeedback(array $data):void
     {
         Feedback::create([

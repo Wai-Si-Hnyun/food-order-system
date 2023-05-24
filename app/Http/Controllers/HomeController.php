@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Dao\UserDaoInterface;
 use App\Contracts\Services\CategoryServiceInterface;
+use App\Contracts\Services\FeedbackServiceInterface;
 use App\Contracts\Services\OrderServiceInterface;
 use App\Contracts\Services\ProductServiceInterface;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +19,7 @@ class HomeController extends Controller
     private $orderService;
     private $chatbotService;
     private $userDao;
+    private $feedbackService;
 
     public function __construct(
         UserProductServiceInterface $userProductService,
@@ -25,7 +27,8 @@ class HomeController extends Controller
         ProductServiceInterface $productService,
         UserDaoInterface $userDao,
         OrderServiceInterface $orderService,
-        ChatbotServiceInterface $chatbotService
+        ChatbotServiceInterface $chatbotService,
+        FeedbackServiceInterface $feedbackService
     ) {
         $this->userProductService = $userProductService;
         $this->categoryService = $categoryService;
@@ -33,6 +36,7 @@ class HomeController extends Controller
         $this->userDao = $userDao;
         $this->orderService = $orderService;
         $this->chatbotService = $chatbotService;
+        $this->feedbackService = $feedbackService;
     }
 
     /**
@@ -99,7 +103,9 @@ class HomeController extends Controller
      */
     public function about()
     {
-        return view('user.main.about');
+        $feedback = $this->feedbackService->getAllFeedback();
+
+        return view('user.main.about', compact('feedback'));
     }
 
     /**

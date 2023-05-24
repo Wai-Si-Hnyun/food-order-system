@@ -145,7 +145,7 @@
     <footer class="footer set-bg" data-setbg="{{ asset('assets/user/img/footer-bg.jpg') }}">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="footer__widget">
                         <h6>WORKING HOURS</h6>
                         <ul>
@@ -155,7 +155,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__logo">
                             <a href="#"><img src="{{ asset('assets/user/img/footer-logo.png') }}"
@@ -169,16 +169,6 @@
                             <a href="#"><i class="fa fa-instagram"></i></a>
                             <a href="#"><i class="fa fa-youtube-play"></i></a>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="footer__newslatter">
-                        <h6>Subscribe</h6>
-                        <p>Get latest updates and offers.</p>
-                        <form action="#">
-                            <input type="text" placeholder="Email">
-                            <button type="submit"><i class="fa fa-send-o"></i></button>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -235,13 +225,6 @@
 
     <!-- routes -->
     <script>
-        let card = document.querySelector(".profileimg"); //declearing profile card element
-        let displayPicture = document.querySelector(".display-picture"); //declearing profile picture
-
-        displayPicture.addEventListener("click", function() { //on click on profile picture toggle hidden class from css
-            card.classList.toggle("hidden")
-        })
-
         window.routes = {
             'orderCreateUrl': '{{ route('order.store') }}',
             'stripeUrl': '{{ route('stripe.card') }}',

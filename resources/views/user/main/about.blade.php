@@ -44,66 +44,41 @@
             </div>
         </div>
     </section>
-    <section class="testimonial spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="section-title">
-                        <span>Testimonial</span>
-                        <h2>Our client say</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="testimonial__slider owl-carousel">
-                    <div class="col-lg-6">
-                        <div class="testimonial__item">
-                            <div class="testimonial__author">
-                                <div class="testimonial__author__pic">
-                                    <img src="{{ asset('assets/user/img/testimonial/ta-2.jpg') }}" alt="">
-                                </div>
-                                <div class="testimonial__author__text">
-                                    <h5>Kerry D.Silva</h5>
-                                    <span>New york</span>
-                                </div>
-                            </div>
-                            <div class="rating">
-                                <span class="icon_star"></span>
-                                <span class="icon_star"></span>
-                                <span class="icon_star"></span>
-                                <span class="icon_star"></span>
-                                <span class="icon_star-half_alt"></span>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua viverra lacus vel facilisis.</p>
+    @if (count($feedback) > 0)
+        <section class="testimonial spad">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div class="section-title">
+                            <span>Testimonial</span>
+                            <h2>Our client say</h2>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="testimonial__slider owl-carousel">
+                        @foreach ($feedback as $f)
+                            <div class="col-lg-6">
+                                <div class="testimonial__item testimonial-item">
+                                    <div class="testimonial__author">
+                                        <div class="testimonial__author__pic">
+                                            <img src="{{ asset('assets/user/img/icon/client.png') }}" alt="">
+                                        </div>
+                                        <div class="testimonial__author__text">
+                                            <h5>{{ $f->name }}</h5>
+                                        </div>
+                                    </div>
+                                    <p>{{ $f->message }}</p>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
     <section class="team spad">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-7 col-md-7 col-sm-7">
-                    <div class="section-title">
-
-                        <img src="{{ asset('assets/user/img/blog/blog-3.jpg') }}" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-5 col-md-5 col-sm-5">
-                    <div class="section-title">
-                        <h2>Freshly Baked Cakes Every Morning!</h2>
-                    </div>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto sunt laudantium nostrum veritatis
-                        eum aliquam laboriosam dicta neque, nisi deleniti similique tempora distinctio debitis sed
-                        aliquid repellendus, itaque, animi est?
-                    </p>
-                    <div class="team__btn">
-                        <a href="#" class="primary-btn rounded btn-outline-warning">Join Us</a>
-                    </div>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-lg-6 col-md-7 col-sm-7 mt-5">
                     <div class="row">
@@ -138,3 +113,17 @@
         </div>
     </section>
 @endsection
+
+@push('script')
+    <script>
+        $(document).ready(function() {
+            var maxheight = 0;
+
+            $('.testimonial-item').each(function() {
+                maxheight = ($(this).height() > maxheight ? $(this).height() : maxheight);
+            });
+
+            $('.testimonial-item').height(maxheight);
+        })
+    </script>
+@endpush
