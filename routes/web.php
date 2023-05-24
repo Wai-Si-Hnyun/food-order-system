@@ -48,6 +48,10 @@ Route::post('/chat/get-answer', [ChatbotController::class, 'getAnswer'])->name('
 //Customer Care
 Route::get('/customer-care', [CustomerController::class, 'care'])->name('customer.care');
 
+//feedback
+Route::get('/contact', [FeedbackController::class, 'feedback'])->name('feedback.page');
+Route::post('/feedback-create', [FeedbackController::class, 'feedbackCreate'])->name('feedback.create');
+
 Route::middleware('role:user')->group(function () {
     // Order
     Route::post('/order/create', [OrderController::class, 'store'])->name('order.store');
@@ -81,10 +85,6 @@ Route::middleware('role:user')->group(function () {
     Route::get('/review/{review}/edit', [ReviewController::class, 'reviewEdit'])->name('review.edit');
     Route::put('/review/{review}/update', [ReviewController::class, 'reviewUpdate'])->name('review.update');
     Route::delete('/review/{review}/delete', [ReviewController::class, 'reviewDelete'])->name('review.delete');
-
-    //feedback
-    Route::get('/feed-back', [FeedbackController::class, 'feedback'])->name('feedback.page');
-    Route::post('/feedback-create', [FeedbackController::class, 'feedbackCreate'])->name('feedback.create');
 });
 
 Route::middleware('role:admin')->prefix('admin')->group(function () {

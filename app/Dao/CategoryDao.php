@@ -64,7 +64,6 @@ class CategoryDao implements CategoryDaoInterface
         $category = Category::where('id', $id);
         $category->update([
             'name' => $categoryName,
-
         ]);
 
     }
