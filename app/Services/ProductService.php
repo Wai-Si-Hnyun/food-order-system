@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Contracts\Dao\ProductDaoInterface;
 use App\Contracts\Services\ProductServiceInterface;
+use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Product Service class
@@ -79,11 +81,17 @@ class ProductService implements ProductServiceInterface
     public function updateProduct(array $data, int $id): void
     {
         //store image
-
-        $image = $data["productImage"];
-        $fileName = uniqid() . $image->getClientOriginalName();
-        $image->storeAs('public', $fileName);
-        $data['productImage'] = $fileName;
+        if (array_key_exists('productImage', $data)) {
+            $oldImageName = Product::where('id', $id)->first();
+            $oldImageName = $oldImageName->image;
+            if ($oldImageName != null) {
+                Storage::delete('public/' . $oldImageName);
+            }
+            $image = $data["productImage"];
+            $fileName = uniqid() . $image->getClientOriginalName();
+            $image->storeAs('public', $fileName);
+            $data['productImage'] = $fileName;
+        }
         $this->productDao->updateProduct($data, $id);
     }
 

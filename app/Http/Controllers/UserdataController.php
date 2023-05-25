@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\Services\UserServiceInterface;
 use App\Models\User;
-use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use App\Contracts\Services\UserServiceInterface;
 
 class UserdataController extends Controller
 {

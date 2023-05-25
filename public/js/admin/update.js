@@ -7,6 +7,7 @@ btnUpdate.addEventListener("click", function() {
 
 
 var loadFile = function(event) {
+    console.log("test");
     var changeImg = document.getElementById('changeImg');
     changeImg.src = URL.createObjectURL(event.target.files[0]);
 };
