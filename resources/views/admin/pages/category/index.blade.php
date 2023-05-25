@@ -1,8 +1,8 @@
 @extends('admin.layouts.app')
 @section('content')
-    <div class="container mt-3">
+    <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold">Categories List</h4>
-        <div class='my-3'>
+        <div class='d-flex justify-content-between my-3'>
             <h5>Total - ({{ $categories->total() }})</h5>
         </div>
         <a href="{{ route('categories.create') }}" class="btn btn-primary my-2">Create</a>
@@ -38,7 +38,7 @@
         @endif
         @if (count($categories) != 0)
             <div class="card my-3">
-                <div class="table-responsive table--no-card m-b-30">
+                <div class="table-responsive text-nowrap">
                     <table class="table table-borderless table-striped table-earning">
                         <thead>
                             <tr>
@@ -67,6 +67,7 @@
                                                 <i class='bx bxs-trash text-danger'></i>
                                             </button>
                                         </form>
+
                                     </td>
                                 </tr>
                             @endforeach

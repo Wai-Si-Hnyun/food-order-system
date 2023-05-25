@@ -9,8 +9,8 @@
             <div class="card-body">
                 <form action="{{ route('categories.store') }}" method="post">
                     @csrf
-                    <label for="">Category</label>
-                    <input class="form-control @error('categoryName') is-invalid @enderror" type="text"
+                    <label for="">Category<span class="text-danger">*</span></label>
+                    <input class="form-control @error('categoryName') is-invalid @enderror" type="text" autofocus
                         value="{{ old('categoryName') }}" name="categoryName" id="category-name" placeholder="Name...">
                     @error('categoryName')
                         <div class="invalid-feedback">
