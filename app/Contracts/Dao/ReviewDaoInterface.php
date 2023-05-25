@@ -10,4 +10,5 @@ interface ReviewDaoInterface
     public function getReview(): object;
     public function searchReview():object;
     public function updateReview(array $data,$id): void;
+    public function deleteReviewById(int $id): object;
 }

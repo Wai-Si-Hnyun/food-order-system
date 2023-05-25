@@ -8,8 +8,8 @@ use App\Models\Review;
 
 class ReviewController extends Controller
 {
-    private $authServiceInterface;
-    private $reviewServiceInterface;
+    private $authService;
+    private $reviewService;
 
     /**
      * Create a new controller instance.
@@ -29,14 +29,14 @@ class ReviewController extends Controller
     {
         $user = Review::where('user_id',$request->userId)->get();
         if ($user->toArray() == null) {
-            $review =$this->reviewService->createReview($request->only([
+            $this->reviewService->createReview($request->only([
                 'userId','productId','content',
             ]));
             return redirect()->back();
         }
         else {
             $id = $request->userId;
-            $reviewUpdate = $this->reviewService->updateReview($request->only([
+            $this->reviewService->updateReview($request->only([
                 'content',
             ]),$id);
             return redirect()->back();
@@ -48,7 +48,7 @@ class ReviewController extends Controller
      */
     public function reviewUpdate (Request $request,$id)
     {
-        $reviewUpdate = $this->reviewService->updateReview($request->only([
+        $this->reviewService->updateReview($request->only([
             'comment',
         ]),$id);
           return response()->json(['msg'=>'success'],200);
@@ -79,8 +79,8 @@ class ReviewController extends Controller
      * function review delete(for admin)
      */
     public function reviewDestory($id) {
-        $reviewDelete =$this->reviewService->getReviewById($id);
-        $reviewDelete->delete();
+        $reviewDelete =$this->reviewService->deleteReviewById($id);
+
         return response()->json(['deletedReview' => $reviewDelete,'msg'=>'success'],200);
     }
 
@@ -89,12 +89,22 @@ class ReviewController extends Controller
      * function review delete(for admin)
      */
     public function reviewSearch() {
-
-
         $review=$this->reviewService->searchReview();
         return view('admin.pages.reviews.list', [
             'review' => $review
         ]);
+    }
 
+    /**
+     * Show review detail page
+     *
+     * @param \App\Models\Review $review
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function show(Review $review)
+    {
+        $review = $review->load('user', 'product');
+
+        return view('admin.pages.reviews.detail', compact('review'));
     }
 }

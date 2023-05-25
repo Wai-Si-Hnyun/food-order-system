@@ -15,6 +15,12 @@ class FeedbackService implements FeedbackServiceInterface
     {
         $this->feedbackDao = $feedbackDao;
     }
+
+    public function getAllFeedback():object
+    {
+        return $this->feedbackDao->getAllFeedback();
+    }
+
     public function createFeedback(array $data): void
     {
         $this->feedbackDao->createFeedback($data);

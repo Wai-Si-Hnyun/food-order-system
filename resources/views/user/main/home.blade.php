@@ -16,18 +16,6 @@
                     </div>
                 </div>
             </div>
-            <div class="hero__item set-bg" data-setbg="{{ asset('assets/user/img/hero/hero-1.jpg') }}">
-                <div class="container">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-lg-8">
-                            <div class="hero__text">
-                                <h2>When you have a lot to do,start with a meal!</h2>
-                                <a href="{{ route('users.shop') }}" class="primary-btn">Our cakes</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
     <!-- Hero Section End -->
@@ -36,35 +24,40 @@
     <section class="product spad">
         <div class="container">
             <h4 class='my-3'>Best Sellers</h4>
-            <div class="row">
-                @foreach ($products as $product)
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg detail-view" data-id="{{ $product->id }}"
-                                data-setbg="{{ asset('storage/' . $product->image) }}" style="cursor: pointer">
-                                <div class="product__label">
-                                    <span>{{ $product->category->name }}</span>
+            @if (count($products) > 0)
+                <div class="row">
+                    @foreach ($products as $product)
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg detail-view" data-id="{{ $product->id }}"
+                                    data-setbg="{{ asset('storage/' . $product->image) }}" style="cursor: pointer">
+                                    <div class="product__label">
+                                        <span>{{ $product->category->name }}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">{{ $product->name }}</a></h6>
-                                <div class="product__item__price">{{ $product->price }} MMK</div>
-                                <div class="cart_add" data-id="{{ $product->id }}" data-name="{{ $product->name }}"
-                                    data-price="{{ $product->price }}" data-image="{{ $product->image }}"
-                                    data-quantity="1">
-                                    @if (Auth::check())
-                                        <a href="javascript:void(0);"
-                                            class="@if (Auth::user()->role == 'user') add-to-cart-btn @else '' @endif">Add to
-                                            cart</a>
-                                    @else
-                                        <a href="javascript:void(0);" class="add-to-cart-btn">Add to cart</a>
-                                    @endif
+                                <div class="product__item__text">
+                                    <h6><a href="#">{{ $product->name }}</a></h6>
+                                    <div class="product__item__price">{{ $product->price }} MMK</div>
+                                    <div class="cart_add" data-id="{{ $product->id }}" data-name="{{ $product->name }}"
+                                        data-price="{{ $product->price }}" data-image="{{ $product->image }}"
+                                        data-quantity="1">
+                                        @if (Auth::check())
+                                            <a href="javascript:void(0);"
+                                                class="@if (Auth::user()->role == 'user') add-to-cart-btn @else '' @endif">Add
+                                                to
+                                                cart</a>
+                                        @else
+                                            <a href="javascript:void(0);" class="add-to-cart-btn">Add to cart</a>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
-            </div>
+                    @endforeach
+                </div>
+            @else
+                <h3 class="text-center mx-auto">Product not Found Sorry!<i class="fa-regular fa-face-frown"></i></h3>
+            @endif
         </div>
     </section>
     <!-- Product Section End -->

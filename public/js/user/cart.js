@@ -75,34 +75,36 @@ $(document).ready(function () {
 
         // Check if there is no tr, then show message
         if ($('tr[data-id]').length == 0) {
-            $('table').append('<tr><td class="text-danger">There is no product in cart.</td></tr>');
+            $('table').append('<tr id="no-product"><td class="text-danger">There is no product in cart.</td></tr>');
         }
     })
 
     $('#clear-cart-btn').on('click', function () {
-        localStorage.removeItem('cart_' + userId);
+        if ($('table tbody tr[data-id').length !== 0) {
+            localStorage.removeItem('cart_' + userId);
 
-        Swal.fire({
-            title: 'Success',
-            text: 'Cart is cleared',
-            icon: 'success',
-            showConfirmButton: false,
-            showCancelButton: false,
-            timer: 1800
-        })
+            Swal.fire({
+                title: 'Success',
+                text: 'Cart is cleared',
+                icon: 'success',
+                showConfirmButton: false,
+                showCancelButton: false,
+                timer: 1800
+            })
 
-        // Remove all products
-        $('table tbody tr[data-id]').remove();
+            // Remove all products
+            $('table tbody tr[data-id]').remove();
 
-        // Add no product text
-        $('table').append('<tr><td class="text-danger">There is no product in cart.</td></tr>');
+            // Add no product text
+            $('table').append('<tr><td class="text-danger">There is no product in cart.</td></tr>');
 
-        // Set the total values to 0
-        $('#subtotal').text('0');
-        $('#total').text('0');
+            // Set the total values to 0
+            $('#subtotal').text('0');
+            $('#total').text('0');
 
-        // Save update value in the header
-        $('#cart-total-price').text('0 MMK');
+            // Save update value in the header
+            $('#cart-total-price').text('0 MMK');
+        }
     })
 
     $('#checkout').on('click', function () {
@@ -110,5 +112,4 @@ $(document).ready(function () {
             window.location.href = '/checkout';
         }
     })
-    console.log(localStorage.getItem('cart_guest'));
 })

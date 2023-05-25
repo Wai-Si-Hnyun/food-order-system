@@ -13,7 +13,7 @@
                     <input type="hidden" name="categoryId" value="{{ $category->id }}">
                     <input class="form-control @error('categoryName') is-invalid @enderror" type="text"
                         value="{{ old('categoryName', $category->name) }}" name="categoryName" id="category-name"
-                        placeholder="Name...">
+                        placeholder="Name..." autofocus>
                     @error('categoryName')
                         <div class="invalid-feedback">
                             {{ $message }}

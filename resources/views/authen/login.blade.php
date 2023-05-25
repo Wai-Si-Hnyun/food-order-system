@@ -27,24 +27,24 @@
                 <label>Email Address <span class="text-danger">*</span></label>
                 <input class="form-control" type="email" name="email" placeholder="example@gmail.com"
                     value="{{ old('email') }}">
+                @error('email')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
             </div>
-            @error('email')
-                <small class="text-danger">{{ $message }}</small>
-            @enderror
-            <div class="form-group mt-3 mb-0">
+            <div class="form-group mt-3">
                 <label>Password <span class="text-danger">*</span></label>
                 <input class="form-control au-input--full" type="password" name="password" placeholder="******"
                     value="{{ old('password') }}">
+                @error('password')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
             </div>
-            @error('password')
-                <small class="text-danger">{{ $message }}</small>
-            @enderror
             <div class="form-group mt-3">
                 {!! NoCaptcha::display() !!}
+                @if ($errors->has('g-recaptcha-response'))
+                    <small class="text-danger">{{ $errors->first('g-recaptcha-response') }}</small>
+                @endif
             </div>
-            @if ($errors->has('g-recaptcha-response'))
-                <small class="text-danger">{{ $errors->first('g-recaptcha-response') }}</small>
-            @endif
             <a href="{{ route('auth.forgetPass') }}" class="mb-3 text-primary d-block mt-2">forget password?</a>
             <button class="text-light pt-2 pb-2 au-btn--block au-btn--orange m-b-20" type="submit">Sign In</button>
 

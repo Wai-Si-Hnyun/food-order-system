@@ -26,6 +26,7 @@ class ResetUserPassword implements ResetsUserPasswords
             'password' => Hash::make($input['password']),
         ])->save();
 
-        redirect()->route('auth.login');
+        // Redirect to login
+        return redirect()->route('auth.login');
     }
 }

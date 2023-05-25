@@ -1,3 +1,7 @@
+function goShop() {
+    window.location.href = '/shop';
+}
+
 $(document).ready(function () {
     // routes
     const chatGetAnswerUrl = window.routes.chatGetAnswerUrl;
@@ -34,7 +38,7 @@ $(document).ready(function () {
             });
     });
 
-    $('.detail-view').on('click', function() {
+    $('.detail-view').on('click', function () {
         $id = $(this).data('id');
 
         window.location.href = '/products/' + $id + '/details';
@@ -46,5 +50,12 @@ $(document).ready(function () {
         $("#questions").addClass("d-none");
         $("#welcome").removeClass("d-none");
         $("#answer").html("");
+    });
+
+    let card = $(".profileimg"); // declaring profile card element
+    let displayPicture = $(".display-picture"); // declaring profile picture
+
+    displayPicture.on("click", function () { // on click on profile picture toggle hidden class from CSS
+        card.toggleClass("hidden");
     });
 });

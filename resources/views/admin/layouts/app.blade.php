@@ -65,7 +65,7 @@
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo">
                     <a href="index.html" class="app-brand-link">
-                        <span class="app-brand-text fs-4 menu-text fw-bolder">Food Order System</span>
+                        <span class="app-brand-text fs-4 menu-text fw-bolder">Cake Shop</span>
                     </a>
 
                     <a href="javascript:void(0);"
@@ -156,87 +156,74 @@
                     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
 
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
-                            <!-- Place this tag where you want the button to render. -->
-                            <li class="nav-item lh-1 me-3">
-                                <a class="github-button"
-                                    href="https://github.com/themeselection/sneat-html-admin-template-free"
-                                    data-icon="octicon-star" data-size="large" data-show-count="true"
-                                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
-                            </li>
 
-                           <!-- User -->
-                           @if(Auth::check())
-                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
-                                    data-bs-toggle="dropdown">
+                            <!-- User -->
+                            @if (Auth::check())
+                                <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                                    <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
+                                        data-bs-toggle="dropdown">
 
-                                    @if(Auth::user()->image == null)
-                                    <div class="avatar avatar-online">
-                                        <img src="{{ asset('image/profile.png') }}" alt
-                                            class="w-100 h-100 rounded-circle" />
-                                    </div>
-                                    @else
-                                    <div class="avatar avatar-online">
-                                        <img src="{{ asset('image/profile/'.Auth::user()->image) }}" alt
-                                            class="w-100 h-100 rounded-circle" />
-                                    </div>
-                                    @endif
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <div class="d-flex">
-                                                <div class="flex-shrink-0 me-3">
-                                                    @if(Auth::user()->image == null)
-                                                        <img src="{{ asset('image/profile.png') }}"
-                                                            alt="Profile" class="w-px-40 h-auto rounded-circle" />
-                                                    @else
-                                                        <img src="{{ asset('image/profile/'.Auth::user()->image) }}"
-                                                            alt="Profile" class="w-px-40 h-auto rounded-circle" />
-                                                    @endif
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <span class="fw-semibold d-block">{{Auth::user()->name}}</span>
-                                                    <small class="text-muted">{{Auth::user()->role}}</small>
-                                                </div>
+                                        @if (Auth::user()->image == null)
+                                            <div class="avatar avatar-online">
+                                                <img src="{{ asset('image/profile.png') }}" alt
+                                                    class="w-100 h-100 rounded-circle" />
                                             </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <div class="dropdown-divider"></div>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="{{url('userprofile/'.Auth::user()->id )}}">
-                                            <i class="bx bx-user me-2"></i>
-                                            <span class="align-middle">My Profile</span>
-                                        </a>
+                                        @else
+                                            <div class="avatar avatar-online">
+                                                <img src="{{ asset('image/profile/' . Auth::user()->image) }}" alt
+                                                    class="w-100 h-100 rounded-circle" />
+                                            </div>
                                         @endif
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <span class="d-flex align-items-center align-middle">
-                                                <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                                                <span class="flex-grow-1 align-middle">Billing</span>
-                                                <span
-                                                    class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <div class="dropdown-divider"></div>
-                                    </li>
-                                    <li>
-                                        <form action="#" method="POST" id="logoutForm">
-                                            @csrf
-                                        </form>
-                                        <a class="dropdown-item" href="#" onclick="handleFormSubmit(event)">
-                                            <i class="bx bx-power-off me-2"></i>
-                                            <span class="align-middle">Log Out</span>
-                                        </a>
-                                    </li>
-                                </ul>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li>
+                                            <a class="dropdown-item" href="#">
+                                                <div class="d-flex">
+                                                    <div class="flex-shrink-0 me-3">
+                                                        @if (Auth::user()->image == null)
+                                                            <img src="{{ asset('image/profile.png') }}"
+                                                                alt="Profile"
+                                                                class="w-px-40 h-auto rounded-circle" />
+                                                        @else
+                                                            <img src="{{ asset('image/profile/' . Auth::user()->image) }}"
+                                                                alt="Profile"
+                                                                class="w-px-40 h-auto rounded-circle" />
+                                                        @endif
+                                                    </div>
+                                                    <div class="flex-grow-1">
+                                                        <span
+                                                            class="fw-semibold d-block">{{ Auth::user()->name }}</span>
+                                                        <small class="text-muted">{{ Auth::user()->role }}</small>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <div class="dropdown-divider"></div>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item"
+                                                href="{{ url('userprofile/' . Auth::user()->id) }}">
+                                                <i class="bx bx-user me-2"></i>
+                                                <span class="align-middle">My Profile</span>
+                                            </a>
+                            @endif
                             </li>
-                            <!--/ User -->
+                            <li>
+                                <div class="dropdown-divider"></div>
+                            </li>
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST" id="logoutForm">
+                                    @csrf
+                                </form>
+                                <a class="dropdown-item" href="#" onclick="handleFormSubmit(event)">
+                                    <i class="bx bx-power-off me-2"></i>
+                                    <span class="align-middle">Log Out</span>
+                                </a>
+                            </li>
+                        </ul>
+                        </li>
+                        <!--/ User -->
                         </ul>
                     </div>
                 </nav>
@@ -270,15 +257,24 @@
         <!-- Page JS -->
         <script src="{{ asset('assets/admin/js/dashboards-analytics.js') }}"></script>
 
-        <!-- Place this tag in your head or just before your close body tag. -->
-        <script async defer src="https://buttons.github.io/buttons.js') }}"></script>
-
         <script src="{{ asset('js/app.js') }}"></script>
 
         <script src="{{ asset('js/admin/menu.js') }}"></script>
 
         <!--axios -->
         <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+        {{-- sweet alert --}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+
+        <!-- routes -->
+        <script>
+            window.routes = {
+                'orderDeleteUrl': '{{ route('order.delete', ['id' => '__orderId__']) }}',
+                'orderStatusChgUrl': '{{ route('order.status.change', ['id' => '__orderId__']) }}',
+                'orderDeliverStatusChgUrl': '{{ route('order.deliver.status.change', ['id' => '__orderId__']) }}',
+                'qaDeleteUrl': '{{ route('q&a.delete', ['id' => '__qaId__']) }}',
+            }
+        </script>
 
         @stack('script')
 </body>

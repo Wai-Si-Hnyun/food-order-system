@@ -1288,13 +1288,7 @@ ol {
 }
 
 .footer__about:after {
-    position: absolute;
-    right: -35px;
-    top: 0;
-    width: 1px;
-    height: 165px;
-    background: rgba(255, 255, 255, 0.1);
-    content: "";
+    display: none;
 }
 
 .footer__about .footer__logo {
@@ -1857,7 +1851,7 @@ ol {
 }
 
 .product__details__option .pro-qty .qtybtn.dec {
-    color: #888888;
+    color: #111111;
 }
 
 .product__details__option .pro-qty .qtybtn.inc {
@@ -3558,7 +3552,6 @@ ol {
     font-size: 14px;
     color: #111111;
     padding-left: 20px;
-    margin-bottom: 30px;
 }
 
 .contact__form form input:last-child {
@@ -3574,7 +3567,6 @@ ol {
     color: #111111;
     padding-left: 20px;
     padding-top: 12px;
-    margin-bottom: 24px;
     resize: none;
 }
 

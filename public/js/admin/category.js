@@ -1,16 +1,16 @@
 $('.show_confirm').click(function(event) {
+    event.preventDefault();
 
     var form = $(this).closest("form");
 
     var name = $(this).data("name");
 
-    event.preventDefault();
 
     swal({
 
         title: ``,
 
-        text: "Are you sure you want to delete this category?",
+        text: "Are you sure you want to delete this Category?",
 
         icon: "warning",
 
@@ -27,7 +27,6 @@ $('.show_confirm').click(function(event) {
             form.submit();
 
         }
-
     });
 
 });

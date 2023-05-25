@@ -29,24 +29,6 @@
     text-decoration: none; /* Removes the underline */
 }
 
-/* .checkout__input select {
-    height: 50px;
-    width: 100%;
-    border: 1px solid #e1e1e1;
-    font-size: 14px;
-    color: #666666;
-    padding-left: 20px;
-} */
-
-/* .checkout__form .checkout__input .select2-container {
-    height: 50px !important;
-    width: 100% !important;
-    border: 1px solid #e1e1e1 !important;
-    font-size: 14px !important;
-    color: #666666 !important;
-    padding-left: 20px !important;
-} */
-
 .select2.select2-container {
     width: 100% !important;
 }

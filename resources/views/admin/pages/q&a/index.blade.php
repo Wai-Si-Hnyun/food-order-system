@@ -29,9 +29,15 @@
                             <h5 class="card-title">{{ $qa->question }}</h5>
                             <p class="card-text">{{ Str::limit($qa->answer, 100, '...') }}</p>
                             <div class="mt-auto d-flex justify-content-between">
-                                <a href="{{ route('q&a.show', $qa->id) }}" class="btn btn-info">Detail</a>
-                                <a href="{{ route('q&a.edit', $qa->id) }}" class="btn btn-secondary">Edit</a>
-                                <a href="#" class="btn btn-danger delete" data-id="{{ $qa->id }}">Delete</a>
+                                <a href="{{ route('q&a.show', $qa->id) }}" class="btn btn-info">
+                                    <i class="bx bxs-detail"></i>
+                                </a>
+                                <a href="{{ route('q&a.edit', $qa->id) }}" class="btn btn-secondary">
+                                    <i class='bx bxs-edit-alt'></i>
+                                </a>
+                                <a href="#" class="btn btn-danger delete" data-id="{{ $qa->id }}">
+                                    <i class="bx bx-trash"></i>
+                                </a>
                             </div>
                         </div>
                     </div>

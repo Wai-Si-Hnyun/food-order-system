@@ -1,8 +1,8 @@
 @extends('admin.layouts.app')
 @section('content')
-    <div class="container mt-3">
+    <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold">Products List</h4>
-        <div class='mt-4 mb-1'>
+        <div class='d-flex justify-content-between mb-3'>
             <h5>Total - ({{ $products->total() }})</h5>
         </div>
         <a href="{{ route('products.create') }}" class="btn btn-primary my-2"></i>Create</a>
@@ -38,7 +38,7 @@
         @endif
         @if (count($products) != 0)
             <div class="card my-3">
-                <div class="table-responsive table--no-card m-b-30">
+                <div class="table-responsive text-nowrap">
                     <table class="table table-borderless table-striped table-earning">
                         <thead>
                             <tr>
@@ -58,18 +58,18 @@
                                     <td>{{ $product->name }}</td>
                                     <td>{{ $product->category_name }}</td>
                                     <td class="text-right">{{ Str::words($product->description, 2, '...') }}</td>
-                                    <td class="text-right">${{ $product->price }}</td>
+                                    <td class="text-right">{{ $product->price }}MMK</td>
                                     <td class="text-right d-flex">
-                                        <a href="{{ route('products.details', $product->id) }}">
-                                            <i class='bx bx-detail text-warning my-5 me-2'></i>
+                                        <a href="{{ route('products.details', $product->id) }}" title="Detail">
+                                            <i class='bx bx-detail text-warning my-5'></i>
                                         </a>
-                                        <a href="{{ route('products.edit', $product->id) }}">
-                                            <i class='bx bxs-edit-alt my-5'></i>
+                                        <a href="{{ route('products.edit', $product->id) }}" title="Edit">
+                                            <i class='bx bxs-edit-alt my-5 ms-3'></i>
                                         </a>
                                         <form method="POST" action="{{ route('products.destroy', $product->id) }}">
                                             @csrf
                                             <input name="_method" type="hidden" value="DELETE">
-                                            <button type="submit" class="btn btn-default btn-xs btn-flat show_confirm"
+                                            <button type="submit" class="btn btn-default ms-3 btn-xs btn-flat show_confirm"
                                                 data-toggle="tooltip" title='Delete'>
                                                 <i class='bx bxs-trash text-danger my-5'></i>
                                             </button>
@@ -90,5 +90,5 @@
     </div>
 @endsection
 @push('script')
-    <script src="{{ asset('assets/admin/js/product.js') }}"></script>
+    <script src="{{ asset('js/admin/product.js') }}"></script>
 @endpush

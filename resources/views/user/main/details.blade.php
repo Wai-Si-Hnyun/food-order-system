@@ -49,25 +49,24 @@
                                     <input type="text" name="quantity" value="1" class="product-qty">
                                 </div>
                             </div>
-                            <a href="#" class="primary-btn add-to-cart-btn">Add to cart</a>
-                            <form action="{{ route('products.storeWishlist') }}" id="contact_form" method="post">
-                                @csrf
-                                <input name="user_id" type="hidden" value="{{ Auth::user()->id }}" />
-                                <input name="product_id" type="hidden" value="{{ $product->id }}" />
-                                <button type="submit" class="btn btn-outline-warning btn-lg heart__btn  mr-3">
-                                    <span class="icon_heart_alt"></span>
-                                </button>
-                            </form>
+                            <a href="#" class="primary-btn add-to-cart-btn-detail">Add to cart</a>
+                            @if (Auth::check())
+                                <form action="{{ route('products.storeWishlist') }}" id="contact_form" method="post">
+                                    @csrf
+                                    <input name="user_id" type="hidden" value="{{ Auth::user()->id }}" />
+                                    <input name="product_id" type="hidden" value="{{ $product->id }}" />
+                                    <button type="submit" class="btn btn-outline-warning btn-lg heart__btn  mr-3">
+                                        <span class="icon_heart_alt"></span>
+                                    </button>
+                                </form>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    @push('script')
-        <script src="{{ asset('assets/user/js/addFavorite.js') }}"></script>
-        <script src="{{ asset('assets/user/js/product-detail.js') }}"></script>
-    @endpush
+
     <!-- Shop Details Section End -->
     <!-- Related Products Section Begin -->
     <section class="related-products spad">
@@ -84,11 +83,11 @@
                     @foreach ($productList as $list)
                         <div class="col-lg-3">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{ asset('storage/' . $list->image) }}">
+                                <div class="product__item__pic set-bg detail-view" data-id="{{ $list->id }}"
+                                    data-setbg="{{ asset('storage/' . $list->image) }}" style="cursor: pointer">
                                     <div class="product__label">
                                         <span>
-                                            <a href="{{ route('product.details', $list->id) }}"
-                                                class="text-dark">{{ $list->category->name }}</a>
+                                            {{ $list->category->name }}
                                         </span>
                                     </div>
                                 </div>
@@ -156,10 +155,11 @@
                     <div class="card-body">
                         <form action="{{ route('review.create') }}" method="post">
                             @csrf
-                            <input type="hidden" name="userId" class="ms-2" value="{{ $user->id }}">
+                            <input type="hidden" name="userId" class="ms-2" value="{{ Auth::user()->id }}">
                             <input type="hidden" name="productId" value="{{ $product->id }}">
                             <label for="">Content</label>
-                            <textarea name="content"  cols="30" rows="3" class="form-control">Good</textarea>
+                            <textarea name="content" id="" cols="30" rows="3" class="form-control"
+                                placeholder="review here..."></textarea>
                             <button type="submit" class="btn btn-success btn-sm ">Create</button>
                             <a href="#" class="btn btn-sm btn-dark float-end my-3">Back</a>
                         </form>
@@ -169,3 +169,9 @@
         </section>
     @endif
 @endsection
+
+@push('script')
+    <script src="{{ asset('assets/user/js/addFavorite.js') }}"></script>
+    <script src="{{ asset('js/user/add-to-cart.js') }}"></script>
+    <script src="{{ asset('js/user/product-detail.js') }}"></script>
+@endpush

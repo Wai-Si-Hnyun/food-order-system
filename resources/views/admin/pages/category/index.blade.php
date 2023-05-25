@@ -1,8 +1,8 @@
 @extends('admin.layouts.app')
 @section('content')
-    <div class="container mt-3">
+    <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold">Categories List</h4>
-        <div class='my-3'>
+        <div class='d-flex justify-content-between my-3'>
             <h5>Total - ({{ $categories->total() }})</h5>
         </div>
         <a href="{{ route('categories.create') }}" class="btn btn-primary my-2">Create</a>
@@ -38,7 +38,7 @@
         @endif
         @if (count($categories) != 0)
             <div class="card my-3">
-                <div class="table-responsive table--no-card m-b-30">
+                <div class="table-responsive text-nowrap">
                     <table class="table table-borderless table-striped table-earning">
                         <thead>
                             <tr>
@@ -55,17 +55,19 @@
                                     <td>{{ $category->name }}</td>
                                     <td class="text-right">{{ $category->created_at->format('j-F-Y') }}</td>
                                     <td class="text-right d-flex">
-                                        <a href="{{ route('categories.edit', $category->id) }}">
-                                            <i class='bx bxs-edit-alt mr-3 mt-1'></i>
+                                        <a href="{{ route('categories.edit', $category->id) }}" title="Edit">
+                                            <i class='bx bxs-edit-alt me-3 mt-1'></i>
                                         </a>
                                         <form method="POST" action="{{ route('categories.destroy', $category->id) }}">
                                             @csrf
+                                            @method('DELETE')
                                             <input name="_method" type="hidden" value="DELETE">
                                             <button type="submit" class="btn btn-default btn-xs btn-flat show_confirm"
                                                 data-toggle="tooltip" title='Delete'>
                                                 <i class='bx bxs-trash text-danger'></i>
                                             </button>
                                         </form>
+
                                     </td>
                                 </tr>
                             @endforeach
@@ -83,5 +85,5 @@
 
 @endsection
 @push('script')
-    <script src="{{ asset('assets/admin/js/category.js') }}"></script>
+    <script src="{{ asset('js/admin/category.js') }}"></script>
 @endpush

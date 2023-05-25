@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $('.add-to-cart-btn-detail').on('click', function(e) {
         e.preventDefault();
-        
+
         let parentDiv = $(this).parent('.product__details__option');
 
         let userId = $('body').data('user-id');
@@ -10,6 +10,7 @@ $(document).ready(function() {
         let price = parseInt(parentDiv.data('price'));
         let image = parentDiv.data('image');
         var quantity = parseInt($('.quantity .pro-qty .product-qty').val());
+        console.log(price, quantity);
 
         // Load the existing cart from localStorage
         let cart = JSON.parse(localStorage.getItem('cart_' + userId)) || [];
@@ -35,7 +36,7 @@ $(document).ready(function() {
 
         // Save update value in the header
         var oldTotal = parseFloat($('#cart-total-price').text().replace('MMK', ''));
-        oldTotal += price *quantity;
+        oldTotal += price * quantity;
         $('#cart-total-price').text(oldTotal + ' MMK');
 
         // Show alert of success
@@ -48,4 +49,17 @@ $(document).ready(function() {
             timer: 2500
         });
     })
+
+    $('.detail-view').on('click', function() {
+        $id = $(this).data('id');
+
+        window.location.href = '/products/' + $id + '/details';
+    })
 })
+
+const btn = document.getElementById('btn');
+
+btn.addEventListener('click', function onClick() {
+    btn.style.backgroundColor = 'orange';
+    btn.style.color = 'white';
+});
