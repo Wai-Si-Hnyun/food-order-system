@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('content')
-    <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="container-xxl flex-grow-1 container-p-y" id="my-div">
         <div class="card col-8 mx-auto mt-5">
             <div class="card-header text-center">
                 <h4><b> Edit Product</b></h4>
@@ -13,9 +13,9 @@
                         <div class="col-6 offset-3">
                             <div class="form-group mb-3">
                                 <img src="{{ asset('storage/' . $product->image) }}" alt="product image"
-                                    class="img-thumbnail shadow-sm">
+                                    class="img-thumbnail shadow-sm" id="output">
                                 <input class="form-control mt-2 @error('productImage') is-invalid @enderror" type="file"
-                                    name="productImage" id="product-image">
+                                    name="productImage" id="product-image" onchange="loadFile(event)">
                                 @error('productImage')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -82,7 +82,7 @@
                         </div>
                     </div>
                     <div class="col-10 offset-1">
-                        <input type="submit" value="Update" class="btn btn-info my-3 text-dark">
+                        <input type="submit" value="Update" class="btn btn-info my-3 text-dark" id="update-button">
                         <a href="{{ route('products.index') }}" class="btn btn-dark my-3 ms-5 float-end">Back</a>
                     </div>
                 </form>
@@ -90,3 +90,6 @@
         </div>
     </div>
 @endsection
+@push('script')
+    <script src="{{ asset('js/admin/update.js') }}"></script>
+@endpush
