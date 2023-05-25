@@ -68,6 +68,7 @@ class ProductService implements ProductServiceInterface
     public function updateProduct(array $data, int $id): void
     {
         //store image
+
         $image = $data["productImage"];
         $fileName = uniqid() . $image->getClientOriginalName();
         $image->storeAs('public', $fileName);
