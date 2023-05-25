@@ -1,8 +1,8 @@
 @extends('admin.layouts.app')
 @section('content')
-    <div class="container mt-3">
+    <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold">Products List</h4>
-        <div class='mt-4 mb-1'>
+        <div class='d-flex justify-content-between mb-3'>
             <h5>Total - ({{ $products->total() }})</h5>
         </div>
         <a href="{{ route('products.create') }}" class="btn btn-primary my-2"></i>Create</a>
@@ -38,7 +38,7 @@
         @endif
         @if (count($products) != 0)
             <div class="card my-3">
-                <div class="table-responsive table--no-card m-b-30">
+                <div class="table-responsive text-nowrap">
                     <table class="table table-borderless table-striped table-earning">
                         <thead>
                             <tr>
@@ -58,7 +58,7 @@
                                     <td>{{ $product->name }}</td>
                                     <td>{{ $product->category_name }}</td>
                                     <td class="text-right">{{ Str::words($product->description, 2, '...') }}</td>
-                                    <td class="text-right">${{ $product->price }}</td>
+                                    <td class="text-right">{{ $product->price }}MMK</td>
                                     <td class="text-right d-flex">
                                         <a href="{{ route('products.details', $product->id) }}" title="Detail">
                                             <i class='bx bx-detail text-warning my-5'></i>

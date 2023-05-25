@@ -24,51 +24,6 @@
     <section class="shop spad">
         <div class="container">
             <div class="shop__option">
-                {{-- <div class="row mb-5">
-                    <div class="col-lg-7 col-md-7">
-                        <div class="shop__option__search row mb-5">
-
-                            <form action="{{ route('users.shop') }}" class="row">
-                                @csrf
-
-                                <div class="dropdown" class="col-4 my-3">
-                                    <a class="btn btn-light text-black dropdown-toggle py-2" href="#" role="button"
-                                        id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Categories
-                                    </a>
-
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMendivink">
-                                        <div>
-                                            <a class="dropdown-item" href="{{ route('users.shop') }}">All
-                                            </a>
-                                        </div>
-                                        @foreach ($categories as $category)
-                                            <div>
-                                                <a class="dropdown-item"
-                                                    href="{{ route('products.filter', $category->id) }}">{{ $category->name }}
-                                                </a>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                                <div class="col-7 offset-1">
-                                    |<input type="text" name="key" value="{{ request('key') }}" placeholder="Search">
-                                    <button type="submit"><i class="fa fa-search"></i></button>
-                                </div>
-                            </form>
-
-                        </div>
-                    </div>
-                    <div class="col-lg-5 col-md-5">
-                        <div class="shop__option__right">
-                            <select id="sorting" name="sorting">
-                                <option value="">Sorting By</option>
-                                <option value="asc">Asending</option>
-                                <option value="desc">Desending</option>
-                            </select>
-                        </div>
-                    </div>
-                </div> --}}
                 <div class="row">
                     <div class="col-lg-7 col-md-7">
                         <div class="shop__option__search">

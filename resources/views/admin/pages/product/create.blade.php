@@ -39,7 +39,7 @@
                     <div class="form-group mb-3">
                         <label for="">Image</label>
                         <input class="form-control @error('productImage') is-invalid @enderror" type="file"
-                            name="productImage" id="product-image">
+                            value="{{ old('productImage') }}" name="productImage" id="product-image">
                         @error('productImage')
                             <div class="invalid-feedback">
                                 {{ $message }}

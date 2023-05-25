@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $('.add-to-cart-btn-detail').on('click', function(e) {
         e.preventDefault();
-        
+
         let parentDiv = $(this).parent('.product__details__option');
 
         let userId = $('body').data('user-id');
@@ -36,7 +36,7 @@ $(document).ready(function() {
 
         // Save update value in the header
         var oldTotal = parseFloat($('#cart-total-price').text().replace('MMK', ''));
-        oldTotal += price *quantity;
+        oldTotal += price * quantity;
         $('#cart-total-price').text(oldTotal + ' MMK');
 
         // Show alert of success
@@ -56,3 +56,10 @@ $(document).ready(function() {
         window.location.href = '/products/' + $id + '/details';
     })
 })
+
+const btn = document.getElementById('btn');
+
+btn.addEventListener('click', function onClick() {
+    btn.style.backgroundColor = 'orange';
+    btn.style.color = 'white';
+});
