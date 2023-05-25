@@ -66,7 +66,7 @@
                                         class=" rounded-circle" /></a>
                             @endif
                             <div class="profileimg hidden">
-                                <ul class=" mt-3 " style="background: none;">
+                                <ul class="mt-3 " style="background: none;">
                                     <!--MENU-->
                                     <li style="background: #E78341;" class="rounded"><a
                                             href="{{ url('userprofile/' . Auth::user()->id) }}"
@@ -109,10 +109,10 @@
                     <div class="col-lg-12">
                         <div class="header__top__inner">
                             <div class="header__top__left">
-                                <ul class="img">
+                                <ul class="img d-flex align-items-center">
                                     @if (Auth::user())
                                         @if (Auth::user()->role == 'user')
-                                            <li style="width:25%;">
+                                            <li style="width:25%;" class="img">
                                                 @if (Auth::user()->image == null)
                                                     <a href="#" class="display-picture"><img
                                                             src="{{ asset('image/profile.png') }}" alt
