@@ -10,12 +10,12 @@
                 <form action="{{ route('products.update', $product->id) }}" enctype="multipart/form-data" method="post">
                     @csrf
                     <div class="row">
-                        <div class="col-6 offset-3">
-                            <div class="form-group mb-3">
+                        <div class="mx-auto">
+                            <div class="form-group mb-3 mx-auto" style="width:280px">
                                 <img src="{{ asset('storage/' . $product->image) }}" alt="product image"
                                     class="img-thumbnail shadow-sm" id="changeImg">
                                 <input class="form-control mt-2 @error('productImage') is-invalid @enderror" type="file"
-                                    name="productImage" id="product-image" onchange="loadFile(event)">
+                                    name="productImage" id="img-input" onchange="loadFile(event)">
                                 @error('productImage')
                                     <div class="invalid-feedback">
                                         {{ $message }}

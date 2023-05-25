@@ -24,8 +24,8 @@ class ProductDao implements ProductDaoInterface
                 ->appends(request()->all());
         } elseif ($page == 'user') {
             return Product::when(request('key'), function ($query) {
-                    $query->where('products.name', 'LIKE', '%' . request('key') . '%');
-                })
+                $query->where('products.name', 'LIKE', '%' . request('key') . '%');
+            })
                 ->with('category')
                 ->orderBy('products.created_at', 'desc')
                 ->get();
@@ -81,14 +81,22 @@ class ProductDao implements ProductDaoInterface
     {
 
         $product = Product::findOrFail($id);
-        $product->update([
-            'category_id' => $data['category'],
-            'name' => $data['productName'],
-            'image' => $data['productImage'],
-            'description' => $data['productDescription'],
-            'price' => $data['productPrice'],
-        ]);
-
+        if (array_key_exists('productImage', $data)) {
+            $product->update([
+                'category_id' => $data['category'],
+                'name' => $data['productName'],
+                'image' => $data['productImage'],
+                'description' => $data['productDescription'],
+                'price' => $data['productPrice'],
+            ]);
+        } else {
+            $product->update([
+                'category_id' => $data['category'],
+                'name' => $data['productName'],
+                'description' => $data['productDescription'],
+                'price' => $data['productPrice'],
+            ]);
+        }
     }
 
     /**
