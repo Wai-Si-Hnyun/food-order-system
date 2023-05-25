@@ -22,8 +22,25 @@ interface WishlistServiceInterface
 
     /**
      * Delete Wishlist by id
-     * @param int $id
+     * @param integer $id
      * @return void
      */
     public function deleteWishlistById(int $id): void;
+
+    /**
+     * Delete wishlist by product id
+     *
+     * @param integer $productId
+     * @return void
+     */
+    public function deleteWishlistByProductId(int $productId): void;
+
+    /**
+     * Check wishlist
+     *
+     * @param integer $userId
+     * @param integer $productId
+     * @return boolean
+     */
+    public function checkWishlist(int $userId, int $productId): bool;
 }

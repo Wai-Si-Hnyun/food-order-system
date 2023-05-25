@@ -10,12 +10,13 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="breadcrumb__links">
-                        <a href="#">Home</a>
+                        <a href="{{ route('home') }}">Home</a>
                         <a href="{{ route('users.shop') }}">Shop</a>
                         <button type="button" class="btn btn-outline-warning position-relative">
                             <span class="text-dark icon_heart_alt"></span>
                             <p
-                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark text-white">
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark text-white"
+                                id="wishlistCount">
                                 {{ count($wishlists) }}
                             </p>
                         </button>
@@ -26,60 +27,54 @@
     </div>
     <section class="wishlist spad">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="wishlist__cart__table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Stock</th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($wishlists as $list)
+            @if (count($wishlists) > 0)
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="wishlist__cart__table">
+                            <table>
+                                <thead>
                                     <tr>
-                                        <td class="product__cart__item">
-                                            <div class="product__cart__item__pic">
-                                                <img src="{{ asset('storage/' . $list->product_image) }}" alt=""
-                                                    class="img-thumbnail" style="height:200px;width:220px">
-                                            </div>
-                                            <div class="product__cart__item__text">
-                                                <h6 class="mt-5">{{ $list->product_name }}</h6>
-                                            </div>
-                                        </td>
-                                        <td class="cart__price">${{ $list->product_price }}</td>
-                                        <td class="cart__stock">In stock</td>
-                                        <td class="cart__btn"><a href="{{ route('payment.card') }}" class="primary-btn">Add
-                                                to cart</a></td>
-                                        <td class="cart__close">
-                                            <form method="POST"
-                                                action="{{ route('products.destroyWishlist', $list->id) }}">
-                                                @csrf
-                                                <input name="_method" type="hidden" value="DELETE">
-                                                <button type="submit" class="btn btn-default btn-xs btn-flat show_confirm"
-                                                    data-toggle="tooltip" title='Delete'>
-                                                    <span class="icon_close"></span>
-                                                </button>
-                                            </form>
-                                        </td>
+                                        <th>Product</th>
+                                        <th>Price(MMK)</th>
+                                        <th></th>
+                                        <th></th>
                                     </tr>
-                                @endforeach
+                                </thead>
+                                <tbody>
+                                    @foreach ($wishlists as $list)
+                                        <tr data-id="{{ $list->id }}">
+                                            <td class="product__cart__item">
+                                                <div class="product__cart__item__pic">
+                                                    <img src="{{ asset('storage/' . $list->product_image) }}" alt="" class="w-50">
+                                                </div>
+                                                <div class="product__cart__item__text">
+                                                    <h6>{{ $list->product_name }}</h6>
+                                                </div>
+                                            </td>
+                                            <td class="cart__price">{{ $list->product_price }}</td>
+                                            <td class="cart__btn">
+                                                <a href="#" class="primary-btn">Add to cart</a></td>
+                                            <td class="cart__close">
+                                                <span class="icon_close"
+                                                    style="cursor: pointer"></span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
 
-                            </tbody>
-                        </table>
-                        <div class="mt-3">
-                            {{ $wishlists->links() }}
+                                </tbody>
+                            </table>
+                            <div class="mt-3">
+                                {{ $wishlists->links() }}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @else
+                <h4 class="text-danger text-center py-5 my-5">User have no favorite product.</h4>
+            @endif
         </div>
     </section>
 @endsection
 @push('script')
-    <script src="{{ asset('assets/user/js/addFavorite.js') }}"></script>
+<script src="{{ asset('js/user/wishlist.js') }}"></script>
 @endpush

@@ -1,4 +1,65 @@
 $(document).ready(function () {
+
+    if (isWishlist) {
+        $('#add-to-wishlist').addClass('active');
+    } else {
+        $('#add-to-wishlist').removeClass('active');
+    }
+
+    $('#add-to-wishlist').on('click', function (e) {
+        e.preventDefault();
+
+        const user_id = $('body').data('user-id');
+        const product_id = $(this).data('product-id');
+
+        const storeWishlistUrl = window.routes.storeWishlistUrl;
+        const deleteWishlistUrl = window.routes.deleteWishlistUrl
+            .replace('__productId__', product_id);
+
+        const data = {
+            user_id,
+            product_id
+        }
+
+        if (isWishlist) {
+            $(this).removeClass('active');
+            isWishlist = false;
+
+            axios.delete(deleteWishlistUrl)
+                .then(res => {
+                    Swal.fire({
+                        title: 'Removed from wishlist',
+                        text: 'You can view your wishlist in the top right corner',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        showCancelButton: false,
+                        timer: 2500
+                    })
+                })
+                .catch(err => {
+                    console.log(err.response);
+                })
+        } else {
+            $(this).addClass('active');
+            isWishlist = true;
+
+            axios.post(storeWishlistUrl, data)
+                .then(res => {
+                    Swal.fire({
+                        title: 'Added to wishlist',
+                        text: 'You can view your wishlist in the top right corner',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        showCancelButton: false,
+                        timer: 2500
+                    })
+                })
+                .catch(err => {
+                    console.log(err.response);
+                })
+        }
+    })
+
     $('.add-to-cart-btn-detail').on('click', function (e) {
         e.preventDefault();
 
