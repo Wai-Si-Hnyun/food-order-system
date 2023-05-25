@@ -31,10 +31,12 @@
                 </div>
                 <div class="card p-3">
                     <div class=" card-header">
-                        <h3>Payment Details</h3>
+                        <h3 class="">Payment Details</h3>
                     </div>
-                    <div class="card-body text-center pt-5">
-                        <div class="mb-3" id="order-total-price">Total Cost - 0 MMK</div>
+                    <div class="card-body text-center mt-5">
+                        <div class="mb-3">
+                            <span class="pr-3" id="order-total-price">Total Cost - 0 MMK</span>
+                            <span class="spinner-border spinner-border-sm d-none" id="spinner" role="status" aria-hidden="true"></span></div>
                         <div id="pay-button"></div>
                     </div>
                 </div>

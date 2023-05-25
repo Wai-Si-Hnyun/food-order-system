@@ -50,7 +50,7 @@ class OrderDao implements OrderDaoInterface
         return Order::where('user_id', $userId)
             ->with('orderlists.product')
             ->orderBy('created_at', 'desc')
-            ->paginate(5);
+            ->paginate(10);
     }
 
     /**
