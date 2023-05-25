@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('content')
-    <div class="container">
+    <div class="container-xxl flex-grow-1 container-p-y">
         <div class="card col-8 mx-auto mt-5">
             <div class="card-header text-center">
                 <h4><b> Product Details</b></h4>
