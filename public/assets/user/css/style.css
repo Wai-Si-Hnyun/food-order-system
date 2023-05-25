@@ -404,6 +404,10 @@ ol {
     color: #bbbbbb;
 }
 
+.header__top__left ul li.img:first-child:after {
+    display: none;
+}
+
 .header__top__left ul li:last-child {
     margin-right: 0;
 }
