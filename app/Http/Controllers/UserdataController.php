@@ -131,7 +131,6 @@ class UserdataController extends Controller
 
     public function passwordUpdate(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'old_password' => 'required',
             'password' => 'required|min:6',

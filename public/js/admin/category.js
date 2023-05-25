@@ -5,12 +5,11 @@ $('.show_confirm').click(function(event) {
 
     var name = $(this).data("name");
 
-
     swal({
 
         title: ``,
 
-        text: "Are you sure you want to delete this Category?",
+        text: "Are you sure you want to delete this product?",
 
         icon: "warning",
 
