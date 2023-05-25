@@ -24,18 +24,18 @@
         <div class="d-flex justify-content-between">
             <h4 class="fw-bold py-3 mb-4">User List</h4>
 
-            <div class="mt-2 col-4">
-                <form action="{{ route('user.search') }}" type="get">
-                    @csrf
-                    <div class="d-flex">
-                        <input class="form-control" name="query" type="text" value="{{ request('query') }}"
-                            id="" placeholder="Enter User Name....">
-                        <button class='btn btn-sm btn-dark ms-2' type="submit"><i
-                                class="fa-solid fa-magnifying-glass"></i></button>
-                    </div>
-                </form>
-            </div>
+<div class="mt-2 col-4">
+    <form action="{{route('user.search')}}"  type="get">
+        @csrf
+        <div class="d-flex">
+            <input class="form-control" name="query" type="text" value="{{ request('query') }}" id=""
+                placeholder="Enter User Name....">
+            <button class='btn btn-sm btn-dark ms-2' type="submit"><i
+                    class="fa-solid fa-magnifying-glass"></i></button>
         </div>
+    </form>
+</div>
+</div>
 
         <div class="card">
             <div class="table-responsive text-nowrap">

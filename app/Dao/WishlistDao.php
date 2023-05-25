@@ -20,7 +20,6 @@ class WishlistDao implements WishlistDaoInterface
             ->where('wishlists.user_id', Auth::user()->id)
             ->paginate(10)
             ->appends(request()->all());
-
     }
 
     /**

@@ -60,6 +60,17 @@ class ProductService implements ProductServiceInterface
     }
 
     /**
+     * Get related products
+     *
+     * @param integer $id
+     * @return object
+     */
+    public function getRelatedProducts(int $id): object
+    {
+        return $this->productDao->getRelatedProducts($id);
+    }
+
+    /**
      * Update Product
      * @param array $data
      * @param int $id

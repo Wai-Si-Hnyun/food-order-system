@@ -15,6 +15,7 @@ interface ProductServiceInterface
 
     /**
      * Save Product
+     * 
      * @param array $data
      * @return void
      */
@@ -22,13 +23,23 @@ interface ProductServiceInterface
 
     /**
      * Get Product by id
+     * 
      * @param int $id
      * @return object
      */
     public function getProductById(int $id): object;
 
     /**
+     * Get related products
+     *
+     * @param integer $id
+     * @return object
+     */
+    public function getRelatedProducts(int $id): object;
+
+    /**
      * Update Product
+     * 
      * @param array $data
      * @param int $id
      * @return void
@@ -37,6 +48,7 @@ interface ProductServiceInterface
 
     /**
      * Delete Product by id
+     * 
      * @param int $id
      * @return void
      */

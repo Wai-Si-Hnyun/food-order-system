@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Services\UserServiceInterface;
 use App\Models\User;
+use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -142,12 +142,18 @@ class UserdataController extends Controller
                 ->withErrors($validator);
         }
         $auth = $this->userService->authCheck($request);
-        if (Auth::attempt(['id' => $request->id, 'password' => $request->old_password])) {
-            $user = Auth::user();
-            $update = $this->userService->passUpdate($request, $user);
-            return redirect()->back()->with('alert', "Passord change successful");
-        } else {
-            return redirect()->back()->with('message', "error");
+        if ($auth) {
+            $this->userService->authCheck($request);
+            if (Auth::attempt(['id' => $request->id, 'password' => $request->old_password])) {
+                $user = Auth::user();
+                $this->userService->passUpdate($request, $user);
+                // Log out the user and redirect to home page
+                Auth::logout();
+
+                return redirect()->route('home');
+            } else {
+                return redirect()->back()->with('message', "error");
+            }
         }
     }
 

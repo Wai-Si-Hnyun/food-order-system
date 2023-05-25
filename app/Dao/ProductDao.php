@@ -55,9 +55,20 @@ class ProductDao implements ProductDaoInterface
      * @param int $id
      * @return object
      */
-    public function getProductById($id): object
+    public function getProductById(int $id): object
     {
-        return Product::findOrFail($id);
+        return Product::findOrFail($id)->load('category');
+    }
+
+    public function getRelatedProducts(int $id): object
+    {
+        $product = Product::findOrFail($id);
+        $relatedProducts = Product::where('category_id', $product->category_id)
+            ->where('id', '!=', $id)
+            ->with('category')
+            ->get();
+
+        return $relatedProducts;
     }
 
     /**

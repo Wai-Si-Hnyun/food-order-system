@@ -44,4 +44,11 @@ $(document).ready(function () {
         e.preventDefault();
         $('#logoutForm').submit();
     }
+
+    let card = $(".profileimg"); // declaring profile card element
+    let displayPicture = $(".display-picture"); // declaring profile picture
+
+    displayPicture.on("click", function () { // on click on profile picture toggle hidden class from CSS
+        card.toggleClass("hidden");
+    });
 })

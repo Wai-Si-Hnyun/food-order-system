@@ -404,6 +404,10 @@ ol {
     color: #bbbbbb;
 }
 
+.header__top__left ul li.img:first-child:after {
+    display: none;
+}
+
 .header__top__left ul li:last-child {
     margin-right: 0;
 }
@@ -1851,7 +1855,7 @@ ol {
 }
 
 .product__details__option .pro-qty .qtybtn.dec {
-    color: #888888;
+    color: #111111;
 }
 
 .product__details__option .pro-qty .qtybtn.inc {
@@ -3552,7 +3556,6 @@ ol {
     font-size: 14px;
     color: #111111;
     padding-left: 20px;
-    margin-bottom: 30px;
 }
 
 .contact__form form input:last-child {
@@ -3568,7 +3571,6 @@ ol {
     color: #111111;
     padding-left: 20px;
     padding-top: 12px;
-    margin-bottom: 24px;
     resize: none;
 }
 

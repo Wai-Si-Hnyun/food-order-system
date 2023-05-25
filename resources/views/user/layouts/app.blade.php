@@ -30,10 +30,7 @@
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
 
-    <!-- Font Awesome -->
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
+
 
     <!-- Select2 -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -69,7 +66,7 @@
                                         class=" rounded-circle" /></a>
                             @endif
                             <div class="profileimg hidden">
-                                <ul class=" mt-3 " style="background: none;">
+                                <ul class="mt-3 " style="background: none;">
                                     <!--MENU-->
                                     <li style="background: #E78341;" class="rounded"><a
                                             href="{{ url('userprofile/' . Auth::user()->id) }}"
@@ -112,10 +109,10 @@
                     <div class="col-lg-12">
                         <div class="header__top__inner">
                             <div class="header__top__left">
-                                <ul>
+                                <ul class="img d-flex align-items-center">
                                     @if (Auth::user())
                                         @if (Auth::user()->role == 'user')
-                                            <li style="width:25%;">
+                                            <li style="width:25%;" class="img">
                                                 @if (Auth::user()->image == null)
                                                     <a href="#" class="display-picture"><img
                                                             src="{{ asset('image/profile.png') }}" alt
@@ -142,7 +139,7 @@
                                             </form>
                                             <a href="#" onclick="handleFormSubmit(event)">Logout</a>
                                         </li>
-                                        <li>
+                                        <li >
                                             <a href="{{ route('customer.care') }}">Help</a>
                                         </li>
                                     @else
@@ -270,6 +267,7 @@
             'ajaxIndexUrl': '{{ route('ajax.index') }}',
             'getProductsUrl': '{{ route('products.all') }}',
             'filterProductsUrl': '{{ route('products.filter', ['id' => '__id__']) }}',
+            'feedbackCreateUrl': '{{ route('feedback.create') }}',
         }
     </script>
     @stack('script')
