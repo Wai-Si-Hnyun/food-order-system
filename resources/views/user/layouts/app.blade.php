@@ -268,6 +268,9 @@
             'getProductsUrl': '{{ route('products.all') }}',
             'filterProductsUrl': '{{ route('products.filter', ['id' => '__id__']) }}',
             'feedbackCreateUrl': '{{ route('feedback.create') }}',
+            'storeWishlistUrl': '{{ route('products.storeWishlist') }}',
+            'deleteWishlistUrl': '{{ route('products.destroyWishlist', ['productId' => '__productId__']) }}',
+            'deleteWishlistByIdUrl': '{{ route('wishlists.destroy', ['id' => '__id__']) }}',
         }
     </script>
     @stack('script')

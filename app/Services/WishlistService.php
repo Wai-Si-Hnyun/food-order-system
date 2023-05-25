@@ -47,11 +47,35 @@ class WishlistService implements WishlistServiceInterface
 
     /**
      * Delete Wishlist by id
-     * @param int $id
+     * 
+     * @param integer $id
      * @return void
      */
     public function deleteWishlistById(int $id): void
     {
         $this->WishlistDao->deleteWishlistById($id);
+    }
+
+    /**
+     * Delete wishlist by product id and user id
+     *
+     * @param integer $productId
+     * @return void
+     */
+    public function deleteWishlistByProductId(int $productId): void
+    {
+        $this->WishlistDao->deleteWishlistByProductId($productId);
+    }
+
+    /**
+     * Check wishlist
+     *
+     * @param integer $userId
+     * @param integer $productId
+     * @return boolean
+     */
+    public function checkWishlist(int $userId, int $productId): bool
+    {
+        return $this->WishlistDao->checkWishlist($userId, $productId);
     }
 }
