@@ -129,30 +129,32 @@ class UserdataController extends Controller
      * function user pass update
      */
 
-    public function passwordUpdate(Request $request){
+    public function passwordUpdate(Request $request)
+    {
 
-        $validator = Validator::make($request->all(),[
-            'old_password'=>'required',
-            'password'=>'required|min:6',
-            'confirm_password'=>'required|same:password'
+        $validator = Validator::make($request->all(), [
+            'old_password' => 'required',
+            'password' => 'required|min:6',
+            'confirm_password' => 'required|same:password',
         ]);
         if ($validator->fails()) {
             return redirect()->back()
                 ->withInput()
                 ->withErrors($validator);
         }
-        $auth =$this->userService->authCheck($request);
+        $auth = $this->userService->authCheck($request);
         if ($auth) {
-        $this->userService->authCheck($request);
-        if (Auth::attempt(['id' => $request->id, 'password' => $request->old_password])) {
-            $user = Auth::user();
-            $this->userService->passUpdate($request, $user);
-            // Log out the user and redirect to home page
-            Auth::logout();
+            $this->userService->authCheck($request);
+            if (Auth::attempt(['id' => $request->id, 'password' => $request->old_password])) {
+                $user = Auth::user();
+                $this->userService->passUpdate($request, $user);
+                // Log out the user and redirect to home page
+                Auth::logout();
 
-            return redirect()->route('home');
-        } else {
-            return redirect()->back()->with('message', "error");
+                return redirect()->route('home');
+            } else {
+                return redirect()->back()->with('message', "error");
+            }
         }
     }
 
