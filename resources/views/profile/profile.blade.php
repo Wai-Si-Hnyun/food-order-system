@@ -1,4 +1,4 @@
-@extends('profile.layouts.app')
+@extends('user.layouts.app')
 
 @section('content')
 
@@ -26,7 +26,7 @@
  @endif
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<section class="vh-100">
+<section class=" mt-0">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100 w-100">
       <div class="col col-lg-8 mb-4 mb-lg-0">
@@ -76,25 +76,27 @@
                 <div class="row pt-1">
                   <div class="col-8 mb-3">
                     <h6>Password Setting</h6>
-                    <a href="{{url('password/'.$user->id)}}" class="text-success">Change Password</a>
+                    <a href="{{url('password/'.$user->id.'/update')}}" class="text-success">Change Password</a>
                   </div>
                   <div class="col-4 mb-3">
                     <h6>Edit Profile</h6>
-                    <a href="#" class="text-primary"  id="update-button">Edit</a>
+                    <a href="#my-div" class="text-primary"  id="update-button">Edit</a>
                   </div>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <a href="{{route('admin.dashboard')}}" class="btn btn-dark btn-sm"> Back</a>
+                    <a href="{{route('home')}}" class="btn btn-dark btn-sm"> Back</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        
       </div>
     </div>
 
-    <!--update -->
-    <div class="container bootstrap snippets bootdey w-75 d-none" id="my-div">
+
+        <!--update -->
+        <div class="container bootstrap snippets bootdey w-75 d-none" id="my-div" >
     <hr>
     <h3 class="text-primary mt-5">Edit Profile</h3>
     <hr>
@@ -141,5 +143,6 @@
       </div>
   </div>
 </div>
-    <script src="{{ asset('js/profile/profile.js') }}"></script>
+<script src="{{ asset('js/profile/profile.js') }}"></script>
 @endsection
+

@@ -4,7 +4,6 @@ namespace App\Dao;
 
 use App\Contracts\Dao\UserProductDaoInterface;
 use App\Models\Product;
-use App\Models\User;
 
 class UserProductDao implements UserProductDaoInterface
 {
