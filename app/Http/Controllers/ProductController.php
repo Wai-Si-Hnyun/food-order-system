@@ -38,8 +38,9 @@ class ProductController extends Controller
      */
     public function create()
     {
+        $product = Product::first();
         $categories = Category::select('id', 'name')->get();
-        return view('admin.pages.product.create', compact('categories'));
+        return view('admin.pages.product.create', compact('categories', 'product'));
     }
 /**
  * Save Product

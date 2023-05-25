@@ -14,7 +14,9 @@
                         <select name="category" id="category" class="form-control @error('category') is-invalid @enderror">
                             <option value="">Choose category</option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                <option value="{{ $category->id }}"
+                                    {{ $product->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}
+                                </option>
                             @endforeach
                         </select>
                         @error('category')
@@ -69,7 +71,7 @@
                             </div>
                         @enderror
                     </div>
-                    <input type="submit" value="Create" class="btn btn-info my-3 text-dark">
+                    <input type="submit" value="Create" class="btn btn-primary my-3 text-white">
                     <a href="{{ route('products.index') }}" class="btn btn-dark float-end my-3">Back</a>
                 </form>
             </div>

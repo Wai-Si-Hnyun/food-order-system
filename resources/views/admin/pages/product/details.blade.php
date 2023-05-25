@@ -8,7 +8,8 @@
             </div>
             <div class="row card-body">
                 <div class="col-5">
-                    <img src="{{ asset('storage/' . $product->image) }}" class="img-thumbnail shadow-sm ms-5" id="product-img">
+                    <img src="{{ asset('storage/' . $product->image) }}" class="img-thumbnail shadow-sm ms-5" id="product-img"
+                        style="height:200px">
                 </div>
                 <div class="col-5 offset-1" id='data'>
                     <h6 class="mb-4"><i class="fa-regular fa-file-code me-3"></i>{{ $product->category_id }}</h6>

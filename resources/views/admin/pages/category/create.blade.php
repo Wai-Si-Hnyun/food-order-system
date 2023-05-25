@@ -17,7 +17,7 @@
                             {{ $message }}
                         </div>
                     @enderror
-                    <input type="submit" value="Create" class="btn btn-info my-3 text-dark" autofocus>
+                    <input type="submit" value="Create" class="btn btn-primary my-3 text-white" autofocus>
                     <a href="{{ route('categories.index') }}" class="btn btn-dark float-end my-3">Back</a>
                 </form>
             </div>
