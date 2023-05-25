@@ -30,10 +30,7 @@
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
 
-    <!-- Font Awesome -->
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
+
 
     <!-- Select2 -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -48,26 +45,18 @@
                     <div class="col-lg-12">
                         <div class="header__top__inner">
                             <div class="header__top__left">
-                                <ul>
+                                <ul class="img">
                                     @if (Auth::user())
                                         <li style="width:25%;">
                                             @if (Auth::user()->image == null)
-                                                <a href="#" class="display-picture"><img
+                                                <a href="{{ url('userprofile/' . Auth::user()->id) }}" class="display-picture"><img
                                                         src="{{ asset('image/profile.png') }}" alt
                                                         class=" rounded-circle" /></a>
                                             @else
-                                                <a href="#" class="display-picture"><img
+                                                <a href="{{ url('userprofile/' . Auth::user()->id) }}" class="display-picture"><img
                                                         src="{{ asset('image/profile/' . Auth::user()->image) }}" alt
                                                         class=" rounded-circle" /></a>
                                             @endif
-                                            <div class="profileimg hidden">
-                                                <ul class=" mt-3 " style="background: none;">
-                                                    <!--MENU-->
-                                                    <li style="background: #E78341;" class="rounded"><a
-                                                            href="{{ url('userprofile/' . Auth::user()->id) }}"
-                                                            class="text-white">Profile</li></a>
-                                                </ul>
-                                            </div>
 
                                         </li>
                                         <li>
@@ -76,7 +65,7 @@
                                             </form>
                                             <a href="#" onclick="handleFormSubmit(event)">Logout</a>
                                         </li>
-                                        <li>
+                                        <li >
                                             <a href="{{ route('customer.care') }}">Help</a>
                                         </li>
                                     @else
@@ -102,7 +91,7 @@
                                             src="{{ asset('assets/user/img/icon/heart.png') }}" alt=""></a>
                                 </div>
                                 <div class="header__top__right__cart">
-                                    <a href="{{ route('show.cart') }}"><img
+                                    <a href="#"><img
                                             src="{{ asset('assets/user/img/icon/cart.png') }}" alt=""></a>
                                     <div class="cart__price">Cart: <span id="cart-total-price">0 MMK</span></div>
                                 </div>

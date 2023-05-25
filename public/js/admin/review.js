@@ -5,7 +5,7 @@ var actionList = document.getElementsByClassName('actionlist');
 var idList = document.getElementsByClassName('idlist');
 function deleteBtn(deleteId) {
     if (confirm('Sure to delete?')) {
-        axios.delete('/admin/user-review/'+deleteId)
+        axios.delete('/admin/reviews/'+deleteId+'/delete')
           .then(response => {
             for (var i = 0; i < commentList.length; i++) {
                 console.log(idList[i].innerHTML);

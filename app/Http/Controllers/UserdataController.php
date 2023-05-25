@@ -128,6 +128,7 @@ class UserdataController extends Controller
      */
 
     public function passwordUpdate(Request $request){
+
         $validator = Validator::make($request->all(),[
             'old_password'=>'required',
             'password'=>'required|min:6',
@@ -139,10 +140,11 @@ class UserdataController extends Controller
                 ->withErrors($validator);
         }
         $auth =$this->userService->authCheck($request);
-        if (Auth::attempt(['id'=>$request->id,'password'=>$request->old_password])) {
+        if ($auth) {
             $user = Auth::user();
             $update = $this->userService->passUpdate($request,$user);
-            return redirect()->back()->with('alert',"Passord change successful");
+            Auth::logout($user);
+            return redirect()->route('home');
         }else {
             return redirect()->back()->with('message',"error");
         }

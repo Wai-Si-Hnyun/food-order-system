@@ -56,7 +56,7 @@ class AuthController extends Controller
         $this->authService->createUser($request->only([
             'name', 'email', 'password', 'remember_token',
         ]));
-        return redirect()->route('auth.login');
+        return view('authen.login');
     }
 
     /**

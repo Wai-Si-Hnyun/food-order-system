@@ -35,10 +35,7 @@
         @error('confirm_password')
                 <small class="text-danger">{{ $message }}</small>
         @enderror
-        <div class="mt-2">
-        <a href="{{route('auth.forgetPass')}}" class="mb-3">forget password?</a>
-        </div>
-
+        
         <button class="text-light pt-2 pb-2 au-btn--block au-btn--orange m-b-20" type="submit">REGISTER</button>
 
     </form>

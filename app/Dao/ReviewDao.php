@@ -29,7 +29,7 @@ class ReviewDao implements ReviewDaoInterface
         ->join('products','reviews.product_id','products.id')
         ->where('product_id',$id)
         ->latest()
-        ->paginate(5);
+        ->paginate(3);
     }
 
     //admin review list

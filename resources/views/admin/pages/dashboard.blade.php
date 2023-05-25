@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         <span>Total Customers</span>
-                        <h3 class="card-title text-nowrap mb-1 mt-2">{{ $data['totalUsers'] }}</h3>
+                        <h3 class="card-title text-nowrap mb-1 mt-2">#</h3>
                     </div>
                 </div>
             </div>

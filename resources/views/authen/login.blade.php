@@ -1,6 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+
+@if (session('message'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+       <p class="text-center text-success">Password change successfully.</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
+
     @if (session('alert'))
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
             <p>Email or Password may be wrong.Please try again!</p>
@@ -29,7 +39,7 @@
             @error('password')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
-            <div class="form-group">
+            <div class="form-group mt-3">
                 {!! NoCaptcha::display() !!}
             </div>
             @if ($errors->has('g-recaptcha-response'))

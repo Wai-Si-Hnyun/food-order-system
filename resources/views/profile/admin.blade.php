@@ -29,7 +29,7 @@
 <section class="vh-100">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100 w-100">
-      <div class="col col-lg-8 mb-4 mb-lg-0">
+      <div class="col col-lg-6 mb-4 mb-lg-0">
         <div class="card mb-3" style="border-radius: .5rem;">
           <div class="row g-0">
             <div class="col-md-4 gradient-custom text-center text-white bg-light"
@@ -76,11 +76,11 @@
                 <div class="row pt-1">
                   <div class="col-8 mb-3">
                     <h6>Password Setting</h6>
-                    <a href="{{url('password/'.$user->id)}}" class="text-success">Change Password</a>
+                    <a href="{{url('password/'.$user->id.'/update')}}" class="text-success">Change Password</a>
                   </div>
                   <div class="col-4 mb-3">
                     <h6>Edit Profile</h6>
-                    <a href="#" class="text-primary"  id="update-button">Edit</a>
+                    <a href="#my-div" class="text-primary"  id="update-button">Edit</a>
                   </div>
                 </div>
                 <div class="d-flex justify-content-end">

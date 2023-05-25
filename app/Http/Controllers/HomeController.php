@@ -57,7 +57,7 @@ class HomeController extends Controller
     {
         $totalCategories = count($this->categoryService->getCategory('admin'));
         $totalProducts = count($this->productService->getProduct('admin'));
-        $totalUsers = count($this->userDao->getUsersByRole('user'));
+        //$totalUsers = count($this->userDao->getUsersByRole('user'));
         $totalOrders = count($this->orderService->index());
         $deliveredOrders = count($this->orderService->getDeliveredOrders());
         $processingOrders = $totalOrders - $deliveredOrders;
@@ -70,7 +70,7 @@ class HomeController extends Controller
         $data = [
             'totalCategories' => $totalCategories,
             'totalProducts' => $totalProducts,
-            'totalUsers' => $totalUsers,
+            //'totalUsers' => $totalUsers,
             'totalOrders' => $totalOrders,
             'deliveredOrders' => $deliveredOrders,
             'processingOrders' => $processingOrders,

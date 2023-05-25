@@ -1,20 +1,21 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ChatbotController;
-use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\UserdataController;
+use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\User\AjaxController;
 use App\Http\Controllers\User\UserProductController;
-use App\Http\Controllers\WishlistController;
-use Illuminate\Support\Facades\Route;
 
 // Unauthenticated Routes
 Route::get('/', [HomeController::class, 'home'])->name('home');
@@ -31,6 +32,7 @@ Route::get('/register', [AuthController::class, 'registerPage'])->name('auth.reg
 Route::post('/register', [AuthController::class, 'authRegisterStore'])->name('auth.store');
 Route::post('/login-check', [AuthController::class, 'authLogin'])->name('auth.loginCheck');
 
+
 //forget/reset password
 Route::get('/forget-passwordpage', [AuthController::class, 'forgetPass'])->name('auth.forgetPass');
 Route::post('/forget-create', [AuthController::class, 'forgetCreate'])->name('auth.forgetCreate');
@@ -38,7 +40,7 @@ Route::get('/reset-passwordpage', [AuthController::class, 'resetPass'])->name('a
 Route::post('/password-change', [AuthController::class, 'passwordChange'])->name('auth.passwordChange');
 
 // Chat bot
-Route::post('/chat/get-answer', [ChatbotController::class, 'getAnswer']);
+Route::post('/chat/get-answer', [ChatbotController::class, 'getAnswer'])->name('chat.getAnswer');
 
 //Customer Care
 Route::get('/customer-care', [CustomerController::class, 'care'])->name('customer.care');
@@ -74,6 +76,7 @@ Route::middleware('role:user')->group(function () {
     //feedback
     Route::get('/feed-back', [FeedbackController::class, 'feedback'])->name('feedback.page');
     Route::post('/feedback-create', [FeedbackController::class, 'feedbackCreate'])->name('feedback.create');
+
 });
 
 Route::middleware('role:admin')->prefix('admin')->group(function () {
@@ -140,6 +143,5 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
 //userProfile (for admin and user)
 Route::get('/userprofile/{user}', [UserdataController::class, 'userProfile'])->name('user.profile');
 Route::post('/profile-update/{user}', [UserdataController::class, 'profileUpdate'])->name('profile.update');
-Route::get('/password/{user}', [UserdataController::class, 'passChange'])->name('pass.change');
+Route::get('/password/{user}/update', [UserdataController::class, 'passChange'])->name('pass.change');
 Route::post('/password-update', [UserdataController::class, 'passwordUpdate'])->name('password.change');
-Route::delete('/delete-account/{user}', [UserdataController::class, 'accountDelete'])->name('account.destroy');
