@@ -1,12 +1,12 @@
-const updateButton = document.getElementById("update-button");
-const myDiv = document.getElementById("my-div");
+const updateBtn = document.getElementById("btnUpdate");
+const form = document.getElementById("form");
 
-updateButton.addEventListener("click", function() {
-    myDiv.classList.remove("d-none");
+btnUpdate.addEventListener("click", function() {
+    form.classList.remove("d-none");
 });
 
 
 var loadFile = function(event) {
-    var output = document.getElementById('output');
-    output.src = URL.createObjectURL(event.target.files[0]);
+    var changeImg = document.getElementById('changeImg');
+    changeImg.src = URL.createObjectURL(event.target.files[0]);
 };
