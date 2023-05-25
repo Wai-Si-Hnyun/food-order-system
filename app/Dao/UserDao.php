@@ -54,11 +54,13 @@ class UserDao implements UserDaoInterface
         ]);
     }
 
-    public function passUpdate($request,$user):void {
+    public function passUpdate($request,$user) {
         $userEmail = User::where('email',$user->email)->first();
         $userUpdate = User::find($userEmail->id);
         $userUpdate->password = bcrypt($request->password);
         $userUpdate->save();
+
+        return redirect()->back();
     }
 
     public function searchUser():object

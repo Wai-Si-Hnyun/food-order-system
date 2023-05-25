@@ -9,7 +9,7 @@ interface UserDaoInterface
     public function getUserById(int $id): object;
     public function getUsersByRole(string $role): object;
     public function updateProfile(array $data,$id): void;
-    public function passUpdate($request,$user):void ;
+    public function passUpdate($request,$user) ;
     public function searchUser():object;
     public function updatefile(array $data,$id): void;
     public function authCheck($request) : bool;

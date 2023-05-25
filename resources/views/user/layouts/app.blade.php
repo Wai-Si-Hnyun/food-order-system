@@ -270,6 +270,7 @@
             'ajaxIndexUrl': '{{ route('ajax.index') }}',
             'getProductsUrl': '{{ route('products.all') }}',
             'filterProductsUrl': '{{ route('products.filter', ['id' => '__id__']) }}',
+            'feedbackCreateUrl': '{{ route('feedback.create') }}',
         }
     </script>
     @stack('script')

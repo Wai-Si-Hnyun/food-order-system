@@ -16,7 +16,7 @@ class UserProductController extends Controller
      */
 
     private $userProductService;
-    private $reviewServiceInterface;
+    private $reviewService;
     /**
      * Create a new controller instance.
      * @param UserProductServiceInterface $userServiceInterface
@@ -28,25 +28,6 @@ class UserProductController extends Controller
     ) {
         $this->userProductService = $userProductServiceInterface;
         $this->reviewService = $reviewServiceInterface;
-    }
-    /**
-     * home function
-     */
-    public function home()
-    {
-        $products = $this->userProductService->getUsersProduct();
-        return view('user.main.home', compact('products'));
-    }
-
-    /**
-     * shop function
-     */
-    public function shop()
-    {
-        $products = $this->userProductService->getUsersProduct();
-        $categories = Category::get();
-
-        return view('user.main.shop', compact('products', 'categories'));
     }
 
     /**
