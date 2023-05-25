@@ -78,33 +78,37 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="related__products__slider owl-carousel">
-                    @foreach ($productList as $list)
-                        <div class="col-lg-3">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg detail-view" data-id="{{ $list->id }}"
-                                    data-setbg="{{ asset('storage/' . $list->image) }}" style="cursor: pointer">
-                                    <div class="product__label">
-                                        <span>
-                                            {{ $list->category->name }}
-                                        </span>
+            @if (count($productList) > 4)
+                <div class="row">
+                    <div class="related__products__slider owl-carousel">
+                        @foreach ($productList as $list)
+                            <div class="col-lg-3">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg detail-view" data-id="{{ $list->id }}"
+                                        data-setbg="{{ asset('storage/' . $list->image) }}" style="cursor: pointer">
+                                        <div class="product__label">
+                                            <span>
+                                                {{ $list->category->name }}
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">{{ $list->name }}</a></h6>
-                                    <div class="product__item__price">{{ $list->price }} MMK</div>
-                                    <div class="cart_add" data-id="{{ $list->id }}" data-name="{{ $list->name }}"
-                                        data-price="{{ $list->price }}" data-image="{{ $list->image }}"
-                                        data-quantity="1">
-                                        <a href="#" class="add-to-cart-btn">Add to cart</a>
+                                    <div class="product__item__text">
+                                        <h6><a href="#">{{ $list->name }}</a></h6>
+                                        <div class="product__item__price">{{ $list->price }} MMK</div>
+                                        <div class="cart_add" data-id="{{ $list->id }}"
+                                            data-name="{{ $list->name }}" data-price="{{ $list->price }}"
+                                            data-image="{{ $list->image }}" data-quantity="1">
+                                            <a href="#" class="add-to-cart-btn">Add to cart</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
-            </div>
+            @else
+                <h5 class="text-danger text-center my-5 py-5">There is no related product yet!</h5>
+            @endif
         </div>
     </section>
     <!-- Related Products Section End -->

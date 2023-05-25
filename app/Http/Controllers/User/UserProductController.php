@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Contracts\Services\ProductServiceInterface;
 use App\Models\Product;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
@@ -17,6 +18,8 @@ class UserProductController extends Controller
 
     private $userProductService;
     private $reviewService;
+    private $productService;
+
     /**
      * Create a new controller instance.
      * @param UserProductServiceInterface $userServiceInterface
@@ -24,10 +27,12 @@ class UserProductController extends Controller
      */
     public function __construct(
         UserProductServiceInterface $userProductServiceInterface,
-        ReviewServiceInterface $reviewServiceInterface
+        ReviewServiceInterface $reviewServiceInterface,
+        ProductServiceInterface $productService
     ) {
         $this->userProductService = $userProductServiceInterface;
         $this->reviewService = $reviewServiceInterface;
+        $this->productService = $productService;
     }
 
     /**
@@ -37,8 +42,8 @@ class UserProductController extends Controller
     {
         $user = Auth::user();
         $review = $this->reviewService->reviewShow($id);
-        $product = Product::where('id', $id)->first();
-        $productList = Product::get();
+        $product = $this->productService->getProductById($id);
+        $productList = $this->productService->getRelatedProducts($id);
 
         return view('user.main.details', compact('product', 'productList', 'id', 'user','review'));
     }
