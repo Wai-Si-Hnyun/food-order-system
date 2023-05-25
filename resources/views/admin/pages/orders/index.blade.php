@@ -8,7 +8,6 @@
             <h5>Total - ({{ count($orders) }})</h5>
             <div class="">
                 <form action="{{ route('orders.index') }}" method="get">
-                    @csrf
                     <div class="d-flex">
                         <input class="form-control" name="key" type="text" value="{{ request('key') }}"
                             id="key" placeholder="Search..">
@@ -51,7 +50,7 @@
                                             </option>
                                             <option class="text-success" value="1"
                                                 {{ $order->status == 1 ? 'selected' : null }}>
-                                                success
+                                                accept
                                             </option>
                                             <option class="text-warning" value="2"
                                                 {{ $order->status == 2 ? 'selected' : null }}>
@@ -65,11 +64,11 @@
                                     </td>
                                     <td>{{ $order->created_at->format('j-m-Y') }}</td>
                                     <td>
-                                        <div class="    ">
-                                            <a class="text-primary me-3" href="{{ route('order.show', $order->id) }}">
-                                                <i class="bx bx-edit-alt me-1"></i>
+                                        <div class="">
+                                            <a class="text-primary me-3" href="{{ route('order.show', $order->id) }}" title="Detail">
+                                                <i class="bx bxs-detail me-1"></i>
                                             </a>
-                                            <a class="text-danger delete-btn" href="#"
+                                            <a class="text-danger delete-btn" href="#" title="Delete"
                                                 onclick="deleteOrder(event, {{ $order->id }})">
                                                 <i class="bx bx-trash me-1"></i>
                                             </a>

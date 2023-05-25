@@ -55,11 +55,12 @@
                                     <td>{{ $category->name }}</td>
                                     <td class="text-right">{{ $category->created_at->format('j-F-Y') }}</td>
                                     <td class="text-right d-flex">
-                                        <a href="{{ route('categories.edit', $category->id) }}">
-                                            <i class='bx bxs-edit-alt mr-3 mt-1'></i>
+                                        <a href="{{ route('categories.edit', $category->id) }}" title="Edit">
+                                            <i class='bx bxs-edit-alt me-3 mt-1'></i>
                                         </a>
                                         <form method="POST" action="{{ route('categories.destroy', $category->id) }}">
                                             @csrf
+                                            @method('DELETE')
                                             <input name="_method" type="hidden" value="DELETE">
                                             <button type="submit" class="btn btn-default btn-xs btn-flat show_confirm"
                                                 data-toggle="tooltip" title='Delete'>

@@ -1,10 +1,10 @@
 $('.show_confirm').click(function(event) {
+    event.preventDefault();
 
     var form = $(this).closest("form");
 
     var name = $(this).data("name");
 
-    event.preventDefault();
 
     swal({
 
@@ -27,7 +27,6 @@ $('.show_confirm').click(function(event) {
             form.submit();
 
         }
-
     });
 
 });

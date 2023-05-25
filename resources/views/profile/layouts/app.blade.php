@@ -66,7 +66,7 @@
 
                                         </li>
                                         <li >
-                                            <form action="#" method="POST" id="logoutForm">
+                                            <form action="{{ route('logout') }}" method="POST" id="logoutForm">
                                                 @csrf
                                             </form>
                                             <a href="#" onclick="handleFormSubmit(event)">Logout</a>
@@ -145,6 +145,7 @@
     <script src="{{ asset('assets/user/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('assets/user/js/jquery.nicescroll.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/user/header.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"
         integrity="sha512-i9cEfJwUwViEPFKdC1enz4ZRGBj8YQo6QByFTF92YXHi7waCqyexvRD75S5NVTsSiTv7rKWqG9Y5eFxmRsOn0A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>

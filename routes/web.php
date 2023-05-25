@@ -111,6 +111,7 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('/reviews/list', [ReviewController::class, 'reviewList'])->name('review.list');
     Route::delete('/reviews/{id}/delete', [ReviewController::class, 'reviewDestory'])->name('review.destory');
     Route::get('/review-search', [ReviewController::class, 'reviewSearch'])->name('review.search');
+    Route::get('/review/{review}/show', [ReviewController::class, 'show'])->name('review.show');
 
     //UserList
     Route::get('/users/list', [UserdataController::class, 'userList'])->name('userData.list');
@@ -123,6 +124,7 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('/feedback-list', [FeedbackController::class, 'feedbackList'])->name('feedback.list');
     Route::delete('/feedback-delete/{feedback}', [FeedbackController::class, 'feedbackDestory'])->name('feedback.destory');
     Route::get('/feedback-search', [FeedbackController::class, 'feedbackSearch'])->name('feedback.search');
+    Route::get('/feedback/{feedback}/show', [FeedbackController::class, 'show'])->name('feedback.show');
 
     // Mail
     Route::get('/mail', [MailController::class, 'index'])->name('mail.index');

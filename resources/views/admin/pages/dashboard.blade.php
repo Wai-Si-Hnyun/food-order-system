@@ -3,7 +3,7 @@
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row card-deck mb-4">
-            <div class="col-lg-4">
+            <div class="col-md-4 col-sm-12 mb-sm-3 col-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title d-flex align-items-start justify-content-between">
@@ -16,7 +16,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-md-4 col-sm-12 mb-sm-3 col-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title d-flex align-items-start justify-content-between">
@@ -29,7 +29,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-md-4 col-sm-12 mb-sm-3 col-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title d-flex align-items-start justify-content-between">
@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="row mb-4">
-            <div class="col-lg-4">
+            <div class="col-md-4 col-sm-12 mb-sm-3 col-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title d-flex align-items-start justify-content-between">
@@ -58,7 +58,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-md-4 col-sm-12 mb-sm-3 col-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title d-flex align-items-start justify-content-between">
@@ -72,7 +72,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-md-4 col-sm-12 mb-sm-3 col-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title d-flex align-items-start justify-content-between">
@@ -88,7 +88,7 @@
             </div>
         </div>
         <div class="row mb-4">
-            <div class="col-lg-4 d-flex">
+            <div class="col-md-4 col-sm-12 mb-sm-3 col-12 d-flex">
                 <div class="card flex-grow-1">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div class="card-title d-flex align-items-start justify-content-between">
@@ -102,7 +102,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 d-flex">
+            <div class="col-md-4 col-sm-12 mb-sm-3 col-12 d-flex">
                 <div class="card flex-grow-1">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div class="card-title d-flex align-items-start justify-content-between">
@@ -120,7 +120,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 d-flex">
+            <div class="col-md-4 col-sm-12 mb-sm-3 col-12 d-flex">
                 <div class="card flex-grow-1">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div class="card-title d-flex align-items-start justify-content-between">
