@@ -22,9 +22,6 @@
     },
     "dependencies": {
         "@bilions/myanmar-cities": "^1.0.1",
-        "laravel-echo": "^1.15.1",
-        "laravel-echo-server": "^1.6.3",
-        "pusher-js": "^6.0.0",
         "sweetalert2": "^11.7.5"
     }
 }
