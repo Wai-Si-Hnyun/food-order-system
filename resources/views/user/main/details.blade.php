@@ -50,16 +50,9 @@
                                 </div>
                             </div>
                             <a href="#" class="primary-btn add-to-cart-btn-detail">Add to cart</a>
-                            @if (Auth::check())
-                                <form action="{{ route('products.storeWishlist') }}" id="contact_form" method="post">
-                                    @csrf
-                                    <input name="user_id" type="hidden" value="{{ Auth::user()->id }}" />
-                                    <input name="product_id" type="hidden" value="{{ $product->id }}" />
-                                    <button type="submit" class="btn btn-outline-warning btn-lg heart__btn  mr-3">
-                                        <span class="icon_heart_alt"></span>
-                                    </button>
-                                </form>
-                            @endif
+                            <button class="btn btn-outline-warning btn-lg mr-3" id="add-to-wishlist" data-product-id="1">
+                                <span class="icon_heart_alt"></span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -78,37 +71,70 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="related__products__slider owl-carousel">
-                    @foreach ($productList as $list)
-                        <div class="col-lg-3">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg detail-view" data-id="{{ $list->id }}"
-                                    data-setbg="{{ asset('storage/' . $list->image) }}" style="cursor: pointer">
-                                    <div class="product__label">
-                                        <span>
-                                            {{ $list->category->name }}
-                                        </span>
+            @if (count($productList) > 0)
+                @if (count($productList) < 4)
+                    <div class="row">
+                        @foreach ($productList as $list)
+                            <div class="col-lg-3 col-md-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg detail-view" data-id="{{ $list->id }}"
+                                        data-setbg="{{ asset('storage/' . $list->image) }}" style="cursor: pointer">
+                                        <div class="product__label">
+                                            <span>
+                                                {{ $list->category->name }}
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">{{ $list->name }}</a></h6>
-                                    <div class="product__item__price">{{ $list->price }} MMK</div>
-                                    <div class="cart_add" data-id="{{ $list->id }}" data-name="{{ $list->name }}"
-                                        data-price="{{ $list->price }}" data-image="{{ $list->image }}"
-                                        data-quantity="1">
-                                        <a href="#" class="add-to-cart-btn">Add to cart</a>
+                                    <div class="product__item__text">
+                                        <h6><a href="#">{{ $list->name }}</a></h6>
+                                        <div class="product__item__price">{{ $list->price }} MMK</div>
+                                        <div class="cart_add" data-id="{{ $list->id }}"
+                                            data-name="{{ $list->name }}" data-price="{{ $list->price }}"
+                                            data-image="{{ $list->image }}" data-quantity="1">
+                                            <a href="#" class="add-to-cart-btn">Add to cart</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                        @endforeach
+                    </div>
+                @else
+                    <div class="row">
+                        <div class="related__products__slider owl-carousel">
+                            @foreach ($productList as $list)
+                                <div class="col-lg-3">
+                                    <div class="product__item">
+                                        <div class="product__item__pic set-bg detail-view" data-id="{{ $list->id }}"
+                                            data-setbg="{{ asset('storage/' . $list->image) }}" style="cursor: pointer">
+                                            <div class="product__label">
+                                                <span>
+                                                    {{ $list->category->name }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="product__item__text">
+                                            <h6><a href="#">{{ $list->name }}</a></h6>
+                                            <div class="product__item__price">{{ $list->price }} MMK</div>
+                                            <div class="cart_add" data-id="{{ $list->id }}"
+                                                data-name="{{ $list->name }}" data-price="{{ $list->price }}"
+                                                data-image="{{ $list->image }}" data-quantity="1">
+                                                <a href="#" class="add-to-cart-btn">Add to cart</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
-                    @endforeach
-                </div>
-            </div>
+                    </div>
+                @endif
+            @else
+                <h5 class="text-danger text-center my-5 py-5">There is no related product yet!</h5>
+            @endif
         </div>
     </section>
     <!-- Related Products Section End -->
 
+    <!--Review Section start -->
     @if (Auth::check())
         <section class="home-testimonial">
             <div class="container-fluid">
@@ -130,10 +156,10 @@
                             @foreach ($review as $reviews)
                                 <div class="col-md-4 style-3  ">
                                     <div class="tour-item ">
-                                        <div class="tour-desc bg-white p-1 rounded border border-1 mb-3">
+                                        <div class="tour-desc bg-white p-2 rounded border border-1 mb-3">
                                             <h4><img src="https://img.icons8.com/ultraviolet/40/000000/quote-left.png"></h4>
-                                            <div class="tour-text color-grey-3 text-center">&ldquo;
-                                                {{ $reviews->comment }}&rdquo;</div>
+                                            <div class="tour-text color-grey-3 text-center w-100 text-warp">
+                                            <p style="overflow:hidden;">" {{ $reviews->comment }} "</p></div>
                                             <div class="link-name d-flex justify-content-center">{{ $reviews->user }}</div>
                                             <div class="link-position d-flex justify-content-center">Customer</div>
                                         </div>
@@ -141,9 +167,10 @@
                                 </div>
                             @endforeach
                         </div>
+                    </div>
                 </section>
         </section>
-        <!--review section start -->
+        <!--review Create start -->
         <section class="mb-5">
             <div class="container">
                 <div class="card col-11 offset-1 mt-5">
@@ -153,20 +180,20 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('review.create') }}" method="post">
-                            @csrf
+                        <form id="reviewForm">
                             <input type="hidden" name="userId" class="ms-2" value="{{ Auth::user()->id }}">
                             <input type="hidden" name="productId" value="{{ $product->id }}">
                             <label for="">Content</label>
-                            <textarea name="content" id="" cols="30" rows="3" class="form-control"
+                            <textarea name="content" id="" cols="30" rows="3" class="form-control mb-0"
                                 placeholder="review here..."></textarea>
-                            <button type="submit" class="btn btn-success btn-sm ">Create</button>
-                            <a href="#" class="btn btn-sm btn-dark float-end my-3">Back</a>
+                                <div><small id="content" > </small></div>
+                            <button type="submit" class="btn btn-success btn-sm mt-3">Create</button>
                         </form>
                     </div>
                 </div>
             </div>
         </section>
+        <!--review end -->
     @endif
 @endsection
 
@@ -174,4 +201,5 @@
     <script src="{{ asset('assets/user/js/addFavorite.js') }}"></script>
     <script src="{{ asset('js/user/add-to-cart.js') }}"></script>
     <script src="{{ asset('js/user/product-detail.js') }}"></script>
+    <script src="{{ asset('js/user/review.js') }}"></script>
 @endpush

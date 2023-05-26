@@ -25,7 +25,7 @@
 
          <div class="form-group mb-0 mt-3">
              <label>New Password <span class="text-danger">*</span></label>
-            <input class="form-control" type="password" name="password" placeholder="******" value="{{old('password')}}">
+            <input class="form-control" type="password" name="password" placeholder="******" >
         </div>
         @error('password')
                 <small class="text-danger">{{ $message }}</small>
@@ -33,7 +33,7 @@
 
         <div class="form-group mb-0 mt-3">
             <label>Confirm Password <span class="text-danger">*</span></label>
-            <input class="form-control" type="password" name="confirm_password" placeholder="******" value="{{old('confirm_password')}}">
+            <input class="form-control" type="password" name="confirm_password" placeholder="******">
         </div>
         @error('confirm_password')
                 <small class="text-danger">{{ $message }}</small>

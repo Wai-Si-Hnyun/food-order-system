@@ -1,3 +1,41 @@
+var reviewForm = document.forms['reviewForm'];
+var userId = reviewForm['userId'];
+var productId = reviewForm['productId'];
+var content = reviewForm['content'];
+
+reviewForm.onsubmit = function(e) {
+    e.preventDefault();
+    axios.post('/review',{
+        userId : userId.value,
+        productId : productId.value,
+        content :content.value,
+    })
+    .then(response => {
+        console.log(response.data.msg);
+        if (response.data.msg == 'success') {
+            Swal.fire({
+            title: 'Success',
+            text: 'Your review has been created',
+            icon: 'success',
+            showConfirmButton: false,
+            showCancelButton: false,
+            timer: 3000
+            });
+            setTimeout(function() {
+                location.reload();
+            }, 1000);
+
+        }
+        else {
+            var contentName = document.getElementById('content');
+            contentName.innerHTML = content.value == '' ? '<i class="text-danger">'+response.data.msg.content+'</i>': '';
+        }
+    })
+    .catch(err => {
+        console.log(err.response)
+    });
+}
+       
        //reviews edit
        var reviewEditForm = document.forms['reviewEditForm'];
        var reviewId = reviewEditForm['reviewId'];

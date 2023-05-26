@@ -64,18 +64,18 @@
                                     {{ $users->role }}
                                 </td>
                                 <td class="table-text action">
-                                    @if ($users->email != 'thant269269@gmail.com')
-                                        <button class="btn btn-success btn-sm" onclick="infoBtn('{{ $users->id }}')"
-                                            data-toggle="modal" data-target="#userModal">More Info</button>
-                                        @if (Auth::user()->id != $users->id)
-                                            <button class="btn btn-danger btn-sm"
-                                                onclick="deleteBtn('{{ $users->id }}')"> Ban </button>
-                                        @endif
+                                @if(Auth::user()->email == "admin@gmail.com")
+                                    @if($users->email != 'admin@gmail.com')
+                                        <button class="btn btn-success btn-sm" onclick="infoBtn('{{ $users->id }}')" data-toggle="modal" data-target="#userModal">More Info</button>
+                                        <button class="btn btn-danger btn-sm" onclick="deleteBtn('{{ $users->id }}')"> Ban </button>
                                     @else
-                                        <button class="btn btn-success btn-sm" onclick="infoBtn('{{ $users->id }}')"
-                                            data-toggle="modal" data-target="#userModal">More Info</button>
+                                        <button class="btn btn-success btn-sm" onclick="infoBtn('{{ $users->id }}')" data-toggle="modal" data-target="#userModal">More Info</button>
                                     @endif
+                                @else
+                                        <button class="btn btn-success btn-sm" onclick="infoBtn('{{ $users->id }}')" data-toggle="modal" data-target="#userModal">More Info</button>
+                                @endif
                                 </td>
+
                                 <td class="table-text changelist">
                                     @if ($users->role == 'user')
                                         <button class="btn btn-secondary btn-sm" onclick="roleBtn('{{ $users->id }}')">As

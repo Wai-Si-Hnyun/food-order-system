@@ -91,7 +91,9 @@ class AuthController extends Controller
                 return redirect()->route('auth.login');
             }
         } else {
-            return redirect()->route('auth.login')->with('alert', "email or password may be wrong");
+            return redirect()->route('auth.login')
+                             ->withInput()
+                             ->with('alert', "email or password may be wrong");
         }
     }
 
@@ -131,7 +133,7 @@ class AuthController extends Controller
 
         }
         else {
-            return redirect()->route('auth.forgetPass')->with('alert', "Your account is not found");
+            return redirect()->route('auth.forgetPass')->withInput()->with('alert', "Your account is not found");
         }
     }
 
@@ -167,7 +169,7 @@ class AuthController extends Controller
             return redirect()->route('auth.login');
         }
         else {
-            return redirect()->back()->with('alert','Token may be wrong.');
+            return redirect()->back()->withInput()->with('alert','Token may be wrong.');
         }
     }
 

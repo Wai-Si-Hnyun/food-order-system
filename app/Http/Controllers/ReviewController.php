@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
-use App\Contracts\Services\ReviewServiceInterface;
-use App\Contracts\Services\AuthServiceInterface;
 use App\Models\Review;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Contracts\Services\AuthServiceInterface;
+use App\Contracts\Services\ReviewServiceInterface;
 
 class ReviewController extends Controller
 {
@@ -27,31 +28,29 @@ class ReviewController extends Controller
      */
     public function review(Request $request)
     {
+        $message = [
+            'required'=>'The :attribute field is required',
+        ];
+        $validator = Validator::make($request->all(),[
+            'content'=>'required',
+        ]);
+        if ($validator->fails()){
+            return response()->json(['msg'=>$validator->errors()],200);
+        }
         $user = Review::where('user_id',$request->userId)->get();
         if ($user->toArray() == null) {
             $this->reviewService->createReview($request->only([
                 'userId','productId','content',
             ]));
-            return redirect()->back();
+            return response()->json(['msg' => 'success'], 200);
         }
         else {
             $id = $request->userId;
             $this->reviewService->updateReview($request->only([
                 'content',
             ]),$id);
-            return redirect()->back();
+            return response()->json(['msg' => 'success'], 200);
         }
-    }
-
-    /**
-     * function review update
-     */
-    public function reviewUpdate (Request $request,$id)
-    {
-        $this->reviewService->updateReview($request->only([
-            'comment',
-        ]),$id);
-          return response()->json(['msg'=>'success'],200);
     }
 
 
@@ -107,4 +106,6 @@ class ReviewController extends Controller
 
         return view('admin.pages.reviews.detail', compact('review'));
     }
+
+
 }

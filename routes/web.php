@@ -46,14 +46,10 @@ Route::post('/chat/get-answer', [ChatbotController::class, 'getAnswer'])->name('
 //Customer Care
 Route::get('/customer-care', [CustomerController::class, 'care'])->name('customer.care');
 
-//feedback
-Route::get('/contact', [FeedbackController::class, 'feedback'])->name('feedback.page');
-Route::post('/feedback-create', [FeedbackController::class, 'feedbackCreate'])->name('feedback.create');
-
 //userProfile (for admin and user)
 Route::get('/userprofile/{user}', [UserdataController::class, 'userProfile'])->name('user.profile');
 Route::post('/profile-update/{user}', [UserdataController::class, 'profileUpdate'])->name('profile.update');
-Route::get('/password/{user}', [UserdataController::class, 'passChange'])->name('pass.change');
+Route::get('/password/{user}/update', [UserdataController::class, 'passChange'])->name('pass.change');
 Route::post('/password-update', [UserdataController::class, 'passwordUpdate'])->name('password.change');
 Route::delete('/delete-account/{user}', [UserdataController::class, 'accountDelete'])->name('account.destroy');
 
@@ -77,13 +73,15 @@ Route::middleware('role:user')->group(function () {
     Route::get('/users/wishlists/page', [WishlistController::class, 'addWishList'])->name('users.wishlist');
     // Route::get('/users/store/wishlists/{productId}', [WishlistController::class, 'storeWishlist'])->name('products.storeWishlist');
     Route::post('/users/store/wishlists', [WishlistController::class, 'storeWishlist'])->name('products.storeWishlist');
-    Route::delete('/users/destroy/{id}/wishlists', [WishlistController::class, 'destroyWishlist'])->name('products.destroyWishlist');
+    Route::delete('/wishlists/{id}/delete', [WishlistController::class, 'deleteWishlistById'])->name('wishlists.destroy');
+    Route::delete('/users/wishlists/{productId}/delete', [WishlistController::class, 'deleteWishlistByProductId'])->name('products.destroyWishlist');
 
     //reviews
     Route::post('/review', [ReviewController::class, 'review'])->name('review.create');
     Route::get('/review/{review}/edit', [ReviewController::class, 'reviewEdit'])->name('review.edit');
     Route::put('/review/{review}/update', [ReviewController::class, 'reviewUpdate'])->name('review.update');
     Route::delete('/review/{review}/delete', [ReviewController::class, 'reviewDelete'])->name('review.delete');
+
     //feedback
     Route::get('/feed-back', [FeedbackController::class, 'feedback'])->name('feedback.page');
     Route::post('/feedback-create', [FeedbackController::class, 'feedbackCreate'])->name('feedback.create');
