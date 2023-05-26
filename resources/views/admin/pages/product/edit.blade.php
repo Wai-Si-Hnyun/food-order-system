@@ -1,6 +1,7 @@
 @extends('admin.layouts.app')
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y" id="form">
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Product /</span> Product</h4>
         <div class="card col-8 mx-auto mt-5">
             <div class="card-header text-center">
                 <h4><b> Edit Product</b></h4>

@@ -1,7 +1,6 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> --}}
     <!-- Modal -->
     <div class="modal fade" id="userModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -13,7 +12,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-sm border border-1 btn-secondary"
-                        data-dismiss="modal">Back</button>
+                        data-bs-dismiss="modal">Back</button>
                 </div>
             </div>
         </div>
@@ -104,9 +103,6 @@
     <div class="d-flex justify-content-center">
         {{ $user->links() }}
     </div>
-    {{-- <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> --}}
     @push('script')
         <script src="{{ asset('js/admin/user.js') }}"></script>
     @endpush
