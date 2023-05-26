@@ -19,19 +19,19 @@
             </form>
         </div>
         @if (session('createSuccess'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="alert alert-success alert-dismissible fade show w-50" role="alert">
                 {{ session('createSuccess') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
         @if (session('deleteSuccess'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div class="alert alert-danger alert-dismissible fade show w-50" role="alert">
                 {{ session('deleteSuccess') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
         @if (session('updateSuccess'))
-            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            <div class="alert alert-primary alert-dismissible fade show w-50" role="alert">
                 {{ session('updateSuccess') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -76,7 +76,7 @@
                 </div>
             </div>
         @else
-            <h3 class="text-center my-5">There is no Categories Here!</h3>
+            <h3 class="text-center my-5">There is no categories here!</h3>
         @endif
         <div class="mt-3">
             {{ $categories->links() }}

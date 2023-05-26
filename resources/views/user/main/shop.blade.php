@@ -77,7 +77,7 @@
                         </div>
                     @endforeach
                 @else
-                    <h3 class="text-center mx-auto">Product not Found Sorry!<i class="fa-regular fa-face-frown"></i></h3>
+                    <h3 class="text-center mx-auto py-5 my-5">Product not Found Sorry!<i class="fa-regular fa-face-frown"></i></h3>
                 @endif
             </div>
         </div>

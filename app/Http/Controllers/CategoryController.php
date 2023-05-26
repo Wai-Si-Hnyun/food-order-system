@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\Services\CategoryServiceInterface;
-use App\Http\Requests\CategoryCreateRequest;
-use App\Http\Requests\CategoryUpdateRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoryCreateRequest;
+use App\Http\Requests\CategoryUpdateRequest;
+use App\Contracts\Services\CategoryServiceInterface;
 
 class CategoryController extends Controller
 {
@@ -40,7 +40,7 @@ class CategoryController extends Controller
  * Save Category
  *
  * @param \App\Http\Requests\CategoryCreateRequest $request
- * @return \Illuminate\Http\Response
+ * @return \Illuminate\Http\RedirectResponse
  */
     public function store(CategoryCreateRequest $request)
     {
@@ -66,7 +66,7 @@ class CategoryController extends Controller
      *
      * @param  \App\Http\Requests\CategoryUpdateRequest
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(CategoryUpdateRequest $request)
     {
@@ -82,8 +82,8 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $this->categoryService->deleteCategoryById($id);
-        // return redirect()->route('categories.index')->with(['deleteSuccess' => 'Category deleted Successfully!']);
-        return back();
+
+        return redirect()->route('categories.index')->with(['deleteSuccess' => 'Category deleted Successfully!']);
     }
 
 }

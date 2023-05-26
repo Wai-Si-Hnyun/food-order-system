@@ -50,9 +50,12 @@
                                 </div>
                             </div>
                             <a href="#" class="primary-btn add-to-cart-btn-detail">Add to cart</a>
-                            <button class="btn btn-outline-warning btn-lg mr-3" id="add-to-wishlist" data-product-id="1">
-                                <span class="icon_heart_alt"></span>
-                            </button>
+                            @if (Auth::check())
+                                <button class="btn btn-outline-warning btn-lg mr-3" id="add-to-wishlist"
+                                    data-product-id="1">
+                                    <span class="icon_heart_alt"></span>
+                                </button>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -62,7 +65,7 @@
 
     <!-- Shop Details Section End -->
     <!-- Related Products Section Begin -->
-    <section class="related-products spad">
+    <section class="related-products spad border-bottom">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">

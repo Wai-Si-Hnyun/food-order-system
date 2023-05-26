@@ -48,7 +48,7 @@ class UserProductController extends Controller
         $review = $this->reviewService->reviewShow($id);
         $product = $this->productService->getProductById($id);
         $productList = $this->productService->getRelatedProducts($id);
-        $isWishlist = $this->wishlistService->checkWishlist($user->id, $id);
+        $isWishlist = $user ? $this->wishlistService->checkWishlist($user->id, $id) : false;
 
         return view('user.main.details', compact('product', 'productList', 'user','review', 'isWishlist'));
     }

@@ -275,6 +275,16 @@
                 'orderDeliverStatusChgUrl': '{{ route('order.deliver.status.change', ['id' => '__orderId__']) }}',
                 'qaDeleteUrl': '{{ route('q&a.delete', ['id' => '__qaId__']) }}',
             }
+
+            // Echo.channel('orders')
+            //     .listen('OrderCreated', (e) => {
+            //         // Display notification
+            //         Swal.fire({
+            //             title: e.notification,
+            //             icon: 'success',
+            //             confirmButtonText: 'Cool'
+            //         });
+            //     });
         </script>
 
         @stack('script')
