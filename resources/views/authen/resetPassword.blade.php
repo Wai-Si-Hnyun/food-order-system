@@ -25,7 +25,7 @@
 
          <div class="form-group mb-0 mt-3">
              <label>New Password <span class="text-danger">*</span></label>
-            <input class="form-control" type="password" name="password" placeholder="******">
+            <input class="form-control" type="password" name="password" placeholder="******" >
         </div>
         @error('password')
                 <small class="text-danger">{{ $message }}</small>

@@ -3,31 +3,28 @@
 @section('content')
 
 
- @if (session('update'))
- <div class="d-flex justify-content-center">
-    <div class="alert alert-danger alert-dismissible fade show w-50" role="alert">
-       <p class="text-center text-danger">Update fails!Email or name field is required.</p>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-</div>
- @endif
-
- @if (session('alert'))
- <div class="d-flex justify-content-center">
-    <div class="alert alert-success alert-dismissible fade show w-50" role="alert">
-       <p class="text-center text-success">Profile update success.</p>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-</div>
- @endif
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <section>
-  <div class="container ">
+@if (session('update'))
+ <div class="d-flex justify-content-center mb-0">
+    <div class="alert alert-danger alert-dismissible fade show w-50" role="alert">
+    <p class="text-center text-danger">Update fails!Email or name field is required.</p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
+@endif
+
+@if (session('alert'))
+<div class="d-flex justify-content-center mb-0">
+    <div class="alert alert-primary alert-dismissible fade show w-50" role="alert">
+    <p class="text-center text-primary">Profile update success.</p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
+@endif
+
+  <div class="container mt-3">
     <div class="row d-flex justify-content-center align-items-center h-100 w-100">
       <div class="col col-lg-8 mb-4 mb-lg-0">
         <div class="card mb-3" style="border-radius: .5rem;">
@@ -39,7 +36,7 @@
                 alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
               @else
               <img src="{{asset('image/profile/'.$user->image) }}"
-                alt="Avatar" class=" img-circle mt-4 mb-3 w-75 h-50" />
+                alt="Avatar" class=" img-circle mt-4 mb-3 w-75 h-50 " />
              @endif
 
               <h5>{{$user->name}}</h5>
@@ -103,9 +100,10 @@
       <div class="col-md-4">
         <div class="text-center">
         @if($user->image == null)
-            <img src="{{asset('image/profile.png') }}" class="avatar img-circle img-thumbnail w-50 h-50" alt="avatar"  >
+            <img src="{{asset('image/profile.png') }}" class="avatar img-circle img-thumbnail w-50 h-50" alt="avatar" id="profile"  >
+            <img id="output" class="img-thumbnail rounded-circle w-75 h-75">
         @else
-            <img src="{{asset('image/profile/'.$user->image) }}" class="img-thumbnail rounded-circle w-75 h-75" id="profile" alt="avatar"  >
+            <img src="{{asset('image/profile/'.$user->image) }}" class="img-thumbnail rounded-circle w-75 h-75" alt="avatar"  id="profile" >
             <img id="output" class="img-thumbnail rounded-circle w-75 h-75">
         @endif
           <h6 class="mb-2 mt-2">Upload a different photo...</h6>
@@ -133,14 +131,14 @@
           </div>
 
             <div class="form-group mt-3">
-            <label class="col-lg-3 control-label">Image Upload:</label>
+            <label class="col-lg-3 control-label">Image Upload :</label>
             <div class="col-lg-8">
             <input type="file" class="form-control" name="image" onchange="loadFile(event)">
             </div>
           </div>
 
-          <div class="form-group mt-3">
-            <button class="btn btn-primary btn-sm ">update</button>
+          <div class="form-group  mb-5 mt-3">
+            <button class="btn btn-primary btn-sm">update</button>
           </div>
         </form>
       </div>

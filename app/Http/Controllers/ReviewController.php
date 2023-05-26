@@ -107,5 +107,4 @@ class ReviewController extends Controller
         return view('admin.pages.reviews.detail', compact('review'));
     }
 
-
 }

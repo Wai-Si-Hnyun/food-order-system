@@ -17,7 +17,7 @@
         <input type="hidden" value="{{$user->id}}" name="id">
         <div class="form-group mb-0">
             <label>Old Password <span class="text-danger ">*</span></label>
-            <input class="form-control" type="password" name="old_password" placeholder="Enter your old password" value="{{old('old_password')}}">
+            <input class="form-control" type="password" name="old_password" placeholder="Enter your old password">
          </div>
          @error('old_password')
                 <small class="text-danger">{{ $message }}</small>

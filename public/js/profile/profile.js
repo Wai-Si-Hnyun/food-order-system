@@ -10,4 +10,5 @@ var loadFile = function(event) {
     profile.classList.add("d-none");
     var output = document.getElementById('output');
     output.src = URL.createObjectURL(event.target.files[0]);
+    profile.classList.add("d-none");
 };

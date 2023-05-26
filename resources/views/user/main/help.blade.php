@@ -184,10 +184,35 @@
         </button>
       </div>
       <div class="modal-body">
-            <p> &#49;. First, click on the profile image on the top left of the page .</p>
-            <p> &#50;. And then , click the profile and you can check your info.</p>
-            <p> &#51;. On the 'profile page' , you must click 'Update' button.</p>
-            <p> &#52;. Choose your favorite image and update it.</p>
+            <p>&#49; . First, click on the profile image on the top left of the page .</p>
+            <p>&#50; . And then , click the profile and you can check your info.</p>
+            <p>&#51; . On the 'profile page' , you must click 'Update' button.</p>
+            <p>&#52; . Choose your favorite image and update it.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Order Modal -->
+<div class="modal fade" id="orderHelpModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">About Order System</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <p>&#49; . Browse our selection: Visit our 'Shop' page to view all the available cake designs and flavors. Each cake listed includes a description and price.</p>
+            <p>&#50; . Choose your cake: Once you've decided on the cake you'd like to order, click 'Add to Cart'.</p>
+            <p>&#51; . Go to Cart: Here, you can review your order, adjust quantities, or remove items.</p>
+            <p>&#52; . Proceed to Checkout: Click on 'Proceed to Checkout'. Here you'll be prompted to provide your contact information and delivery address.</p>
+            <p>&#53; . Make payment: Choose your preferred payment method and complete the payment process. We accept several payment methods including Visa, MasterCard, and Google Pay.</p>
+            <p>&#54; . Confirmation: After you've successfully placed your order, you'll receive an order confirmation email with your order details.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -207,37 +232,12 @@
         </button>
       </div>
       <div class="modal-body">
-            <p> &#49;. First, click on the profile image on the top left of the page .</p>
-            <p> &#50;. And then , click the profile and you can check your info.</p>
-            <p> &#51;. On the 'profile page' , you must click 'Password Change' button and then , you will be redirected to the "Password change page"</p>
-            <p> &#52;. On the 'password change page', you need to fill "old password" and "new password" field and click the "Change" button.</p>
-            <p> &#53;. After that , You can login with your new password.</p>
-            <p> &#54;. If you forget "old password" you can use <a href="{{route('auth.forgetPass')}}" class="text-primary">Forget Password</a> .</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- order Modal -->
-<div class="modal fade" id="orderHelpModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">About Order</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-            <p>&#49;. Browse our selection: Visit our 'Shop' page to view all the available cake designs and flavors. Each cake listed includes a description and price.</p>
-            <p>&#50;. Choose your cake: Once you've decided on the cake you'd like to order, click 'Add to Cart'.</p>
-            <p>&#51;. Go to Cart: Here, you can review your order, adjust quantities, or remove items.</p>
-            <p>&#52;. Proceed to Checkout: Click on 'Proceed to Checkout'. Here you'll be prompted to provide your contact information and delivery address.</p>
-            <p>&#53;. Make payment: Choose your preferred payment method and complete the payment process. We accept several payment methods including Visa, MasterCard, and Google Pay.</p>
-            <p>&#54;. Confirmation: After you've successfully placed your order, you'll receive an order confirmation email with your order details.</p>
+            <p>&#49; . First, click on the profile image on the top left of the page .</p>
+            <p>&#50; . And then , click the profile and you can check your info.</p>
+            <p>&#51; . On the 'profile page' , you must click 'Password Change' button and then , you will be redirected to the "Password change page"</p>
+            <p>&#52; . On the 'password change page', you need to fill "old password" and "new password" field and click the "Change" button.</p>
+            <p>&#53; . After that , You can login with your new password.</p>
+            <p>&#54; . If you forget "old password" you can use <a href="#" class="text-primary">Forget Password</a> .</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

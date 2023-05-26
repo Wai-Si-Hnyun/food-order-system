@@ -106,9 +106,10 @@
                     <div class="col-md-4">
                         <div class="text-center">
                         @if($user->image == null)
-                            <img src="{{asset('image/profile.png') }}" class="avatar img-circle img-thumbnail w-50 h-50" alt="avatar"  >
+                            <img src="{{asset('image/profile.png') }}" class="avatar img-circle img-thumbnail w-50 h-50" alt="avatar" id="profile"  >
+                            <img id="output" class="img-thumbnail rounded-circle w-75 h-75">
                         @else
-                            <img src="{{asset('image/profile/'.$user->image) }}" class="img-thumbnail rounded-circle w-75 h-75" alt="avatar"  >
+                            <img src="{{asset('image/profile/'.$user->image) }}" class="img-thumbnail rounded-circle w-75 h-75" alt="avatar" id="profile" >
                             <img id="output" class="img-thumbnail rounded-circle w-75 h-75">
                         @endif
                             <h6 class="mb-2 mt-2">Upload a different photo...</h6>

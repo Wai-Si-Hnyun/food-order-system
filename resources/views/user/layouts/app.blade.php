@@ -65,7 +65,7 @@
                             @else
                                 <a href="{{ url('userprofile/' . Auth::user()->id) }}" class="display-picture"><img
                                         src="{{ asset('image/profile/' . Auth::user()->image) }}" alt
-                                        class=" rounded-circle" /></a>
+                                        class=" rounded-circle "/></a>
                             @endif
 
                         </li>
