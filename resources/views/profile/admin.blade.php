@@ -39,7 +39,7 @@
                 alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
               @else
               <img src="{{asset('image/profile/'.$user->image) }}"
-                alt="Avatar" class=" img-circle mt-4 mb-3" />
+                alt="Avatar" class=" img-circle mt-4 mb-3 w-75 h-50" />
              @endif
 
               <h5>{{$user->name}}</h5>

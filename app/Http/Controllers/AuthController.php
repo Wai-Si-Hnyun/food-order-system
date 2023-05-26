@@ -91,7 +91,9 @@ class AuthController extends Controller
                 return redirect()->route('auth.login');
             }
         } else {
-            return redirect()->route('auth.login')->with('alert', "email or password may be wrong");
+            return redirect()->route('auth.login')
+                             ->withInput()
+                             ->with('alert', "email or password may be wrong");
         }
     }
 

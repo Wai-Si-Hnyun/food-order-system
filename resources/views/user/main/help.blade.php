@@ -87,14 +87,7 @@
             <li>
             <i class="fa-solid fa-circle-info text-success-m2 text-110 mr-2 mt-1"></i>
               <span>
-                <span class="text-110"><a href="#" class="text-primary">How Can I Order The Cake?</a></span>
-            </li>
-
-            <li class="mt-25">
-              <i class="fa-solid fa-circle-info text-success-m2 text-110 mr-2 mt-1"></i>
-              <span class="text-110">
-                <a href="#" class="text-primary">About Billing Method.</a>
-            </span>
+                <span class="text-110"><a href="#" class="text-primary" data-toggle="modal" data-target="#orderHelpModel" data-dismiss="modal">How Can I Order The Cake?</a></span>
             </li>
           </ul>
 
@@ -120,12 +113,12 @@
         </button>
       </div>
       <div class="modal-body">
-            <p><i class="fa-solid fa-1"></i> . First, you need to visit the <a href="#" class="text-primary">login page</a>.</p>
-            <p><i class="fa-solid fa-2"></i> . If you haven't registered yet, go to the <a href="#" class="text-primary">sign up page</a></p>
-            <p><i class="fa-solid fa-3"></i> . And then, you need to fill in all the fields and click the 'Sign Up' button.</p>
-            <p><i class="fa-solid fa-4"></i> . After 'Sign Up', you will be redirected to the login page.</p>
-            <p><i class="fa-solid fa-5"></i> . On the login page, you need to fill in the 'Email' and 'Password' fields.</p>
-            <p><i class="fa-solid fa-6"></i> . Finally, click the 'Sign In' button. After that, you will be redirected to the home page.</p>
+            <p>&#49;. First, you need to visit the <a href="{{route('auth.login')}}" class="text-primary">login page</a>.</p>
+            <p>&#50;. If you haven't registered yet, go to the <a href="{{route('auth.registerPage')}}" class="text-primary">sign up page</a></p>
+            <p>&#51;. And then, you need to fill in all the fields and click the 'Sign Up' button.</p>
+            <p>&#52;. After 'Sign Up', you will be redirected to the login page.</p>
+            <p>&#53;. On the login page, you need to fill in the 'Email' and 'Password' fields.</p>
+            <p>&#54;. Finally, click the 'Sign In' button. After that, you will be redirected to the home page.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -145,12 +138,12 @@
         </button>
       </div>
       <div class="modal-body">
-            <p><i class="fa-solid fa-1"></i> . First, you need to visit the <a href="#" class="text-primary">Forget Password Page</a>.</p>
-            <p><i class="fa-solid fa-2"></i> . And then, you need to fill in the email fields and click "Send" button.</p>
-            <p><i class="fa-solid fa-3"></i> . And you must check your email and copy the token that the admin team sends.</p>
-            <p><i class="fa-solid fa-4"></i> . After click the button, you will be redirected to the "Reset password page".</p>
-            <p><i class="fa-solid fa-5"></i> . On the reset password page, you need to fill in all the fields and click the "Reset" button.</p>
-            <p><i class="fa-solid fa-6"></i> . Finally, you can sign in with your new password.</p>
+            <p> &#49;. First, you need to visit the <a href="{{route('auth.forgetPass')}}" class="text-primary">Forget Password Page</a>.</p>
+            <p> &#50;. And then, you need to fill in the email fields and click "Send" button.</p>
+            <p> &#51;. And you must check your email and copy the token that the admin team sends.</p>
+            <p> &#52;. After click the button, you will be redirected to the "Reset password page".</p>
+            <p> &#53;. On the reset password page, you need to fill in all the fields and click the "Reset" button.</p>
+            <p> &#54;. Finally, you can sign in with your new password.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -170,8 +163,8 @@
         </button>
       </div>
       <div class="modal-body">
-            <p><i class="fa-solid fa-1"></i> . First, click on the profile image on the top left of the page </a>.</p>
-            <p><i class="fa-solid fa-2"></i> . And then , click the profile and you can check your info.</p>
+            <p>&#49; . First, click on the profile image on the top left of the page </a>.</p>
+            <p>&#50; . And then , click the profile and you can check your info.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -191,10 +184,10 @@
         </button>
       </div>
       <div class="modal-body">
-            <p><i class="fa-solid fa-1"></i> . First, click on the profile image on the top left of the page .</p>
-            <p><i class="fa-solid fa-2"></i> . And then , click the profile and you can check your info.</p>
-            <p><i class="fa-solid fa-3"></i> . On the 'profile page' , you must click 'Update' button.</p>
-            <p><i class="fa-solid fa-4"></i> . Choose your favorite image and update it.</p>
+            <p> &#49;. First, click on the profile image on the top left of the page .</p>
+            <p> &#50;. And then , click the profile and you can check your info.</p>
+            <p> &#51;. On the 'profile page' , you must click 'Update' button.</p>
+            <p> &#52;. Choose your favorite image and update it.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -214,12 +207,37 @@
         </button>
       </div>
       <div class="modal-body">
-            <p><i class="fa-solid fa-1"></i> . First, click on the profile image on the top left of the page .</p>
-            <p><i class="fa-solid fa-2"></i> . And then , click the profile and you can check your info.</p>
-            <p><i class="fa-solid fa-3"></i> . On the 'profile page' , you must click 'Password Change' button and then , you will be redirected to the "Password change page"</p>
-            <p><i class="fa-solid fa-4"></i> . On the 'password change page', you need to fill "old password" and "new password" field and click the "Change" button.</p>
-            <p><i class="fa-solid fa-5"></i> . After that , You can login with your new password.</p>
-            <p><i class="fa-solid fa-6"></i> . If you forget "old password" you can use <a href="#" class="text-primary">Forget Password</a> .</p>
+            <p> &#49;. First, click on the profile image on the top left of the page .</p>
+            <p> &#50;. And then , click the profile and you can check your info.</p>
+            <p> &#51;. On the 'profile page' , you must click 'Password Change' button and then , you will be redirected to the "Password change page"</p>
+            <p> &#52;. On the 'password change page', you need to fill "old password" and "new password" field and click the "Change" button.</p>
+            <p> &#53;. After that , You can login with your new password.</p>
+            <p> &#54;. If you forget "old password" you can use <a href="{{route('auth.forgetPass')}}" class="text-primary">Forget Password</a> .</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- order Modal -->
+<div class="modal fade" id="orderHelpModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">About Order</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <p>&#49;. Browse our selection: Visit our 'Shop' page to view all the available cake designs and flavors. Each cake listed includes a description and price.</p>
+            <p>&#50;. Choose your cake: Once you've decided on the cake you'd like to order, click 'Add to Cart'.</p>
+            <p>&#51;. Go to Cart: Here, you can review your order, adjust quantities, or remove items.</p>
+            <p>&#52;. Proceed to Checkout: Click on 'Proceed to Checkout'. Here you'll be prompted to provide your contact information and delivery address.</p>
+            <p>&#53;. Make payment: Choose your preferred payment method and complete the payment process. We accept several payment methods including Visa, MasterCard, and Google Pay.</p>
+            <p>&#54;. Confirmation: After you've successfully placed your order, you'll receive an order confirmation email with your order details.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

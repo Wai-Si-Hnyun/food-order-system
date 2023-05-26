@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Services\UserServiceInterface;
-use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -95,6 +94,7 @@ class UserdataController extends Controller
         ]);
         if ($validator->fails()) {
             return redirect()->back()
+                ->withInput()
                 ->with('update', 'Please Update again!.')
                 ->withErrors($validator);
         } else {
@@ -144,8 +144,6 @@ class UserdataController extends Controller
         }
         $auth = $this->userService->authCheck($request);
         if ($auth) {
-            $this->userService->authCheck($request);
-            if (Auth::attempt(['id' => $request->id, 'password' => $request->old_password])) {
                 $user = Auth::user();
                 $this->userService->passUpdate($request, $user);
                 // Log out the user and redirect to home page
@@ -153,10 +151,12 @@ class UserdataController extends Controller
 
                 return redirect()->route('home');
             } else {
-                return redirect()->back()->with('message', "error");
+                return redirect()
+                        ->back()
+                        ->withInput()
+                        ->with('message', "error");
             }
         }
-    }
 
     /**
      * function search user
