@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('admin.layouts.app')
 
 @section('content')
 
@@ -26,10 +26,10 @@
  @endif
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<section class="vh-100">
-  <div class="container py-5 h-100">
+<section>
+  <div class="container ">
     <div class="row d-flex justify-content-center align-items-center h-100 w-100">
-      <div class="col col-lg-6 mb-4 mb-lg-0">
+      <div class="col col-lg-8 mb-4 mb-lg-0">
         <div class="card mb-3" style="border-radius: .5rem;">
           <div class="row g-0">
             <div class="col-md-4 gradient-custom text-center text-white bg-light"
@@ -113,7 +113,7 @@
       </div>
 
       <!-- edit form column -->
-      <div class="col-md-8 personal-info">
+      <div class="col-md-8 personal-info mb-5">
         <h6 class="mt-2">Personal info</h6>
 
         <form action= "{{url('profile-update/'.$user->id)}}" class="form-horizontal" role="form"  enctype="multipart/form-data" method="post">
@@ -139,7 +139,7 @@
             </div>
           </div>
 
-          <div class="form-group ps-4 ">
+          <div class="form-group mt-3">
             <button class="btn btn-primary btn-sm ">update</button>
           </div>
         </form>
