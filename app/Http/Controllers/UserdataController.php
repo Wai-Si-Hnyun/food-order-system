@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\Contracts\Services\UserServiceInterface;
 use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use App\Contracts\Services\UserServiceInterface;
+use Illuminate\Validation\Rule;
 
 class UserdataController extends Controller
 {
@@ -145,19 +143,19 @@ class UserdataController extends Controller
         }
         $auth = $this->userService->authCheck($request);
         if ($auth) {
-                $user = Auth::user();
-                $this->userService->passUpdate($request, $user);
-                // Log out the user and redirect to home page
-                Auth::logout();
+            $user = Auth::user();
+            $this->userService->passUpdate($request, $user);
+            // Log out the user and redirect to home page
+            Auth::logout();
 
-                return redirect()->route('home');
-            } else {
-                return redirect()
-                        ->back()
-                        ->withInput()
-                        ->with('message', "error");
-            }
+            return redirect()->route('home');
+        } else {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('message', "error");
         }
+    }
 
     /**
      * function search user

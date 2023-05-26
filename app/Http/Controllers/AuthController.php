@@ -49,7 +49,7 @@ class AuthController extends Controller
      * Save user
      *
      * @param \App\Http\Requests\UserCreateRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function authRegisterStore(UserCreateRequest $request)
     {
@@ -100,7 +100,7 @@ class AuthController extends Controller
     /**
      * forgetPassword page
      *
-     * @return View forgetPassword page
+     * @return \Illuminate\Contracts\View\View forgetPassword page
      */
     public function forgetPass() {
         return view ('authen.forgetPassword');
@@ -110,7 +110,7 @@ class AuthController extends Controller
      * Save token
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function forgetCreate(Request $request) {
         $validator = Validator::make($request->all(),[
@@ -128,7 +128,7 @@ class AuthController extends Controller
                 "subject"=>"Please check your token",
                 "body"=>$passwordReset->token
             ];
-            $mail = Mail::to($request->email)->send(new MailNotify($data));
+            Mail::to($request->email)->queue(new MailNotify($data));
             return redirect()->route('auth.resetPass');
 
         }
@@ -140,7 +140,7 @@ class AuthController extends Controller
       /**
      * resetPassword page
      *
-     * @return View resetPassword page
+     * @return \Illuminate\Contracts\View\View resetPassword page
      */
     public function resetPass() {
         return view ('authen.resetPassword');
@@ -149,8 +149,8 @@ class AuthController extends Controller
     /**
      * Password Change
      *
-     * @param \App\Http\Requests\Request $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function passwordChange(Request $request) {
         $validator = Validator::make($request->all(),[
@@ -165,7 +165,7 @@ class AuthController extends Controller
         }
         $resetData = $this->authService->findToken($request);
         if (isset($request->token) && $resetData->toArray() != null) {
-            $update = $this->authService->passUpdate($request,$resetData);
+            $this->authService->passUpdate($request,$resetData);
             return redirect()->route('auth.login');
         }
         else {
