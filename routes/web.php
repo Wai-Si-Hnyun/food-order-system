@@ -46,14 +46,10 @@ Route::post('/chat/get-answer', [ChatbotController::class, 'getAnswer'])->name('
 //Customer Care
 Route::get('/customer-care', [CustomerController::class, 'care'])->name('customer.care');
 
-//feedback
-Route::get('/contact', [FeedbackController::class, 'feedback'])->name('feedback.page');
-Route::post('/feedback-create', [FeedbackController::class, 'feedbackCreate'])->name('feedback.create');
-
 //userProfile (for admin and user)
 Route::get('/userprofile/{user}', [UserdataController::class, 'userProfile'])->name('user.profile');
 Route::post('/profile-update/{user}', [UserdataController::class, 'profileUpdate'])->name('profile.update');
-Route::get('/password/{user}', [UserdataController::class, 'passChange'])->name('pass.change');
+Route::get('/password/{user}/update', [UserdataController::class, 'passChange'])->name('pass.change');
 Route::post('/password-update', [UserdataController::class, 'passwordUpdate'])->name('password.change');
 Route::delete('/delete-account/{user}', [UserdataController::class, 'accountDelete'])->name('account.destroy');
 
@@ -85,6 +81,7 @@ Route::middleware('role:user')->group(function () {
     Route::get('/review/{review}/edit', [ReviewController::class, 'reviewEdit'])->name('review.edit');
     Route::put('/review/{review}/update', [ReviewController::class, 'reviewUpdate'])->name('review.update');
     Route::delete('/review/{review}/delete', [ReviewController::class, 'reviewDelete'])->name('review.delete');
+
     //feedback
     Route::get('/feed-back', [FeedbackController::class, 'feedback'])->name('feedback.page');
     Route::post('/feedback-create', [FeedbackController::class, 'feedbackCreate'])->name('feedback.create');

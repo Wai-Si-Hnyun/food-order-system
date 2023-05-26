@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\FeedbackRequest;
 use App\Models\Feedback;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use App\Contracts\Services\FeedbackServiceInterface;
 
 class FeedbackController extends Controller

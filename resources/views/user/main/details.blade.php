@@ -134,6 +134,7 @@
     </section>
     <!-- Related Products Section End -->
 
+    <!--Review Section start -->
     @if (Auth::check())
         <section class="home-testimonial">
             <div class="container-fluid">
@@ -155,22 +156,21 @@
                             @foreach ($review as $reviews)
                                 <div class="col-md-4 style-3  ">
                                     <div class="tour-item ">
-                                        <div class="tour-desc bg-white p-1 rounded border border-1 mb-3">
-                                            <h4><img src="https://img.icons8.com/ultraviolet/40/000000/quote-left.png">
-                                            </h4>
-                                            <div class="tour-text color-grey-3 text-center">&ldquo;
-                                                {{ $reviews->comment }}&rdquo;</div>
-                                            <div class="link-name d-flex justify-content-center">{{ $reviews->user }}
-                                            </div>
+                                        <div class="tour-desc bg-white p-2 rounded border border-1 mb-3">
+                                            <h4><img src="https://img.icons8.com/ultraviolet/40/000000/quote-left.png"></h4>
+                                            <div class="tour-text color-grey-3 text-center w-100 text-warp">
+                                            <p style="overflow:hidden;">" {{ $reviews->comment }} "</p></div>
+                                            <div class="link-name d-flex justify-content-center">{{ $reviews->user }}</div>
                                             <div class="link-position d-flex justify-content-center">Customer</div>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
+                    </div>
                 </section>
         </section>
-        <!--review section start -->
+        <!--review Create start -->
         <section class="mb-5">
             <div class="container">
                 <div class="card col-11 offset-1 mt-5">
@@ -180,20 +180,20 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('review.create') }}" method="post">
-                            @csrf
+                        <form id="reviewForm">
                             <input type="hidden" name="userId" class="ms-2" value="{{ Auth::user()->id }}">
                             <input type="hidden" name="productId" value="{{ $product->id }}">
                             <label for="">Content</label>
-                            <textarea name="content" id="" cols="30" rows="3" class="form-control"
+                            <textarea name="content" id="" cols="30" rows="3" class="form-control mb-0"
                                 placeholder="review here..."></textarea>
-                            <button type="submit" class="btn btn-success btn-sm ">Create</button>
-                            <a href="#" class="btn btn-sm btn-dark float-end my-3">Back</a>
+                                <div><small id="content" > </small></div>
+                            <button type="submit" class="btn btn-success btn-sm mt-3">Create</button>
                         </form>
                     </div>
                 </div>
             </div>
         </section>
+        <!--review end -->
     @endif
 @endsection
 
@@ -204,4 +204,5 @@
     <script src="{{ asset('assets/user/js/addFavorite.js') }}"></script>
     <script src="{{ asset('js/user/add-to-cart.js') }}"></script>
     <script src="{{ asset('js/user/product-detail.js') }}"></script>
+    <script src="{{ asset('js/user/review.js') }}"></script>
 @endpush

@@ -1,33 +1,41 @@
-       //reviews edit
-       var reviewEditForm = document.forms['reviewEditForm'];
-       var reviewId = reviewEditForm['reviewId'];
-       var reviewComment = reviewEditForm['comment'];
-       function reviewEditBtn(editId) {
-                   axios.get('/review/'+editId+'/edit')
-                        .then(response => {
-                           reviewId.value = response.data.id;
-                           reviewComment.value = response.data.comment;
-                        })
-                        .catch(err => {
-                       console.log(err.response)
-                   });
-       }
-   
-           // reviews update
-   
-           reviewEditForm.onsubmit = function(e) {
-           e.preventDefault();
-           axios.put('/review/'+reviewId.value,{
-               comment: reviewComment.value,
-           })
-               .then(response => {
-                   location.reload();
-           })
-               .catch(err => {
-                   console.log(err.response)
-           });
-           }
-   
+var reviewForm = document.forms['reviewForm'];
+var userId = reviewForm['userId'];
+var productId = reviewForm['productId'];
+var content = reviewForm['content'];
+
+reviewForm.onsubmit = function(e) {
+    e.preventDefault();
+    axios.post('/review',{
+        userId : userId.value,
+        productId : productId.value,
+        content :content.value,
+    })
+    .then(response => {
+        console.log(response.data.msg);
+        if (response.data.msg == 'success') {
+            Swal.fire({
+            title: 'Success',
+            text: 'Your review has been created',
+            icon: 'success',
+            showConfirmButton: false,
+            showCancelButton: false,
+            timer: 3000
+            });
+            setTimeout(function() {
+                location.reload();
+            }, 1000);
+
+        }
+        else {
+            var contentName = document.getElementById('content');
+            contentName.innerHTML = content.value == '' ? '<i class="text-danger">'+response.data.msg.content+'</i>': '';
+        }
+    })
+    .catch(err => {
+        console.log(err.response)
+    });
+}
+
        var nameList = document.getElementsByClassName('namelist');
        var commentList = document.getElementsByClassName('commentlist');
        var actionList = document.getElementsByClassName('actionlist');
@@ -50,6 +58,6 @@
              .catch(err => {
                console.log(err.response)
            });
-   
+
        }
    }
