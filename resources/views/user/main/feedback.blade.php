@@ -94,42 +94,44 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="contact__text">
-                        <h3>Feedback Here</h3>
-                        <ul>
-                            <li>Representatives or Advisors are available:</li>
-                            <li>Mon-Fri: 5:00am to 9:00pm</li>
-                            <li>Sat-Sun: 6:00am to 9:00pm</li>
-                        </ul>
-                        <img src="img/cake-piece.png" alt="">
+            @if (Auth::check())
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="contact__text">
+                            <h3>Feedback Here</h3>
+                            <ul>
+                                <li>Representatives or Advisors are available:</li>
+                                <li>Mon-Fri: 5:00am to 9:00pm</li>
+                                <li>Sat-Sun: 6:00am to 9:00pm</li>
+                            </ul>
+                            <img src="img/cake-piece.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="contact__form">
+                            <form action="#" method="post" id="feedbackForm">
+                                <div class="row">
+                                    <div class="col-lg-6 mb-3">
+                                        <input type="text" placeholder="Name" name="name" id="name">
+                                        <small class="text-danger"></small>
+                                    </div>
+                                    <div class="col-lg-6 mb-3">
+                                        <input type="text" placeholder="Email" name="email" id="email">
+                                        <small class="text-danger"></small>
+                                    </div>
+                                    <div class="col-lg-12 mb-3">
+                                        <textarea placeholder="Message" name="message" id="message"></textarea>
+                                        <small class="text-danger"></small>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <button type="submit" class="site-btn">Send Us</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-8">
-                    <div class="contact__form">
-                        <form action="#" method="post" id="feedbackForm">
-                            <div class="row">
-                                <div class="col-lg-6 mb-3">
-                                    <input type="text" placeholder="Name" name="name" id="name">
-                                    <small class="text-danger"></small>
-                                </div>
-                                <div class="col-lg-6 mb-3">
-                                    <input type="text" placeholder="Email" name="email" id="email">
-                                    <small class="text-danger"></small>
-                                </div>
-                                <div class="col-lg-12 mb-3">
-                                    <textarea placeholder="Message" name="message" id="message"></textarea>
-                                    <small class="text-danger"></small>
-                                </div>
-                                <div class="col-lg-12">
-                                    <button type="submit" class="site-btn">Send Us</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+            @endif
         </div>
     </section>
     <!-- Contact Section End -->

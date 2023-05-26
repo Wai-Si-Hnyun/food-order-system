@@ -26,6 +26,7 @@ Route::get('/products/{id}/filter', [UserProductController::class, 'filter'])->n
 Route::get('/products/{id}/details', [UserProductController::class, 'details'])->name('product.details');
 Route::get('/about', [HomeController::class, 'about'])->name('products.about');
 Route::get('/cart', [HomeController::class, 'cart'])->name('cart.index');
+Route::get('/feed-back', [FeedbackController::class, 'feedback'])->name('feedback.page');
 
 //login/register
 Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
@@ -83,7 +84,6 @@ Route::middleware('role:user')->group(function () {
     Route::delete('/review/{review}/delete', [ReviewController::class, 'reviewDelete'])->name('review.delete');
 
     //feedback
-    Route::get('/feed-back', [FeedbackController::class, 'feedback'])->name('feedback.page');
     Route::post('/feedback-create', [FeedbackController::class, 'feedbackCreate'])->name('feedback.create');
 });
 
@@ -127,7 +127,7 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::put('/user/{user}', [UserdataController::class, 'roleUpdate'])->name('role.update');
     Route::get('/user/{user}/info', [UserdataController::class, 'userInfo'])->name('user.info');
     Route::delete('/user-delete/{user}', [UserdataController::class, 'userDelete'])->name('user.destory');
-    Route::get('/search', [UserdataController::class, 'search'])->name('user.search');
+    Route::get('/users/search', [UserdataController::class, 'search'])->name('user.search');
 
     //feedback
     Route::get('/feedback-list', [FeedbackController::class, 'feedbackList'])->name('feedback.list');

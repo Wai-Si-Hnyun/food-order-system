@@ -162,6 +162,9 @@ $(document).ready(function () {
             if (nextElement.hasClass('invalid-feedback')) {
                 nextElement.remove();
             }
+            if (nextElement.next().hasClass('invalid-feedback')) {
+                nextElement.next().remove();
+            }
         })
 
         // Apply new errors

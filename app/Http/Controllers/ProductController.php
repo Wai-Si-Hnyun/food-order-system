@@ -39,6 +39,7 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::select('id', 'name')->get();
+
         return view('admin.pages.product.create', compact('categories'));
     }
 /**
@@ -106,7 +107,8 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $this->productService->deleteProductById($id);
-        return back();
+        
+        return redirect()->route('products.index')->with(['deleteSuccess' => 'Category deleted Successfully!']);
     }
 
     public function getAllProducts()

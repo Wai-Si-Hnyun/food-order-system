@@ -28,6 +28,14 @@ interface ProductDaoInterface
     public function getProductById(int $id): object;
 
     /**
+     * Get related products
+     *
+     * @param integer $id
+     * @return object
+     */
+    public function getRelatedProducts(int $id): object;
+
+    /**
      * Update Product
      * @param array $data
      * @param int $id

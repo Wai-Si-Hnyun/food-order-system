@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Mail\OrderPlaced;
 use Illuminate\Support\Str;
+use App\Events\OrderCreated;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use App\Contracts\Dao\OrderDaoInterface;
@@ -172,6 +173,8 @@ class OrderService implements OrderServiceInterface
             Mail::to($order->user->email)->queue(new OrderPlaced($order));
 
             Session::forget(['payment-complete', 'payment_data', 'cart']);
+
+            // event(new OrderCreated($order));
 
             return true;
         } else {

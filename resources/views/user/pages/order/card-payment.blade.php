@@ -57,8 +57,10 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <button class="primary-btn border-0 w-100" id="submit-btn" type="submit">Pay
-                                        Now</button>
+                                    <button class="primary-btn border-0 w-100" id="submit-btn" type="submit">
+                                        <span class="pr-3" id="totalPrice">Pay Now</span>
+                                        <span class="spinner-border spinner-border-sm d-none" id="spinner" role="status" aria-hidden="true"></span>
+                                    </button>
                                 </div>
                             </div>
                         </form>

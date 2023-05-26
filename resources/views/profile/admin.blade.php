@@ -111,7 +111,7 @@
       </div>
 
       <!-- edit form column -->
-      <div class="col-md-8 personal-info">
+      <div class="col-md-8 personal-info mb-5">
         <h6 class="mt-2">Personal info</h6>
 
         <form action= "{{url('profile-update/'.$user->id)}}" class="form-horizontal" role="form"  enctype="multipart/form-data" method="post">

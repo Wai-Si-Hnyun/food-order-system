@@ -42,10 +42,12 @@
     <div class="offcanvas-menu-wrapper">
         <div class="offcanvas__cart">
             <div class="offcanvas__cart__links">
-                <a href="{{ route('users.wishlist') }}"><img src="{{ asset('assets/user/img/icon/heart.png') }}" alt=""></a>
+                <a href="{{ route('users.wishlist') }}"><img src="{{ asset('assets/user/img/icon/heart.png') }}"
+                        alt=""></a>
             </div>
             <div class="offcanvas__cart__item">
-                <a href="{{ route('cart.index') }}"><img src="{{ asset('assets/user/img/icon/cart.png') }}" alt=""></a>
+                <a href="{{ route('cart.index') }}"><img src="{{ asset('assets/user/img/icon/cart.png') }}"
+                        alt=""></a>
             </div>
         </div>
         <div class="offcanvas__logo">
@@ -58,10 +60,10 @@
                     @if (Auth::user()->role == 'user')
                         <li style="width:25%;">
                             @if (Auth::user()->image == null)
-                                <a href="#" class="display-picture"><img src="{{ asset('image/profile.png') }}"
-                                        alt class=" rounded-circle h-50 w-50"></a>
+                                <a href="{{ url('userprofile/' . Auth::user()->id) }}" class="display-picture"><img src="{{ asset('image/profile.png') }}"
+                                        alt class=" rounded-circle" /></a>
                             @else
-                                <a href="#" class="display-picture"><img
+                                <a href="{{ url('userprofile/' . Auth::user()->id) }}" class="display-picture"><img
                                         src="{{ asset('image/profile/' . Auth::user()->image) }}" alt
                                         class=" rounded-circle "/></a>
                             @endif
@@ -106,23 +108,14 @@
                                         @if (Auth::user()->role == 'user')
                                             <li style="width:25%;" class="img">
                                                 @if (Auth::user()->image == null)
-                                                    <a href="#" class="display-picture"><img
+                                                    <a href="{{ url('userprofile/' . Auth::user()->id) }}" class="display-picture"><img
                                                             src="{{ asset('image/profile.png') }}" alt
                                                             class=" rounded-circle" /></a>
                                                 @else
-                                                    <a href="#" class="display-picture"><img
+                                                    <a href="{{ url('userprofile/' . Auth::user()->id) }}" class="display-picture"><img
                                                             src="{{ asset('image/profile/' . Auth::user()->image) }}"
                                                             alt class=" rounded-circle" /></a>
                                                 @endif
-                                                <div class="profileimg hidden">
-                                                    <ul class=" mt-3 " style="background: none;">
-                                                        <!--MENU-->
-                                                        <li style="background: #E78341;" class="rounded"><a
-                                                                href="{{ url('userprofile/' . Auth::user()->id) }}"
-                                                                class="text-white">Profile</li></a>
-                                                    </ul>
-                                                </div>
-
                                             </li>
                                         @endif
                                         <li>
@@ -131,7 +124,7 @@
                                             </form>
                                             <a href="#" onclick="handleFormSubmit(event)">Logout</a>
                                         </li>
-                                        <li >
+                                        <li>
                                             <a href="{{ route('customer.care') }}">Help</a>
                                         </li>
                                     @else
@@ -152,10 +145,13 @@
                                         alt=""></a>
                             </div>
                             <div class="header__top__right">
-                                <div class="header__top__right__links">
-                                    <a href="{{ route('users.wishlist') }}"><img
-                                            src="{{ asset('assets/user/img/icon/heart.png') }}" alt=""></a>
-                                </div>
+                                @if (Auth::check())
+                                    <div class="header__top__right__links">
+                                        <a href="{{ route('users.wishlist') }}"><img
+                                                src="{{ asset('assets/user/img/icon/heart.png') }}"
+                                                alt=""></a>
+                                    </div>
+                                @endif
                                 <div class="header__top__right__cart">
                                     <a href="{{ route('cart.index') }}"><img
                                             src="{{ asset('assets/user/img/icon/cart.png') }}" alt=""></a>
@@ -260,6 +256,9 @@
             'getProductsUrl': '{{ route('products.all') }}',
             'filterProductsUrl': '{{ route('products.filter', ['id' => '__id__']) }}',
             'feedbackCreateUrl': '{{ route('feedback.create') }}',
+            'storeWishlistUrl': '{{ route('products.storeWishlist') }}',
+            'deleteWishlistUrl': '{{ route('products.destroyWishlist', ['productId' => '__productId__']) }}',
+            'deleteWishlistByIdUrl': '{{ route('wishlists.destroy', ['id' => '__id__']) }}',
         }
     </script>
     @stack('script')

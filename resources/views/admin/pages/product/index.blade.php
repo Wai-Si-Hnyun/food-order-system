@@ -18,26 +18,28 @@
                 </div>
             </form>
         </div>
-        @if (session('createSuccess'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('createSuccess') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
-        @if (session('deleteSuccess'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                {{ session('deleteSuccess') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
-        @if (session('updateSuccess'))
-            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                {{ session('updateSuccess') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
+        <div class="d-flex justify-content-end mt-2">
+            @if (session('createSuccess'))
+                <div class="alert alert-success alert-dismissible fade show w-50" role="alert">
+                    {{ session('createSuccess') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            @if (session('deleteSuccess'))
+                <div class="alert alert-danger alert-dismissible fade show w-50" role="alert">
+                    {{ session('deleteSuccess') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            @if (session('updateSuccess'))
+                <div class="alert alert-primary alert-dismissible fade show w-50" role="alert">
+                    {{ session('updateSuccess') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+        </div>
         @if (count($products) != 0)
-            <div class="card my-3">
+            <div class="card mb-3 mt-1">
                 <div class="table-responsive text-nowrap">
                     <table class="table table-borderless table-striped table-earning">
                         <thead>
@@ -68,7 +70,7 @@
                                         </a>
                                         <form method="POST" action="{{ route('products.destroy', $product->id) }}">
                                             @csrf
-                                            <input name="_method" type="hidden" value="DELETE">
+                                            @method('DELETE')
                                             <button type="submit" class="btn btn-default ms-3 btn-xs btn-flat show_confirm"
                                                 data-toggle="tooltip" title='Delete'>
                                                 <i class='bx bxs-trash text-danger my-5'></i>

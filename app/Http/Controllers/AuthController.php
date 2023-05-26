@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Mail;
 use App\Mail\MailNotify;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\UserCreateRequest;
 use Illuminate\Support\Facades\Validator;
 use App\Contracts\Services\AuthServiceInterface;

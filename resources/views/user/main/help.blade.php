@@ -113,12 +113,12 @@
         </button>
       </div>
       <div class="modal-body">
-            <p>&#49; . First, you need to visit the <a href="#" class="text-primary">login page</a>.</p>
-            <p>&#50; . If you haven't registered yet, go to the <a href="#" class="text-primary">sign up page</a></p>
-            <p>&#51; . And then, you need to fill in all the fields and click the 'Sign Up' button.</p>
-            <p>&#52; . After 'Sign Up', you will be redirected to the login page.</p>
-            <p>&#53; . On the login page, you need to fill in the 'Email' and 'Password' fields.</p>
-            <p>&#54; . Finally, click the 'Sign In' button. After that, you will be redirected to the home page.</p>
+            <p>&#49;. First, you need to visit the <a href="{{route('auth.login')}}" class="text-primary">login page</a>.</p>
+            <p>&#50;. If you haven't registered yet, go to the <a href="{{route('auth.registerPage')}}" class="text-primary">sign up page</a></p>
+            <p>&#51;. And then, you need to fill in all the fields and click the 'Sign Up' button.</p>
+            <p>&#52;. After 'Sign Up', you will be redirected to the login page.</p>
+            <p>&#53;. On the login page, you need to fill in the 'Email' and 'Password' fields.</p>
+            <p>&#54;. Finally, click the 'Sign In' button. After that, you will be redirected to the home page.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -138,12 +138,12 @@
         </button>
       </div>
       <div class="modal-body">
-            <p>&#49; . First, you need to visit the <a href="#" class="text-primary">Forget Password Page</a>.</p>
-            <p>&#50; . And then, you need to fill in the email fields and click "Send" button.</p>
-            <p>&#51; . And you must check your email and copy the token that the admin team sends.</p>
-            <p>&#52; . After click the button, you will be redirected to the "Reset password page".</p>
-            <p>&#53; . On the reset password page, you need to fill in all the fields and click the "Reset" button.</p>
-            <p>&#54; . Finally, you can sign in with your new password.</p>
+            <p> &#49;. First, you need to visit the <a href="{{route('auth.forgetPass')}}" class="text-primary">Forget Password Page</a>.</p>
+            <p> &#50;. And then, you need to fill in the email fields and click "Send" button.</p>
+            <p> &#51;. And you must check your email and copy the token that the admin team sends.</p>
+            <p> &#52;. After click the button, you will be redirected to the "Reset password page".</p>
+            <p> &#53;. On the reset password page, you need to fill in all the fields and click the "Reset" button.</p>
+            <p> &#54;. Finally, you can sign in with your new password.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -265,7 +265,7 @@
                   <div id="questions" class="d-none">
                       <h4 class="mb-4" style="font-size: 14px">Questions:</h4>
                       @forelse ($questions as $question)
-                          <button class="btn btn-primary question mb-2 text-left text-wrap w-100 overflow-hidden"
+                          <button class="btn btn-primary question mb-2 text-left text-wrap overflow-hidden"
                               style="font-size: 14px"
                               data-question="{{ $question }}">{{ $question }}</button>
                       @empty
