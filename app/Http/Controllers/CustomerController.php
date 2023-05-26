@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Contracts\Services\ChatbotServiceInterface;
 use Illuminate\Http\Request;
 
-class customerController extends Controller
+class CustomerController extends Controller
 {
     private $chatbotService;
 
