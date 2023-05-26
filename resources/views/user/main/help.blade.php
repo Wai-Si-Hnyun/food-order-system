@@ -265,7 +265,7 @@
                   <div id="questions" class="d-none">
                       <h4 class="mb-4" style="font-size: 14px">Questions:</h4>
                       @forelse ($questions as $question)
-                          <button class="btn btn-primary question mb-2 text-left text-wrap w-100 overflow-hidden"
+                          <button class="btn btn-primary question mb-2 text-left text-wrap overflow-hidden"
                               style="font-size: 14px"
                               data-question="{{ $question }}">{{ $question }}</button>
                       @empty

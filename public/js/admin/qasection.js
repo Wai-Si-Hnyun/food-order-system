@@ -19,7 +19,7 @@ $(document).ready(function () {
                 axios.delete(qaDeleteUrl)
                     .then((res) => {
                         $(`#qa-${id}`).remove();
-                        $('#success').html(`<div class="alert alert-success w-50" role="alert">${res.data.success}</div>`);
+                        $('#success').html(`<div class="alert alert-danger w-50" role="alert">${res.data.success}</div>`);
                         if ($('.qa-card').length == 0) {
                             $('.row.mb-5').append(`<h4 class="mt-5 text-center">No Question and Answer here!</h4>`);
                         }

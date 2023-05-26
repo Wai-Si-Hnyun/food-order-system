@@ -1,20 +1,18 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <!-- Modal -->
-    <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal fade" id="userModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">PROFILE</h5>
                 </div>
                 <div id="main" class="mt-2">
                 </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-sm border border-1 btn-secondary"
-                        data-dismiss="modal">Back</button>
+                        data-bs-dismiss="modal">Back</button>
                 </div>
             </div>
         </div>
@@ -24,79 +22,86 @@
         <div class="d-flex justify-content-between">
             <h4 class="fw-bold py-3 mb-4">User List</h4>
 
-<div class="mt-2 col-4">
-    <form action="{{route('user.search')}}"  type="get">
-        @csrf
-        <div class="d-flex">
-            <input class="form-control" name="query" type="text" value="{{ request('query') }}" id=""
-                placeholder="Enter User Name....">
-            <button class='btn btn-sm btn-dark ms-2' type="submit"><i
-                    class="fa-solid fa-magnifying-glass"></i></button>
-        </div>
-    </form>
-</div>
-</div>
-
-        <div class="card">
-            <div class="table-responsive text-nowrap">
-                <table class="table table-striped task-table ">
-                    <thead>
-                        <th>ID</th>
-                        <th>User Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Actions</th>
-                        <th>Change Role</th>
-                    </thead>
-                    <tbody>
-                        @foreach ($user as $users)
-                            <tr>
-                                <td class="table-text idlist">
-                                    {{ $users->id }}
-                                </td>
-                                <td class="table-text userlist">
-                                    {{ $users->name }}
-                                </td>
-                                <td class="table-text mailList">
-                                    {{ $users->email }}
-                                </td>
-                                <td class="table-text rolelist">
-                                    {{ $users->role }}
-                                </td>
-                                <td class="table-text action">
-                                @if(Auth::user()->email == "admin@gmail.com")
-                @if($users->email != 'admin@gmail.com')
-                    <button class="btn btn-success btn-sm" onclick="infoBtn('{{ $users->id }}')" data-toggle="modal" data-target="#userModal">More Info</button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteBtn('{{ $users->id }}')"> Ban </button>
-                @else
-                    <button class="btn btn-success btn-sm" onclick="infoBtn('{{ $users->id }}')" data-toggle="modal" data-target="#userModal">More Info</button>
-                @endif
-            @else
-            <button class="btn btn-success btn-sm" onclick="infoBtn('{{ $users->id }}')" data-toggle="modal" data-target="#userModal">More Info</button>
-            @endif
-            </td>
-            <td class="table-text changelist">
-            @if($users->role == 'user')
-                <button class="btn btn-secondary btn-sm" onclick="roleBtn('{{$users->id }}')">As admin</button>
-            @else
-                <span class="text-danger">Admin</span>
-            @endif
-                </td>
-            </tr>
-            @endforeach
-
-            </tbody>
-        </table>
-
+            <div class="mt-2 col-4">
+                <form action="{{ route('user.search') }}" type="get">
+                    <div class="d-flex">
+                        <input class="form-control" name="query" type="text" value="{{ request('query') }}"
+                            id="" placeholder="Enter User Name....">
+                        <button class='btn btn-sm btn-dark ms-2' type="submit"><i
+                                class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                </form>
             </div>
         </div>
+
+        @if (count($user) > 0)
+            <div class="card">
+                <div class="table-responsive text-nowrap">
+                    <table class="table table-striped task-table ">
+                        <thead>
+                            <th>ID</th>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Actions</th>
+                            <th>Change Role</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($user as $users)
+                                <tr>
+                                    <td class="table-text idlist">
+                                        {{ $users->id }}
+                                    </td>
+                                    <td class="table-text userlist">
+                                        {{ $users->name }}
+                                    </td>
+                                    <td class="table-text mailList">
+                                        {{ $users->email }}
+                                    </td>
+                                    <td class="table-text rolelist">
+                                        {{ $users->role }}
+                                    </td>
+                                    <td class="table-text action">
+                                        @if (Auth::user()->email == 'admin@example.com')
+                                            @if ($users->email != 'admin@example.com')
+                                                <button class="btn btn-success btn-sm" data-bs-toggle="modal"
+                                                    data-bs-target="#userModal" type="button"
+                                                    onclick="infoBtn('{{ $users->id }}')">More Info</button>
+                                                <button class="btn btn-danger btn-sm"
+                                                    onclick="deleteBtn('{{ $users->id }}')"> Ban </button>
+                                            @else
+                                                <button class="btn btn-success btn-sm" type="button"
+                                                    onclick="infoBtn('{{ $users->id }}')" data-bs-toggle="modal"
+                                                    data-bs-target="#userModal">More Info</button>
+                                            @endif
+                                        @else
+                                            <button class="btn btn-success btn-sm" onclick="infoBtn('{{ $users->id }}')"
+                                                data-toggle="modal" data-target="#userModal">More Info</button>
+                                        @endif
+                                    </td>
+                                    <td class="table-text changelist">
+                                        @if ($users->role == 'user')
+                                            <button class="btn btn-secondary btn-sm"
+                                                onclick="roleBtn('{{ $users->id }}')">As
+                                                admin</button>
+                                        @else
+                                            <span class="text-danger">Admin</span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        @else
+            <h4 class="mt-5 text-center">No user found!</h4>
+        @endif
     </div>
     <div class="d-flex justify-content-center">
         {{ $user->links() }}
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     @push('script')
         <script src="{{ asset('js/admin/user.js') }}"></script>
     @endpush

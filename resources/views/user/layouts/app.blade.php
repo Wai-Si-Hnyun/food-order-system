@@ -42,10 +42,12 @@
     <div class="offcanvas-menu-wrapper">
         <div class="offcanvas__cart">
             <div class="offcanvas__cart__links">
-                <a href="{{ route('users.wishlist') }}"><img src="{{ asset('assets/user/img/icon/heart.png') }}" alt=""></a>
+                <a href="{{ route('users.wishlist') }}"><img src="{{ asset('assets/user/img/icon/heart.png') }}"
+                        alt=""></a>
             </div>
             <div class="offcanvas__cart__item">
-                <a href="{{ route('cart.index') }}"><img src="{{ asset('assets/user/img/icon/cart.png') }}" alt=""></a>
+                <a href="{{ route('cart.index') }}"><img src="{{ asset('assets/user/img/icon/cart.png') }}"
+                        alt=""></a>
             </div>
         </div>
         <div class="offcanvas__logo">
@@ -114,7 +116,6 @@
                                                             src="{{ asset('image/profile/' . Auth::user()->image) }}"
                                                             alt class=" rounded-circle" /></a>
                                                 @endif
-
                                             </li>
                                         @endif
                                         <li>
@@ -123,7 +124,7 @@
                                             </form>
                                             <a href="#" onclick="handleFormSubmit(event)">Logout</a>
                                         </li>
-                                        <li >
+                                        <li>
                                             <a href="{{ route('customer.care') }}">Help</a>
                                         </li>
                                     @else
@@ -144,10 +145,13 @@
                                         alt=""></a>
                             </div>
                             <div class="header__top__right">
-                                <div class="header__top__right__links">
-                                    <a href="{{ route('users.wishlist') }}"><img
-                                            src="{{ asset('assets/user/img/icon/heart.png') }}" alt=""></a>
-                                </div>
+                                @if (Auth::check())
+                                    <div class="header__top__right__links">
+                                        <a href="{{ route('users.wishlist') }}"><img
+                                                src="{{ asset('assets/user/img/icon/heart.png') }}"
+                                                alt=""></a>
+                                    </div>
+                                @endif
                                 <div class="header__top__right__cart">
                                     <a href="{{ route('cart.index') }}"><img
                                             src="{{ asset('assets/user/img/icon/cart.png') }}" alt=""></a>

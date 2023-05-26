@@ -5,7 +5,7 @@
         <h4 class="fw-bold">Questions and Answers for Chatbot</h4>
         <div id="success"></div>
         @if (session()->has('success'))
-            <div class="alert alert-success w-50 fade" id="successAlert" role="alert">
+            <div class="alert alert-danger w-50 fade" id="successAlert" role="alert">
                 {{ session()->get('success') }}
             </div>
         @endif

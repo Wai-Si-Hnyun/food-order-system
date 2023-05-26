@@ -88,7 +88,7 @@
                 @endforeach
             </div>
         @else
-            <p class="text-center my-5 py-5">There is no order yet.</p>
+            <h3 class="text-center my-5 py-5">There is no order yet.</h3>
         @endif
         <div class="my-3">
             {{ $orders->links() }}
