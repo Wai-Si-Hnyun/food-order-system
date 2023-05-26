@@ -60,21 +60,13 @@
                     @if (Auth::user()->role == 'user')
                         <li style="width:25%;">
                             @if (Auth::user()->image == null)
-                                <a href="#" class="display-picture"><img src="{{ asset('image/profile.png') }}"
+                                <a href="{{ url('userprofile/' . Auth::user()->id) }}" class="display-picture"><img src="{{ asset('image/profile.png') }}"
                                         alt class=" rounded-circle" /></a>
                             @else
-                                <a href="#" class="display-picture"><img
+                                <a href="{{ url('userprofile/' . Auth::user()->id) }}" class="display-picture"><img
                                         src="{{ asset('image/profile/' . Auth::user()->image) }}" alt
                                         class=" rounded-circle" /></a>
                             @endif
-                            <div class="profileimg hidden">
-                                <ul class="mt-3 " style="background: none;">
-                                    <!--MENU-->
-                                    <li style="background: #E78341;" class="rounded"><a
-                                            href="{{ url('userprofile/' . Auth::user()->id) }}"
-                                            class="text-white">Profile</li></a>
-                                </ul>
-                            </div>
 
                         </li>
                     @endif

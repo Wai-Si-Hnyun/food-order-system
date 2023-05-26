@@ -47,14 +47,10 @@ Route::post('/chat/get-answer', [ChatbotController::class, 'getAnswer'])->name('
 //Customer Care
 Route::get('/customer-care', [CustomerController::class, 'care'])->name('customer.care');
 
-//feedback
-Route::get('/contact', [FeedbackController::class, 'feedback'])->name('feedback.page');
-Route::post('/feedback-create', [FeedbackController::class, 'feedbackCreate'])->name('feedback.create');
-
 //userProfile (for admin and user)
 Route::get('/userprofile/{user}', [UserdataController::class, 'userProfile'])->name('user.profile');
 Route::post('/profile-update/{user}', [UserdataController::class, 'profileUpdate'])->name('profile.update');
-Route::get('/password/{user}', [UserdataController::class, 'passChange'])->name('pass.change');
+Route::get('/password/{user}/update', [UserdataController::class, 'passChange'])->name('pass.change');
 Route::post('/password-update', [UserdataController::class, 'passwordUpdate'])->name('password.change');
 Route::delete('/delete-account/{user}', [UserdataController::class, 'accountDelete'])->name('account.destroy');
 

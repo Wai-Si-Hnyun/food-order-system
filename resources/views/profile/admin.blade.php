@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('admin.layouts.app')
 
 @section('content')
 
@@ -26,10 +26,10 @@
  @endif
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<section class="vh-100">
-  <div class="container py-5 h-100">
+<section>
+  <div class="container ">
     <div class="row d-flex justify-content-center align-items-center h-100 w-100">
-      <div class="col col-lg-6 mb-4 mb-lg-0">
+      <div class="col col-lg-8 mb-4 mb-lg-0">
         <div class="card mb-3" style="border-radius: .5rem;">
           <div class="row g-0">
             <div class="col-md-4 gradient-custom text-center text-white bg-light"
@@ -39,7 +39,7 @@
                 alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
               @else
               <img src="{{asset('image/profile/'.$user->image) }}"
-                alt="Avatar" class=" img-circle mt-4 mb-3" />
+                alt="Avatar" class=" img-circle mt-4 mb-3 w-75 h-50" />
              @endif
 
               <h5>{{$user->name}}</h5>
@@ -102,26 +102,31 @@
       <!-- left column -->
       <div class="col-md-4">
         <div class="text-center">
-        <img id="output" class="img-thumbnail rounded-circle"  >
+        @if($user->image == null)
+            <img src="{{asset('image/profile.png') }}" class="avatar img-circle img-thumbnail w-50 h-50" alt="avatar"  >
+        @else
+            <img src="{{asset('image/profile/'.$user->image) }}" class="img-thumbnail rounded-circle w-75 h-75" id="profile" alt="avatar"  >
+            <img id="output" class="img-thumbnail rounded-circle w-75 h-75">
+        @endif
           <h6 class="mb-2 mt-2">Upload a different photo...</h6>
         </div>
       </div>
 
       <!-- edit form column -->
-      <div class="col-md-8 personal-info">
+      <div class="col-md-8 personal-info mb-5">
         <h6 class="mt-2">Personal info</h6>
 
         <form action= "{{url('profile-update/'.$user->id)}}" class="form-horizontal" role="form"  enctype="multipart/form-data" method="post">
         {{ csrf_field() }}
           <div class="form-group mb-2 mt-3">
-            <label class="col-lg-3 control-label">Name:</label>
+            <label class="col-lg-3 control-label">Name <span class="text-danger">*</span></label>
             <div class="col-lg-8">
               <input class="form-control" type="text" value="{{$user->name}}" name="name">
             </div>
           </div>
 
           <div class="form-group mt-3">
-            <label class="col-lg-3 control-label">Email:</label>
+            <label class="col-lg-3 control-label">Email <span class="text-danger">*</span></label>
             <div class="col-lg-8">
               <input class="form-control" type="text" value="{{$user->email}}" name="email">
             </div>
@@ -134,7 +139,7 @@
             </div>
           </div>
 
-          <div class="form-group ps-4 ">
+          <div class="form-group mt-3">
             <button class="btn btn-primary btn-sm ">update</button>
           </div>
         </form>
