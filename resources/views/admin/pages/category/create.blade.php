@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('content')
-    <div class="container">
+    <div class="container-xxl flex-grow-1 container-p-y">
         <div class="card col-8 mt-5 mx-auto">
             <div class="card-header text-center">
                 <h4><b> Category Create</b></h4>
@@ -17,7 +17,7 @@
                             {{ $message }}
                         </div>
                     @enderror
-                    <input type="submit" value="Create" class="btn btn-info my-3 text-dark" autofocus>
+                    <input type="submit" value="Create" class="btn btn-primary my-3 text-white" autofocus>
                     <a href="{{ route('categories.index') }}" class="btn btn-dark float-end my-3">Back</a>
                 </form>
             </div>

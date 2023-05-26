@@ -4,7 +4,7 @@ function onGooglePayLoaded() {
         const userId = $('body').data('user-id');
 
         // routes
-        const createOrderUrl = window.routes.createOrderUrl;
+        const orderCreateUrl = window.routes.orderCreateUrl;
         const googlePayUrl = window.routes.googlePayUrl;
 
         const paymentsClient = new google.payments.api.PaymentsClient({
@@ -73,7 +73,7 @@ function onGooglePayLoaded() {
             return JSON.parse(orderDataFromSession);
         }
 
-        async function processPaymentData(paymentData) {
+        function processPaymentData(paymentData) {
             $data = {
                 'paymentData': paymentData,
                 'totalPrice': totalPrice,
@@ -81,11 +81,17 @@ function onGooglePayLoaded() {
 
             var orderData = loadOrderData();
 
-            await axios.post(googlePayUrl, $data)
-                .then(async function (res) {
+            // Show loading spin
+            $('.gpay-card-info-container').prop('disabled', true);
+            $('#spinner').removeClass('d-none');
+
+            axios.post(googlePayUrl, $data)
+                .then(function (res) {
                     if (res.status == 200) {
-                        await axios.post(createOrderUrl, orderData)
+                        axios.post(orderCreateUrl, orderData)
                             .then(function (res) {
+                                $('#spinner').addClass('d-none');
+                                $('.gpay-card-info-container').prop('disabled', false);
                                 sessionStorage.removeItem('order-data', 'order-total-price');
                                 localStorage.removeItem('cart_' + userId);
                                 Swal.fire({
@@ -99,8 +105,9 @@ function onGooglePayLoaded() {
                                     window.location.href = '/orders';
                                 })
                             })
-                            .catch(function (e) {
-                                if (e.response.status == 402) {
+                            .catch(err => {
+                                console.log(err);
+                                if (err.response.status == 402) {
                                     window.location.href = '/payment/choose';
                                 }
                             })

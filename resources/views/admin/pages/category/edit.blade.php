@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('content')
-    <div class="container">
+    <div class="container-xxl flex-grow-1 container-p-y">
         <div class="card col-8 mx-auto mt-5">
             <div class="card-header text-center">
                 <h4><b> Category Edit</b></h4>
@@ -9,7 +9,7 @@
             <div class="card-body">
                 <form action="{{ route('categories.update', $category->id) }}" method="post">
                     @csrf
-                    <label for="">Category</label>
+                    <label for="">Category<span class="text-danger">*</span></label>
                     <input type="hidden" name="categoryId" value="{{ $category->id }}">
                     <input class="form-control @error('categoryName') is-invalid @enderror" type="text"
                         value="{{ old('categoryName', $category->name) }}" name="categoryName" id="category-name"

@@ -24,8 +24,8 @@ class ProductDao implements ProductDaoInterface
                 ->appends(request()->all());
         } elseif ($page == 'user') {
             return Product::when(request('key'), function ($query) {
-                    $query->where('products.name', 'LIKE', '%' . request('key') . '%');
-                })
+                $query->where('products.name', 'LIKE', '%' . request('key') . '%');
+            })
                 ->with('category')
                 ->orderBy('products.created_at', 'desc')
                 ->get();
@@ -55,9 +55,20 @@ class ProductDao implements ProductDaoInterface
      * @param int $id
      * @return object
      */
-    public function getProductById($id): object
+    public function getProductById(int $id): object
     {
-        return Product::findOrFail($id);
+        return Product::findOrFail($id)->load('category');
+    }
+
+    public function getRelatedProducts(int $id): object
+    {
+        $product = Product::findOrFail($id);
+        $relatedProducts = Product::where('category_id', $product->category_id)
+            ->where('id', '!=', $id)
+            ->with('category')
+            ->get();
+
+        return $relatedProducts;
     }
 
     /**
@@ -70,14 +81,22 @@ class ProductDao implements ProductDaoInterface
     {
 
         $product = Product::findOrFail($id);
-        $product->update([
-            'category_id' => $data['category'],
-            'name' => $data['productName'],
-            'image' => $data['productImage'],
-            'description' => $data['productDescription'],
-            'price' => $data['productPrice'],
-        ]);
-
+        if (array_key_exists('productImage', $data)) {
+            $product->update([
+                'category_id' => $data['category'],
+                'name' => $data['productName'],
+                'image' => $data['productImage'],
+                'description' => $data['productDescription'],
+                'price' => $data['productPrice'],
+            ]);
+        } else {
+            $product->update([
+                'category_id' => $data['category'],
+                'name' => $data['productName'],
+                'description' => $data['productDescription'],
+                'price' => $data['productPrice'],
+            ]);
+        }
     }
 
     /**

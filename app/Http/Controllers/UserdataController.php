@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Contracts\Services\UserServiceInterface;
 use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use App\Contracts\Services\UserServiceInterface;
 
 class UserdataController extends Controller
 {
@@ -131,7 +133,6 @@ class UserdataController extends Controller
 
     public function passwordUpdate(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'old_password' => 'required',
             'password' => 'required|min:6',

@@ -46,6 +46,7 @@
     <!-- Page CSS -->
     <!-- Page -->
     <link rel="stylesheet" href="{{ asset('assets/admin/vendor/css/pages/page-misc.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/style.css') }}">
 
     <!-- Helpers -->
     <script src="{{ asset('assets/admin/vendor/js/helpers.js') }}"></script>

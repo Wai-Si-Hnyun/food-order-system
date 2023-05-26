@@ -73,7 +73,8 @@ Route::middleware('role:user')->group(function () {
     Route::get('/users/wishlists/page', [WishlistController::class, 'addWishList'])->name('users.wishlist');
     // Route::get('/users/store/wishlists/{productId}', [WishlistController::class, 'storeWishlist'])->name('products.storeWishlist');
     Route::post('/users/store/wishlists', [WishlistController::class, 'storeWishlist'])->name('products.storeWishlist');
-    Route::delete('/users/destroy/{id}/wishlists', [WishlistController::class, 'destroyWishlist'])->name('products.destroyWishlist');
+    Route::delete('/wishlists/{id}/delete', [WishlistController::class, 'deleteWishlistById'])->name('wishlists.destroy');
+    Route::delete('/users/wishlists/{productId}/delete', [WishlistController::class, 'deleteWishlistByProductId'])->name('products.destroyWishlist');
 
     //reviews
     Route::post('/review', [ReviewController::class, 'review'])->name('review.create');

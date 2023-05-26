@@ -33,7 +33,7 @@ $(document).ready(function () {
     });
 
     // Add price to show
-    $('#submit-btn').text('Pay - ' + totalPrice + ' MMK');
+    $('#totalPrice').text('Pay - ' + totalPrice + ' MMK');
 
     function getOrderData() {
         const orderDataFromSession = sessionStorage.getItem('order-data');
@@ -44,7 +44,7 @@ $(document).ready(function () {
     $('#submit-btn').on('click', function (e) {
         e.preventDefault();
 
-        stripe.createToken(cardElement).then(async function (result) {
+        stripe.createToken(cardElement).then(function (result) {
             if (result.error) {
                 // Inform the user if there was an error
                 const errorElement = $('#card-errors');
@@ -61,10 +61,16 @@ $(document).ready(function () {
                     stripeToken: token,
                 }
 
-                await axios.post(stripeUrl, data)
-                    .then(async (res) => {
-                        await axios.post(orderCreateUrl, orderData)
+                // Show loading spin
+                $('#submit-btn').prop('disabled', true);
+                $('#spinner').removeClass('d-none');
+
+                axios.post(stripeUrl, data)
+                    .then(res => {
+                        axios.post(orderCreateUrl, orderData)
                             .then(function (res) {
+                                $('#spinner').addClass('d-none');
+                                $('#submit-btn').prop('disabled', false);
                                 sessionStorage.removeItem('order-data', 'order-total-price');
                                 localStorage.removeItem('cart_' + userId);
                                 Swal.fire({ 
