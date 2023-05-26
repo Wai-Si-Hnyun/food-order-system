@@ -38,7 +38,7 @@
                                     <img src="{{ asset('image/profile.png') }}" alt="Avatar" class="img-fluid my-5"
                                         style="width: 80px;" />
                                 @else
-                                    <img src="{{ asset('image/profile/' . $user->image) }}" alt="Avatar"
+                                    <img src="{{ asset('image/profile/' .$user->image) }}" alt="Avatar"
                                         class=" img-circle mt-4 mb-3 w-75 h-50" />
                                 @endif
 
@@ -105,7 +105,12 @@
                     <!-- left column -->
                     <div class="col-md-4">
                         <div class="text-center">
-                            <img id="output" class="img-thumbnail rounded-circle">
+                        @if($user->image == null)
+                            <img src="{{asset('image/profile.png') }}" class="avatar img-circle img-thumbnail w-50 h-50" alt="avatar"  >
+                        @else
+                            <img src="{{asset('image/profile/'.$user->image) }}" class="img-thumbnail rounded-circle w-75 h-75" alt="avatar"  >
+                            <img id="output" class="img-thumbnail rounded-circle w-75 h-75">
+                        @endif
                             <h6 class="mb-2 mt-2">Upload a different photo...</h6>
                         </div>
                     </div>
@@ -118,21 +123,21 @@
                             enctype="multipart/form-data" method="post">
                             {{ csrf_field() }}
                             <div class="form-group mb-2 mt-3">
-                                <label class="col-lg-3 control-label">Name:</label>
+                                <label class="col-lg-3 control-label">Name <span class="text-danger">*</span></label>
                                 <div class="col-lg-8">
                                     <input class="form-control" type="text" value="{{ $user->name }}" name="name">
                                 </div>
                             </div>
 
                             <div class="form-group mt-3">
-                                <label class="col-lg-3 control-label">Email:</label>
+                                <label class="col-lg-3 control-label">Email <span class="text-danger">*</span></label>
                                 <div class="col-lg-8">
                                     <input class="form-control" type="text" value="{{ $user->email }}" name="email">
                                 </div>
                             </div>
 
                             <div class="form-group mt-3">
-                                <label class="col-lg-3 control-label">Image Upload:</label>
+                                <label class="col-lg-3 control-label">Image Upload <span class="text-danger">*</span></label>
                                 <div class="col-lg-8">
                                     <input type="file" class="form-control" name="image" onchange="loadFile(event)">
                                 </div>

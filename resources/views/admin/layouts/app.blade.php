@@ -175,6 +175,7 @@
                                             </div>
                                         @endif
                                     </a>
+                                    
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         <li>
                                             <a class="dropdown-item" href="#">
@@ -187,7 +188,7 @@
                                                         @else
                                                             <img src="{{ asset('image/profile/' . Auth::user()->image) }}"
                                                                 alt="Profile"
-                                                                class="w-px-40 h-auto rounded-circle" />
+                                                                class="w-px-40 h-px-40 rounded-circle" />
                                                         @endif
                                                     </div>
                                                     <div class="flex-grow-1">
