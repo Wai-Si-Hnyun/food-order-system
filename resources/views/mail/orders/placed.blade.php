@@ -24,11 +24,11 @@ Thank you for your order!
 | Product Name       | Quantity | Price      |
 |:-------------------|:--------:|:----------:|
 @foreach($order->orderlists as $orderlist)
-| {{ $orderlist->product->name }} | {{ $orderlist->quantity }}      | ${{ number_format($orderlist->total, 2) }}  |
+| {{ $orderlist->product->name }} | {{ $orderlist->quantity }}      | {{ $orderlist->total }} MMK  |
 @endforeach
 @endcomponent
 
-**Order Total:** ${{ number_format($order->total_price, 2) }}
+**Order Total:** {{ $order->total_price }} MMK
 
 ---
 

@@ -88,6 +88,11 @@ class HomeController extends Controller
         return view('admin.pages.dashboard', compact('data'));
     }
 
+    /**
+     * Go to shop page
+     *
+     * @return \Illuminate\Contracts\View\View
+     */
     public function shop()
     {
         $products = $this->productService->getProduct('user');
@@ -99,7 +104,7 @@ class HomeController extends Controller
     /**
      * Go to about page
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View
      */
     public function about()
     {

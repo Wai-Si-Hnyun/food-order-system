@@ -105,7 +105,7 @@ $(document).ready(function () {
         sessionStorage.setItem('order-data', JSON.stringify(data));
     }
 
-    $('#order-btn').click(async function (event) {
+    $('#order-btn').click(function (event) {
         event.preventDefault();
 
         // Find parent node for all
@@ -139,9 +139,9 @@ $(document).ready(function () {
 
         saveOrderDetails($data);
 
-        await axios.post(orderCreateUrl, $data)
+        axios.post(orderCreateUrl, $data)
             .then(function (res) {
-                console.log(res.data);
+                window.location.href = '/orders';
             })
             .catch(function (e) {
                 if (e.response.status == 422) {

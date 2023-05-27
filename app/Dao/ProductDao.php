@@ -14,11 +14,13 @@ class ProductDao implements ProductDaoInterface
     public function getProduct($page): object
     {
         if ($page == 'admin') {
-            return Product::select('products.*', 'categories.name as category_name')
+            return Product::with('category')
                 ->when(request('key'), function ($query) {
-                    $query->where('products.name', 'LIKE', '%' . request('key') . '%');
+                    $query->where('products.name', 'LIKE', '%' . request('key') . '%')
+                        ->orWhereHas('category', function ($q) {
+                            $q->where('name', 'LIKE', '%' . request('key') . '%');
+                        });
                 })
-                ->leftJoin('categories', 'products.category_id', 'categories.id')
                 ->orderBy('products.created_at', 'desc')
                 ->paginate(10)
                 ->appends(request()->all());

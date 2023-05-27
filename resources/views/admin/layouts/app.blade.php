@@ -54,6 +54,29 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js') }} in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('assets/admin/js/config.js') }}"></script>
+
+    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+    <script>
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('b59d0312a77bca50d283', {
+            cluster: 'ap1'
+        });
+
+        var channel = pusher.subscribe('noti-channel');
+        channel.bind('order-create', function(data) {
+            Swal.fire({
+                title: 'New Order Created',
+                text: 'A new order has been placed by the customer.',
+                footer: '<a href="/admin/orders">View Order Details</a>',
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                allowEnterKey: false
+            })
+        });
+    </script>
 </head>
 
 <body>
@@ -176,7 +199,7 @@
                                             </div>
                                         @endif
                                     </a>
-                                    
+
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         <li>
                                             <a class="dropdown-item" href="#">

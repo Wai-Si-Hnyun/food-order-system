@@ -13,7 +13,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="breadcrumb__links">
                         <a href="{{ route('user.payment') }}">Payment</a>
-                        <span>Card</span>
+                        <span>Google Pay</span>
                     </div>
                 </div>
             </div>

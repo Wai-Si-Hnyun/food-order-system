@@ -41,16 +41,19 @@ class UserProductController extends Controller
 
     /**
      * shop details function
+     * 
+     * @param integer $id
+     * @return \Illuminate\Contracts\View\View
      */
     public function details($id)
     {
         $user = Auth::user();
         $review = $this->reviewService->reviewShow($id);
         $product = $this->productService->getProductById($id);
-        $productList = $this->productService->getRelatedProducts($id);
+        $relatedProducts = $this->productService->getRelatedProducts($id);
         $isWishlist = $user ? $this->wishlistService->checkWishlist($user->id, $id) : false;
 
-        return view('user.main.details', compact('product', 'productList', 'user','review', 'isWishlist'));
+        return view('user.main.details', compact('product', 'relatedProducts','review', 'isWishlist'));
     }
 
     /**

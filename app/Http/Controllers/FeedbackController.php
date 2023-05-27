@@ -29,9 +29,11 @@ class FeedbackController extends Controller
     }
 
     /**
-     * function feedback create
+     * Create feedback from user
+     *
+     * @param \App\Http\Requests\FeedbackRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
-
     public function feedbackCreate(FeedbackRequest $request) {
         $this->feedbackService->createFeedback($request->only([
             'name','email','message',

@@ -10,13 +10,13 @@ class WishlistDao implements WishlistDaoInterface
 {
     /**
      * Get Wishlist list
+     * 
      * @return object
      */
     public function getWishlists(): object
     {
 
-        return Wishlist::select('wishlists.*', 'products.name as product_name', 'products.image as product_image', 'products.price as product_price')
-            ->leftJoin('products', 'products.id', 'wishlists.product_id')
+        return Wishlist::with('product')
             ->where('wishlists.user_id', Auth::user()->id)
             ->paginate(10)
             ->appends(request()->all());

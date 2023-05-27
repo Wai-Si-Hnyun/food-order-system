@@ -27,7 +27,7 @@ $(document).ready(function () {
                         <td class="quantity__item">
                             <div class="quantity">
                                 <div class="pro-qty">
-                                    <input type="text" value="${item.quantity}">
+                                    <input type="text" id="product_qty" value="${item.quantity}" disable>
                                 </div>
                             </div>
                         </td>
@@ -38,14 +38,64 @@ $(document).ready(function () {
 
                 totalPrice += item.price * item.quantity;
             });
+            var proQty = $('.pro-qty');
+            proQty.prepend('<span class="dec qtybtn dec-btn">-</span>');
+            proQty.append('<span class="inc qtybtn inc-btn">+</span>');
+            proQty.on('click', '.qtybtn', function () {
+                var $button = $(this);
+                var oldValue = $button.parent().find('input').val();
+                if ($button.hasClass('inc')) {
+                    var newVal = parseFloat(oldValue) + 1;
+                } else {
+                    // Don't allow decrementing below one
+                    if (oldValue > 1) {
+                        var newVal = parseFloat(oldValue) - 1;
+                    } else {
+                        newVal = 1;
+                    }
+                }
+                $button.parent().find('input').val(newVal);
+            });
         }
         $('#subtotal, #total').text(totalPrice);
     })();
 
+    $('.pro-qty').on('click', '.qtybtn', function (e) {
+        e.preventDefault();
+
+        var row = $(this).closest('tr');
+        var product_id = row.data('id');
+        var updateQty = parseInt($('#product_qty').val());
+
+        // Update localStorage
+        var cart = JSON.parse(localStorage.getItem('cart_' + userId));
+        var product = cart.find(item => item.id === product_id);
+        if (product) {
+            product.quantity = updateQty;
+        }
+
+        localStorage.setItem('cart_' + userId, JSON.stringify(cart));
+
+        var price = product.price;
+        var updatePrice = price * updateQty;
+
+        // Update subtotal and total
+        var total = parseInt($('#total').text());
+        var currentProductTotal = parseInt(row.find('.cart__price').text());
+        var updateTotal = (total - currentProductTotal) + updatePrice;
+        $('#subtotal, #total').text(updateTotal);
+
+        // Change product total
+        row.find('.cart__price').text(updatePrice);
+
+        // Update the header total
+        $('#cart-total-price').text(updateTotal + ' MMK');
+    })
+
     $('.cart__close').on('click', function () {
         var row = $(this).closest('tr');
         var id = row.data('id');
-        var price = parseInt(row.find('.cart__price').text().replace('MMK', ''));
+        var price = parseInt(row.find('.cart__price').text());
 
         // Load the existing cart from localStorage
         var cart = JSON.parse(localStorage.getItem('cart_' + userId)) || [];
