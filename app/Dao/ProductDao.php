@@ -19,14 +19,19 @@ class ProductDao implements ProductDaoInterface
                     $query->where('products.name', 'LIKE', '%' . request('key') . '%')
                         ->orWhereHas('category', function ($q) {
                             $q->where('name', 'LIKE', '%' . request('key') . '%');
-                        });
+                        })
+                        ->orWhere('products.price', 'LIKE', '%' . request('key') . '%')
+                        ->orWhere('products.description', 'LIKE', '%' . request('key') . '%');
                 })
                 ->orderBy('products.created_at', 'desc')
                 ->paginate(10)
                 ->appends(request()->all());
         } elseif ($page == 'user') {
             return Product::when(request('key'), function ($query) {
-                $query->where('products.name', 'LIKE', '%' . request('key') . '%');
+                $query->where('products.name', 'LIKE', '%' . request('key') . '%')
+                    ->orWhere('categories.name', 'LIKE', '%' . request('key') . '%')
+                    ->orwhere('products.price', 'LIKE', '%' . request('key') . '%')
+                    ->orWhere('products.description', 'LIKE', '%' . request('key') . '%');
             })
                 ->with('category')
                 ->orderBy('products.created_at', 'desc')
