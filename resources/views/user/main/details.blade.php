@@ -52,7 +52,7 @@
                             <a href="#" class="primary-btn add-to-cart-btn-detail">Add to cart</a>
                             @if (Auth::check())
                                 <button class="btn btn-outline-warning btn-lg mr-3" id="add-to-wishlist"
-                                    data-product-id="1">
+                                    data-product-id="{{ $product->id }}">
                                     <span class="icon_heart_alt"></span>
                                 </button>
                             @endif
@@ -74,10 +74,10 @@
                     </div>
                 </div>
             </div>
-            @if (count($productList) > 0)
-                @if (count($productList) < 4)
+            @if (count($relatedProducts) > 0)
+                @if (count($relatedProducts) < 4)
                     <div class="row">
-                        @foreach ($productList as $list)
+                        @foreach ($relatedProducts as $list)
                             <div class="col-lg-3 col-md-6">
                                 <div class="product__item">
                                     <div class="product__item__pic set-bg detail-view" data-id="{{ $list->id }}"
@@ -104,7 +104,7 @@
                 @else
                     <div class="row">
                         <div class="related__products__slider owl-carousel">
-                            @foreach ($productList as $list)
+                            @foreach ($relatedProducts as $list)
                                 <div class="col-lg-3">
                                     <div class="product__item">
                                         <div class="product__item__pic set-bg detail-view" data-id="{{ $list->id }}"
@@ -176,7 +176,7 @@
         <!--review Create start -->
         <section class="mb-5">
             <div class="container">
-                <div class="card col-11 offset-1 mt-5">
+                <div class="card mt-5">
                     <div class="card-header text-center">
                         <div class="section-title">
                             <h2>Review Create</h2>
@@ -204,7 +204,6 @@
     <script>
         var isWishlist = {{ $isWishlist ? 'true' : 'false' }}
     </script>
-    <script src="{{ asset('assets/user/js/addFavorite.js') }}"></script>
     <script src="{{ asset('js/user/add-to-cart.js') }}"></script>
     <script src="{{ asset('js/user/product-detail.js') }}"></script>
     <script src="{{ asset('js/user/review.js') }}"></script>

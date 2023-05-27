@@ -26,7 +26,7 @@ Route::get('/products/{id}/filter', [UserProductController::class, 'filter'])->n
 Route::get('/products/{id}/details', [UserProductController::class, 'details'])->name('product.details');
 Route::get('/about', [HomeController::class, 'about'])->name('products.about');
 Route::get('/cart', [HomeController::class, 'cart'])->name('cart.index');
-Route::get('/feed-back', [FeedbackController::class, 'feedback'])->name('feedback.page');
+Route::get('/contact', [FeedbackController::class, 'feedback'])->name('feedback.page');
 
 //login/register
 Route::get('/login', [AuthController::class, 'login'])->name('auth.login');

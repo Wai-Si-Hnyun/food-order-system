@@ -12,7 +12,7 @@
                     @csrf
                     <div class="form-group mb-3">
                         <label for="">Category<span class="text-danger">*</span></label>
-                        <select name="category" id="category" class="form-control @error('category') is-invalid @enderror">
+                        <select name="category" id="category" class="form-select @error('category') is-invalid @enderror">
                             <option value="">Choose category</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}"

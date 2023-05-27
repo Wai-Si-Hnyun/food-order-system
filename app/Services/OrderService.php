@@ -2,14 +2,14 @@
 
 namespace App\Services;
 
-use App\Mail\OrderPlaced;
-use Illuminate\Support\Str;
-use App\Events\OrderCreated;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Session;
 use App\Contracts\Dao\OrderDaoInterface;
 use App\Contracts\Services\OrderServiceInterface;
 use App\Contracts\Services\PaymentServiceInterface;
+use App\Events\OrderCreated;
+use App\Mail\OrderPlaced;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class OrderService implements OrderServiceInterface
 {
@@ -165,16 +165,12 @@ class OrderService implements OrderServiceInterface
                 $this->orderDao->storeOrderList($orderListsData);
             }
 
-            // Mail process to user
             // Load the users relationship
             $order->load('user', 'orderlists.product', 'billingdetail');
 
-            // Queue the confirmation email
-            Mail::to($order->user->email)->queue(new OrderPlaced($order));
-
             Session::forget(['payment-complete', 'payment_data', 'cart']);
 
-            // event(new OrderCreated($order));
+            event(new OrderCreated($order));
 
             return true;
         } else {
@@ -192,6 +188,12 @@ class OrderService implements OrderServiceInterface
      */
     public function changeOrderStatus(int $status, int $id)
     {
+        if ($status == 1) {
+            $order = $this->orderDao->getOrderById($id);
+            
+            // Queue the confirmation email
+            Mail::to($order->user->email)->queue(new OrderPlaced($order));
+        }
         $this->orderDao->changeOrderStatus($status, $id);
     }
 

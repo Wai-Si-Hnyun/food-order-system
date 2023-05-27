@@ -9,7 +9,6 @@
 
         <div class="float-end mt-2 col-4">
             <form action="{{ route('products.index') }}" class="" method="get">
-                @csrf
                 <div class="d-flex">
                     <input class="form-control" name="key" type="text" value="{{ request('key') }}" id=""
                         placeholder="Search..">
@@ -58,7 +57,7 @@
                                     <td class="col-2"><img src="{{ asset('storage/' . $product->image) }}"
                                             class="img-thumbnail shadow-sm" id="product-img"></td>
                                     <td>{{ $product->name }}</td>
-                                    <td>{{ $product->category_name }}</td>
+                                    <td>{{ $product->category->name }}</td>
                                     <td class="text-right">{{ Str::words($product->description, 2, '...') }}</td>
                                     <td class="text-right">{{ $product->price }}MMK</td>
                                     <td class="text-right d-flex">

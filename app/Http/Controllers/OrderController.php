@@ -27,7 +27,7 @@ class OrderController extends Controller
     /**
      * Get all orders
      *
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View|void
      */
     public function index()
     {
@@ -42,7 +42,6 @@ class OrderController extends Controller
 
             return view('user.pages.order.list', compact('orders'));
         }
-        return view('user.pages.orders.index');
     }
 
     /**

@@ -29,11 +29,9 @@ class WishlistController extends Controller
      */
     public function addWishlist()
     {
-
-        $products = Product::select('id', 'name', 'image', 'price')->get();
         $wishlists = $this->wishlistService->getWishlists();
 
-        return view('user.main.wishlist', compact('wishlists', 'products'));
+        return view('user.main.wishlist', compact('wishlists'));
 
     }
 

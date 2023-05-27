@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\ReviewRequest;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -26,17 +27,8 @@ class ReviewController extends Controller
     /**
      * function reviews create
      */
-    public function review(Request $request)
+    public function review(ReviewRequest $request)
     {
-        $message = [
-            'required'=>'The :attribute field is required',
-        ];
-        $validator = Validator::make($request->all(),[
-            'content'=>'required',
-        ]);
-        if ($validator->fails()){
-            return response()->json(['msg'=>$validator->errors()],200);
-        }
         $user = Review::where('user_id',$request->userId)->get();
         if ($user->toArray() == null) {
             $this->reviewService->createReview($request->only([
