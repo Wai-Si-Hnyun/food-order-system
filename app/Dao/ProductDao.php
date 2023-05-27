@@ -16,7 +16,10 @@ class ProductDao implements ProductDaoInterface
         if ($page == 'admin') {
             return Product::select('products.*', 'categories.name as category_name')
                 ->when(request('key'), function ($query) {
-                    $query->where('products.name', 'LIKE', '%' . request('key') . '%');
+                    $query->where('products.name', 'LIKE', '%' . request('key') . '%')
+                        ->orWhere('categories.name', 'LIKE', '%' . request('key') . '%')
+                        ->orWhere('products.price', 'LIKE', '%' . request('key') . '%')
+                        ->orWhere('products.description', 'LIKE', '%' . request('key') . '%');
                 })
                 ->leftJoin('categories', 'products.category_id', 'categories.id')
                 ->orderBy('products.created_at', 'desc')
@@ -24,7 +27,10 @@ class ProductDao implements ProductDaoInterface
                 ->appends(request()->all());
         } elseif ($page == 'user') {
             return Product::when(request('key'), function ($query) {
-                $query->where('products.name', 'LIKE', '%' . request('key') . '%');
+                $query->where('products.name', 'LIKE', '%' . request('key') . '%')
+                    ->orWhere('categories.name', 'LIKE', '%' . request('key') . '%')
+                    ->orwhere('products.price', 'LIKE', '%' . request('key') . '%')
+                    ->orWhere('products.description', 'LIKE', '%' . request('key') . '%');
             })
                 ->with('category')
                 ->orderBy('products.created_at', 'desc')

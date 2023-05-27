@@ -22,8 +22,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="answer">Answer<span class="text-danger">*</span></label>
-                        <textarea class="form-control @error('answer') is-invalid @enderror" 
-                            name="answer" id="answer" cols="30" rows="10">{{ old('answer') }}</textarea>
+                        <textarea class="form-control @error('answer') is-invalid @enderror" name="answer" id="answer" cols="30"
+                            rows="10">{{ old('answer') }}</textarea>
                         @error('answer')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -31,7 +31,8 @@
                         @enderror
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary my-3">Create</button>
+                        <a href="{{ route('q&a.index') }}" class="btn btn-dark float-end my-3">Back</a>
                     </div>
                 </form>
             </div>
