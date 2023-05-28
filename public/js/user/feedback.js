@@ -1,5 +1,5 @@
-$(document).ready(function() {
-    $('#feedbackForm').on('submit', function(e) {
+$(document).ready(function () {
+    $('#feedbackForm').on('submit', function (e) {
         e.preventDefault();
 
         const feedbackCreateUrl = window.routes.feedbackCreateUrl;
@@ -25,7 +25,12 @@ $(document).ready(function() {
                     showConfirmButton: false,
                     showCancelButton: false,
                     timer: 2000
-                });
+                })
+                    .then((res) => {
+                        $('#name').val('');
+                        $('#email').val('');
+                        $('#message').val('');
+                    })
             })
             .catch(err => {
                 if (err.response.status == 422) {

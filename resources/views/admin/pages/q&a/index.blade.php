@@ -12,7 +12,6 @@
         <div class="mt-5 d-flex justify-content-between">
             <a href="{{ route('q&a.create') }}" class="btn btn-primary mb-4">Create</a>
             <form action="{{ route('q&a.index') }}" method="get">
-                @csrf
                 <div class="d-flex">
                     <input class="form-control" name="key" type="text" value="{{ request('key') }}" id="key"
                         placeholder="Search..">

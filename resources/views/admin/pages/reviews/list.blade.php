@@ -20,7 +20,7 @@
         @if (count($review) > 0)
             <div class="card">
                 <div class="table-responsive text-nowrap">
-                    <table class="table">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th></th>
@@ -35,7 +35,7 @@
                             @foreach ($review as $reviews)
                                 <tr>
                                     <td class="table-text idlist">
-                                        {{ $loop->iteration }}
+                                        {{ ($review->currentPage()-1) * $review->perPage() + $loop->iteration }}
                                     </td>
                                     <td class="table-text userlist">
                                         {{ $reviews->user }}

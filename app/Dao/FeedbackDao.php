@@ -20,9 +20,14 @@ class FeedbackDao implements FeedbackDaoInterface
         ]);
     }
 
+    /**
+     * Get feedback message
+     *
+     * @return object
+     */
     public function getMessage():object
     {
-        return Feedback::orderBy('created_at', 'asc')->paginate(5);
+        return Feedback::orderBy('created_at', 'desc')->paginate(10);
     }
 
     public function searchfeedback():object

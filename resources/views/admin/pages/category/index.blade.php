@@ -41,10 +41,10 @@
         @if (count($categories) != 0)
             <div class="card my-3">
                 <div class="table-responsive text-nowrap">
-                    <table class="table table-borderless table-striped table-earning">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Id</th>
+                                <th></th>
                                 <th>Name</th>
                                 <th>Created Date</th>
                                 <th class="text-right">Action</th>
@@ -53,7 +53,9 @@
                         <tbody>
                             @foreach ($categories as $category)
                                 <tr>
-                                    <td>{{ $category->id }}</td>
+                                    <td>
+                                        {{ ($categories->currentPage()-1) * $categories->perPage() + $loop->iteration }}
+                                    </td>
                                     <td>{{ $category->name }}</td>
                                     <td class="text-right">{{ $category->created_at->format('j-F-Y') }}</td>
                                     <td class="text-right d-flex">

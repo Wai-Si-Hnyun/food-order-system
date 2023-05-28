@@ -6,7 +6,7 @@
         <div class="alert alert-success w-50 fade" id="successAlert" role="alert"></div>
         <div class="d-flex justify-content-between mb-3">
             <h5>Total - ({{ count($orders) }})</h5>
-            <div class="">
+            <div>
                 <form action="{{ route('orders.index') }}" method="get">
                     <div class="d-flex">
                         <input class="form-control" name="key" type="text" value="{{ request('key') }}"
@@ -20,7 +20,7 @@
         @if (count($orders) > 0)
             <div class="card">
                 <div class="table-responsive text-nowrap">
-                    <table class="table">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th></th>
@@ -36,7 +36,9 @@
                         <tbody class="table-border-bottom-0">
                             @foreach ($orders as $order)
                                 <tr data-id="{{ $order->id }}">
-                                    <th>{{ $loop->iteration }}</th>
+                                    <th>
+                                        {{ ($orders->currentPage()-1) * $orders->perPage() + $loop->iteration }}
+                                    </th>
                                     <td>{{ $order->user->name }}</td>
                                     <td><a href="{{ route('order.show', $order->id) }}"
                                             class="text-decoration-underline">{{ $order->order_code }}</a></td>

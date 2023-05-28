@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4">Customer Feedback</h4>
         <div class="d-flex justify-content-between">
-            <h4 class="fw-bold py-3 mb-4">Customer Feedback</h4>
-
-            <div class="mt-2 col-4">
+            <h5 class="pt-2">Total - ({{ $message->total() }})</h5>
+            <div class="mb-3 col-4">
                 <form action="{{ route('feedback.search') }}" type="get">
                     <div class="d-flex">
                         <input class="form-control" name="query" type="text" value="{{ request('query') }}" id=""
@@ -19,10 +19,10 @@
         @if (count($message) > 0)
             <div class="card">
                 <div class="table-responsive text-nowrap">
-                    <table class="table">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th></th>
                                 <th>User Name</th>
                                 <th>User Email</th>
                                 <th>Suggection</th>
@@ -33,7 +33,7 @@
                             @foreach ($message as $messages)
                                 <tr>
                                     <td class="table-text idlist">
-                                        {{ $messages->id }}
+                                        {{ ($message->currentPage()-1) * $message->perPage() + $loop->iteration }}
                                     </td>
                                     <td class="table-text namelist">
                                         {{ $messages->name }}

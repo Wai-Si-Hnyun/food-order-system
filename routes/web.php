@@ -112,15 +112,15 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{id}/show', [OrderController::class, 'show'])->name('order.show');
     Route::delete('/orders/{id}/delete', [OrderController::class, 'destroy'])->name('order.delete');
-
     Route::get('/orders/{id}/status/change', [OrderController::class, 'changeOrderStatus'])->name('order.status.change');
     Route::get('/orders/{id}/deivered/status/change', [OrderController::class, 'changeDeliverStatus'])->name('order.deliver.status.change');
+    Route::get('/orders/export/csv', [OrderController::class, 'exportCsv'])->name('order.export.csv');
 
     //review
     Route::get('/reviews/list', [ReviewController::class, 'reviewList'])->name('review.list');
     Route::delete('/reviews/{id}/delete', [ReviewController::class, 'reviewDestory'])->name('review.destory');
     Route::get('/review-search', [ReviewController::class, 'reviewSearch'])->name('review.search');
-    Route::get('/review/{review}/show', [ReviewController::class, 'show'])->name('review.show');
+    Route::get('/reviews/{review}/show', [ReviewController::class, 'show'])->name('review.show');
 
     //UserList
     Route::get('/users/list', [UserdataController::class, 'userList'])->name('userData.list');

@@ -8,7 +8,7 @@ use App\Contracts\Dao\UserDaoInterface;
 class UserDao implements UserDaoInterface
 {
     public function getUser():object {
-        return User::orderBy('created_at', 'asc')->paginate(5);
+        return User::orderBy('created_at', 'asc')->paginate(10);
     }
 
     public function updateRole(array $data, $id): void
@@ -68,7 +68,7 @@ class UserDao implements UserDaoInterface
         $search_name = request()->query('query');
         $users = User::where('users.name','LIKE','%'.$search_name.'%')
         ->latest()
-        ->paginate(5);
+        ->paginate(10);
 
         $users->appends(['query' => $search_name]);
 

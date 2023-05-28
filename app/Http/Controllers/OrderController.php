@@ -114,6 +114,13 @@ class OrderController extends Controller
         return response()->json(['message' => 'Order status changed successfully!'], 200);
     }
 
+    /**
+     * Change deliver status 
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param integer $id
+     * @return \\Illuminate\Http\JsonResponse
+     */
     public function changeDeliverStatus(Request $request, int $id)
     {
         $status = $request->input('status');

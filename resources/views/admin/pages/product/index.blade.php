@@ -40,9 +40,10 @@
         @if (count($products) != 0)
             <div class="card mb-3 mt-1">
                 <div class="table-responsive text-nowrap">
-                    <table class="table table-borderless table-striped table-earning">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
+                                <th></th>
                                 <th>Image</th>
                                 <th>Name</th>
                                 <th>Category</th>
@@ -54,6 +55,9 @@
                         <tbody>
                             @foreach ($products as $product)
                                 <tr>
+                                    <th>
+                                        {{ ($products->currentPage()-1) * $products->perPage() + $loop->iteration }}
+                                    </th>
                                     <td class="col-2"><img src="{{ asset('storage/' . $product->image) }}"
                                             class="img-thumbnail shadow-sm" id="product-img"></td>
                                     <td>{{ $product->name }}</td>
