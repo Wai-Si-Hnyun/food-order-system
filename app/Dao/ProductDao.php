@@ -29,7 +29,6 @@ class ProductDao implements ProductDaoInterface
         } elseif ($page == 'user') {
             return Product::when(request('key'), function ($query) {
                 $query->where('products.name', 'LIKE', '%' . request('key') . '%')
-                    ->orWhere('categories.name', 'LIKE', '%' . request('key') . '%')
                     ->orwhere('products.price', 'LIKE', '%' . request('key') . '%')
                     ->orWhere('products.description', 'LIKE', '%' . request('key') . '%');
             })

@@ -39,7 +39,7 @@ class ReviewDao implements ReviewDaoInterface
         ->join('users','reviews.user_id','users.id')
         ->join('products','reviews.product_id','products.id')
         ->latest()
-        ->paginate(3);
+        ->paginate(10);
     }
 
     public function searchReview():object
@@ -51,7 +51,7 @@ class ReviewDao implements ReviewDaoInterface
         ->where('users.name','LIKE','%'.$search_name.'%')
         ->orwhere('products.name','LIKE','%'.$search_name.'%')
         ->latest()
-        ->paginate(5);
+        ->paginate(10);
 
         $students->appends(['query' => $search_name]);
 

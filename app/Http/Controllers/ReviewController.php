@@ -29,7 +29,10 @@ class ReviewController extends Controller
      */
     public function review(ReviewRequest $request)
     {
-        $user = Review::where('user_id',$request->userId)->get();
+        $user = Review::where('user_id', $request->userId)
+            ->where('product_id', $request->productId)
+            ->get();
+            
         if ($user->toArray() == null) {
             $this->reviewService->createReview($request->only([
                 'userId','productId','content',

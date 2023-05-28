@@ -1,6 +1,25 @@
 @extends('user.layouts.app')
 
 @section('content')
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="breadcrumb__text">
+                        <h2>Profile</h2>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="breadcrumb__links">
+                        <a href="{{ route('home') }}">Home</a>
+                        <span>Profile</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
     @if (session('update'))
         <div class="d-flex justify-content-center">
             <div class="alert alert-danger alert-dismissible fade show w-50" role="alert">
@@ -23,10 +42,7 @@
         </div>
     @endif
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <section class=" mt-0">
+    <section class="my-5 pt-2 pb-5">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100 w-100">
                 <div class="col col-lg-8 mb-4 mb-lg-0">
@@ -38,8 +54,8 @@
                                     <img src="{{ asset('image/profile.png') }}" alt="Avatar" class="img-fluid my-5"
                                         style="width: 80px;" />
                                 @else
-                                    <img src="{{ asset('image/profile/' .$user->image) }}" alt="Avatar"
-                                        class=" img-circle mt-4 mb-3 w-75 h-50" />
+                                    <img src="{{ asset('image/profile/' . $user->image) }}" alt="Avatar"
+                                        class="mt-4 mb-3 w-75 h-50" />
                                 @endif
 
                                 <h5>{{ $user->name }}</h5>
@@ -76,7 +92,8 @@
                                     <div class="row pt-1">
                                         <div class="col-8 mb-3">
                                             <h6>Password Setting</h6>
-                                            <a href="{{ url('password/' . $user->id . '/update') }}" class="text-success">Change
+                                            <a href="{{ url('password/' . $user->id . '/update') }}"
+                                                class="text-success">Change
                                                 Password</a>
                                         </div>
                                         <div class="col-4 mb-3">
@@ -105,13 +122,15 @@
                     <!-- left column -->
                     <div class="col-md-4">
                         <div class="text-center">
-                        @if($user->image == null)
-                            <img src="{{asset('image/profile.png') }}" class="avatar img-circle img-thumbnail w-50 h-50" alt="avatar" id="profile"  >
-                            <img id="output" class="img-thumbnail rounded-circle w-75 h-75">
-                        @else
-                            <img src="{{asset('image/profile/'.$user->image) }}" class="img-thumbnail rounded-circle w-75 h-75" alt="avatar" id="profile" >
-                            <img id="output" class="img-thumbnail rounded-circle w-75 h-75">
-                        @endif
+                            @if ($user->image == null)
+                                <img src="{{ asset('image/profile.png') }}"
+                                    class="avatar img-circle img-thumbnail w-50 h-50" alt="avatar" id="profile">
+                                <img id="output" class="img-thumbnail rounded-circle w-75 h-75">
+                            @else
+                                <img src="{{ asset('image/profile/' . $user->image) }}"
+                                    class="img-thumbnail rounded-circle w-75 h-75" alt="avatar" id="profile">
+                                <img id="output" class="img-thumbnail rounded-circle w-75 h-75">
+                            @endif
                             <h6 class="mb-2 mt-2">Upload a different photo...</h6>
                         </div>
                     </div>
@@ -133,14 +152,17 @@
                             <div class="form-group mt-3">
                                 <label class="col-lg-3 control-label">Email <span class="text-danger">*</span></label>
                                 <div class="col-lg-8">
-                                    <input class="form-control" type="text" value="{{ $user->email }}" name="email">
+                                    <input class="form-control" type="text" value="{{ $user->email }}"
+                                        name="email">
                                 </div>
                             </div>
 
                             <div class="form-group mt-3">
-                                <label class="col-lg-3 control-label">Image Upload <span class="text-danger">*</span></label>
+                                <label class="col-lg-3 control-label">Image Upload <span
+                                        class="text-danger">*</span></label>
                                 <div class="col-lg-8">
-                                    <input type="file" class="form-control" name="image" onchange="loadFile(event)">
+                                    <input type="file" class="form-control" name="image"
+                                        onchange="loadFile(event)">
                                 </div>
                             </div>
 

@@ -184,10 +184,9 @@
                     </div>
                     <div class="card-body">
                         <form id="reviewForm">
-                            <input type="hidden" name="userId" class="ms-2" value="{{ Auth::user()->id }}">
-                            <input type="hidden" name="productId" value="{{ $product->id }}">
+                            <input type="hidden" name="productId" id="productId" value="{{ $product->id }}">
                             <label for="">Content</label>
-                            <textarea name="content" id="" cols="30" rows="3" class="form-control mb-0"
+                            <textarea name="content" id="content" cols="30" rows="3" class="form-control mb-0"
                                 placeholder="review here..."></textarea>
                                 <div><small id="content" > </small></div>
                             <button type="submit" class="btn btn-success btn-sm mt-3">Create</button>

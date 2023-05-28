@@ -23,7 +23,7 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th></th>
                                 <th>User</th>
                                 <th>Order Code</th>
                                 <th>Total Price(MMK)</th>
@@ -80,7 +80,7 @@
                     </table>
                 </div>
             </div>
-            <div class="mt-3">
+            <div class="mt-3 d-flex justify-content-center">
                 {{ $orders->links() }}
             </div>
         @else

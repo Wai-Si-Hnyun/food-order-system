@@ -1,88 +1,37 @@
-var reviewForm = document.forms['reviewForm'];
-var userId = reviewForm['userId'];
-var productId = reviewForm['productId'];
-var content = reviewForm['content'];
+$(document).ready(function () {
+    const userId = $('body').data('user-id');
 
-reviewForm.onsubmit = function (e) {
-    e.preventDefault();
-    axios.post('/review', {
-        userId: userId.value,
-        productId: productId.value,
-        content: content.value,
-    })
-        .then(response => {
-            Swal.fire({
-                title: 'Success',
-                text: 'Your review has been created',
-                icon: 'success',
-                showConfirmButton: false,
-                showCancelButton: false,
-                timer: 3000
-            });
-            setTimeout(function () {
-                location.reload();
-            }, 1000);
-        })
-        .catch(err => {
-            if (err.response.status == 422) {
-                var contentName = document.getElementById('content');
-                contentName.innerHTML = content.value == '' ? '<i class="text-danger">' + err.response.data.errors.content[0] + '</i>' : '';
-            }
-        });
-}
+    $('#reviewForm').on('submit', function (e) {
+        e.preventDefault();
 
-//reviews edit
-var reviewEditForm = document.forms['reviewEditForm'];
-var reviewId = reviewEditForm['reviewId'];
-var reviewComment = reviewEditForm['comment'];
-function reviewEditBtn(editId) {
-    axios.get('/review/' + editId + '/edit')
-        .then(response => {
-            reviewId.value = response.data.id;
-            reviewComment.value = response.data.comment;
-        })
-        .catch(err => {
-            console.log(err.response)
-        });
-}
+        var productId = $('#productId').val();
+        var content = $('#content').val();
 
-// reviews update
+        var data = {
+            userId,
+            productId,
+            content
+        };
 
-reviewEditForm.onsubmit = function (e) {
-    e.preventDefault();
-    axios.put('/review/' + reviewId.value, {
-        comment: reviewComment.value,
-    })
-        .then(response => {
-            location.reload();
-        })
-        .catch(err => {
-            console.log(err.response)
-        });
-}
-
-var nameList = document.getElementsByClassName('namelist');
-var commentList = document.getElementsByClassName('commentlist');
-var actionList = document.getElementsByClassName('actionlist');
-var idList = document.getElementsByClassName('idlist');
-function deleteBtn(deleteId) {
-    if (confirm('Sure to delete?')) {
-        axios.delete('/review-delete/' + deleteId)
+        axios.post('/review', data)
             .then(response => {
-                console.log(response.data.deletedReview.comment);
-                for (var i = 0; i < commentList.length; i++) {
-                    console.log(idList[i].innerHTML);
-                    if (idList[i].innerHTML == response.data.deletedReview.id) {
-                        nameList[i].style.display = 'none';
-                        commentList[i].style.display = 'none';
-                        actionList[i].style.display = 'none';
-                        idList[i].style.display = 'none';
-                    }
-                }
+                Swal.fire({
+                    title: 'Success',
+                    text: 'Your review has been created',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    showCancelButton: false,
+                    timer: 3000
+                });
+                setTimeout(function () {
+                    location.reload();
+                }, 1000);
             })
             .catch(err => {
-                console.log(err.response)
+                if (err.response.status == 422) {
+                    var contentName = document.getElementById('content');
+                    contentName.innerHTML = content.value == '' ? '<i class="text-danger">' + err.response.data.errors.content[0] + '</i>' : '';
+                }
             });
-
-    }
-}
+    })
+})

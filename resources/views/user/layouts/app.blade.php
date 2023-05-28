@@ -41,10 +41,12 @@
     <div class="offcanvas-menu-overlay"></div>
     <div class="offcanvas-menu-wrapper">
         <div class="offcanvas__cart">
-            <div class="offcanvas__cart__links">
-                <a href="{{ route('users.wishlist') }}"><img src="{{ asset('assets/user/img/icon/heart.png') }}"
-                        alt=""></a>
-            </div>
+            @if (Auth::check())
+                <div class="offcanvas__cart__links">
+                    <a href="{{ route('users.wishlist') }}"><img src="{{ asset('assets/user/img/icon/heart.png') }}"
+                            alt=""></a>
+                </div>
+            @endif
             <div class="offcanvas__cart__item">
                 <a href="{{ route('cart.index') }}"><img src="{{ asset('assets/user/img/icon/cart.png') }}"
                         alt=""></a>
@@ -60,12 +62,12 @@
                     @if (Auth::user()->role == 'user')
                         <li style="width:25%;">
                             @if (Auth::user()->image == null)
-                                <a href="{{ url('userprofile/' . Auth::user()->id) }}" class="display-picture"><img src="{{ asset('image/profile.png') }}"
-                                        alt class=" rounded-circle" /></a>
+                                <a href="{{ url('userprofile/' . Auth::user()->id) }}" class="display-picture"><img
+                                        src="{{ asset('image/profile.png') }}" alt class=" rounded-circle" /></a>
                             @else
                                 <a href="{{ url('userprofile/' . Auth::user()->id) }}" class="display-picture"><img
                                         src="{{ asset('image/profile/' . Auth::user()->image) }}" alt
-                                        class=" rounded-circle "/></a>
+                                        class=" rounded-circle " /></a>
                             @endif
 
                         </li>
@@ -108,13 +110,16 @@
                                         @if (Auth::user()->role == 'user')
                                             <li style="width:25%;" class="img">
                                                 @if (Auth::user()->image == null)
-                                                    <a href="{{ url('userprofile/' . Auth::user()->id) }}" class="display-picture"><img
+                                                    <a href="{{ url('userprofile/' . Auth::user()->id) }}"
+                                                        class="display-picture"><img
                                                             src="{{ asset('image/profile.png') }}" alt
-                                                            class=" rounded-circle" /></a>
+                                                            class="img-rounded" /></a>
                                                 @else
-                                                    <a href="{{ url('userprofile/' . Auth::user()->id) }}" class="display-picture"><img
+                                                    <a href="{{ url('userprofile/' . Auth::user()->id) }}"
+                                                        class="display-picture"><img
                                                             src="{{ asset('image/profile/' . Auth::user()->image) }}"
-                                                            alt class=" rounded-circle" /></a>
+                                                            alt="{{ Auth::user()->name }}"
+                                                            class="img-rounded" /></a>
                                                 @endif
                                             </li>
                                         @endif

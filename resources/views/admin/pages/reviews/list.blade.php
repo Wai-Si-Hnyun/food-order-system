@@ -23,7 +23,7 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th></th>
                                 <th>User Name</th>
                                 <th>Product Name</th>
                                 <th>Review</th>
@@ -35,7 +35,7 @@
                             @foreach ($review as $reviews)
                                 <tr>
                                     <td class="table-text idlist">
-                                        {{ $reviews->id }}
+                                        {{ $loop->iteration }}
                                     </td>
                                     <td class="table-text userlist">
                                         {{ $reviews->user }}
@@ -44,7 +44,7 @@
                                         {{ $reviews->product }}
                                     </td>
                                     <td class="table-text commentlist">
-                                        {{ $reviews->comment }}
+                                        {{ Str::limit($reviews->comment, 40, '...') }}
                                     </td>
 
                                     <td class="actionlist">
