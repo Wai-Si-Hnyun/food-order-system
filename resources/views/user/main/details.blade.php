@@ -39,9 +39,6 @@
                         <p>
                             {{ $product->description }}
                         </p>
-                        <ul>
-                            <li>Product-Id : <span>{{ $product->id }}</span></li>
-                        </ul>
                         <div class="product__details__option" data-id="{{ $product->id }}" data-name="{{ $product->name }}"
                             data-price="{{ $product->price }}" data-image="{{ $product->image }}">
                             <div class="quantity">
@@ -139,42 +136,47 @@
 
     <!--Review Section start -->
     @if (Auth::check())
-        <section class="home-testimonial">
-            <div class="container-fluid">
-                <div class="row d-flex justify-content-center testimonial-pos">
-                    <div class="col-md-12 pt-4 d-flex justify-content-center">
-                        <div class="col-lg-12 text-center">
-                            <div class="section-title">
-                                <h2>Reviews</h2>
+        @if (count($review) > 0)
+            <section class="home-testimonial">
+                <div class="container-fluid">
+                    <div class="row d-flex justify-content-center testimonial-pos mb-5">
+                        <div class="col-md-12 pt-4 d-flex justify-content-center">
+                            <div class="col-lg-12 text-center">
+                                <div class="section-title">
+                                    <h2>Reviews</h2>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12 d-flex justify-content-center">
-                        <h2 class="mb-3">About this product</h2>
-                    </div>
-                </div>
-                <section class="home-testimonial-bottom">
-                    <div class="container testimonial-inner">
-                        <div class="row d-flex justify-content-center">
-                            @foreach ($review as $reviews)
-                                <div class="col-md-4 style-3  ">
-                                    <div class="tour-item ">
-                                        <div class="tour-desc bg-white p-2 rounded border border-1 mb-3">
-                                            <h4><img src="https://img.icons8.com/ultraviolet/40/000000/quote-left.png"></h4>
-                                            <div class="tour-text color-grey-3 text-center w-100 text-warp">
-                                            <p style="overflow:hidden;">" {{ $reviews->comment }} "</p></div>
-                                            <div class="link-name d-flex justify-content-center">{{ $reviews->user }}</div>
-                                            <div class="link-position d-flex justify-content-center">Customer</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <h2 class="mb-3">About this product</h2>
                         </div>
                     </div>
-                </section>
-        </section>
+                    <section class="home-testimonial-bottom">
+                        <div class="container testimonial-inner">
+                            <div class="row">
+                                @foreach ($review as $reviews)
+                                    <div class="col-md-4 d-flex style-3">
+                                        <div class="tour-item d-flex flex-column">
+                                            <div
+                                                class="tour-desc bg-white p-2 rounded border border-1 mb-3 flex-grow-1 d-flex flex-column">
+                                                <h4><img src="https://img.icons8.com/ultraviolet/40/000000/quote-left.png">
+                                                </h4>
+                                                <div class="tour-text color-grey-3 text-center w-100 text-warp">
+                                                    <p style="overflow:hidden;">" {{ $reviews->comment }} "</p>
+                                                </div>
+                                                <div class="mt-auto link-name d-flex justify-content-center">
+                                                    {{ $reviews->user }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </section>
+            </section>
+        @endif
         <!--review Create start -->
-        <section class="mb-5">
+        <section class="my-5">
             <div class="container">
                 <div class="card mt-5">
                     <div class="card-header text-center">
@@ -188,7 +190,7 @@
                             <label for="">Content</label>
                             <textarea name="content" id="content" cols="30" rows="3" class="form-control mb-0"
                                 placeholder="review here..."></textarea>
-                                <div><small id="content" > </small></div>
+                            <div><small id="content"> </small></div>
                             <button type="submit" class="btn btn-success btn-sm mt-3">Create</button>
                         </form>
                     </div>

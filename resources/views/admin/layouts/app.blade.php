@@ -112,13 +112,13 @@
                     </li>
                     <li class="menu-item" id="reviews">
                         <a href="{{ route('review.list') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <i class="menu-icon tf-icons bx bx-message-alt-edit"></i>
                             <div>Reviews</div>
                         </a>
                     </li>
                     <li class="menu-item" id="users">
                         <a href="{{ route('userData.list') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <i class="menu-icon tf-icons bx bx-user"></i>
                             <div>Users</div>
                         </a>
                     </li>
@@ -136,7 +136,7 @@
                     </li>
                     <li class="menu-item" id="feedback">
                         <a href="{{ route('feedback.list') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <i class="menu-icon tf-icons bx bx-comment-add"></i>
                             <div>FeedBack</div>
                         </a>
                     </li>

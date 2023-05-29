@@ -19,7 +19,7 @@ class CategoryDao implements CategoryDaoInterface
             return Category::when(request('key'), function ($query) {
                 $query->where('name', 'LIKE', '%' . request('key') . '%');
             })
-                ->orderBy('created_at', 'asc')
+                ->orderBy('created_at', 'desc')
                 ->paginate(10)
                 ->appends(request()->all());
         } elseif ($page == 'user') {

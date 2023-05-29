@@ -58,12 +58,7 @@
                                         class="mt-4 mb-3 w-75 h-50" />
                                 @endif
 
-                                <h5>{{ $user->name }}</h5>
-                                @if ($user->role == 'user')
-                                    <p class="text-dark">Customer</p>
-                                @else
-                                    <p class="text-dark">Admin</p>
-                                @endif
+                                <h5 class="text-dark">{{ $user->name }}</h5>
                                 <i class="far fa-edit mb-5"></i>
                             </div>
                             <div class="col-md-8">
@@ -78,7 +73,7 @@
                                         @if ($user->role == 'user')
                                             <div class="col-4 mb-3">
                                                 <h6>Your Role</h6>
-                                                <p class="text-muted">User</p>
+                                                <p class="text-muted">Customer</p>
                                             </div>
                                         @else
                                             <div class="col-4 mb-3">
@@ -158,16 +153,15 @@
                             </div>
 
                             <div class="form-group mt-3">
-                                <label class="col-lg-3 control-label">Image Upload <span
-                                        class="text-danger">*</span></label>
+                                <label class="col-lg-4 control-label">Image Upload</label>
                                 <div class="col-lg-8">
-                                    <input type="file" class="form-control" name="image"
+                                    <input type="file" class="form-control-file" name="image"
                                         onchange="loadFile(event)">
                                 </div>
                             </div>
 
                             <div class="form-group ps-4 ">
-                                <button class="btn btn-primary btn-sm ">update</button>
+                                <button class="btn btn-primary btn-sm ml-3">update</button>
                             </div>
                         </form>
                     </div>

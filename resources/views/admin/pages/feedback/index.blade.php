@@ -8,8 +8,8 @@
             <div class="mb-3 col-4">
                 <form action="{{ route('feedback.search') }}" type="get">
                     <div class="d-flex">
-                        <input class="form-control" name="query" type="text" value="{{ request('query') }}" id=""
-                            placeholder="Enter User Name Or Email Address">
+                        <input class="form-control" name="query" type="text" value="{{ request('query') }}"
+                            id="" placeholder="Enter User Name Or Email Address">
                         <button class='btn btn-sm btn-dark ms-2' type="submit"><i
                                 class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
@@ -33,7 +33,7 @@
                             @foreach ($message as $messages)
                                 <tr>
                                     <td class="table-text idlist">
-                                        {{ ($message->currentPage()-1) * $message->perPage() + $loop->iteration }}
+                                        {{ ($message->currentPage() - 1) * $message->perPage() + $loop->iteration }}
                                     </td>
                                     <td class="table-text namelist">
                                         {{ $messages->name }}
@@ -46,7 +46,8 @@
                                     </td>
 
                                     <td class="actionlist">
-                                        <a class="text-primary me-3" href="{{ route('feedback.show', $messages->id) }}" title="Detail">
+                                        <a class="text-primary me-3" href="{{ route('feedback.show', $messages->id) }}"
+                                            title="Detail">
                                             <i class="bx bxs-detail me-1"></i>
                                         </a>
                                         <a href="#" class="text-danger" title="Delete"
@@ -84,22 +85,24 @@
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Confirm'
             }).then(res => {
-                axios.delete('/admin/feedback-delete/' + deleteId)
-                    .then(response => {
-                        for (var i = 0; i < messageList.length; i++) {
-                            console.log(idList[i].innerHTML);
-                            if (idList[i].innerHTML == response.data.reviewFeedback.id) {
-                                messageList[i].style.display = 'none';
-                                nameList[i].style.display = 'none';
-                                emailList[i].style.display = 'none';
-                                actionList[i].style.display = 'none';
-                                idList[i].style.display = 'none';
+                if (res.isConfirmed) {
+                    axios.delete('/admin/feedback-delete/' + deleteId)
+                        .then(response => {
+                            for (var i = 0; i < messageList.length; i++) {
+                                console.log(idList[i].innerHTML);
+                                if (idList[i].innerHTML == response.data.reviewFeedback.id) {
+                                    messageList[i].style.display = 'none';
+                                    nameList[i].style.display = 'none';
+                                    emailList[i].style.display = 'none';
+                                    actionList[i].style.display = 'none';
+                                    idList[i].style.display = 'none';
+                                }
                             }
-                        }
-                    })
-                    .catch(err => {
-                        console.log(err.response)
-                    });
+                        })
+                        .catch(err => {
+                            console.log(err.response)
+                        });
+                }
             })
         }
     </script>

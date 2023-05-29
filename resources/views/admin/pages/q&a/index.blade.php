@@ -3,6 +3,7 @@
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold">Questions and Answers for Chatbot</h4>
+        <h5>Total - ({{ count($qaData) }})</h5>
         <div id="success"></div>
         @if (session('createSuccess'))
             <div class="alert alert-success alert-dismissible fade show w-50" role="alert">

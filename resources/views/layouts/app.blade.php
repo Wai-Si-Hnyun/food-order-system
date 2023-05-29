@@ -1,4 +1,3 @@
-
 @php
     use Anhskohbo\NoCaptcha\Facades\NoCaptcha;
 @endphp
@@ -19,7 +18,6 @@
     <!-- Fontfaces CSS-->
     <link href="{{asset('auth/css/font-face.css') }}" rel="stylesheet" media="all">
     <link href="{{asset('auth/vendor/font-awesome-4.7/css/font-awesome.min.css') }}" rel="stylesheet" media="all">
-    <link href="{{asset('authvendor/font-awesome-5/css/fontawesome-all.min.css') }}" rel="stylesheet" media="all">
     <link href="{{asset('auth/vendor/mdi-font/css/material-design-iconic-font.min.css') }}" rel="stylesheet" media="all">
 
     <!-- Bootstrap CSS-->
@@ -46,8 +44,8 @@
                 <div class="login-wrap">
                     <div class="login-content">
                     <div class="login-logo">
-                            <a href="./index.html"><img src="{{ asset('assets/user/img/logo.png') }}"
-                            alt=""></a>
+                            <a href="{{ route('home') }}"><img src="{{ asset('assets/user/img/logo.png') }}"
+                            alt="Cake Shop Logo"></a>
                         </div>
                         @yield('content')
                     </div>
