@@ -41,7 +41,7 @@ class ChatbotController extends Controller
     {
         $this->chatbotService->store($request->all());
 
-        return redirect()->route('q&a.index')->with('success', 'Question and answer successfully created!');
+        return redirect()->route('q&a.index')->with('createSuccess', 'Question and answer successfully created!');
     }
 
     /**
