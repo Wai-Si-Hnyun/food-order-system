@@ -12,7 +12,7 @@
 
 <div class="login-form">
     <p class="mb-3">Change Password</p>
-    <form action="{{route('password.change')}}" method="post" onsubmit="return confirmSubmit()">
+    <form action="{{route('password.change')}}" method="post" id="passChgForm" onsubmit="confirmSubmit()">
     {{ csrf_field() }}
         <input type="hidden" value="{{$user->id}}" name="id">
         <div class="form-group mb-0">
@@ -57,9 +57,17 @@
         </div>
     </div>
 <script>
-    function confirmSubmit() {
-        return confirm('Are you sure you want to change your password?');
-    }
+    $('.update-password-btn').on('click',function confirmSubmit(e) {
+        e.preventDefault();
 
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'This action cannot be undone!',
+            icon: 'warning',
+            showCancelButton: true,
+        }).then(res => {
+            $('#passChgForm').submit();
+        })
+    })
 </script>
 @endsection

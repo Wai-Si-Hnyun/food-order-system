@@ -98,7 +98,7 @@ class PaymentService implements PaymentServiceInterface
             $payment_data = [
                 'payment_amount' => $charge->amount / 100,
                 'payment_currency' => $charge->currency,
-                'payment_method' => $charge->payment_method_details->card->brand,
+                'payment_method' => 'gpay',
                 'payment_gateway' => $charge->calculated_statement_descriptor,
                 'payment_status' => $charge->status,
                 'transaction_id' => $charge->id

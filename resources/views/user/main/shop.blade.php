@@ -44,8 +44,8 @@
                         <div class="shop__option__right">
                             <select id="sorting" name="sorting">
                                 <option value="">Sorting By</option>
-                                <option value="asc">Asending</option>
-                                <option value="desc">Desending</option>
+                                <option value="asc">Price low to high</option>
+                                <option value="desc">Price high to low</option>
                             </select>
                         </div>
                     </div>

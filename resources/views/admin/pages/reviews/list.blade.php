@@ -7,7 +7,6 @@
 
             <div class="mt-2 col-4">
                 <form action="{{ route('review.search') }}" type="get">
-                    @csrf
                     <div class="d-flex">
                         <input class="form-control" name="query" type="text" value="{{ request('query') }}" id=""
                             placeholder="Enter User Or Product Name">

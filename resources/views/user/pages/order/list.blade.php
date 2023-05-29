@@ -42,6 +42,7 @@
                                     @endif
                                 </div>
                                 <p class="d-inline-block mb-0">Total Cost - {{ $order->total_price }} MMK</p>
+                                <p>{{ $order->created_at->format('j-m-Y') }}</p>
                                 <i class="text-dark fa fa-sort-desc" aria-hidden="true"></i>
                             </div>
                         </div>

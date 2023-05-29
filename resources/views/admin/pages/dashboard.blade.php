@@ -98,7 +98,7 @@
                             </div>
                         </div>
                         <span>Total Revenue</span>
-                        <h3 class="card-title text-nowrap mb-1 mt-2">$ {{ $data['totalRevenue'] }}</h3>
+                        <h3 class="card-title text-nowrap mb-1 mt-2">{{ $data['totalRevenue'] }} MMK</h3>
                     </div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                             </div>
                         </div>
                         <span>This Month Revenue</span>
-                        <h3 class="card-title text-nowrap mb-1 mt-2">{{ $data['currentMonthRevenue'] }}</h3>
+                        <h3 class="card-title text-nowrap mb-1 mt-2">{{ $data['currentMonthRevenue'] }} MMK</h3>
                         <small class="{{ $data['percentageChangePerMonth'] >= 0 ? 'text-success' : 'text-danger' }} fw-semibold">
                             <i class="bx {{ $data['percentageChangePerMonth'] >= 0 ? 'bx-up-arrow-alt' : 'bx-down-arrow-alt' }}"></i>
                             {{ $data['percentageChangePerMonth'] >= 0 ? '+' : '' }}{{ number_format($data['percentageChangePerMonth'], 2) }}%
@@ -130,7 +130,7 @@
                             </div>
                         </div>
                         <span>This Year Revenue</span>
-                        <h3 class="card-title text-nowrap mb-1 mt-2">{{ $data['currentYearRevenue'] }}</h3>
+                        <h3 class="card-title text-nowrap mb-1 mt-2">{{ $data['currentYearRevenue'] }} MMK</h3>
                         <small class="{{ $data['percentageChangePerYear'] >= 0 ? 'text-success' : 'text-danger' }} fw-semibold">
                             <i class="bx {{ $data['percentageChangePerYear'] >= 0 ? 'bx-up-arrow-alt' : 'bx-down-arrow-alt' }}"></i>
                             {{ $data['percentageChangePerYear'] >= 0 ? '+' : '' }}{{ number_format($data['percentageChangePerYear'], 2) }}%

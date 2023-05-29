@@ -29,8 +29,8 @@
             @if (count($wishlists) > 0)
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="wishlist__cart__table">
-                            <table class="">
+                        <div class="wishlist-table table-responsive">
+                            <table class="table">
                                 <thead>
                                     <tr>
                                         <th>Image</th>
@@ -43,31 +43,32 @@
                                 <tbody>
                                     @foreach ($wishlists as $list)
                                         <tr data-id="{{ $list->id }}">
-                                            <td>
+                                            <td class="image">
                                                 <img src="{{ asset('storage/' . $list->product->image) }}"
-                                                    alt="{{ $list->product->name }}" class=" img-fluid w-25">
+                                                    alt="{{ $list->product->name }}">
                                             </td>
                                             <td>
-                                                <p class="text-dark pt-3 fw-bolder">{{ $list->product->name }}</p>
+                                                <p class="text-dark pt-3">{{ $list->product->name }}</p>
                                             </td>
-                                            <td class="cart__price">{{ $list->product->price }}</td>
+                                            <td class="cart__price">
+                                                <p class="pt-3">{{ $list->product->price }}</p>
+                                            </td>
                                             <td class="cart__btn cart_add" data-id="{{ $list->product->id }}"
                                                 data-name="{{ $list->product->name }}"
                                                 data-price="{{ $list->product->price }}"
                                                 data-image="{{ $list->product->image }}" data-quantity="1">
-                                                <a href="#" class="primary-btn add-to-cart-btn">Add to cart</a>
+                                                <a href="#" class="btn btn-dark mt-2 add-to-cart-btn" title="Add to cart">
+                                                    <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                                </a>
                                             </td>
                                             <td class="cart__close">
-                                                <span class="icon_close" style="cursor: pointer"></span>
+                                                <span class="btn btn-outline-dark mt-2 icon_close" style="cursor: pointer" title="Remove"></span>
                                             </td>
                                         </tr>
                                     @endforeach
 
                                 </tbody>
                             </table>
-                            <div class="mt-3">
-                                {{ $wishlists->links() }}
-                            </div>
                         </div>
                     </div>
                 </div>

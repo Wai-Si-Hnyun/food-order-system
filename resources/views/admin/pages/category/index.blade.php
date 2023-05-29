@@ -9,7 +9,6 @@
 
         <div class="float-end mt-2 col-4">
             <form action="{{ route('categories.index') }}" class="" method="get">
-                @csrf
                 <div class="d-flex">
                     <input class="form-control" name="key" type="text" value="{{ request('key') }}" id=""
                         placeholder="Search..">

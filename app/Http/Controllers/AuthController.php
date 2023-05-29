@@ -166,6 +166,7 @@ class AuthController extends Controller
         $resetData = $this->authService->findToken($request);
         if (isset($request->token) && $resetData->toArray() != null) {
             $this->authService->passUpdate($request,$resetData);
+            Auth::logout();
             return redirect()->route('auth.login');
         }
         else {

@@ -119,7 +119,7 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     //review
     Route::get('/reviews/list', [ReviewController::class, 'reviewList'])->name('review.list');
     Route::delete('/reviews/{id}/delete', [ReviewController::class, 'reviewDestory'])->name('review.destory');
-    Route::get('/review-search', [ReviewController::class, 'reviewSearch'])->name('review.search');
+    Route::get('/reviews/search', [ReviewController::class, 'reviewSearch'])->name('review.search');
     Route::get('/reviews/{review}/show', [ReviewController::class, 'show'])->name('review.show');
 
     //UserList
