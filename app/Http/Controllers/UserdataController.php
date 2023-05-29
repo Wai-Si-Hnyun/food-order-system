@@ -39,7 +39,7 @@ class UserdataController extends Controller
      */
     public function roleUpdate(Request $request, $id)
     {
-        $roleUpdate = $this->userService->updateRole($request->only([
+        $this->userService->updateRole($request->only([
             'role',
         ]), $id);
         return response()->json(['msg' => 'success'], 200);
@@ -99,12 +99,12 @@ class UserdataController extends Controller
                 ->withErrors($validator);
         } else {
             if ($request->image == null) {
-                $userProfile = $this->userService->updatefile($request->only([
+                $this->userService->updatefile($request->only([
                     'name', 'email',
                 ]), $id);
                 return redirect()->back()->with('alert', 'Profile update successfully');
             } else {
-                $userProfile = $this->userService->updateProfile($request->only([
+                $this->userService->updateProfile($request->only([
                     'name', 'email', 'image',
                 ]), $id);
                 return redirect()->back()->with('alert', 'Profile update successfully');
@@ -147,6 +147,9 @@ class UserdataController extends Controller
             $this->userService->passUpdate($request, $user);
             // Log out the user and redirect to home page
             Auth::logout();
+
+            // Clear session
+            $request->session()->flush();
 
             return redirect()->route('home');
         } else {

@@ -28,8 +28,8 @@ $(document).ready(function () {
             axios.delete(deleteWishlistUrl)
                 .then(res => {
                     Swal.fire({
-                        title: 'Removed from wishlist',
-                        text: 'You can view your wishlist in the top right corner',
+                        title: 'Removed from favorite',
+                        text: 'You can view your favorite in the top right corner',
                         icon: 'success',
                         showConfirmButton: false,
                         showCancelButton: false,
@@ -46,8 +46,8 @@ $(document).ready(function () {
             axios.post(storeWishlistUrl, data)
                 .then(res => {
                     Swal.fire({
-                        title: 'Added to wishlist',
-                        text: 'You can view your wishlist in the top right corner',
+                        title: 'Added to favorite',
+                        text: 'You can view your favorite in the top right corner',
                         icon: 'success',
                         showConfirmButton: false,
                         showCancelButton: false,

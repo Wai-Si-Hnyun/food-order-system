@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\MailNotify;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\UserCreateRequest;
@@ -150,7 +151,7 @@ class AuthController extends Controller
      * Password Change
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\RedirectResponse|void
      */
     public function passwordChange(Request $request) {
         $validator = Validator::make($request->all(),[
@@ -166,12 +167,10 @@ class AuthController extends Controller
         $resetData = $this->authService->findToken($request);
         if (isset($request->token) && $resetData->toArray() != null) {
             $this->authService->passUpdate($request,$resetData);
-            Auth::logout();
             return redirect()->route('auth.login');
         }
         else {
             return redirect()->back()->withInput()->with('alert','Token may be wrong.');
         }
     }
-
 }

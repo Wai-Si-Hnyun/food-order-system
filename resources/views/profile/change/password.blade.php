@@ -12,7 +12,7 @@
 
 <div class="login-form">
     <p class="mb-3">Change Password</p>
-    <form action="{{route('password.change')}}" method="post" id="passChgForm" onsubmit="confirmSubmit()">
+    <form action="{{route('password.change')}}" method="post" id="passChgForm">
     {{ csrf_field() }}
         <input type="hidden" value="{{$user->id}}" name="id">
         <div class="form-group mb-0">
