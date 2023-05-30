@@ -7,6 +7,7 @@ use App\Contracts\Services\OrderServiceInterface;
 use App\Contracts\Services\PaymentServiceInterface;
 use App\Events\OrderCreated;
 use App\Mail\OrderPlaced;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
@@ -78,7 +79,23 @@ class OrderService implements OrderServiceInterface
      */
     public function getMonthlyRevenueInfo()
     {
-        return $this->orderDao->getMonthlyRevenueInfo();
+        // Get the current date
+        $now = Carbon::now();
+
+        // Calculate the total revenue for the current and previous month
+        $currentMonthRevenue = $this->orderDao->calculateMonthlyRevenue($now->month, $now->year);
+        $previousMonth = $now->copy()->subMonth();
+        $previousMonthRevenue = $this->orderDao->calculateMonthlyRevenue($previousMonth->month, $previousMonth->year);
+
+        // Calculate the change in revenue
+        $revenueChange = $this->calculateRevenueChange($currentMonthRevenue, $previousMonthRevenue);
+
+        // Calculate the percentage change in revenue
+        $percentageChange = $this->calculatePercentageChange($revenueChange, $previousMonthRevenue);
+
+        $revenueData = $this->formatMonthlyRevenueData($currentMonthRevenue, $percentageChange);
+
+        return $revenueData;
     }
 
     /**
@@ -88,7 +105,25 @@ class OrderService implements OrderServiceInterface
      */
     public function getYearlyRevenueInfo()
     {
-        return $this->orderDao->getYearlyRevenueInfo();
+        // Get the current date
+        $now = Carbon::now();
+
+        // Calculate the total revenue for the current year
+        $currentYearRevenue = $this->orderDao->calculateYearlyRevenueInfo($now->year);
+
+        // Calculate the total revenue for the previous year
+        $previousYear = $now->copy()->subYear();
+        $previousYearRevenue = $this->orderDao->calculateYearlyRevenueInfo($previousYear->year);
+
+        // Calculate the change in revenue
+        $revenueChange = $this->calculateRevenueChange($currentYearRevenue, $previousYearRevenue);
+
+        // Calculate the percentage change in revenue
+        $percentageChange = $this->calculatePercentageChange($revenueChange, $previousYearRevenue);
+
+        $revenueData = $this->formatYearlyRevenueData($currentYearRevenue, $percentageChange);
+
+        return $revenueData;
     }
 
     /**
@@ -189,7 +224,7 @@ class OrderService implements OrderServiceInterface
     {
         if ($status == 1) {
             $order = $this->orderDao->getOrderById($id);
-            
+
             // Queue the confirmation email
             Mail::to($order->user->email)->queue(new OrderPlaced($order));
         }
@@ -244,5 +279,31 @@ class OrderService implements OrderServiceInterface
     public function generateOrderCode()
     {
         return Str::random(8);
+    }
+
+    private function calculateRevenueChange($current, $previous)
+    {
+        return $current - $previous;
+    }
+
+    private function calculatePercentageChange($change, $previous)
+    {
+        return ($previous != 0) ? ($change / $previous) * 100 : 0;
+    }
+
+    private function formatMonthlyRevenueData($current, $percentageChange)
+    {
+        return [
+            'currentMonthRevenue' => $current,
+            'percentageChange' => $percentageChange,
+        ];
+    }
+
+    private function formatYearlyRevenueData($current, $percentageChange)
+    {
+        return [
+            'currentYearRevenue' => $current,
+            'percentageChange' => $percentageChange,
+        ];
     }
 }

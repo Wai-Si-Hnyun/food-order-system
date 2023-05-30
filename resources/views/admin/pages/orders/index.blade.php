@@ -29,7 +29,7 @@
                                 <th>Total Price(MMK)</th>
                                 <th>Status</th>
                                 <th>Delivered?</th>
-                                <th>Date</th>
+                                <th>Date/Time</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -65,7 +65,7 @@
                                             class="form-check-input" name="delivered" id="delivered"
                                             {{ $order->delivered == 0 ? '' : 'checked' }}>
                                     </td>
-                                    <td>{{ $order->created_at->format('j-m-Y') }}</td>
+                                    <td>{{ $order->created_at->format('n/j/y g:i A') }}</td>
                                     <td>
                                         <div class="">
                                             <a class="text-primary me-3" href="{{ route('order.show', $order->id) }}" title="Detail">

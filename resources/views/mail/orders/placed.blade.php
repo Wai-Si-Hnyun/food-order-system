@@ -1,5 +1,5 @@
 @component('mail::message')
-# Order Confirmation
+# Order Confirmation<br>
 
 Hello {{ $order->user->name }},
 
@@ -17,6 +17,7 @@ Thank you for your order!
 {{ $order->billingdetail->name }}<br>
 {{ $order->billingdetail->address }}<br>
 {{ $order->billingdetail->city }}<br>
+{{ $order->billingdetail->state }}<br>
 
 ---
 
@@ -32,7 +33,7 @@ Thank you for your order!
 
 ---
 
-@component('mail::button', ['url' => url('/')])
+@component('mail::button', ['url' => url('http://localhost:8000/orders')])
 View Order
 @endcomponent
 

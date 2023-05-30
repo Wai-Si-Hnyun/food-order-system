@@ -27,35 +27,35 @@
             <h2 class="my-4">Choose Payment Method</h2>
             <div class="row">
                 <!-- Credit Card -->
-                <div class="col-md-4">
-                    <div class="card">
+                <div class="col-md-4 mb-4 d-flex">
+                    <div class="card flex-fill d-flex flex-column">
                         <div class="card-body text-center">
                             <img src="{{ asset('assets/user/img/credit-card-svgrepo-com.svg') }}" alt="Credit Card"
                                 class="w-25 mb-3">
                             <h4 class="mb-4">Credit Card</h4>
-                            <a href="{{ route('payment.card') }}" class="btn btn-primary">Choose Credit Card</a>
+                            <a href="{{ route('payment.card') }}" class="btn btn-primary mt-auto">Choose Credit Card</a>
                         </div>
                     </div>
                 </div>
                 <!-- Google Pay -->
-                <div class="col-md-4">
-                    <div class="card">
+                <div class="col-md-4 mb-4 d-flex">
+                    <div class="card flex-fill d-flex flex-column">
                         <div class="card-body text-center">
                             <img src="{{ asset('assets/user/img/google-pay.svg') }}" alt="Google Pay"
                                 class="w-25 mb-3">
                             <h4 class="mb-4">Google Pay</h4>
-                            <a href="{{ route('payment.google') }}" class="btn btn-primary">Choose Google Pay</a>
+                            <a href="{{ route('payment.google') }}" class="btn btn-primary mt-auto">Choose Google Pay</a>
                         </div>
                     </div>
                 </div>
                 <!-- PayPal -->
-                <div class="col-md-4">
-                    <div class="card">
+                <div class="col-md-4 mb-4 d-flex">
+                    <div class="card flex-fill d-flex flex-column">
                         <div class="card-body text-center">
                             <img src="{{ asset('assets/user/img/paypal.svg') }}" alt="Paypal" class="w-25 mb-3">
                             <h4 class="mb-1">Paypal</h4>
                             <small class="text-danger d-block mb-1">Not avaliable now</small>
-                            <a href="javascript:void(0)" class="btn btn-primary">Choose Paypal</a>
+                            <a href="javascript:void(0)" class="btn btn-primary mt-auto">Choose Paypal</a>
                         </div>
                     </div>
                 </div>

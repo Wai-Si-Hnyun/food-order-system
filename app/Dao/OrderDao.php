@@ -2,11 +2,11 @@
 
 namespace App\Dao;
 
-use Carbon\Carbon;
+use App\Contracts\Dao\OrderDaoInterface;
+use App\Models\BillingDetails;
 use App\Models\Order;
 use App\Models\OrderList;
-use App\Models\BillingDetails;
-use App\Contracts\Dao\OrderDaoInterface;
+use Carbon\Carbon;
 
 class OrderDao implements OrderDaoInterface
 {
@@ -18,11 +18,11 @@ class OrderDao implements OrderDaoInterface
     public function getOrders()
     {
         return Order::with('user')
-            ->when(request('key'), function($query) {
+            ->when(request('key'), function ($query) {
                 $query->whereHas('user', function ($q) {
                     $q->where('name', 'LIKE', '%' . request('key') . '%');
                 })
-                ->orWhere('order_code', 'LIKE', '%' . request('key') . '%');
+                    ->orWhere('order_code', 'LIKE', '%' . request('key') . '%');
             })
             ->orderBy('created_at', 'desc')
             ->paginate(10);
@@ -78,36 +78,12 @@ class OrderDao implements OrderDaoInterface
      *
      * @return array
      */
-    public function getMonthlyRevenueInfo()
+    public function calculateMonthlyRevenue($month, $year)
     {
-        // Get the current date
-        $now = Carbon::now();
-
-        // Calculate the total revenue for the current month
-        $currentMonthRevenue = Order::whereMonth('created_at', $now->month)
-            ->whereYear('created_at', $now->year)
+        return Order::whereMonth('created_at', $month)
+            ->whereYear('created_at', $year)
             ->where('status', 1)
             ->sum('total_price');
-
-        // Calculate the total revenue for the previous month
-        $previousMonth = $now->copy()->subMonth();
-        $previousMonthRevenue = Order::whereMonth('created_at', $previousMonth->month)
-            ->whereYear('created_at', $previousMonth->year)
-            ->where('status', 1)
-            ->sum('total_price');
-
-        // Calculate the change in revenue
-        $revenueChange = $currentMonthRevenue - $previousMonthRevenue;
-
-        // Calculate the percentage change in revenue
-        $percentageChange = ($previousMonthRevenue != 0) ? ($revenueChange / $previousMonthRevenue) * 100 : 0;
-
-        $revenueData = [
-            'currentMonthRevenue' => $currentMonthRevenue,
-            'percentageChange' => $percentageChange,
-        ];
-
-        return $revenueData;
     }
 
     /**
@@ -115,34 +91,11 @@ class OrderDao implements OrderDaoInterface
      *
      * @return array
      */
-    public function getYearlyRevenueInfo()
+    public function calculateYearlyRevenueInfo($year)
     {
-        // Get the current date
-        $now = Carbon::now();
-
-        // Calculate the total revenue for the current year
-        $currentYearRevenue = Order::whereYear('created_at', $now->year)
+        return Order::whereYear('created_at', $year)
             ->where('status', 1)
             ->sum('total_price');
-
-        // Calculate the total revenue for the previous year
-        $previousYear = $now->copy()->subYear();
-        $previousYearRevenue = Order::whereYear('created_at', $previousYear->year)
-            ->where('status', 1)
-            ->sum('total_price');
-
-        // Calculate the change in revenue
-        $revenueChange = $currentYearRevenue - $previousYearRevenue;
-
-        // Calculate the percentage change in revenue
-        $percentageChange = ($previousYearRevenue != 0) ? ($revenueChange / $previousYearRevenue) * 100 : 0;
-
-        $revenueData = [
-            'currentYearRevenue' => $currentYearRevenue,
-            'percentageChange' => $percentageChange,
-        ];
-
-        return $revenueData;
     }
 
     /**

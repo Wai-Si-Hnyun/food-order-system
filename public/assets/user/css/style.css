@@ -1734,7 +1734,7 @@ ol {
     top: 2px;
 }
 
-.shop__pagination a:hover {
+.shop__pagination a:hover, .shop__pagination a.active {
     background: #000000;
     color: #ffffff;
 }

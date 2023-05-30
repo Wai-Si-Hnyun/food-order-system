@@ -46,14 +46,14 @@ interface OrderDaoInterface
      *
      * @return array
      */
-    public function getMonthlyRevenueInfo();
+    public function calculateMonthlyRevenue($month, $year);
 
     /**
      * Get yearly revenue
      *
      * @return array
      */
-    public function getYearlyRevenueInfo();
+    public function calculateYearlyRevenueInfo($year);
 
     /**
      * Store order to order table

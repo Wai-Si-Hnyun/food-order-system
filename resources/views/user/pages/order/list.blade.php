@@ -31,8 +31,8 @@
                             <div class="d-flex justify-content-between w-100" type="button" data-toggle="collapse"
                                 data-target="#collapse{{ $order->id }}" aria-expanded="true"
                                 aria-controls="collapse{{ $order->id }}">
-                                <p class="d-inline-block mb-0">Order # {{ $order->order_code }}</p>
-                                <div>Order Status -
+                                <p class="d-inline-block mb-0"><span class="d-none d-lg-inline">Order</span>#<span class="text-primary">{{ $order->order_code }}</span></p>
+                                <div><span class="d-none d-lg-inline">Order Status - </span>
                                     @if ($order->status == 0)
                                         <span class="text-danger">Rejected</span>
                                     @elseif ($order->status == 1)
@@ -41,8 +41,8 @@
                                         <span class="text-warning">Pending</span>
                                     @endif
                                 </div>
-                                <p class="d-inline-block mb-0">Total Cost - {{ $order->total_price }} MMK</p>
-                                <p>{{ $order->created_at->format('j-m-Y') }}</p>
+                                <p class="d-inline-block mb-0"><span class="d-none d-lg-inline">Total Cost - </span>{{ $order->total_price }} MMK</p>
+                                <p class="d-none d-sm-block">{{ $order->created_at->format('n/j/y g:i A') }}</p>
                                 <i class="text-dark fa fa-sort-desc" aria-hidden="true"></i>
                             </div>
                         </div>
