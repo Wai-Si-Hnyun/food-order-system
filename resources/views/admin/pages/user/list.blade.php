@@ -19,10 +19,11 @@
     </div>
     <!--modal end -->
     <div class="container-xxl flex-grow-1 container-p-y">
-        <div class="d-flex justify-content-between">
-            <h4 class="fw-bold py-3 mb-4">User List</h4>
+        <h4 class="fw-bold pb-5">User List</h4>
+        <div class="d-flex justify-content-between my-3">
+            <h5>Total - ({{ $user->total() }})</h5>
 
-            <div class="mt-2 col-4">
+            <div class="col-4">
                 <form action="{{ route('user.search') }}" type="get">
                     <div class="d-flex">
                         <input class="form-control" name="query" type="text" value="{{ request('query') }}"
@@ -99,7 +100,7 @@
         @endif
     </div>
     <div class="d-flex justify-content-center">
-        {{ $user->links() }}
+        {{ $user->appends(['query' => request('query')])->links() }}
     </div>
     @push('script')
         <script src="{{ asset('js/admin/user.js') }}"></script>

@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <div class="d-flex justify-content-between">
-            <h4 class="fw-bold py-3 mb-4">Reviews List</h4>
-
-            <div class="mt-2 col-4">
+        <h4 class="fw-bold pb-5">Reviews List</h4>
+        <div class="d-flex justify-content-between my-3">
+            <h5>Total - ({{ $review->total() }})</h5>
+            <div class="col-4">
                 <form action="{{ route('review.search') }}" type="get">
                     <div class="d-flex">
                         <input class="form-control" name="query" type="text" value="{{ request('query') }}" id=""
@@ -34,7 +34,7 @@
                             @foreach ($review as $reviews)
                                 <tr>
                                     <td class="table-text idlist">
-                                        {{ ($review->currentPage()-1) * $review->perPage() + $loop->iteration }}
+                                        {{ ($review->currentPage() - 1) * $review->perPage() + $loop->iteration }}
                                     </td>
                                     <td class="table-text userlist">
                                         {{ $reviews->user }}
@@ -67,7 +67,7 @@
         @endif
     </div>
     <div class="d-flex justify-content-center">
-        {{ $review->links() }}
+        {{ $review->appends(['query' => request('query')])->links() }}
     </div>
     @push('script')
         <script src="{{ asset('js/admin/review.js') }}"></script>

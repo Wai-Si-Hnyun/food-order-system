@@ -82,7 +82,7 @@
             <h3 class="text-center my-5">There is no categories here!</h3>
         @endif
         <div class="mt-3 d-flex justify-content-center">
-            {{ $categories->links() }}
+            {{ $categories->appends(['key' => request('key')])->links() }}
         </div>
     </div>
 

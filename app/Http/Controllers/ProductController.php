@@ -113,7 +113,9 @@ class ProductController extends Controller
 
     public function getAllProducts()
     {
-        $products = $this->productService->getProduct('user');
+        $products = Product::with('category')
+            ->orderBy('products.created_at', 'desc')
+            ->get();
 
         return response()->json($products, 200);
     }

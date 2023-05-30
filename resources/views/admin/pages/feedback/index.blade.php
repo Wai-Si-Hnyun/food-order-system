@@ -66,7 +66,7 @@
         @endif
     </div>
     <div class="d-flex justify-content-center">
-        {{ $message->links() }}
+        {{ $message->appends(['query' => request('query')])->links() }}
     </div>
     <script>
         var messageList = document.getElementsByClassName('messagelist');

@@ -34,7 +34,7 @@
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
-                                <input type="text" name="key" value="{{ request('key') }}" old="{{ request('key') }}"
+                                <input type="text" name="key" value="{{ request('key') }}"
                                     placeholder="Search">
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form>
@@ -80,8 +80,8 @@
                     <h3 class="text-center mx-auto py-5 my-5">Product not Found Sorry!</h3>
                 @endif
             </div>
-            <div class="mt-3">
-                {{ $products->links('vendor.pagination.custom') }}
+            <div class="mt-3" id="product-pagination">
+                {{ $products->appends(['key' => request('key')])->links('vendor.pagination.custom') }}
             </div>
         </div>
         </div>

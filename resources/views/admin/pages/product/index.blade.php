@@ -90,7 +90,7 @@
             <h4 class="mt-5 text-center">No Products here!</h4>
         @endif
         <div class="mt-3 d-flex justify-content-center">
-            {{ $products->links() }}
+            {{ $products->appends(['key' => request('key')])->links() }}
         </div>
     </div>
 @endsection

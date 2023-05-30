@@ -5,7 +5,7 @@
         <h4 class="fw-bold">Orders List</h4>
         <div class="alert alert-success w-50 fade" id="successAlert" role="alert"></div>
         <div class="d-flex justify-content-between mb-3">
-            <h5>Total - ({{ count($orders) }})</h5>
+            <h5>Total - ({{ $orders->total() }})</h5>
             <div>
                 <form action="{{ route('orders.index') }}" method="get">
                     <div class="d-flex">
@@ -84,7 +84,7 @@
                 </div>
             </div>
             <div class="mt-3 d-flex justify-content-center">
-                {{ $orders->links() }}
+                {{ $orders->appends(['key' => request('key')])->links() }}
             </div>
         @else
             <h4 class="mt-5 text-center">No Order here!</h4>

@@ -41,6 +41,7 @@ $(document).ready(function () {
                             `;
                     }
                     $('#dataList').html($list);
+                    $('#product-pagination').remove();
 
                     // After appending the list, apply the background images
                     $('.set-bg').each(function () {
@@ -79,6 +80,7 @@ $(document).ready(function () {
                         `;
                     }
                     $('#dataList').html($list);
+                    $('#product-pagination').remove();
 
                     // After appending the list, apply the background images
                     $('.set-bg').each(function () {
@@ -128,6 +130,7 @@ $(document).ready(function () {
                                 </div>
                             `);
                     })
+                    $('#product-pagination').remove();
                     // After appending the list, apply the background images
                     $('.set-bg').each(function () {
                         let imgUrl = $(this).data('setbg');
@@ -167,10 +170,12 @@ $(document).ready(function () {
                             </div>
                         `);
                         })
+                        $('#product-pagination').remove();
                     } else {
                         $('#dataList').append(`
                             <h3 class="text-center mx-auto py-5 my-5">Product not Found Sorry!</h3>
                         `);
+                        $('#product-pagination').remove();
                     }
                     // After appending the list, apply the background images
                     $('.set-bg').each(function () {
