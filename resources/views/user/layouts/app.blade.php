@@ -67,7 +67,7 @@
                             @else
                                 <a href="{{ url('userprofile/' . Auth::user()->id) }}" class="display-picture"><img
                                         src="{{ asset('storage/' . Auth::user()->image) }}" alt
-                                        class=" rounded-circle " /></a>
+                                        class=" rounded-circle" /></a>
                             @endif
 
                         </li>
@@ -119,7 +119,7 @@
                                                         class="display-picture"><img
                                                             src="{{ asset('storage/' . Auth::user()->image) }}"
                                                             alt="{{ Auth::user()->name }}"
-                                                            class="img-rounded" /></a>
+                                                            style="border-radius:50%;width:50px;height:50px;"/></a>
                                                 @endif
                                             </li>
                                         @endif
