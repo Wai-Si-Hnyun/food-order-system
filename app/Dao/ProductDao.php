@@ -34,7 +34,7 @@ class ProductDao implements ProductDaoInterface
             })
                 ->with('category')
                 ->orderBy('products.created_at', 'desc')
-                ->paginate(8);
+                ->paginate(12);
         }
         return Product::all();
     }
