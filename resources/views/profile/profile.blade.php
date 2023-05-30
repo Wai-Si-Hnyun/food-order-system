@@ -54,7 +54,7 @@
                                     <img src="{{ asset('image/profile.png') }}" alt="Avatar" class="img-fluid my-5"
                                         style="width: 80px;" />
                                 @else
-                                    <img src="{{ asset('image/profile/' . $user->image) }}" alt="Avatar"
+                                    <img src="{{ asset('storage/' . $user->image) }}" alt="Avatar"
                                         class="mt-4 mb-3 w-75 h-50" />
                                 @endif
 
@@ -122,7 +122,7 @@
                                     class="avatar img-circle img-thumbnail w-50 h-50" alt="avatar" id="profile">
                                 <img id="output" class="img-thumbnail rounded-circle w-75 h-75">
                             @else
-                                <img src="{{ asset('image/profile/' . $user->image) }}"
+                                <img src="{{ asset('storage/'.$user->image) }}"
                                     class="img-thumbnail rounded-circle w-75 h-75" alt="avatar" id="profile">
                                 <img id="output" class="img-thumbnail rounded-circle w-75 h-75">
                             @endif

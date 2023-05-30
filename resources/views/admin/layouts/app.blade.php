@@ -174,7 +174,7 @@
                                             </div>
                                         @else
                                             <div class="avatar avatar-online">
-                                                <img src="{{ asset('image/profile/' . Auth::user()->image) }}" alt
+                                                <img src="{{ asset('storage/' . Auth::user()->image) }}" alt
                                                     class="w-100 h-100 rounded-circle" />
                                             </div>
                                         @endif
@@ -190,7 +190,7 @@
                                                                 alt="Profile"
                                                                 class="w-px-40 h-auto rounded-circle" />
                                                         @else
-                                                            <img src="{{ asset('image/profile/' . Auth::user()->image) }}"
+                                                            <img src="{{ asset('storage/' . Auth::user()->image) }}"
                                                                 alt="Profile"
                                                                 class="w-px-40 h-px-40 rounded-circle" />
                                                         @endif
