@@ -84,8 +84,7 @@ class UserDao implements UserDaoInterface
     {
         $search_name = request()->query('query');
         $users = User::where('users.name','LIKE','%'.$search_name.'%')
-        ->latest()
-        ->paginate(10);
+            ->paginate(10);
 
         $users->appends(['query' => $search_name]);
 

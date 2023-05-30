@@ -131,7 +131,7 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
 
     //feedback
     Route::get('/feedback-list', [FeedbackController::class, 'feedbackList'])->name('feedback.list');
-    Route::delete('/feedback-delete/{feedback}', [FeedbackController::class, 'feedbackDestory'])->name('feedback.destory');
+    Route::delete('/feedback-delete/{id}', [FeedbackController::class, 'feedbackDestory'])->name('feedback.destory');
     Route::get('/feedback-search', [FeedbackController::class, 'feedbackSearch'])->name('feedback.search');
     Route::get('/feedback/{feedback}/show', [FeedbackController::class, 'show'])->name('feedback.show');
 

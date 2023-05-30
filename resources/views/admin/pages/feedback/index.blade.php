@@ -4,7 +4,7 @@
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold py-3 mb-4">Customer Feedback</h4>
         <div class="d-flex justify-content-between">
-            <h5 class="pt-2">Total - ({{ $message->total() }})</h5>
+            <h5 class="pt-2">Total - (<span id="totalFeedback">{{ $message->total() }}</span>)</h5>
             <div class="mb-3 col-4">
                 <form action="{{ route('feedback.search') }}" type="get">
                     <div class="d-flex">
@@ -31,7 +31,7 @@
                         </thead>
                         <tbody>
                             @foreach ($message as $messages)
-                                <tr>
+                                <tr data-id="{{ $messages->id }}">
                                     <td class="table-text idlist">
                                         {{ ($message->currentPage() - 1) * $message->perPage() + $loop->iteration }}
                                     </td>
@@ -88,16 +88,10 @@
                 if (res.isConfirmed) {
                     axios.delete('/admin/feedback-delete/' + deleteId)
                         .then(response => {
-                            for (var i = 0; i < messageList.length; i++) {
-                                console.log(idList[i].innerHTML);
-                                if (idList[i].innerHTML == response.data.reviewFeedback.id) {
-                                    messageList[i].style.display = 'none';
-                                    nameList[i].style.display = 'none';
-                                    emailList[i].style.display = 'none';
-                                    actionList[i].style.display = 'none';
-                                    idList[i].style.display = 'none';
-                                }
-                            }
+                            $(`tr[data-id="${deleteId}"]`).remove();
+
+                            $total = parseInt($('#totalFeedback').text());
+                            $('#totalFeedback').text($total - 1);
                         })
                         .catch(err => {
                             console.log(err.response)

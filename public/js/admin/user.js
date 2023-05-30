@@ -38,7 +38,6 @@ function deleteBtn(deleteId) {
         if (res.isConfirmed) {
             axios.delete('/admin/user-delete/' + deleteId)
                 .then(response => {
-                    console.log(response.data.userDelete.name);
                     for (var i = 0; i < nameList.length; i++) {
                         console.log(idList[i].innerHTML);
                         if (idList[i].innerHTML == response.data.userDelete.id) {
@@ -50,6 +49,18 @@ function deleteBtn(deleteId) {
                             changeList[i].style.display = 'none';
                         }
                     }
+
+                    Swal.fire({
+                        title: 'Success',
+                        text: 'User has been deleted',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        showCancelButton: false,
+                        timer: 1500
+                    })
+
+                    $total = parseInt($('#totalUser').text());
+                    $('#totalUser').text($total - 1);
                 })
                 .catch(err => {
                     console.log(err.response)

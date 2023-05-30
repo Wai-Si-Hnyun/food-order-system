@@ -4,7 +4,7 @@
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold pb-5">Reviews List</h4>
         <div class="d-flex justify-content-between my-3">
-            <h5>Total - ({{ $review->total() }})</h5>
+            <h5>Total - (<span id="totalReview">{{ $review->total() }}</span>)</h5>
             <div class="col-4">
                 <form action="{{ route('review.search') }}" type="get">
                     <div class="d-flex">
@@ -32,7 +32,7 @@
                         </thead>
                         <tbody>
                             @foreach ($review as $reviews)
-                                <tr>
+                                <tr data-id="{{ $reviews->id }}">
                                     <td class="table-text idlist">
                                         {{ ($review->currentPage() - 1) * $review->perPage() + $loop->iteration }}
                                     </td>

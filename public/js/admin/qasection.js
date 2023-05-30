@@ -19,15 +19,21 @@ $(document).ready(function () {
                 axios.delete(qaDeleteUrl)
                     .then((res) => {
                         $(`#qa-${id}`).remove();
-                        $('#success').html(`<div class="alert alert-danger w-50" role="alert">${res.data.success}</div>`);
+                        Swal.fire({
+                            title: 'Success',
+                            text: 'Q&A deleted successfully!',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            showCancelButton: false,
+                            timer: 1500
+                        })
+
                         if ($('.qa-card').length == 0) {
                             $('.row.mb-5').append(`<h4 class="mt-5 text-center">No Question and Answer here!</h4>`);
                         }
 
-                        // Remove the success message after 2 seconds
-                        setTimeout(function () {
-                            $('#success').empty();
-                        }, 2000);
+                        $total = parseInt($('#totalQA').text());
+                        $('#totalQA').text($total - 1);
                     })
                     .catch((err) => {
                         console.log(err);

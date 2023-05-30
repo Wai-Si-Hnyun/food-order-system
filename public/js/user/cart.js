@@ -27,7 +27,7 @@ $(document).ready(function () {
                         <td class="quantity__item">
                             <div class="quantity">
                                 <div class="pro-qty">
-                                    <input type="text" id="product_qty" value="${item.quantity}" disable>
+                                    <input type="text" class="product_qty" value="${item.quantity}" disable>
                                 </div>
                             </div>
                         </td>
@@ -65,7 +65,7 @@ $(document).ready(function () {
 
         var row = $(this).closest('tr');
         var product_id = row.data('id');
-        var updateQty = parseInt($('#product_qty').val());
+        var updateQty = parseInt(row.find('.product_qty').val());
 
         // Update localStorage
         var cart = JSON.parse(localStorage.getItem('cart_' + userId));

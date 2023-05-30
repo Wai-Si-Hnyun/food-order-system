@@ -4,11 +4,10 @@ $(document).ready(function () {
     const getProductsUrl = window.routes.getProductsUrl;
 
     // product detail page
-    $('.detail-view').on('click', function () {
+    $(document).on('click', '.detail-view', function () {
         $id = $(this).data('id');
-
         window.location.href = '/products/' + $id + '/details';
-    })
+    });    
 
     $('#sorting').change(function () {
         $option = $('#sorting').val();
@@ -21,7 +20,7 @@ $(document).ready(function () {
                         $list += `
                                 <div class="col-lg-3 col-md-6 col-sm-6">
                                     <div class="product__item" id="myForm">
-                                        <div class="product__item__pic set-bg detail-view" data-product-id="${res.data[$i].id}"
+                                        <div class="product__item__pic set-bg detail-view" data-id="${res.data[$i].id}"
                                             data-setbg="/storage/${res.data[$i].image}">
                                             <div class="product__label">
                                                 <span>${res.data[$i].category.name}</span>
@@ -60,7 +59,7 @@ $(document).ready(function () {
                         $list += `
                             <div class="col-lg-3 col-md-6 col-sm-6">
                                 <div class="product__item" id="myForm">
-                                    <div class="product__item__pic set-bg detail-view" data-product-id="${res.data[$i].id}"
+                                    <div class="product__item__pic set-bg detail-view" data-id="${res.data[$i].id}"
                                         data-setbg="/storage/${res.data[$i].image}">
                                         <div class="product__label">
                                             <span>${res.data[$i].category.name}</span>

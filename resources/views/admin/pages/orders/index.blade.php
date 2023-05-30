@@ -2,10 +2,9 @@
 
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold">Orders List</h4>
-        <div class="alert alert-success w-50 fade" id="successAlert" role="alert"></div>
+        <h4 class="fw-bold mb-5 pb-3">Orders List</h4>
         <div class="d-flex justify-content-between mb-3">
-            <h5>Total - ({{ $orders->total() }})</h5>
+            <h5>Total - (<span id="totalOrder">{{ $orders->total() }}</span>)</h5>
             <div>
                 <form action="{{ route('orders.index') }}" method="get">
                     <div class="d-flex">
@@ -45,7 +44,7 @@
                                     <td>{{ $order->total_price }}</td>
                                     <td>
                                         <select class="form-select form-select-sm orderStatus" name="status"
-                                            id="status">
+                                            id="status" {{ $order->status == 0 || $order->status == 1 ? 'disabled' : '' }}>
                                             <option class="text-danger" value="0"
                                                 {{ $order->status == 0 ? 'selected' : null }}>
                                                 reject
@@ -63,7 +62,7 @@
                                     <td>
                                         <input type="checkbox" @if ($order->status == 0 || $order->status == 2) disabled @endif 
                                             class="form-check-input" name="delivered" id="delivered"
-                                            {{ $order->delivered == 0 ? '' : 'checked' }}>
+                                            {{ $order->delivered == 0 ? '' : 'checked disabled' }}>
                                     </td>
                                     <td>{{ $order->created_at->format('n/j/y g:i A') }}</td>
                                     <td>

@@ -34,6 +34,7 @@
 @endif
 
   <div class="container mt-3">
+    <h4 class="fw-bold mb-5">Admin Profile</h4>
     <div class="row d-flex justify-content-center align-items-center h-100 w-100">
       <div class="col col-lg-8 mb-4 mb-lg-0">
         <div class="card mb-3" style="border-radius: .5rem;">
@@ -49,11 +50,6 @@
              @endif
 
               <h5>{{$user->name}}</h5>
-              @if($user->role == 'user' )
-              <p class="text-dark">Customer</p>
-              @else
-              <p class="text-dark">Admin</p>
-              @endif
               <i class="far fa-edit mb-5"></i>
             </div>
             <div class="col-md-8">
