@@ -47,6 +47,12 @@ $(document).ready(function () {
                 $('#successAlert').text(res.data.message);
                 $('#successAlert').addClass('show');
 
+                if ($current == 1) {
+                    $("tr[data-id='" + $orderId + "'] #delivered").removeAttr('disabled');
+                } else {
+                    $("tr[data-id='" + $orderId + "'] #delivered").attr('disabled', true);
+                }
+
                 // Hide the success alert
                 setTimeout(function () {
                     $('#successAlert').removeClass('show');

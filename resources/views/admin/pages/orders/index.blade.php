@@ -61,7 +61,8 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <input type="checkbox" class="form-check-input" name="delivered" id="delivered"
+                                        <input type="checkbox" @if ($order->status == 0 || $order->status == 2) disabled @endif 
+                                            class="form-check-input" name="delivered" id="delivered"
                                             {{ $order->delivered == 0 ? '' : 'checked' }}>
                                     </td>
                                     <td>{{ $order->created_at->format('j-m-Y') }}</td>

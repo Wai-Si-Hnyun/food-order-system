@@ -7,6 +7,7 @@ var pusher = new Pusher('b59d0312a77bca50d283', {
 
 var channel = pusher.subscribe('noti-channel');
 channel.bind('order-create', function(data) {
+    console.log('event success');
     Swal.fire({
         title: 'New Order Created',
         text: 'A new order has been placed by the customer.',
