@@ -1,6 +1,6 @@
 <?php
 namespace App\Dao;
-
+use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Contracts\Dao\UserDaoInterface;
@@ -31,16 +31,22 @@ class UserDao implements UserDaoInterface
 
     public function updateProfile(array $data,$id): void
     {
-        $image_name = time().'.'.$data['image']->extension();
-        $data['image']->move(public_path('image/profile'),$image_name);
+        $oldImage = User::where('id', $id)->first();
+        $oldImage = $oldImage->image;
+        if ($oldImage != null) {
+            Storage::delete('public/' . $oldImage);
 
-        $user=User::where('id',$id)->first();
-        $user->update([
-            'name'=>$data['name'],
-            'email'=>$data['email'],
-            'image'=>$image_name,
+            $image_name = time().'.'.$data['image']->extension();
+            $data['image']->move(storage_path('app/public'),$image_name);
 
-        ]);
+            $user=User::where('id',$id)->first();
+            $user->update([
+                'name'=>$data['name'],
+                'email'=>$data['email'],
+                'image'=>$image_name,
+
+            ]);
+        }
     }
 
     public function updatefile(array $data,$id): void
