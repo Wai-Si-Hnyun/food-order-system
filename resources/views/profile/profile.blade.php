@@ -23,7 +23,7 @@
     @if (session('update'))
         <div class="d-flex justify-content-center">
             <div class="alert alert-danger alert-dismissible fade show w-50" role="alert">
-                <p class="text-center text-danger">Update fails!Email or name field is required.</p>
+                <p class="text-center text-danger">{{ session('update') }}</p>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
