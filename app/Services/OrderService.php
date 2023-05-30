@@ -84,7 +84,7 @@ class OrderService implements OrderServiceInterface
 
         // Calculate the total revenue for the current and previous month
         $currentMonthRevenue = $this->orderDao->calculateMonthlyRevenue($now->month, $now->year);
-        $previousMonth = $now->copy()->subMonth();
+        $previousMonth = $now->copy()->subMonthNoOverflow();
         $previousMonthRevenue = $this->orderDao->calculateMonthlyRevenue($previousMonth->month, $previousMonth->year);
 
         // Calculate the change in revenue

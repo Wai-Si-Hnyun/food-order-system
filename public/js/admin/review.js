@@ -17,16 +17,23 @@ function deleteBtn(deleteId) {
     }).then(res => {
         axios.delete(`/admin/reviews/${deleteId}/delete`)
             .then(response => {
-                for (var i = 0; i < commentList.length; i++) {
-                    console.log(idList[i].innerHTML);
-                    if (idList[i].innerHTML == response.data.deletedReview.id) {
-                        userList[i].style.display = 'none';
-                        productList[i].style.display = 'none';
-                        commentList[i].style.display = 'none';
-                        actionList[i].style.display = 'none';
-                        idList[i].style.display = 'none';
-                    }
+                Swal.fire({
+                    title: 'Success',
+                    text: 'Review deleted successfully!',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    showCancelButton: false,
+                    timer: 1500
+                })
+                
+                $(`tr[data-id="${deleteId}"]`).remove();
+                if ($('table tbody tr').length === 0) {
+                    $('table').remove();
+                    $('.container-xxl.flex-grow-1').append(`<h4 class="mt-5 text-center">No Review here!</h4>`);
                 }
+
+                $total = parseInt($('#totalReview').text());
+                $('#totalReview').text($total - 1);
             })
             .catch(err => {
                 console.log(err.response)

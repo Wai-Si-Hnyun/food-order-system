@@ -15,6 +15,18 @@ const deleteOrder = (e, id) => {
         if (result.isConfirmed) {
             axios.delete(orderDeleteUrl)
                 .then((res) => {
+                    Swal.fire({
+                        title: 'Success',
+                        text: 'Order deleted successfully!',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        showCancelButton: false,
+                        timer: 1500
+                    })
+
+                    $total = parseInt($('#totalOrder').text());
+                    $('#totalOrder').text($total - 1);
+
                     $(`table tbody tr[data-id="${id}"]`).remove();
 
                     if ($('table tbody tr').length === 0) {
@@ -44,13 +56,23 @@ $(document).ready(function () {
 
         axios.get(orderStatusChgUrl, { params: $data })
             .then((res) => {
-                $('#successAlert').text(res.data.message);
-                $('#successAlert').addClass('show');
+                Swal.fire({
+                    title: 'Success',
+                    text: 'Order status updated successfully!',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    showCancelButton: false,
+                    timer: 1500
+                })
 
                 if ($current == 1) {
                     $("tr[data-id='" + $orderId + "'] #delivered").removeAttr('disabled');
                 } else {
                     $("tr[data-id='" + $orderId + "'] #delivered").attr('disabled', true);
+                }
+
+                if ($current == 0 || $current == 1) {
+                    $(this).attr('disabled', true);
                 }
 
                 // Hide the success alert
@@ -77,8 +99,18 @@ $(document).ready(function () {
 
         axios.get(orderDeliverStatusChgUrl, { params: $data })
             .then((res) => {
-                $('#successAlert').text(res.data.message);
-                $('#successAlert').addClass('show');
+                Swal.fire({
+                    title: 'Success',
+                    text: 'Order deliverd!',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    showCancelButton: false,
+                    timer: 1500
+                })
+
+                if ($status == 1) {
+                    $(this).attr('disabled', true);
+                }
 
                 // Hide the success alert
                 setTimeout(function () {

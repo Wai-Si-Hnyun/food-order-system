@@ -36,7 +36,7 @@ class FeedbackDao implements FeedbackDaoInterface
         $students = Feedback::where('name','LIKE','%'.$search_name.'%')
         ->orwhere('email','LIKE','%'.$search_name.'%')
         ->latest()
-        ->paginate(5);
+        ->paginate(10);
 
         $students->appends(['query' => $search_name]);
 

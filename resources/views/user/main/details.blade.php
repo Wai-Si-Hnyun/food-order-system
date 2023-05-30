@@ -153,21 +153,12 @@
                     </div>
                     <section class="home-testimonial-bottom">
                         <div class="container testimonial-inner">
-                            <div class="row">
+                            <div class="">
                                 @foreach ($review as $reviews)
-                                    <div class="col-md-4 d-flex style-3">
-                                        <div class="tour-item d-flex flex-column">
-                                            <div
-                                                class="tour-desc bg-white p-2 rounded border border-1 mb-3 flex-grow-1 d-flex flex-column">
-                                                <h4><img src="https://img.icons8.com/ultraviolet/40/000000/quote-left.png">
-                                                </h4>
-                                                <div class="tour-text color-grey-3 text-center w-100 text-warp">
-                                                    <p style="overflow:hidden;">" {{ $reviews->comment }} "</p>
-                                                </div>
-                                                <div class="mt-auto link-name d-flex justify-content-center">
-                                                    {{ $reviews->user }}</div>
-                                            </div>
-                                        </div>
+                                    <div class="border border-1 w-100 mb-3 p-3">
+                                        <img src="{{ asset('assets/user/img/icon/icons8-quote-left-30.png') }}">
+                                        <p class="text-center overflow-hidden">" {{ $reviews->comment }} "</p>
+                                        <p class="text-center">{{ $reviews->user }}</p>
                                     </div>
                                 @endforeach
                             </div>

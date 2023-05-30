@@ -33,10 +33,7 @@
                                 <p>Full Name<span>*</span></p>
                                 <input type="text" name="name" id="name">
                             </div>
-                            <div class="checkout__input mb-3">
-                                <p>Country<span>*</span></p>
-                                <input type="text" name="country" id="country" value="Myanmar" disabled>
-                            </div>
+                            <input type="hidden" name="country" id="country" value="Myanmar">
                             <div class="checkout__input mb-3">
                                 <p>State<span>*</span></p>
                                 <select name="state" class="state-select" id="state" style="width: 100%;">
